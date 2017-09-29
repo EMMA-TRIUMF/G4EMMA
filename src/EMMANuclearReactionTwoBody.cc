@@ -1,4 +1,4 @@
-/* 
+/*
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
@@ -26,6 +26,11 @@
 #include "G4He3.hh"
 #include "G4Gamma.hh"
 #include "G4NucleiProperties.hh"
+
+/*! \file
+ \brief Nuclear-reaction model for two-body final-state (Z3,A3)+(Z4,A4) after target is hit with projectile.
+  If changes need to be made, check also EMMANuclearReactionProcess.cc.
+  */
 
 
 EMMANuclearReactionTwoBody::EMMANuclearReactionTwoBody(const G4String& name
@@ -84,7 +89,7 @@ EMMANuclearReactionTwoBody::ApplyYourself(const G4HadProjectile& aTrack, G4Nucle
 
   // determine velocity of CM frame relative to LAB frame
   G4LorentzVector lv1 = aParticle->Get4Momentum();
-  G4LorentzVector lv2(0.0,0.0,0.0,m2);   
+  G4LorentzVector lv2(0.0,0.0,0.0,m2);
   G4LorentzVector lv = lv1 + lv2;
   G4ThreeVector bst = lv.boostVector(); // divides the spatial component (p) by the time component (E)
 
@@ -100,8 +105,8 @@ EMMANuclearReactionTwoBody::ApplyYourself(const G4HadProjectile& aTrack, G4Nucle
   }
 
   // Compute energies and momentum of reaction products (3+4)
-  G4double e3 = ( etot*etot + m3*m3 - m4*m4 ) / (2*etot); 
-  G4double e4 = etot - e3; 
+  G4double e3 = ( etot*etot + m3*m3 - m4*m4 ) / (2*etot);
+  G4double e4 = etot - e3;
   G4double pcm = sqrt( e3*e3 - m3*m3 );
 
   // Sampling of directions in CM system
@@ -110,21 +115,21 @@ EMMANuclearReactionTwoBody::ApplyYourself(const G4HadProjectile& aTrack, G4Nucle
   G4double phi  = G4UniformRand()*CLHEP::twopi;
   G4double cost = 1. - tmax*t;
   G4double sint = std::sqrt((1.0-cost)*(1.0+cost));
-  
+
   // Lorentz vectors of reaction products (3+4)
   G4ThreeVector v3(sint*std::cos(phi),sint*std::sin(phi),cost);
   v3 = v3 * pcm;
   G4ThreeVector v4 = -v3;
   G4LorentzVector lv3(v3.x(),v3.y(),v3.z(),e3);
   G4LorentzVector lv4(v4.x(),v4.y(),v4.z(),e4);
-  
+
   // Transform to LAB frame
   lv3.boost(bst);
   lv4.boost(bst);
-    
+
   // Set energy of primary to zero
   theParticleChange.SetEnergyChange(0);
-  
+
   // Create secondaries
   // (3)
   G4ParticleDefinition * theDef3=0;
@@ -150,13 +155,13 @@ EMMANuclearReactionTwoBody::ApplyYourself(const G4HadProjectile& aTrack, G4Nucle
   else {
     theDef4 = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(Z4,A4,0.0);
   }
-  
-  // Kinetic energies of reaction products in lab 
+
+  // Kinetic energies of reaction products in lab
   G4double ekin3 = lv3[3] - m3;
   G4double ekin4 = lv4[3] - m4;
   G4double ekincut = GetRecoilEnergyThreshold(); // currently set to 0.1 MeV
-  
-  // Add secondaries with appropriate data    
+
+  // Add secondaries with appropriate data
   if (ekin3>ekincut) {
     G4DynamicParticle * aSec3 = new G4DynamicParticle(theDef3, lv3);
     theParticleChange.AddSecondary(aSec3);
@@ -165,9 +170,9 @@ EMMANuclearReactionTwoBody::ApplyYourself(const G4HadProjectile& aTrack, G4Nucle
     G4DynamicParticle * aSec4 = new G4DynamicParticle(theDef4, lv4);
     theParticleChange.AddSecondary(aSec4);
   }
-  
+
 
   return &theParticleChange;
-    
+
 }
 

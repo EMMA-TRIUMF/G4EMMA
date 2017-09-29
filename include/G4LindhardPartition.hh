@@ -37,16 +37,23 @@
  *
  */
 
+
+/*! \file
+    \brief A seemingly periphery code that calculates the non-ionizing energy loss of radiation via the Lindhard partition function.
+   Used to calculate energy deposited in target by the beam thereby affecting energy of recoils.
+*/
+
+
 #include "globals.hh"
 
 class G4Material;
 
-class G4VNIELPartition 
+class G4VNIELPartition
 {
 public:
         G4VNIELPartition() { }
         virtual ~G4VNIELPartition() { }
-        
+
         // return the fraction of the specified energy which will be deposited as NIEL
         // if an incoming particle with z1, a1 is stopped in the specified material
         // a1 is in atomic mass units, energy in native G4 energy units.
@@ -60,11 +67,11 @@ class G4LindhardRobinsonPartition : public G4VNIELPartition
 public:
         G4LindhardRobinsonPartition();
         virtual ~G4LindhardRobinsonPartition() { }
-        
+
         virtual G4double PartitionNIEL(
                 G4int z1, G4double a1, const G4Material *material, G4double energy
         ) const ;
-        
+
         G4double z23[120];
         size_t   max_z;
 };

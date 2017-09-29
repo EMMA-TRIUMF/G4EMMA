@@ -25,8 +25,15 @@
 //
 // $Id$
 //
-/// \file B4cCalorimeterSD.cc
-/// \brief Implementation of the B4cCalorimeterSD class
+///// \file B4cCalorimeterSD.cc
+
+
+/*! \file
+ \brief \brief Implementation of the B4cCalorimeterSD class
+ Builds the ion chamber and defines the types of data it outputs.
+ Look here to modify the specific workings of the IC. (Look also in DetectorConstruction)
+*/
+
 
 #include "EMMAIonChamber.hh"
 #include "G4HCofThisEvent.hh"
@@ -38,7 +45,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 EMMAIonChamber::EMMAIonChamber(
-                            const G4String& name, 
+                            const G4String& name,
                             const G4String& hitsCollectionName,
                             G4int nofCells)
  : G4VSensitiveDetector(name),
@@ -50,8 +57,8 @@ EMMAIonChamber::EMMAIonChamber(
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-EMMAIonChamber::~EMMAIonChamber() 
-{ 
+EMMAIonChamber::~EMMAIonChamber()
+{
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -59,16 +66,16 @@ EMMAIonChamber::~EMMAIonChamber()
 void EMMAIonChamber::Initialize(G4HCofThisEvent* hce)
 {
   // Create hits collection
-  fHitsCollection 
-    = new EMMAIonChamberHitsCollection(SensitiveDetectorName, collectionName[0]); 
+  fHitsCollection
+    = new EMMAIonChamberHitsCollection(SensitiveDetectorName, collectionName[0]);
 
   // Add this collection in hce
-  G4int hcID 
+  G4int hcID
     = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
-  hce->AddHitsCollection( hcID, fHitsCollection ); 
+  hce->AddHitsCollection( hcID, fHitsCollection );
 
   // Create hits
-  // fNofCells for cells + one more for total sums 
+  // fNofCells for cells + one more for total sums
   for (G4int i=0; i<fNofCells+1; i++ ) {
     fHitsCollection->insert(new EMMAIonChamberHit());
   }
@@ -76,41 +83,41 @@ void EMMAIonChamber::Initialize(G4HCofThisEvent* hce)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4bool EMMAIonChamber::ProcessHits(G4Step* step, 
+G4bool EMMAIonChamber::ProcessHits(G4Step* step,
                                      G4TouchableHistory*)
-{  
+{
   // energy deposit
   G4double edep = step->GetTotalEnergyDeposit();
-  
+
   // step length
   G4double stepLength = 0.;
   if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
     stepLength = step->GetStepLength();
   }
 
-  if ( edep==0. && stepLength == 0. ) return false;      
+  if ( edep==0. && stepLength == 0. ) return false;
 
   G4TouchableHistory* touchable
     = (G4TouchableHistory*)(step->GetPreStepPoint()->GetTouchable());
-    
-  // Get calorimeter cell id 
+
+  // Get calorimeter cell id
   G4int layerNumber = touchable->GetReplicaNumber(1);
-  
+
   // Get hit accounting data for this cell
   EMMAIonChamberHit* hit = (*fHitsCollection)[layerNumber];
   if ( ! hit ) {
     G4cerr << "Cannot access hit " << layerNumber << G4endl;
     exit(1);
-  }         
+  }
 
   // Get hit for total accounting
-  EMMAIonChamberHit* hitTotal 
+  EMMAIonChamberHit* hitTotal
     = (*fHitsCollection)[fHitsCollection->entries()-1];
-  
+
   // Add values
   hit->Add(edep, stepLength);
-  hitTotal->Add(edep, stepLength); 
-      
+  hitTotal->Add(edep, stepLength);
+
   return true;
 }
 
@@ -118,9 +125,9 @@ G4bool EMMAIonChamber::ProcessHits(G4Step* step,
 
 void  EMMAIonChamber::EndOfEvent(G4HCofThisEvent*)
 {
-  if ( verboseLevel>1 ) { 
+  if ( verboseLevel>1 ) {
      G4int nofHits = fHitsCollection->entries();
-     G4cout << "\n-------->Hits Collection: in this event they are " << nofHits 
+     G4cout << "\n-------->Hits Collection: in this event they are " << nofHits
             << " hits in the ion chamber: " << G4endl;
      for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }

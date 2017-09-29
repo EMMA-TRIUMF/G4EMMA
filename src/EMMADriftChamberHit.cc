@@ -25,6 +25,16 @@
 //
 // $Id: EMMADriftChamberHit.cc,v 1.11 2006-11-14 07:11:18 perl Exp $
 // --------------------------------------------------------------
+
+
+/*! \file
+ \brief Records the particle information when it is detected by the drift chamber, and prints the results.
+ Look here if you need to edit how the PGAC detects particles and what results are thus printed.
+*/
+
+
+
+
 //
 #include "EMMADriftChamberHit.hh"
 #include "G4ios.hh"
@@ -51,10 +61,12 @@
 #include <fstream>
 #include <iostream>
 
+#include "ExternalVariables.hh"
+
 G4Allocator<EMMADriftChamberHit> EMMADriftChamberHitAllocator;
 
 EMMADriftChamberHit::EMMADriftChamberHit()
- : G4VHit(), 
+ : G4VHit(),
    Edep(0.)
 {
   layerID = -1;
@@ -80,7 +92,7 @@ EMMADriftChamberHit::EMMADriftChamberHit(const EMMADriftChamberHit &right)
   time = right.time;
   Momentum = right.Momentum;
   Ekin = right.Ekin;
-  Edep = right.Edep;  
+  Edep = right.Edep;
 
   dirn = sqrt(Momentum.x()*Momentum.x()+Momentum.y()*Momentum.y()+Momentum.z()*Momentum.z());
   theta = std::acos( Momentum.z()/dirn );
@@ -91,12 +103,12 @@ const EMMADriftChamberHit& EMMADriftChamberHit::operator=(const EMMADriftChamber
   layerID = right.layerID;
   worldPos = right.worldPos;
   localPos = right.localPos;
-  time = right.time;	
+  time = right.time;
   Momentum = right.Momentum;
   Ekin = right.Ekin;
   theta = right.theta;
   Edep = right.Edep;
-  
+
   return *this;
 }
 
@@ -134,7 +146,7 @@ const std::map<G4String,G4AttDef>* EMMADriftChamberHit::GetAttDefs() const
 
     G4String Time("Time");
     (*store)[Time] = G4AttDef(Time,"Time","Physics","G4BestUnit","G4double");
-	  
+
     G4String Pos("Pos");
     (*store)[Pos] = G4AttDef(Pos, "Position",
 		      "Physics","G4BestUnit","G4ThreeVector");
@@ -146,14 +158,14 @@ const std::map<G4String,G4AttDef>* EMMADriftChamberHit::GetAttDefs() const
     G4String Ek("Ekin");
     (*store)[Ekin] = G4AttDef(Ek, "Ekin",
 			      "Physics","G4BestUnit","G4double");
-    
+
     G4String EDep("Edep");
     (*store)[Edep] = G4AttDef(EDep, "Edep",
 			      "Physics","G4BestUnit","G4double");
 //    G4String TL("Track Length");
 //    (*store)[TrackLength] = G4AttDef(TL, "Track Length",
 //			      "Physics","G4BestUnit","G4double");
-	  
+
   }
   return store;
 }
@@ -184,7 +196,7 @@ std::vector<G4AttValue>* EMMADriftChamberHit::CreateAttValues() const
 
 //  values->push_back
 //    (G4AttValue("Track Length",G4BestUnit(TrackLength,"Length"),""));
-	
+
   return values;
 }
 
@@ -192,13 +204,13 @@ void EMMADriftChamberHit::Print()
 {
 	std::ofstream outFile(focalPlaneFileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction
 	double buffer;
-	
+
 	if(/*worldPos.z() <= 15000 && */ worldPos.y() < 10 && worldPos.y() > -10) //8815 //8875
 	{
-		
+
 	  // G4String filename;
 	  // std::ifstream Diag;
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output1.bgf");
 	  // Diag.open(filename);
@@ -207,7 +219,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-		
+
 	  // filename = MotherDir;
 	  // filename.append("/output2.bgf");
 	  // Diag.open(filename);
@@ -216,7 +228,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output3.bgf");
 	  // Diag.open(filename);
@@ -225,7 +237,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output4.bgf");
 	  // Diag.open(filename);
@@ -234,7 +246,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output5.bgf");
 	  // Diag.open(filename);
@@ -243,7 +255,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output6.bgf");
 	  // Diag.open(filename);
@@ -252,7 +264,7 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  // filename = MotherDir;
 	  // filename.append("/output7.bgf");
 	  // Diag.open(filename);
@@ -261,15 +273,15 @@ void EMMADriftChamberHit::Print()
 	  // Diag >> buffer;
 	  // G4cout << buffer*10 << " mm" << G4endl;
 	  // Diag.close();
-	  
+
 	  G4double X1 = worldPos.x()/mm + 542.712;		//540.164;
 	  G4double Z1 = worldPos.z()/mm - 5126.64;		//3458.6;
 
-	  G4double X2 = sqrt((X1*X1)+(Z1*Z1)); 
-		
+	  G4double X2 = sqrt((X1*X1)+(Z1*Z1));
+
 	  G4cout << "\tFocal Plane (x,y,z): " << worldPos.x()/mm << ", " << worldPos.y()/mm << ", " << worldPos.z()/mm << " mm."
 		 << G4endl;
-	  
+
 
 	  G4cout << "\tEkin: " << Ekin << " MeV" << G4endl;
 
@@ -280,17 +292,20 @@ void EMMADriftChamberHit::Print()
 	  G4cout <<"\tAngle " << theta/deg << " deg" << G4endl;
 
 	  G4cout << "\tTime " << (time/s)*1000000 << " us " << G4endl;
-	  
-	  
-	  //	outFile << Momentum.x() << ", " << Momentum.y() << ", " << Momentum.z() << ", " 
+
+
+	  //	outFile << Momentum.x() << ", " << Momentum.y() << ", " << Momentum.z() << ", "
 	  //	<< Ekin << ", " ;
 	  dirn = sqrt(Momentum.x()*Momentum.x()+Momentum.y()*Momentum.y()+Momentum.z()*Momentum.z());
 	  theta = std::acos( Momentum.z()/dirn );
-      	  outFile << Ekin << ", " << theta/deg << ", " << worldPos.x()/mm << ", " << worldPos.y()/mm << std::endl;
+      	  outFile << Ekin << ", " << kin << ", " << theta/deg << ", " << ang << ", " << angx << ", " << comx << ", " <<
+      	  comy << ", " << worldPos.x()/mm << ", " << exx << ", " << worldPos.y()/mm << ", " << why <<  std::endl;
 	}
-	
+
+	// Simply reorder, remove, or add to the above variables to make changes to the data printed in fp_beam.dat. See ExternalVariables.hh for a detailed description.
+
 	outFile.close();
-	
+
 }
 
 

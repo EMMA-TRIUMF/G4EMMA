@@ -42,7 +42,7 @@
 #include "G4ThreeVector.hh"
 
 
-// global variables 
+// global variables
 extern G4double targetThickness; // EMMADetectorConstMessenger.cc
 extern G4double targetZoffset; // EMMADetectorConstMessenger.cc
 extern G4String MotherDir; // EMMAapp.cc
@@ -54,6 +54,13 @@ class G4Event;
 class G4ParticleDefinition;
 class EMMAPrimaryGeneratorMessenger;
 
+/*!
+ \file
+ \brief This is an important class responsible for primary particle or vertex generation. It is required by G4; the
+  Primary Generator is not an actual physical component of EMMA but rather a G4 construction element.
+  This class is the concrete class stemming from the virtual class found in "G4VUserPrimaryGeneratorAction.hh."
+*/
+
 
 class EMMAPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
@@ -62,7 +69,7 @@ public:
   EMMAPrimaryGeneratorAction();
   virtual ~EMMAPrimaryGeneratorAction();
   virtual void GeneratePrimaries(G4Event*);
-  	
+
 private:
   G4ParticleGun* particleGun;
   G4ParticleGun* particleGun2;

@@ -42,6 +42,15 @@
 #include "G4MuIonisation.hh"
 #include "G4hIonisation.hh"
 
+
+/*!
+ \file
+ \brief The G4 header "G4VPhysicsConstructor.hh" contains a virtual class that must be used to create concrete classes for specific applications (such as EMMA).
+ Specifically, this header defines particles and processes required to simulate muon interactions.
+*/
+
+
+
 class EMMAMuonPhysics : public G4VPhysicsConstructor
 {
   public:

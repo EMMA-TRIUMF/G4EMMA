@@ -43,6 +43,12 @@
 //
 // Nov 4 2002 -- Upgrade to AIDA 3.0
 // **********************************************************************
+
+/*! \file
+ \brief Calls upon and writes to ROOT files to display results and outcomes.
+ */
+
+
 #ifdef G4ANALYSIS_USE
 
 #include <fstream>
@@ -65,16 +71,16 @@ EMMAAnalysisManager* EMMAAnalysisManager::instance = 0;
 EMMAAnalysisManager::EMMAAnalysisManager()
 :Hlist(0)
 {
-  
+
   //create root file
   G4String filename = UserDir + "/Results/GEMMAoutput.root";
-  rootfile = new TFile(filename,"recreate");  
-  
+  rootfile = new TFile(filename,"recreate");
+
   //create root tree
   if(rootfile){
     roottree = new TTree("fphits","Focal plane hits");
   }
-  
+
 }
 
 EMMAAnalysisManager::~EMMAAnalysisManager()

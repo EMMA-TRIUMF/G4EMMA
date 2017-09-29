@@ -1,6 +1,11 @@
 //
 // Created from BuildGeometry program
 //
+
+/*! \file
+ \brief The BGField source files construct the 7 magnetic and electric fields on the EMMA simulation (QQEMEQQ).
+*/
+
 #include "BGField6.hh"
 #include "fortran_subs.inc"
 #include "G4UnitsTable.hh"
@@ -59,7 +64,7 @@ BGField6::~BGField6()
 void BGField6::AddFieldValue(const double Point[3],G4double field[6]) const
 {
 	double pos[3], pos2[3];
-	
+
 	pos2[0] = Point[0]/cm - offset[0];
 	pos2[1] = Point[1]/cm - offset[1];
 	pos2[2] = Point[2]/cm - offset[2];
@@ -75,11 +80,11 @@ void BGField6::AddFieldValue(const double Point[3],G4double field[6]) const
 	Bfield[1] = 0;
 	Bfield[2] = 0;
 	mitray_poles__(data,pos,Bfield);
-	
+
 	Bfield[0] = cos(Pi/180*360)*Bfield[0] - sin(Pi/180*360)*Bfield[2];
 	Bfield[1] = Bfield[1];
 	Bfield[2] = sin(Pi/180*360)*Bfield[0] + cos(Pi/180*360)*Bfield[2];
-	
+
 
 	Bfield[0] *= tesla;
 	Bfield[1] *= tesla;

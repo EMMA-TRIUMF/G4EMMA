@@ -1,4 +1,4 @@
-/* 
+/*
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
@@ -24,6 +24,13 @@
 #include "G4Step.hh"
 #include "G4TrackStatus.hh"
 #include "G4HadronicInteraction.hh"
+
+/*!
+ \file
+ \brief Nuclear-reaction model for two-body final-state (Z3,A3)+(Z4,A4) after a two body reaction between a projectile and target.
+
+   See related files "EMMANuclearReactionDataSet" and "EMMANuclearReactionProcess"
+*/
 
 
 class EMMANuclearReactionTwoBody : public G4HadronicInteraction

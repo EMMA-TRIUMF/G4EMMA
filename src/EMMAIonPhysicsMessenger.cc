@@ -5,6 +5,9 @@
 #include "G4UIcmdWithABool.hh"
 #include "G4ios.hh"
 
+/*! \file
+ \brief Connects and delivers user commands regarding ion physics particles and processes to respective classes, and relays their responses to the user.
+ */
 
 EMMAIonPhysicsMessenger::EMMAIonPhysicsMessenger(EMMAIonPhysics * ionphys)
 :fTarget(ionphys)
@@ -97,44 +100,44 @@ EMMAIonPhysicsMessenger::~EMMAIonPhysicsMessenger()
 
 void EMMAIonPhysicsMessenger::SetNewValue(G4UIcommand * command,G4String newValue)
 {
-  if( command==fcsCmd ) { 
-    fTarget->SetCrossSection(fcsCmd->GetNewDoubleValue(newValue)); 
+  if( command==fcsCmd ) {
+    fTarget->SetCrossSection(fcsCmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fZ1Cmd ) { 
-    fTarget->SetZ1(fZ1Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fZ1Cmd ) {
+    fTarget->SetZ1(fZ1Cmd->GetNewDoubleValue(newValue));
   }
-  if( command==fA1Cmd ) { 
-    fTarget->SetA1(fA1Cmd->GetNewDoubleValue(newValue)); 
-  }
-
-  if( command==fZ2Cmd ) { 
-    fTarget->SetZ2(fZ2Cmd->GetNewDoubleValue(newValue)); 
-  }
-  if( command==fA2Cmd ) { 
-    fTarget->SetA2(fA2Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fA1Cmd ) {
+    fTarget->SetA1(fA1Cmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fZ3Cmd ) { 
-    fTarget->SetZ3(fZ3Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fZ2Cmd ) {
+    fTarget->SetZ2(fZ2Cmd->GetNewDoubleValue(newValue));
   }
-  if( command==fA3Cmd ) { 
-    fTarget->SetA3(fA3Cmd->GetNewDoubleValue(newValue)); 
-  }
-
-  if( command==fZ4Cmd ) { 
-    fTarget->SetZ4(fZ4Cmd->GetNewDoubleValue(newValue)); 
-  }
-  if( command==fA4Cmd ) { 
-    fTarget->SetA4(fA4Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fA2Cmd ) {
+    fTarget->SetA2(fA2Cmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fqmaxCmd ) { 
-    fTarget->Setqmax(fqmaxCmd->GetNewDoubleValue(newValue)); 
+  if( command==fZ3Cmd ) {
+    fTarget->SetZ3(fZ3Cmd->GetNewDoubleValue(newValue));
+  }
+  if( command==fA3Cmd ) {
+    fTarget->SetA3(fA3Cmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fAddProcessCmd ) { 
-    fTarget->SetReactionParameters(); 
+  if( command==fZ4Cmd ) {
+    fTarget->SetZ4(fZ4Cmd->GetNewDoubleValue(newValue));
+  }
+  if( command==fA4Cmd ) {
+    fTarget->SetA4(fA4Cmd->GetNewDoubleValue(newValue));
+  }
+
+  if( command==fqmaxCmd ) {
+    fTarget->Setqmax(fqmaxCmd->GetNewDoubleValue(newValue));
+  }
+
+  if( command==fAddProcessCmd ) {
+    fTarget->SetReactionParameters();
   }
 }
 

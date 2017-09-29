@@ -36,11 +36,13 @@
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 
-/// Calorimeter hit class
-///
-/// It defines data members to store the the energy deposit and track lengths
-/// of charged particles in a selected volume:
-/// - fEdep, fTrackLength
+/*! \file
+    \brief
+ Calorimeter (ion chamber) hit class: defines data members to store the the energy deposit and track lengths
+ of charged particles in a selected volume.
+
+ see variables - fEdep, fTrackLength
+*/
 
 class EMMAIonChamberHit : public G4VHit
 {
@@ -66,7 +68,7 @@ class EMMAIonChamberHit : public G4VHit
     // get methods
     G4double GetEdep() const;
     G4double GetTrackLength() const;
-      
+
   private:
     G4double fEdep;        ///< Energy deposit in the sensitive volume
     G4double fTrackLength; ///< Track length in the  sensitive volume
@@ -93,16 +95,16 @@ inline void EMMAIonChamberHit::operator delete(void *hit)
 }
 
 inline void EMMAIonChamberHit::Add(G4double de, G4double dl) {
-  fEdep += de; 
+  fEdep += de;
   fTrackLength += dl;
 }
 
-inline G4double EMMAIonChamberHit::GetEdep() const { 
-  return fEdep; 
+inline G4double EMMAIonChamberHit::GetEdep() const {
+  return fEdep;
 }
 
-inline G4double EMMAIonChamberHit::GetTrackLength() const { 
-  return fTrackLength; 
+inline G4double EMMAIonChamberHit::GetTrackLength() const {
+  return fTrackLength;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bad_5fx_5fpoint',['bad_x_point',['../classc2__function.html#a19b31dd52b778a2fe5f156def38e41d4',1,'c2_function']]]
+  ['emmadriftchamberhitallocator',['EMMADriftChamberHitAllocator',['../EMMADriftChamberHit_8hh.html#a69d77018fbd217765f66a3ea52ee314f',1,'EMMADriftChamberHit.hh']]]
 ];

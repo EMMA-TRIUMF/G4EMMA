@@ -55,6 +55,13 @@ using namespace std;
 //global variable
 extern G4String UserDir;
 
+/*! \file
+ \brief Takes care of the interactions (events) of an object that was generated in the Primary Generator.
+ Note: If you are getting error messages concerning this file while building EMMA it is likely an error or problem in your (CERN) ROOT installation, as this file calls upon ROOT functions.
+ Reinstall or remake ROOT, or seek your local computer guru for help.
+*/
+
+
 
 EMMAEventAction::EMMAEventAction()
 :fp_hitpos(0),fp_hitangle(0),fp_hitEkin(0),fp_hitEdep(0),fp_hitposX(0)
@@ -91,7 +98,7 @@ EMMAEventAction::EMMAEventAction()
   fp_hitposEdep = new TH2F("hitposEdep","Position vs Edep",160,-80,80,2000,0,200);
   fp_hitposEdep->GetXaxis()->SetTitle("x Position (mm)");
   fp_hitposEdep->GetYaxis()->SetTitle("Edep (MeV)");
-  
+
   //call root tree and creates branches to store event by event data
   fp_tree = analysisManager->getRoottree();
   fp_tree->Branch("fp_pos",&fp_pos,"fp_pos[2]/D");
@@ -100,7 +107,7 @@ EMMAEventAction::EMMAEventAction()
   fp_tree->Branch("fp_Ekin",&fp_Edep,"fp_Ekin/D");
   fp_tree->Branch("fp_Edep",&fp_Edep,"fp_Edep/D");
   fp_tree->Branch("fp_posEdep",&fp_posEdep,"fp_posEdep/D");
-  
+
 #endif // G4ANALYSIS_USE
 }
 
@@ -121,7 +128,7 @@ EMMAEventAction::GetHitsCollection(const G4String& hcName,
 {
   G4int hcID
     = G4SDManager::GetSDMpointer()->GetCollectionID(hcName);
-  EMMAIonChamberHitsCollection* hitsCollection 
+  EMMAIonChamberHitsCollection* hitsCollection
     = static_cast<EMMAIonChamberHitsCollection*>(
 	event->GetHCofThisEvent()->GetHC(hcID));
 
@@ -129,7 +136,7 @@ EMMAEventAction::GetHitsCollection(const G4String& hcName,
     G4cerr << "Cannot access hitsCollection" << hcName << G4endl;
     exit(1);
    }
-   
+
    return hitsCollection;
 }
 
@@ -192,7 +199,7 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
         EMMADriftChamberHit* aHit = (*DHC2)[i1];
         if(aHit->GetLayerID()==i2){
           aHit->Print();
-          
+
 #ifdef G4ANALYSIS_USE
             localPos = aHit->GetLocalPos();	//local position at focal plane
             theta = aHit->GetTheta()/deg; //angle at focal place
@@ -217,5 +224,6 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
     }
   }
 }
+
 
 

@@ -27,6 +27,12 @@
 // --------------------------------------------------------------
 //
 
+/*! \file
+ \brief Connects and delivers user commands regarding event action to respective classes, and relays their responses to the user.
+ */
+
+
+
 #include "EMMAEventActionMessenger.hh"
 #include "EMMAEventAction.hh"
 #include "G4UIcmdWithAnInteger.hh"

@@ -26,6 +26,12 @@
 // $Id: EMMADriftChamber.cc,v 1.6 2006-06-29 16:32:26 gunter Exp $
 // --------------------------------------------------------------
 //
+
+/*! \file
+ \brief Builds the specific operation of the PGAC drift chamber and the taking of the results.
+ */
+
+
 #include "EMMADriftChamber.hh"
 #include "EMMADriftChamberHit.hh"
 #include "G4HCofThisEvent.hh"
@@ -54,7 +60,7 @@ void EMMADriftChamber::Initialize(G4HCofThisEvent*HCE)
     (SensitiveDetectorName,collectionName[0]);
   // Add this collection in hce
   if(HCID<0)
-    { HCID = G4SDManager::GetSDMpointer()->GetCollectionID(hitsCollection); 
+    { HCID = G4SDManager::GetSDMpointer()->GetCollectionID(hitsCollection);
 	}
 
   HCE->AddHitsCollection(HCID,hitsCollection);
@@ -66,7 +72,7 @@ G4bool EMMADriftChamber::ProcessHits(G4Step*aStep,G4TouchableHistory* /*ROhist*/
 {
   G4double charge = aStep->GetTrack()->GetDefinition()->GetPDGCharge();
   if(charge==0.) return true;
-  
+
   G4StepPoint* preStepPoint = aStep->GetPreStepPoint();
 
   G4TouchableHistory* theTouchable
@@ -83,14 +89,14 @@ G4bool EMMADriftChamber::ProcessHits(G4Step*aStep,G4TouchableHistory* /*ROhist*/
   G4ThreeVector Momentum = preStepPoint->GetMomentum();
   //Initial Energy
   G4double Ekin = preStepPoint->GetKineticEnergy();
-  //Energy Deposit	
+  //Energy Deposit
   G4double Edep = aStep->GetTotalEnergyDeposit();
-  
+
 
   if ( Edep==0.) return false;
 
   EMMADriftChamberHit* aHit = new EMMADriftChamberHit(copyNo);
-  
+
   //Set Values
   aHit->SetWorldPos(worldPos);
   aHit->SetLocalPos(localPos);
@@ -98,11 +104,11 @@ G4bool EMMADriftChamber::ProcessHits(G4Step*aStep,G4TouchableHistory* /*ROhist*/
   aHit->SetEkin(Ekin);
   aHit->SetTime(preStepPoint->GetGlobalTime());
   //aHit->GetEdep(Edep);
-  
+
   hitsCollection->insert(aHit);
-  
+
   //G4cout<<theMotherPhysical->GetName()<<" "<<copyNo<<G4endl;
-  
+
   return true;
 }
 

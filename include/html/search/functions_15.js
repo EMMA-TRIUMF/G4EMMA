@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y',['y',['../classEMMADriftChamberHit.html#afd5a3604f426ac37b58ac2cae1cecba8',1,'EMMADriftChamberHit']]]
+  ['zero',['zero',['../classc2__transformation.html#a81a65d1c58abae1f7bed846f736a9887',1,'c2_transformation']]]
 ];

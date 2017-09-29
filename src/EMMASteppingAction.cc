@@ -26,9 +26,19 @@
 //
 // $Id: ExN02SteppingAction.cc,v 1.9 2006-06-29 17:48:18 gunter Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
-// 
+//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
+/*! \file
+ \brief Tracks the particle as it makes its way through the spectrometer.
+ Ensures that the beam projectiles do not pass through the target.
+ Writes beam information as it passes through target so a collision can be simulated.
+ Records and writes the locations of (dead) hits to a ROOT histogram.
+ */
+
+
 
 #include "EMMASteppingAction.hh"
 #include "EMMAGlobalField.hh"
@@ -49,9 +59,13 @@
 
 #include <G4Event.hh>
 
-// global variables 
-G4double currentCharge = 0.0; // default value is 0
+#define pi 3.14159265359
 
+#include "ExternalVariables.hh"
+double kin, ang, angx, comx, comy, exx, why;
+
+// global variables
+G4double currentCharge = 0.0; // default value is 0
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -65,7 +79,7 @@ EMMASteppingAction::EMMASteppingAction()
   dead_hit = new TH1I("dead_hit","Dead hits",nelements,0,nelements);	//create root histogram
   dead_hit->GetXaxis()->SetTitle("EMMA component number");	//axis labels
   dead_hit->GetYaxis()->SetTitle("Counts");
-  
+
   //label EMMA elements
   G4String* deadname = new G4String[nelements];
   deadname[0]="FocalPlane";
@@ -88,7 +102,7 @@ EMMASteppingAction::EMMASteppingAction()
     dead_hit->GetXaxis()->SetBinLabel(i+1,deadname[i].c_str());
   }
 
-#endif // G4ANALYSIS_USE  
+#endif // G4ANALYSIS_USE
 
   //useful for debugging by tracking particles through the vacuum regions
   element[0]="Q1Logical";
@@ -106,7 +120,7 @@ EMMASteppingAction::EMMASteppingAction()
 EMMASteppingAction::~EMMASteppingAction()
 {
 #ifdef G4ANALYSIS_USE
-  //This root histogram gets writen to the root file created in the constructor of EventAction.cc
+  //This root histogram gets written to the root file created in the constructor of EventAction.cc
   dead_hit->Write();
 #endif // G4ANALYSIS_USE
 }
@@ -114,7 +128,7 @@ EMMASteppingAction::~EMMASteppingAction()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
-{ 
+{
 
   G4Track* theTrack = theStep->GetTrack();
   const G4DynamicParticle* theParticle = theTrack->GetDynamicParticle();
@@ -123,15 +137,15 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
   G4ThreeVector MomentumDirection = theParticle->GetMomentumDirection();
   //  G4cout << "Charge: " << theCharge << G4endl;
   currentCharge = theCharge;
-  
+
   //get event number. useful for debugging
   G4int evnt = G4RunManager::GetRunManager()->GetCurrentEvent() -> GetEventID();
 
 //====================================================================//
-/* 
-   Writes beam energy, direction and position to file at random 
+/*
+   Writes beam energy, direction and position to file at random
    depth in foil, so that this information can be used as input
-   for a subsequent simulation of reactions taking place in the 
+   for a subsequent simulation of reactions taking place in the
    foil.
 */
   G4StepPoint* preStepPoint = theStep->GetPreStepPoint();
@@ -149,7 +163,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
       <<inTargetFileName<<". \nThis causes /mydet/doReaction to crash."<<G4endl;
     }
   }
-  
+
   if (name=="targetLogical") {
     G4TouchableHandle theTouchable = preStepPoint->GetTouchableHandle();
     G4ThreeVector worldPosition = preStepPoint->GetPosition();
@@ -167,29 +181,34 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 	G4double dz = depth/2.; // correction needed because target placement refers to center of target ...
 	std::ofstream beamFile(inTargetFileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction
 	beamFile.precision(17);
-	beamFile 
-	  << theKineticEnergy/MeV << " " 
+	beamFile
+	  << theKineticEnergy/MeV << " "
 	  //	  << worldPosition[0] << " " << worldPosition[1] << " " << worldPosition[2] << " "
 	  << worldPosition2[0] << " " << worldPosition2[1] << " " << worldPosition2[2]+dz << " "
 	  << MomentumDirection[0] << " " << MomentumDirection[1] << " " << MomentumDirection[2]
 	  << G4endl;
 	beamFile.close();
-	
+
 	G4EventManager::GetEventManager()->AbortCurrentEvent();
       }
     }
 //====================================================================//
-    
-    
-    
-    
+
+
+
+
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>//
     //   Writes energies and angles just after target to file
     //   (so that electric and magnetic field strengths can be
     //   optimized)
+    //
+    // ^^^ The above description is strange. There is no mention in any other
+    // code of using these values to optimize E and B strengths. However,
+    // this information was incredibly useful when analyzing what
+    // caused particles to form strange patterns in the focal plane.  - Alex 2017
     if (!prepareBeam) {
       if (name2!=name) {
-	G4double dirn = sqrt( MomentumDirection[0]*MomentumDirection[0] 
+	G4double dirn = sqrt( MomentumDirection[0]*MomentumDirection[0]
 			      + MomentumDirection[1]*MomentumDirection[1]
 			      + MomentumDirection[2]*MomentumDirection[2]);
 	G4double theta = std::acos( MomentumDirection[2]/dirn );
@@ -198,6 +217,13 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 	outfile << theKineticEnergy/MeV << ", " << theta/deg << ", "
 		<< worldPosition2[0] << ", " << worldPosition2[1] << G4endl;
 	outfile.close();
+    kin=theKineticEnergy/MeV;
+    ang=theta/deg;
+    angx=(atan(MomentumDirection[0]/MomentumDirection[2]))*(180/pi);
+    comx=MomentumDirection[0];
+    comy=MomentumDirection[1];
+    exx=worldPosition2[0];
+    why=worldPosition2[1];
       }
     }
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>//
@@ -206,14 +232,14 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 
   //......................................................................//
   // Writes energies and angles just after (optional) degrader
-   
+
   if (name=="degrader1Logical") {
     G4StepPoint* postStepPoint = theStep->GetPostStepPoint();
     G4TouchableHandle theTouchable2 = postStepPoint->GetTouchableHandle();
     G4ThreeVector worldPosition2 = postStepPoint->GetPosition();
     G4String name2 = postStepPoint->GetPhysicalVolume()->GetLogicalVolume()->GetName();
     if (!prepareBeam && name2!=name) {
-      G4double dirn = sqrt( MomentumDirection[0]*MomentumDirection[0] 
+      G4double dirn = sqrt( MomentumDirection[0]*MomentumDirection[0]
 			    + MomentumDirection[1]*MomentumDirection[1]
 			    + MomentumDirection[2]*MomentumDirection[2]);
       G4double theta = std::acos( MomentumDirection[2]/dirn );
@@ -228,7 +254,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 
   //find out if any walls and slits were hit.
   //terminate event if it does.
-  
+
   //initialize
   dead=false;	//hit focal plane
   deadint=0;	//Focal plane
@@ -236,7 +262,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
   if (name =="AnodeWireLogical" || name=="CathodeWireLogical") {
     deadint=15; // MWPC wires
   }
-  
+
   if (name=="hSlits1Logical") {
     NOHslits1 = NOHslits1 + 1; // count number of hits in various places
     deadint=11; //slits1 between ED1 and MD  Should be 12?
@@ -267,7 +293,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
   if (name=="Pipe7WallLogical"){
     deadint=4; //drift space ED1 and MD
   }
-  if (name=="MD1Wall1Logical" || name=="MD1Wall2Logical" || name=="MD1Wall3Logical" || name=="MD1Wall4Logical" ||  
+  if (name=="MD1Wall1Logical" || name=="MD1Wall2Logical" || name=="MD1Wall3Logical" || name=="MD1Wall4Logical" ||
       name=="Pipe1MDWallLogical" || name=="Pipe2MDWallLogical" || name=="MDSlit1Logical" || name=="MDSlit2Logical"){
     deadint=5; //MD
   }
@@ -296,7 +322,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
 #endif // G4ANALYSIS_USE
     G4EventManager::GetEventManager()->AbortCurrentEvent();
   }
-  
+
 //----------------------------------------------------------------------------------------------------//
 //debugging
 
@@ -311,7 +337,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     G4String name2 = postStepPoint->GetPhysicalVolume()->GetLogicalVolume()->GetName();
     G4TouchableHandle theTouchable2 = postStepPoint->GetTouchableHandle();
     G4ThreeVector worldPosition2 = postStepPoint->GetPosition();
-    
+
     G4double locpos[3],dplane1,dplane2,xplane,dx,dz;
     locpos[0]=worldPosition2[0];
     locpos[1]=worldPosition2[1];
@@ -329,8 +355,8 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
   }
   if(name==element[2]){
     //calculate x and y location wrt optical axis
-    
-//THE PLANE EQUATIONS NEED TO BE CALCULATED AGAIN!!!  
+
+//THE PLANE EQUATIONS NEED TO BE CALCULATED AGAIN!!!
     dplane1=-tan(20*deg)*worldPosition[0]+worldPosition[2];
     dplane2=-tan(20*deg)*worldPosition2[0]+worldPosition2[2];
     dx=worldPosition[0]+301.5370253*mm; //did calculations based on measurements in EMMA drawings
@@ -339,14 +365,14 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     if(dx<0)xplane*=-1;
     if(dplane1<2893.232*mm && dplane2>2893.232*mm){
       //G4cout<<"ED1 exit position in WorldVolume: "<<G4BestUnit(worldPosition[0],"Length")<<", "
-      //  <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
+      //  <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
       G4cout<<"ED1 exit position wrt optical axis: "<<G4BestUnit(xplane,"Length")<<", "
-        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
+        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
     }
   }
   if(name==element[3]){
-    
-//THE PLANE EQUATIONS NEED TO BE CALCULATED AGAIN!!!    
+
+//THE PLANE EQUATIONS NEED TO BE CALCULATED AGAIN!!!
     /*dplane1=tan(20*deg)*worldPosition[0]+worldPosition[2];
     dplane2=tan(20*deg)*worldPosition2[0]+worldPosition2[2];
     dx=worldPosition[0]+708.3972367*mm; //did calculations based on measurements in EMMA drawings
@@ -355,15 +381,15 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     if(dx<0)xplane*=-1;
     if(dplane1<4356.394632*mm && dplane2>4356.394632*mm){
       //G4cout<<"MD exit position in WorldVolume: "<<G4BestUnit(worldPosition[0],"Length")<<", "
-      //  <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
+      //  <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
       G4cout<<"MD exit position wrt optical axis: "<<G4BestUnit(xplane,"Length")<<", "
-        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
+        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
     }*/
   }
   if(name==element[4]){
     if(worldPosition[2]<7479.86*mm && worldPosition2[2]>7479.86*mm){
       G4cout<<"ED2 exit position: "<<G4BestUnit(worldPosition[0],"Length")<<", "
-        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;      
+        <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
     }
   }
   if(name==element[5] && worldPosition[2]<zQ3ends && worldPosition2[2]>zQ3ends){
@@ -374,7 +400,7 @@ void EMMASteppingAction::UserSteppingAction(const G4Step* theStep)
     G4cout<<"Q4 exit position: "<<G4BestUnit(worldPosition[0],"Length")<<", "
       <<G4BestUnit(worldPosition[1],"Length")<<G4endl;
   }
-  
+
   }
 
 }

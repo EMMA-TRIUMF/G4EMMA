@@ -26,9 +26,16 @@
 // $Id: EMMAIonPhysics.cc,v 1.10 2009-11-21 01:00:19 perl Exp $
 // --------------------------------------------------------------
 //
-// 13-Oct-2003 Add Comment for Ionisation of Generic Ion by T. Koi 
+// 13-Oct-2003 Add Comment for Ionisation of Generic Ion by T. Koi
 // 05-Jan-2004 Change G. Ion Ionisation from G4hIonisation
 //                                      to G4ionIonisation T. Koi
+
+
+/*! \file
+ \brief Creates particles and processes for important ions: deuterium, tritium, Alphas, and He-3s; also builds generic ions.
+ Also defines ion physics processes.
+ */
+
 
 #include "EMMAIonPhysics.hh"
 
@@ -107,17 +114,17 @@ void EMMAIonPhysics::ConstructProcess()
 //    // Coulomb scattering
 //    G4CoulombScattering* thegionCoulombScattering = new G4CoulombScattering();
 //    thegionCoulombScattering->SetEmModel(new G4IonCoulombScatteringModel());
-//    pManager->AddDiscreteProcess(thegionCoulombScattering);  
+//    pManager->AddDiscreteProcess(thegionCoulombScattering);
 
 
 
    // Screened nuclear recoil
    // G4ScreenedNuclearRecoil* thegionScreenedNuclearRecoil = new G4ScreenedNuclearRecoil();
-   // pManager->AddDiscreteProcess(thegionScreenedNuclearRecoil);  
+   // pManager->AddDiscreteProcess(thegionScreenedNuclearRecoil);
 
    // Nuclear stopping
    //   G4VProcess* thegionNuclearStopping = new G4NuclearStopping();
-   //   pManager->AddDiscreteProcess(thegionNuclearStopping);  
+   //   pManager->AddDiscreteProcess(thegionNuclearStopping);
 
 
 
@@ -253,7 +260,7 @@ void EMMAIonPhysics::AddIonGasModels() //NOT USED
 {
   G4EmConfigurator* em_config = G4LossTableManager::Instance()->EmConfigurator();
   //G4Region* vacuumRegion = G4RegionStore::GetInstance()->GetRegion("vacuumRegion",false);
-  
+
   theParticleIterator->reset();
   while ((*theParticleIterator)())
     {
@@ -275,11 +282,11 @@ void EMMAIonPhysics::SetReactionParameters() {
 
   G4cout << G4endl;
   G4cout << "*** Two-body process activated ***" << G4endl;
-  G4cout << "Reaction: "  
-	 << "(" << fZ1 << "," << fA1 << ")+" 
-	 << "(" << fZ2 << "," << fA2 << ") -> " 
-	 << "(" << fZ3 << "," << fA3 << ")+" 
-	 << "(" << fZ4 << "," << fA4 << ")" 
+  G4cout << "Reaction: "
+	 << "(" << fZ1 << "," << fA1 << ")+"
+	 << "(" << fZ2 << "," << fA2 << ") -> "
+	 << "(" << fZ3 << "," << fA3 << ")+"
+	 << "(" << fZ4 << "," << fA4 << ")"
 	 << G4endl;
   G4cout << "with cross section = " << fcs/millibarn << " mb" << G4endl;
   G4cout << G4endl;

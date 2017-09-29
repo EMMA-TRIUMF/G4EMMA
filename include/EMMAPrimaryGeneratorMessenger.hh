@@ -38,20 +38,33 @@ class G4UIcmdWithAnInteger;
 #include "G4UImessenger.hh"
 #include "globals.hh"
 
+/*! \file
+ \brief
+    This file is responsible for deleting commands, delivering commands to destination classes, defining global G4 variables specific to EMMA,
+    and replying the current values of the parameters (again as described the "G4UImessenger.hh" source file) regarding the primary generator (of the events)
+
+    This header file contains classes built upon the base class created in the G4 header "G4UImessenger.hh."
+    As explained in the "G4UImessenger.hh" file, it is necessary for the user to to create his(her) own
+    derivative class if (s)he wishes to define commands (for EMMA).
+    This is one of four similar EMMA headers, each titled "EMMA...Messenger," which serves the same above purpose for different aspects of the EMMA simulation:
+    see "EMMADetectorConstMessenger," "EMMAEventActionMessenger," "EMMAIonPhysicsMessenger," and "EMMAPrimaryGeneratorMessenger."
+*/
+
+
 class EMMAPrimaryGeneratorMessenger: public G4UImessenger
 {
 public:
   EMMAPrimaryGeneratorMessenger(EMMAPrimaryGeneratorAction* mpga);
   ~EMMAPrimaryGeneratorMessenger();
-  
+
 public:
   void SetNewValue(G4UIcommand * command,G4String newValues);
   G4String GetCurrentValue(G4UIcommand * command);
-  
+
 private:
   EMMAPrimaryGeneratorAction * target;
   G4UIdirectory * reactionDirectory;
-  
+
 private: //commands
   G4UIcmdWithADouble  *beamZCmd, *beamACmd, *beamChargeCmd;
   G4UIcmdWithADoubleAndUnit*  energyCmd;

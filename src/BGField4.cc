@@ -1,6 +1,11 @@
 //
 // Created from BuildGeometry program
 //
+
+/*! \file
+ \brief The BGField source files construct the 7 magnetic and electric fields on the EMMA simulation (QQEMEQQ).
+*/
+
 #include "BGField4.hh"
 
 #include "fortran_subs.inc"
@@ -41,7 +46,7 @@ BGField4::BGField4(G4double xoffset, G4double zoffset,G4double zbefore,G4double 
   data[26] = -25;	// integration limit defining start of exit fringefield zone in co-ordinate system of exit EFB
   data[27] = 50;	// integration limit defining end of exit fringefield zone in co-ordinate system of exit EFB
   data[28] = 0.2401;	//{
-  data[29] = 1.8639;	//	coefficients used in expansion of fringing field at entrance	
+  data[29] = 1.8639;	//	coefficients used in expansion of fringing field at entrance
   data[30] = -0.5572;	//
   data[31] = 0.3904;	//}
   data[34] = 0.2401;	//{
@@ -63,7 +68,7 @@ BGField4::~BGField4()
 void BGField4::AddFieldValue(const double Point[3],G4double field[6]) const
 {
 	double pos[3], pos2[3];
-	
+
 	pos2[0] = Point[0]/cm - offset[0];
 	pos2[1] = Point[1]/cm - offset[1];
 	pos2[2] = Point[2]/cm - offset[2];

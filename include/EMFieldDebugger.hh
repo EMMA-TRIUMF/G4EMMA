@@ -8,7 +8,8 @@
 
 #include "EMMADetectorConstruction.hh"
 
-// Global variables from SpectrometerConstruction.cc
+
+/// Global variables from SpectrometerConstruction.cc
 extern G4double zQ1ends; //z location at beginning and end of element
 extern G4double zQ2ends;
 extern G4double zQ3ends;
@@ -59,17 +60,23 @@ extern G4double Pipe4z;
 extern G4double Pipe4HL;
 extern G4double Pipe7HL;
 
-// Global variables from EMMADetectorConstruction.cc
+/// Global variables from EMMADetectorConstruction.cc
 extern G4double magneticScaling;
 extern G4double electricScaling;
 
 
-// Global variables from EMMAPrimaryGeneratorAction.cc
+/// Global variables from EMMAPrimaryGeneratorAction.cc
 extern G4String fieldFileName;
 
 #include "EMMAGlobalField.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
+/*!
+ \file
+ \brief This header declares a class used in the corresponding source file that calculates the value of EM fields at different locations in the simulation.
+*/
 
 class EMFieldDebugger
 {

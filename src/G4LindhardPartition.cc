@@ -28,6 +28,11 @@
 //
 // $Id$
 //
+/*! \file
+ \brief A seemingly periphery code that calculates the non-ionizing energy loss of radiation via the Lindhard partition function.
+    Used to calculate energy deposited in target by the beam thereby affecting energy of recoils.
+    */
+
 
 /*
  *  G4LindhardPartition.cc
@@ -50,12 +55,12 @@ based on the most abundant element in the material.
 this is from IEEE Trans. Nucl Science Vol. 48 No.1 February 2001 page 162++
 Insoo Jun, "Effects of Secondary Particles on the Total Dose..."
 and, by reference,
-Lindhard, Nielsen, Scharff & Thompson, 
-"Integral Equations Governing Radiation Efects...", 
+Lindhard, Nielsen, Scharff & Thompson,
+"Integral Equations Governing Radiation Efects...",
 Mat. Fys. Medd. Dan. Vid. Selsk. vol 33 #10, pp1-42, 1963
 and
 Robinson, "The dependence of radiation effects on primary recoil energy",
-in Proc. Int. Conf. Radiation-Induced Voids in Metal,  
+in Proc. Int. Conf. Radiation-Induced Voids in Metal,
 Albany, NY 1972 pp. 397-439
 def lindhard_robinson(z1, a1, z2, a2, ke):
 el=30.724*z1*z2*math.sqrt(z1**0.6667+z2**0.6667)*(a1+a2)/a2
@@ -65,7 +70,7 @@ eps=ke*(1.0/el)
 return 1.0/(1+fl*(3.4008*eps**0.16667+0.40244*eps**0.75+eps))
 */
 
-G4LindhardRobinsonPartition::G4LindhardRobinsonPartition() 
+G4LindhardRobinsonPartition::G4LindhardRobinsonPartition()
 {
   max_z = 120;
   for(size_t i=1; i<max_z; i++) {z23[i]=std::pow((G4double)i, 2./3.);}
@@ -75,7 +80,7 @@ G4double G4LindhardRobinsonPartition::PartitionNIEL(
    G4int z1, G4double a1, const G4Material *material, G4double energy) const
 {
   size_t nMatElements = material->GetNumberOfElements();
-        
+
   const G4double *atomDensities=material->GetVecNbOfAtomsPerVolume();
   G4double maxdens=0.0;
   size_t maxindex=0;
@@ -89,12 +94,12 @@ G4double G4LindhardRobinsonPartition::PartitionNIEL(
   const G4Element *element=material->GetElement(maxindex);
 
   G4int z2=G4int(element->GetZ());
-        
+
   G4double a2=element->GetA()/(Avogadro*amu);
-        
+
   G4double zpow=z23[z1]+z23[z2];
   G4double asum=a1+a2;
-        
+
   G4double el=30.724*z1*z2*std::sqrt(zpow)*asum/a2;
   G4double fl=0.0793*z23[z1]*std::sqrt(z2*asum*asum*asum/(a1*a1*a1*a2))/std::pow(zpow, 0.75);
   G4double eps=(energy/eV)*(1.0/el);

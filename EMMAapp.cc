@@ -25,12 +25,12 @@
 //   Date:			July 2014
 //   Modified by:	Naomi Galinski
 //   Original Author:		Derek Howell
-// 
-// Version1.6:  
+//
+// Version1.6:
 // Now uses ROOT instead of AIDA.
 // Input file format changed.
 //
-// Verstion1.7:  
+// Verstion1.7:
 // Changes made to SpectrometerConstruction.cc.:
 //   - less input parameters required to make new SpectrometerConstruction object
 //   - slits.dat input file format changed.
@@ -38,7 +38,7 @@
 //   - got rid of vertical slits
 //   - changes made to pipe lengths
 //   - Bruker's apertures are used for the quads and EDs and MD have rectangular aperture slits
-//   - BGFieldn.cc object definition has changed. More input parameters are required. 
+//   - BGFieldn.cc object definition has changed. More input parameters are required.
 //   - uses EMFieldDebugger.cc to debug calculated E and B fields
 //   - added lengths and distances used in EMFieldDebugger.cc
 // BGField classes:
@@ -111,9 +111,9 @@ G4int NOHslits4=0;
 
 
 void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8 );
-void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, 
-			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12, 
-			     G4double &s13 ); 
+void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
+			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
+			     G4double &s13 );
 void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 );
 
 
@@ -137,10 +137,10 @@ int main(int argc,char** argv)
   //
   G4VSteppingVerbose* verbosity = new EMMASteppingVerbose;
   G4VSteppingVerbose::SetInstance(verbosity);
-  
+
   // RunManager construction
   G4RunManager* runManager = new G4RunManager;
-  
+
 #ifdef G4VIS_USE
   // Visualization manager construction
   G4VisManager* visManager = new G4VisExecutive;
@@ -150,34 +150,34 @@ int main(int argc,char** argv)
   // mandatory user initialization classes
   runManager->SetUserInitialization(new EMMADetectorConstruction); //declare detector parts
   runManager->SetUserInitialization(new EMMAPhysicsList); //declare particles and physics processes
-  
+
   G4UserSteppingAction* stepping_action = new EMMASteppingAction;
   runManager->SetUserAction(stepping_action);
   TrackingAction* trkAct = new TrackingAction();
-  runManager->SetUserAction(trkAct);  
+  runManager->SetUserAction(trkAct);
   runManager->SetUserAction(new StackingAction);
-  
+
   // initialize Geant4 kernel
   runManager->Initialize();
-  
+
   // mandatory user action class
   EMMAPrimaryGeneratorAction* priGenAct = new EMMAPrimaryGeneratorAction();
   runManager->SetUserAction(priGenAct);
 
   // optional user action classes
   runManager->SetUserAction(new EMMAEventAction);
-  
+
   // start interactive session
 #ifdef G4VIS_USE
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
-  //if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");   
+  //if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");
   //      UImanager->ApplyCommand("/control/execute BeamSetup.mac");
-  
-  
+
+
   G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12;
   G4double d13;
   G4String command;
-  
+
 
   //-----------------------------------------
   //            Specify beam
@@ -192,8 +192,8 @@ int main(int argc,char** argv)
   command = "/mydet/beamSpotDiameter "; command.append(s7); UImanager->ApplyCommand(command);
   command = "/mydet/transEmittance "; command.append(s8); UImanager->ApplyCommand(command);
   //-----------------------------------------
-  
-  
+
+
   //-----------------------------------------
   //  Nuclear-reaction process: (1+2->3+4)
   //-----------------------------------------
@@ -215,8 +215,8 @@ int main(int argc,char** argv)
   if (s3=="0" && s4=="0") simtype=0; // reaction not specified; simulate beam
   else simtype=1; // reaction specified; simulate reaction
   //-----------------------------------------
-  
-  
+
+
   //-----------------------------------------
   //      Specify central trajectory
   //-----------------------------------------
@@ -227,16 +227,16 @@ int main(int argc,char** argv)
   command = "/mydet/centralE "; command.append(s4); UImanager->ApplyCommand(command);
   UImanager->ApplyCommand("/mydet/updategeo"); // necessary for changes to take effect
   //-----------------------------------------
-  
-  
+
+
   // Amount of output info
   //-----------------------------------------
   UImanager->ApplyCommand("/run/verbose      0");
   UImanager->ApplyCommand("/event/verbose    0");
   UImanager->ApplyCommand("/tracking/verbose 0");
   //-----------------------------------------
-    
-  
+
+
 //-----------------------------------------------------------------------------------------//
   //Following section is commented out so that the simulation doesn't run automatically.
   //To simulate beam run using command: /mydet/doBeam
@@ -257,7 +257,7 @@ int main(int argc,char** argv)
   //UImanager->ApplyCommand("/mydet/doReaction"); //simulate recoils from reaction depth
   //-----------------------------------------
 //-----------------------------------------------------------------------------------------//
-  
+
 
   // Print hit info
   //-----------------------------------------
@@ -269,7 +269,7 @@ int main(int argc,char** argv)
   G4cout << "Slits 4: " << NOHslits4 << G4endl;
   G4cout << G4endl;
   // print same info to file
-  std::ofstream outfile; 
+  std::ofstream outfile;
   G4String fname = UserDir;
   fname.append("/Results/diagnostics.dat");
   outfile.open(fname);
@@ -281,31 +281,32 @@ int main(int argc,char** argv)
   outfile.close();
   //-----------------------------------------
 
-  
+
 #endif
 #ifdef G4UI_USE
   G4UIExecutive* ui = new G4UIExecutive(argc, argv);
-  UImanager->ApplyCommand("/control/execute visEMMA.mac"); 
+  UImanager->ApplyCommand("/control/execute visEMMA.mac");
   ui->SessionStart();
   delete ui;
 #endif
-  
+
 
 #ifdef G4VIS_USE
   delete visManager;
 #endif
-  
+
   delete runManager;
   delete verbosity;
-  
+
   return 0;
 }
 
 
 
 
-
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8 ) 
+///Takes the manually-input values from the user input file "beam.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
+///values as strings to be used as simulation commands (See "Specify Beam" section in main())
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8 )
 {
   s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8="";
   G4String text, line;
@@ -319,10 +320,10 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
       if (text=="#") { // skip comments
 	getline (inputfil,line);
       }
-      else {	 
+      else {
 	n = n+1;
-	if (n==1) s1 = text; // # of events 
-	if (n==2) s2 = text; // Z 
+	if (n==1) s1 = text; // # of events
+	if (n==2) s2 = text; // Z
 	if (n==3) s3 = text; // A
 	if (n==4) s4 = text; // charge-state
 	if (n==5) s5 = text; // energy
@@ -333,7 +334,7 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
     }
     inputfil.close();
   }
-  else G4cout << "Unable to open " << filename << G4endl; 
+  else G4cout << "Unable to open " << filename << G4endl;
   // get units right:
   s5.append(" MeV");
   s7.append(" mm");
@@ -341,9 +342,11 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
 }
 
 
-void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, 
+///Takes the input values from the user input file "reaction.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
+///values as strings to be used as simulation commands (See "Nuclear-reaction process" section in main())
+void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
 			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
-			     G4double &d13 ) 
+			     G4double &d13 )
 {
   s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8=""; s9=""; s10=""; s11=""; s12=""; d13=0;
   G4String text, line;
@@ -358,27 +361,27 @@ void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String 
       if (text=="#") { // skip comments
 	getline (inputfil,line);
       }
-      else {	 
+      else {
 	n = n+1;
-	if (n==1) s1 = text; // Z1 
+	if (n==1) s1 = text; // Z1
 	if (n==2) s2 = text; // A1
 	if (n==3) s3 = text; // Z2
 	if (n==4) s4 = text; // A2
-	if (n==5) s5 = text; // Z3 
+	if (n==5) s5 = text; // Z3
 	if (n==6) s6 = text; // A3
 	if (n==7) s7 = text; // Z4
 	if (n==8) s8 = text; // A4
-	if (n==9) s9 = text; // theta cm min 
+	if (n==9) s9 = text; // theta cm min
 	if (n==10) s10 = text; // theta cm max
 	if (n==11) s11 = text; // charge-state of fragment 3
 	if (n==12) s12 = text; // excitation energy of fragment 3
-	val = atof(text.c_str());  
+	val = atof(text.c_str());
 	if (n==13) d13 = val; // cross section (mb/sr)
       }
     }
     inputfil.close();
   }
-  else G4cout << "Unable to open " << filename << G4endl; 
+  else G4cout << "Unable to open " << filename << G4endl;
   // get units right:
   s9.append(" deg");
   s10.append(" deg");
@@ -386,7 +389,9 @@ void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String 
 }
 
 
-void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 ) 
+///Takes the input values from the user input file "centralTrajectory.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
+///values as strings to be used as simulation commands (See "Specify central trajectory" section in main()).
+void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 )
 {
   s1="";  s2="";  s3="";  s4="";
   G4String text, line;
@@ -400,9 +405,9 @@ void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, 
       if (text=="#") { // skip comments
 	getline (inputfil,line);
       }
-      else {	 
+      else {
 	n = n+1;
-	if (n==1) s1 = text; // Z 
+	if (n==1) s1 = text; // Z
 	if (n==2) s2 = text; // A
 	if (n==3) s3 = text; // charge-state
 	if (n==4) s4 = text; // energy
@@ -410,7 +415,7 @@ void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, 
     }
     inputfil.close();
   }
-  else G4cout << "Unable to open " << filename << G4endl; 
+  else G4cout << "Unable to open " << filename << G4endl;
   // get units right:
   s4.append(" MeV");
 }

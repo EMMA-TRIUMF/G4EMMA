@@ -1,0 +1,31 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Prerequisites}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Required Software}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Additional Software for Windows}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Required Libraries}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Declaring Variables}{5}{subsection.2.4}
+\contentsline {section}{\numberline {3}Installing G4EMMA}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Downloading}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Compiling}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Building}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Opening G4EMMA}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Controlling and Starting the Simulation}{8}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Descriptions of Simulation Commands (Naomi Galinski)}{9}{subsubsection.3.5.1}
+\contentsline {section}{\numberline {4}Output and Results}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Output File}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}ROOT}{11}{subsection.4.2}
+\contentsline {section}{\numberline {5}How the program works (Naomi Galinski)}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}Main Program}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}User Initialization Classes}{12}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}DetectorConstruction}{12}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}EMMAPhysicsList}{13}{subsubsection.5.2.2}
+\contentsline {subsection}{\numberline {5.3}User Action Classes}{14}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}EMMAPrimaryGeneratorAction}{14}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}EMMASteppingAction}{15}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}EMMAEventAction}{16}{subsection.5.6}
+\contentsline {section}{\numberline {6}Function-to-File Quick Reference}{17}{section.6}
+\contentsline {section}{\numberline {7}Appendix}{18}{section.7}
+\contentsline {subsection}{\numberline {7.1}Log of Changes Made Since G4EMMA 1.7}{18}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Documentation and Organization}{19}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Modifications to Structure}{19}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.3}Reproducing Calibration Data}{20}{subsubsection.7.1.3}

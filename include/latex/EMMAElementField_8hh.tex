@@ -1,28 +1,22 @@
-\hypertarget{EMMAElementField_8hh}{}\section{E\+M\+M\+A\+Element\+Field.\+hh File Reference}
-\label{EMMAElementField_8hh}\index{E\+M\+M\+A\+Element\+Field.\+hh@{E\+M\+M\+A\+Element\+Field.\+hh}}
-{\ttfamily \#include \char`\"{}globals.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Navigator.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Transportation\+Manager.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+User\+Limits.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Vis\+Attributes.\+hh\char`\"{}}\\*
-Include dependency graph for E\+M\+M\+A\+Element\+Field.\+hh\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{EMMAElementField_8hh__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{EMMAElementField_8hh__dep__incl}
-\end{center}
-\end{figure}
+\hypertarget{EMMAElementField_8hh}{\section{E\-M\-M\-A\-Element\-Field.\-hh File Reference}
+\label{EMMAElementField_8hh}\index{E\-M\-M\-A\-Element\-Field.\-hh@{E\-M\-M\-A\-Element\-Field.\-hh}}
+}
+
+
+This is the interface class used by Global\-Field to compute the field value at a given point\mbox{[}\mbox{]}.  
+
+
+{\ttfamily \#include \char`\"{}globals.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Navigator.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Transportation\-Manager.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-User\-Limits.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Vis\-Attributes.\-hh\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classEMMAElementField}{E\+M\+M\+A\+Element\+Field}
+class \hyperlink{classEMMAElementField}{E\-M\-M\-A\-Element\-Field}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the interface class used by Global\-Field to compute the field value at a given point\mbox{[}\mbox{]}. This class is copied from extended example F04 (F04\-Element\-Field -\/ interface for the E\-M field of one element). An element with an E\-M field will derive a class from this one and implement the computation for the element. The Construct() function will add the derived object into Global\-Field. 

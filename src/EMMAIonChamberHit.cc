@@ -25,8 +25,13 @@
 //
 // $Id$
 //
-/// \file B4cCalorHit.cc
-/// \brief Implementation of the B4cCalorHit class
+///// \file B4cCalorHit.cc
+
+/*! \file
+ \brief Implementation of the B4cCalorHit class. Prints and outputs the results of a particle hit in the ion chamber.
+ */
+
+
 
 #include "EMMAIonChamberHit.hh"
 #include "G4UnitsTable.hh"
@@ -82,9 +87,9 @@ G4int EMMAIonChamberHit::operator==(const EMMAIonChamberHit& right) const
 void EMMAIonChamberHit::Print()
 {
   G4cout
-     << "Edep: " 
+     << "Edep: "
      << std::setw(7) << G4BestUnit(fEdep,"Energy")
-     << " track length: " 
+     << " track length: "
      << std::setw(7) << G4BestUnit( fTrackLength,"Length")
      << G4endl;
 }

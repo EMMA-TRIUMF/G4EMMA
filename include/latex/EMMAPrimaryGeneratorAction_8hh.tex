@@ -1,51 +1,42 @@
-\hypertarget{EMMAPrimaryGeneratorAction_8hh}{}\section{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh File Reference}
-\label{EMMAPrimaryGeneratorAction_8hh}\index{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}}
-{\ttfamily \#include \char`\"{}G4\+V\+User\+Primary\+Generator\+Action.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}globals.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}Randomize.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Element.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Element\+Vector.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Element\+Table.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Physics\+Table.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Physics\+Vector.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+L\+Physics\+Free\+Vector.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Three\+Vector.\+hh\char`\"{}}\\*
-Include dependency graph for E\+M\+M\+A\+Primary\+Generator\+Action.\+hh\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{EMMAPrimaryGeneratorAction_8hh__incl}
-\end{center}
-\end{figure}
+\hypertarget{EMMAPrimaryGeneratorAction_8hh}{\section{E\-M\-M\-A\-Primary\-Generator\-Action.\-hh File Reference}
+\label{EMMAPrimaryGeneratorAction_8hh}\index{E\-M\-M\-A\-Primary\-Generator\-Action.\-hh@{E\-M\-M\-A\-Primary\-Generator\-Action.\-hh}}
+}
+
+
+This is an important class responsible for primary particle or vertex generation. It is required by G4; the Primary Generator is not an actual physical component of E\-M\-M\-A but rather a G4 construction element. This class is the concrete class stemming from the virtual class found in \char`\"{}\-G4\-V\-User\-Primary\-Generator\-Action.\-hh.\char`\"{}.  
+
+
+{\ttfamily \#include \char`\"{}G4\-V\-User\-Primary\-Generator\-Action.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}globals.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Randomize.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Element.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Element\-Vector.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Element\-Table.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Physics\-Table.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Physics\-Vector.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-L\-Physics\-Free\-Vector.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Three\-Vector.\-hh\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classEMMAPrimaryGeneratorAction}{E\+M\+M\+A\+Primary\+Generator\+Action}
+class \hyperlink{classEMMAPrimaryGeneratorAction}{E\-M\-M\-A\-Primary\-Generator\-Action}
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-G4double \hyperlink{EMMAPrimaryGeneratorAction_8hh_a168924eff042d94e1e59a05bbcdcca38}{target\+Thickness}
+\hypertarget{EMMAPrimaryGeneratorAction_8hh_a168924eff042d94e1e59a05bbcdcca38}{G4double {\bfseries target\-Thickness}}\label{EMMAPrimaryGeneratorAction_8hh_a168924eff042d94e1e59a05bbcdcca38}
+
 \item 
-G4double \hyperlink{EMMAPrimaryGeneratorAction_8hh_a7d65bdf83ece33e0fa248e3da81e825a}{target\+Zoffset}
+\hypertarget{EMMAPrimaryGeneratorAction_8hh_a7d65bdf83ece33e0fa248e3da81e825a}{G4double {\bfseries target\-Zoffset}}\label{EMMAPrimaryGeneratorAction_8hh_a7d65bdf83ece33e0fa248e3da81e825a}
+
 \item 
-G4\+String \hyperlink{EMMAPrimaryGeneratorAction_8hh_a28a3faf9b4768b420044f0d81fa645b7}{Mother\+Dir}
+\hypertarget{EMMAPrimaryGeneratorAction_8hh_a28a3faf9b4768b420044f0d81fa645b7}{G4\-String {\bfseries Mother\-Dir}}\label{EMMAPrimaryGeneratorAction_8hh_a28a3faf9b4768b420044f0d81fa645b7}
+
 \item 
-G4\+String \hyperlink{EMMAPrimaryGeneratorAction_8hh_a8558631b93942e4ae79b3feb21c97c8f}{User\+Dir}
+\hypertarget{EMMAPrimaryGeneratorAction_8hh_a8558631b93942e4ae79b3feb21c97c8f}{G4\-String {\bfseries User\-Dir}}\label{EMMAPrimaryGeneratorAction_8hh_a8558631b93942e4ae79b3feb21c97c8f}
+
 \end{DoxyCompactItemize}
 
 
-\subsection{Variable Documentation}
-\index{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}!Mother\+Dir@{Mother\+Dir}}
-\index{Mother\+Dir@{Mother\+Dir}!E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}}
-\subsubsection[{\texorpdfstring{Mother\+Dir}{MotherDir}}]{\setlength{\rightskip}{0pt plus 5cm}G4\+String Mother\+Dir}\hypertarget{EMMAPrimaryGeneratorAction_8hh_a28a3faf9b4768b420044f0d81fa645b7}{}\label{EMMAPrimaryGeneratorAction_8hh_a28a3faf9b4768b420044f0d81fa645b7}
-\index{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}!target\+Thickness@{target\+Thickness}}
-\index{target\+Thickness@{target\+Thickness}!E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}}
-\subsubsection[{\texorpdfstring{target\+Thickness}{targetThickness}}]{\setlength{\rightskip}{0pt plus 5cm}G4double target\+Thickness}\hypertarget{EMMAPrimaryGeneratorAction_8hh_a168924eff042d94e1e59a05bbcdcca38}{}\label{EMMAPrimaryGeneratorAction_8hh_a168924eff042d94e1e59a05bbcdcca38}
-\index{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}!target\+Zoffset@{target\+Zoffset}}
-\index{target\+Zoffset@{target\+Zoffset}!E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}}
-\subsubsection[{\texorpdfstring{target\+Zoffset}{targetZoffset}}]{\setlength{\rightskip}{0pt plus 5cm}G4double target\+Zoffset}\hypertarget{EMMAPrimaryGeneratorAction_8hh_a7d65bdf83ece33e0fa248e3da81e825a}{}\label{EMMAPrimaryGeneratorAction_8hh_a7d65bdf83ece33e0fa248e3da81e825a}
-\index{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}!User\+Dir@{User\+Dir}}
-\index{User\+Dir@{User\+Dir}!E\+M\+M\+A\+Primary\+Generator\+Action.\+hh@{E\+M\+M\+A\+Primary\+Generator\+Action.\+hh}}
-\subsubsection[{\texorpdfstring{User\+Dir}{UserDir}}]{\setlength{\rightskip}{0pt plus 5cm}G4\+String User\+Dir}\hypertarget{EMMAPrimaryGeneratorAction_8hh_a8558631b93942e4ae79b3feb21c97c8f}{}\label{EMMAPrimaryGeneratorAction_8hh_a8558631b93942e4ae79b3feb21c97c8f}
+\subsection{Detailed Description}
+This is an important class responsible for primary particle or vertex generation. It is required by G4; the Primary Generator is not an actual physical component of E\-M\-M\-A but rather a G4 construction element. This class is the concrete class stemming from the virtual class found in \char`\"{}\-G4\-V\-User\-Primary\-Generator\-Action.\-hh.\char`\"{}. 

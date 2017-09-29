@@ -1,17 +1,19 @@
-\hypertarget{EMFieldDebugger_8cc}{}\section{E\+M\+Field\+Debugger.\+cc File Reference}
-\label{EMFieldDebugger_8cc}\index{E\+M\+Field\+Debugger.\+cc@{E\+M\+Field\+Debugger.\+cc}}
-{\ttfamily \#include \char`\"{}E\+M\+Field\+Debugger.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}E\+M\+M\+A\+Global\+Field.\+hh\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}G4\+Units\+Table.\+hh\char`\"{}}\\*
+\hypertarget{EMFieldDebugger_8cc}{\section{E\-M\-Field\-Debugger.\-cc File Reference}
+\label{EMFieldDebugger_8cc}\index{E\-M\-Field\-Debugger.\-cc@{E\-M\-Field\-Debugger.\-cc}}
+}
+
+
+Calculates E and B fields at certain locations.  
+
+
+{\ttfamily \#include \char`\"{}E\-M\-Field\-Debugger.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-M\-M\-A\-Global\-Field.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G4\-Units\-Table.\-hh\char`\"{}}\\*
 {\ttfamily \#include $<$iomanip$>$}\\*
 {\ttfamily \#include $<$fstream$>$}\\*
-{\ttfamily \#include $<$stdlib.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}G4\+System\+Of\+Units.\+hh\char`\"{}}\\*
-Include dependency graph for E\+M\+Field\+Debugger.\+cc\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{EMFieldDebugger_8cc__incl}
-\end{center}
-\end{figure}
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}G4\-System\-Of\-Units.\-hh\char`\"{}}\\*
+
+
+\subsection{Detailed Description}
+Calculates E and B fields at certain locations. It M\-U\-S\-T be used after \hyperlink{SpectrometerConstruction_8cc}{Spectrometer\-Construction.\-cc} is initialised since it assigns lengths and sizes of the elements needed to calculate the field strengths in the B\-G\-Field classes. 

@@ -1,8 +1,8 @@
-/* 
+/*
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
-   Nuclear-reaction process for projectile (Z1,A1) 
+   Nuclear-reaction process for projectile (Z1,A1)
    striking target (Z2,A2) with cross section (cs)
 
    (G4HadronElasticProcess.hh used as starting point)
@@ -12,7 +12,7 @@
 
 #ifndef EMMANuclearReactionProcess_h
 #define EMMANuclearReactionProcess_h 1
- 
+
 #include "globals.hh"
 #include "G4HadronicProcess.hh"
 #include "EMMANuclearReactionDataSet.hh"
@@ -20,6 +20,16 @@
 
 class G4ParticleDefinition;
 class G4CrossSectionDataStore;
+
+
+/*!
+ \file
+ \brief Nuclear-reaction process for projectile (Z1,A1)
+  striking target (Z2,A2) with cross section (cs)
+
+    - Oliver Kirsebom, TRIUMF, February 2013
+*/
+
 
 class EMMANuclearReactionProcess : public G4HadronicProcess
 {
@@ -46,7 +56,7 @@ public:
   void Setcs(G4double x) { ods->Setcs(x); };
 
 private:
-  // hide assignment operator as private 
+  // hide assignment operator as private
   EMMANuclearReactionProcess& operator=(const EMMANuclearReactionProcess &right);
   EMMANuclearReactionProcess(const EMMANuclearReactionProcess& );
 

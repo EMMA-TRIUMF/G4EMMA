@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['collisionstages',['collisionStages',['../classG4ScreenedNuclearRecoil.html#a0d3ecbaa25714e7a92a69fcae7833662',1,'G4ScreenedNuclearRecoil']]],
-  ['combine',['combine',['../classc2__binary__function.html#a03189b157a02b97b2f885196616c01a0',1,'c2_binary_function']]],
-  ['costheta',['cosTheta',['../structG4CoulombKinematicsInfo.html#a4b434e3e3c9dddcf949db7838fd227f9',1,'G4CoulombKinematicsInfo']]],
-  ['coszeta',['cosZeta',['../structG4CoulombKinematicsInfo.html#aaf59256e97f3d630a063d1f8d8294e42',1,'G4CoulombKinematicsInfo']]],
-  ['crosssection',['crossSection',['../structG4CoulombKinematicsInfo.html#a98f207760b06d9ec24aafb5c4a499c7a',1,'G4CoulombKinematicsInfo']]],
-  ['crosssectionhandlers',['crossSectionHandlers',['../classG4ScreenedNuclearRecoil.html#a9860a5abf8c2239adad8d1635612d6a1',1,'G4ScreenedNuclearRecoil']]],
-  ['currentcharge',['currentCharge',['../BGField1_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField1.hh'],['../BGField2_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField2.hh'],['../BGField3_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField3.hh'],['../BGField4_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField4.hh'],['../BGField5_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField5.hh'],['../BGField6_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField6.hh'],['../BGField7_8hh.html#acb265d8eecfa1acd31056f0c7915362e',1,'currentCharge():&#160;BGField7.hh']]]
+  ['fhasstatictransforms',['fHasStaticTransforms',['../classc2__transformation.html#a66489da404feec82b2db467a9c3e7a1e',1,'c2_transformation']]],
+  ['fieldfilename',['fieldFileName',['../EMFieldDebugger_8hh.html#ae9b14cfeccc31b1bf76af2f4c3aae43d',1,'EMFieldDebugger.hh']]],
+  ['focalplanefilename',['focalPlaneFileName',['../EMMADriftChamberHit_8hh.html#a3dbaf7156a8d958508b9806a0ef50aa6',1,'EMMADriftChamberHit.hh']]],
+  ['ftransformed',['fTransformed',['../classc2__transformation.html#a18c8ee93daf24675a40905aaceeebd72',1,'c2_transformation']]],
+  ['func',['func',['../classc2__classic__function__p.html#a1ff2ac38a9a119e6f68ef44bb382ece7',1,'c2_classic_function_p::func()'],['../classc2__scaled__function__p.html#a4ee175f7c60c6967c44418062b93cbbb',1,'c2_scaled_function_p::func()']]]
 ];

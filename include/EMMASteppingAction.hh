@@ -26,7 +26,7 @@
 //
 // $Id: ExN02SteppingAction.hh,v 1.8 2006-06-29 17:47:48 gunter Exp $
 // GEANT4 tag $Name: geant4-09-04-patch-02 $
-// 
+//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -79,27 +79,37 @@ extern G4double electricScaling;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+
+/*! \file
+ \brief
+  Headers that have to do with "stepping" (loops) is related to tracking the particle and its interactions with its surroundings.
+  This class defines functions that build on "G4UserSteppingAction.hh," which represents user actions during "stepping."
+
+  For more understanding of "stepping" (and consequently particle tracking) see the most fundamental "G4SteppingManager.hh" file.
+*/
+
+
 class EMMASteppingAction : public G4UserSteppingAction
 {
 public:
   EMMASteppingAction();
   virtual ~EMMASteppingAction();
-  
+
   virtual void UserSteppingAction(const G4Step* theStep);
-  
+
   G4int getDeadInt() {return deadint;}
   G4bool getDead() {return dead;}
-  
+
 private:
   G4int deadint;
   G4bool dead;
-  
+
   G4String element[8];
-    
+
 #ifdef G4ANALYSIS_USE
   TH1I* dead_hit;
 #endif // G4ANALYSIS_USE
-  
+
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

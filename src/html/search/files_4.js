@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mitray_2ecc',['mitray.cc',['../mitray_8cc.html',1,'']]]
+  ['spectrometerconstruction_2ecc',['SpectrometerConstruction.cc',['../SpectrometerConstruction_8cc.html',1,'']]]
 ];

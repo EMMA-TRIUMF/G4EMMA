@@ -53,44 +53,52 @@ class G4UserLimits;
 class EMMADetectorConstMessenger;
 class SpectrometerConstruction;
 
+
+/*!
+ \file
+ \brief This header file builds on the G4 header "G4VUserDetectorConstruction.hh" to set the global G4 variables specifying the materials and
+ simulation attributes of the EMMA detectors. Several EMMA functions (regarding its detectors) are also defined.
+*/
+
+
 class EMMADetectorConstruction : public G4VUserDetectorConstruction
 {
 public:
   EMMADetectorConstruction();
   virtual ~EMMADetectorConstruction();
-  void CalculateScalingFactors();  
+  void CalculateScalingFactors();
   void ReadUserInput();
 
 public:
   virtual G4VPhysicalVolume* Construct();
-  
+
 private:
   void ConstructMaterials();
   void DestroyMaterials();
   void DumpGeometricalTree(G4VPhysicalVolume* aVolume,G4int depth=0);
-  
-private:	
-  SpectrometerConstruction* Spectrometer;	
+
+private:
+  SpectrometerConstruction* Spectrometer;
   EMMADetectorConstMessenger* messenger;
   G4Material* air;
   G4Material* Vacuum;
   G4Material* Aluminum;
   G4Material* lead;
-  G4Material* graphite;  
-  G4Material* CD2;  
-  G4Material* silicon;  
+  G4Material* graphite;
+  G4Material* CD2;
+  G4Material* silicon;
   G4Material* mylar;
   G4Material* isobutane;
   G4Material* isobutaneIC;
-  G4VisAttributes* worldVisAtt;  
+  G4VisAttributes* worldVisAtt;
   G4VisAttributes* cellVisAtt;
   G4VisAttributes* WallVisAtt;
   G4VisAttributes* wedgeVisAtt;
   G4VisAttributes* BeamLineVisAtt;
   G4VisAttributes* PoleVisAtt;
-  G4VisAttributes* BendingVisAtt; 
-  G4UserLimits* stepLimit;             // pointer to user step limits 
-  //G4VPhysicalVolume* EMMAPhys;  
+  G4VisAttributes* BendingVisAtt;
+  G4UserLimits* stepLimit;             // pointer to user step limits
+  //G4VPhysicalVolume* EMMAPhys;
   //G4VPhysicalVolume* targetBoxPhys;
   //  G4VPhysicalVolume* spectrometerBoxPhys;
   G4VPhysicalVolume* detectorBoxPhys;
@@ -103,13 +111,13 @@ private:
 
 private:
   G4bool insertTarget;
-  G4Material* targetMaterial;  
+  G4Material* targetMaterial;
   G4bool insertDegrader1;
   G4double degrader1Thickness;
-  G4Material* degrader1Material;  
+  G4Material* degrader1Material;
   G4bool insertDegrader2;
   G4double degrader2Thickness;
-  G4Material* degrader2Material;  
+  G4Material* degrader2Material;
   G4bool insertMWPC;
   G4bool insertIC;
   G4double MWPCwindowCathodeSeparation;
@@ -120,16 +128,16 @@ private:
   G4double pTorrIC;
   G4double TCelsius;
   G4bool fCheckOverlaps;
-  
+
 public:
   inline void SetCentralZ(G4double val) { centralZ = val; }
   inline G4double GetCentralZ() const { return centralZ; }
   inline void SetCentralA(G4double val) { centralA = val; }
-  inline G4double GetCentralA() const { return centralA; }  
+  inline G4double GetCentralA() const { return centralA; }
   inline void SetCentralQ(G4double val) { centralQ = val; }
-  inline G4double GetCentralQ() const { return centralQ; }  
+  inline G4double GetCentralQ() const { return centralQ; }
   inline void SetCentralE(G4double val) { centralE = val; }
-  inline G4double GetCentralE() const { return centralE; }  
+  inline G4double GetCentralE() const { return centralE; }
 
 };
 

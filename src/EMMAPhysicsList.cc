@@ -28,8 +28,14 @@
 //
 // 28-Jan-04 Add QGSP_BERT and QGSP_BIC for hadronic lists. T. Koi
 // 22-Nov-04 Comment out QGSP_BERT and QGSP_BIC
-//           Output Notificaiton message             
-//           All Particles are created in GeneralPhysics 
+//           Output Notificaiton message
+//           All Particles are created in GeneralPhysics
+
+
+/*! \file
+ \brief All other physics processes (EM, general, muon, etc.) are written here.
+ */
+
 
 #include "EMMAPhysicsList.hh"
 

@@ -50,6 +50,13 @@
 
 class EMMAEventActionMessenger;
 
+
+/*! \file
+ \brief This header defines the user's action class, and specifically, the beginning and end of a user action.
+ It generates from the PrimaryGenerator headers as the user begins an action. Contains functions that are invoked by G4EventManager.
+*/
+
+
 class EMMAEventAction : public G4UserEventAction
 {
   public:
@@ -85,12 +92,12 @@ class EMMAEventAction : public G4UserEventAction
   //! two g4double, returns nothing but prints event statistics
     EMMAIonChamberHitsCollection* GetHitsCollection(const G4String& hcName,
 						const G4Event* event) const;
-    void PrintEventStatistics(G4double IonChamberEdep, G4double IonChamberTrackLength) const; 
+    void PrintEventStatistics(G4double IonChamberEdep, G4double IonChamberTrackLength) const;
 
 #ifdef G4ANALYSIS_USE
   //! Private variables rootfile of type TFile*, fp_tree of type TTree*,
   //! fp_hitpos, fp_hitposEdep both of type TH2F*, and
-  //! fp_hitposX, fp_hitangle, fp_hitEkin, fp_hitEdep, all of type TH1F*, 
+  //! fp_hitposX, fp_hitangle, fp_hitEkin, fp_hitEdep, all of type TH1F*,
 	TFile* rootfile;
 	TTree* fp_tree;
 	TH2F* fp_hitpos;

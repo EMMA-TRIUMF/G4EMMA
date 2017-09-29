@@ -1,7 +1,7 @@
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
-/* 
+/*
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
@@ -22,6 +22,12 @@
 #include "G4Element.hh"
 
 
+/*!
+ \file
+ \brief Data set for (two body) nuclear reaction cross sections. Inherited from similar G4 headers.
+*/
+
+
 class EMMANuclearReactionDataSet : public G4VCrossSectionDataSet
 {
 public:
@@ -33,11 +39,11 @@ public:
   virtual void CrossSectionDescription(std::ostream&) const;
 
   virtual
-  G4bool IsIsoApplicable(const G4DynamicParticle*, G4int Z, G4int A,    
+  G4bool IsIsoApplicable(const G4DynamicParticle*, G4int Z, G4int A,
 			 const G4Element* elm = 0,
 			 const G4Material* mat = 0);
   virtual
-  G4double GetIsoCrossSection(const G4DynamicParticle*, G4int Z, G4int A,  
+  G4double GetIsoCrossSection(const G4DynamicParticle*, G4int Z, G4int A,
 			      const G4Isotope* iso = 0,
 			      const G4Element* elm = 0,
 			      const G4Material* mat = 0);

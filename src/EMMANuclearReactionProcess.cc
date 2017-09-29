@@ -1,14 +1,20 @@
-/* 
+/*
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
-   Nuclear-reaction process for projectile (Z1,A1) 
+   Nuclear-reaction process for projectile (Z1,A1)
    striking target (Z2,A2) with cross section (cs)
 
    (G4HadronElasticProcess.cc used as starting point)
 */
 
 
+
+/*! \file
+ \brief Nuclear-reaction process for projectile (Z1,A1)
+  striking target (Z2,A2) with cross section (cs).
+  Look here if you need to alter the process of striking target with beam.
+  */
 
 
 #include <iostream>
@@ -55,8 +61,8 @@ void EMMANuclearReactionProcess::Description() const
 
 
 
-G4VParticleChange* 
-EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track, 
+G4VParticleChange*
+EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
 				     const G4Step& /*step*/)
 {
   theTotalResult->Clear();
@@ -89,25 +95,25 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   }
   catch(G4HadronicException & aR) {
     G4ExceptionDescription ed;
-    DumpState(track,"SampleZandA",ed); 
+    DumpState(track,"SampleZandA",ed);
     ed << " PostStepDoIt failed on element selection" << G4endl;
     G4Exception("EMMANuclearReactionProcess::PostStepDoIt", "had003", FatalException, ed);
   }
 
 
-  /* 
+  /*
      choses the interaction model depending on kinetic energy,
      material and element (only has been defined for this process,
      so that is the one that will be selected)
   */
   G4HadronicInteraction* hadi = 0;
   try {
-    hadi = ChooseHadronicInteraction( kineticEnergy, material, elm ); 
+    hadi = ChooseHadronicInteraction( kineticEnergy, material, elm );
   }
   catch(G4HadronicException & aE) {
     G4ExceptionDescription ed;
-    ed << "Target element "<< elm->GetName()<<"  Z= " 
-       << targNucleus->GetZ_asInt() << "  A= " 
+    ed << "Target element "<< elm->GetName()<<"  Z= "
+       << targNucleus->GetZ_asInt() << "  A= "
        << targNucleus->GetA_asInt() << G4endl;
     DumpState(track,"ChooseHadronicInteraction",ed);
     ed << " No HadronicInteraction found out" << G4endl;
@@ -124,7 +130,7 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   G4HadProjectile theProj(track);
   G4HadFinalState* result = 0;
   try {
-    /* 
+    /*
        here we call the actual routine that simulates the interaction
     */
     result = hadi->ApplyYourself( theProj, *targNucleus );
@@ -132,15 +138,15 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   catch(G4HadronicException aR) {
     G4ExceptionDescription ed;
     ed << "Call for " << hadi->GetModelName() << G4endl;
-    ed << "Target element "<< elm->GetName()<<"  Z= " 
-       << targNucleus->GetZ_asInt() 
+    ed << "Target element "<< elm->GetName()<<"  Z= "
+       << targNucleus->GetZ_asInt()
        << "  A= " << targNucleus->GetA_asInt() << G4endl;
     DumpState(track,"ApplyYourself",ed);
     ed << " ApplyYourself failed" << G4endl;
-    G4Exception("EMMANuclearReactionProcess::PostStepDoIt", "had006", 
+    G4Exception("EMMANuclearReactionProcess::PostStepDoIt", "had006",
 		FatalException, ed);
   }
-  
+
 
 
   // Directions
@@ -150,7 +156,7 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   G4ThreeVector outdir = result->GetMomentumChange();
 
 
-  // Energies  
+  // Energies
   G4double edep = result->GetLocalEnergyDeposit();
   G4double efinal = result->GetEnergyChange();
   if(efinal < 0.0) { efinal = 0.0; }
@@ -165,10 +171,10 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   theTotalResult->ProposeEnergy(efinal);
   G4TrackStatus status = track.GetTrackStatus();
   if(efinal > 0.0) {
-    /* 
+    /*
        this serves to rotate things from the 'internal frame' of the
        interaction process to the 'world frame' of the laboratory
-    */    
+    */
     outdir.rotate(phi, it);
     outdir.rotateUz(indir);
     theTotalResult->ProposeMomentumDirection(outdir);
@@ -188,22 +194,22 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
   for (G4int i=0; i<NoS; i++) {
     G4DynamicParticle* p = result->GetSecondary(i)->GetParticle();
 
-    /* 
+    /*
        this, again, serves to rotate things from the 'internal frame' of the
        interaction process to the 'world frame' of the laboratory
-    */    
+    */
     G4ThreeVector pdir = p->GetMomentumDirection();
     pdir.rotate(phi, it);
     pdir.rotateUz(indir);
     p->SetMomentumDirection(pdir);
-    
+
     //  time and weight are not changed
     G4Track* t = new G4Track(p, track.GetGlobalTime(), track.GetPosition());
     t->SetWeight(weight);
     t->SetTouchableHandle(track.GetTouchableHandle());
     theTotalResult->AddSecondary(t);
   }
-  
+
 
   theTotalResult->ProposeLocalEnergyDeposit(edep);
   theTotalResult->ProposeNonIonizingEnergyDeposit(edep);
@@ -214,7 +220,7 @@ EMMANuclearReactionProcess::PostStepDoIt(const G4Track& track,
 
 
 
-void 
+void
 EMMANuclearReactionProcess::PreparePhysicsTable(const G4ParticleDefinition& part)
 {
   if(!isInitialised) {

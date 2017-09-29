@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['tan',['tan',['../classc2__factory.html#a2f83cbd3be646166f7e3bef1e27244b9',1,'c2_factory']]],
-  ['targetmap',['targetMap',['../classG4ScreenedCoulombCrossSection.html#a4f47a69e60be10d7040de1fbc9612887',1,'G4ScreenedCoulombCrossSection']]],
-  ['targetmaterial',['targetMaterial',['../structG4CoulombKinematicsInfo.html#a85b16b6a9ae7eea8d989fa93c365891b',1,'G4CoulombKinematicsInfo']]],
-  ['targetthickness',['targetThickness',['../EMMAPrimaryGeneratorAction_8hh.html#a168924eff042d94e1e59a05bbcdcca38',1,'targetThickness():&#160;EMMAPrimaryGeneratorAction.hh'],['../EMMASteppingAction_8hh.html#a168924eff042d94e1e59a05bbcdcca38',1,'targetThickness():&#160;EMMASteppingAction.hh']]],
-  ['targetzoffset',['targetZoffset',['../EMMAPrimaryGeneratorAction_8hh.html#a7d65bdf83ece33e0fa248e3da81e825a',1,'EMMAPrimaryGeneratorAction.hh']]],
-  ['trackingaction',['TrackingAction',['../classTrackingAction.html',1,'TrackingAction'],['../classTrackingAction.html#ab133cbd276ad944eb433eb671a8fa8f4',1,'TrackingAction::TrackingAction()']]],
-  ['trackingaction_2ehh',['TrackingAction.hh',['../TrackingAction_8hh.html',1,'']]],
-  ['trackingstarted',['TrackingStarted',['../classEMMASteppingVerbose.html#a55f521f1fc939b41027b250733d1dd58',1,'EMMASteppingVerbose']]]
+  ['unary_5foperator',['unary_operator',['../classinterpolating__function__p.html#aae37d6b9356c6bb5d1bed631b036abba',1,'interpolating_function_p']]],
+  ['unset_5ffunction',['unset_function',['../classc2__const__ptr.html#aee1890c1f880174b9859d627d2c79425',1,'c2_const_ptr::unset_function()'],['../classc2__plugin__function__p.html#aebe716e59908fe373f85e5aac964441f',1,'c2_plugin_function_p::unset_function()']]],
+  ['updatefield',['UpdateField',['../classEMMAGlobalField.html#a89ebf29cff77048404ea6955333d5ae3',1,'EMMAGlobalField']]]
 ];

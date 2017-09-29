@@ -34,6 +34,11 @@
 #include "G4UIcmdWithoutParameter.hh"
 #include "G4ios.hh"
 
+/*! \file
+ \brief Connects UI and user input to the detector construction. Takes and gives use commands to/from the user when constructing detectors (the PGAC, the degraders, etc.).
+*/
+
+
 EMMADetectorConstMessenger::EMMADetectorConstMessenger(EMMADetectorConstruction* mpga)
 :target(mpga)
 {

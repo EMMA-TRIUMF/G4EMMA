@@ -34,6 +34,10 @@
 #include "G4UIcmdWithAnInteger.hh"
 #include "G4ios.hh"
 
+/*! \file
+ \brief Connects and delivers user commands regarding the primary generator actions to respective classes, and relays their responses.
+ */
+
 EMMAPrimaryGeneratorMessenger::EMMAPrimaryGeneratorMessenger(EMMAPrimaryGeneratorAction * mpga)
 :target(mpga)
 {
@@ -76,7 +80,7 @@ EMMAPrimaryGeneratorMessenger::EMMAPrimaryGeneratorMessenger(EMMAPrimaryGenerato
   AngCmd->SetRange("t<360.");
   AngCmd->SetDefaultValue(0.0);
   AngCmd->SetDefaultUnit("deg");
-	
+
   beamSpotDiameterCmd = new G4UIcmdWithADoubleAndUnit("/mydet/beamSpotDiameter",this);
   beamSpotDiameterCmd->SetGuidance("Beam spot diamater in mm.");
   beamSpotDiameterCmd->SetParameterName("t",true);
@@ -244,56 +248,56 @@ void EMMAPrimaryGeneratorMessenger::SetNewValue(G4UIcommand * command,G4String n
   if( command==beamSpotDiameterCmd )
     { target->SetBeamSpotDiameter(beamSpotDiameterCmd->GetNewDoubleValue(newValue)); }
 
-  if( command==doPrepareCmd ) 
+  if( command==doPrepareCmd )
     { target->initializeBeamPreparation(); }
-  if( command==doBeamCmd ) 
+  if( command==doBeamCmd )
     { target->initializeBeamSimulation(); }
-  if( command==doReactionCmd ) 
+  if( command==doReactionCmd )
     { target->initializeReactionSimulation(); }
 
   if( command==nEventsCmd )
     { target->SetNEvents(nEventsCmd->GetNewIntValue(newValue)); }
 
-  if( command==fZ1Cmd ) { 
-    target->SetZ1(fZ1Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fZ1Cmd ) {
+    target->SetZ1(fZ1Cmd->GetNewDoubleValue(newValue));
   }
-  if( command==fA1Cmd ) { 
-    target->SetA1(fA1Cmd->GetNewDoubleValue(newValue)); 
-  }
-
-  if( command==fZ2Cmd ) { 
-    target->SetZ2(fZ2Cmd->GetNewDoubleValue(newValue)); 
-  }
-  if( command==fA2Cmd ) { 
-    target->SetA2(fA2Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fA1Cmd ) {
+    target->SetA1(fA1Cmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fZ3Cmd ) { 
-    target->SetZ3(fZ3Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fZ2Cmd ) {
+    target->SetZ2(fZ2Cmd->GetNewDoubleValue(newValue));
   }
-  if( command==fA3Cmd ) { 
-    target->SetA3(fA3Cmd->GetNewDoubleValue(newValue)); 
-  }
-
-  if( command==fZ4Cmd ) { 
-    target->SetZ4(fZ4Cmd->GetNewDoubleValue(newValue)); 
-  }
-  if( command==fA4Cmd ) { 
-    target->SetA4(fA4Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fA2Cmd ) {
+    target->SetA2(fA2Cmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fqminCmd ) { 
+  if( command==fZ3Cmd ) {
+    target->SetZ3(fZ3Cmd->GetNewDoubleValue(newValue));
+  }
+  if( command==fA3Cmd ) {
+    target->SetA3(fA3Cmd->GetNewDoubleValue(newValue));
+  }
+
+  if( command==fZ4Cmd ) {
+    target->SetZ4(fZ4Cmd->GetNewDoubleValue(newValue));
+  }
+  if( command==fA4Cmd ) {
+    target->SetA4(fA4Cmd->GetNewDoubleValue(newValue));
+  }
+
+  if( command==fqminCmd ) {
     target->Setqmin(fqminCmd->GetNewDoubleValue(newValue));
   }
-  if( command==fqmaxCmd ) { 
-    target->Setqmax(fqmaxCmd->GetNewDoubleValue(newValue)); 
+  if( command==fqmaxCmd ) {
+    target->Setqmax(fqmaxCmd->GetNewDoubleValue(newValue));
   }
 
-  if( command==fCharge3Cmd ) { 
-    target->SetCharge3(fCharge3Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fCharge3Cmd ) {
+    target->SetCharge3(fCharge3Cmd->GetNewDoubleValue(newValue));
   }
-  if( command==fExcitationEnergy3Cmd ) { 
-    target->SetExcitationEnergy3(fExcitationEnergy3Cmd->GetNewDoubleValue(newValue)); 
+  if( command==fExcitationEnergy3Cmd ) {
+    target->SetExcitationEnergy3(fExcitationEnergy3Cmd->GetNewDoubleValue(newValue));
   }
 
 }
@@ -317,7 +321,7 @@ G4String EMMAPrimaryGeneratorMessenger::GetCurrentValue(G4UIcommand * command)
     { cv = transEmittanceCmd->ConvertToString(target->GetTransEmittance(),"mm"); }
   if( command==beamSpotDiameterCmd )
     { cv = beamSpotDiameterCmd->ConvertToString(target->GetBeamSpotDiameter(),"mm"); }
- 
+
  if( command==nEventsCmd )
     { cv = nEventsCmd->ConvertToString(target->GetNEvents(),""); }
 

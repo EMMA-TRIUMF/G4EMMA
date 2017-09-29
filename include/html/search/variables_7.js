@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['hardeningfactor',['hardeningFactor',['../classG4ScreenedNuclearRecoil.html#a988377cb58e0d3ea9e9b8b47fdff0668',1,'G4ScreenedNuclearRecoil']]],
-  ['hardeningfraction',['hardeningFraction',['../classG4ScreenedNuclearRecoil.html#ad07667d26ae00e2498cdb6ed9c96f4c6',1,'G4ScreenedNuclearRecoil']]],
-  ['highenergylimit',['highEnergyLimit',['../classG4ScreenedNuclearRecoil.html#a2851b050a8dd1473dd893737ae0d9c3a',1,'G4ScreenedNuclearRecoil']]],
-  ['hinting_5ffunction',['hinting_function',['../classc2__inverse__function__p.html#a4e1f68a44dea194ec1737fdcc8a7f17f',1,'c2_inverse_function_p']]]
+  ['pin',['pIn',['../classc2__transformation.html#a8198a729a8e5aebce14a178a4d6a0ea6',1,'c2_transformation']]],
+  ['pindprime',['pInDPrime',['../classc2__transformation.html#a438be3935940de5336383f0a97120b54',1,'c2_transformation']]],
+  ['pinprime',['pInPrime',['../classc2__transformation.html#a256d983133c9f096c7fa7c7b5fb7d64f',1,'c2_transformation']]],
+  ['pout',['pOut',['../classc2__transformation.html#a4cc519a54974378efb82c1449c613cb7',1,'c2_transformation']]],
+  ['processmaxenergy',['processMaxEnergy',['../classG4ScreenedNuclearRecoil.html#a1953ae04bf9ef546cc16d07291cd8819',1,'G4ScreenedNuclearRecoil']]]
 ];

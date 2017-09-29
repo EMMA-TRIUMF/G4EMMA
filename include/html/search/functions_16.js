@@ -1,5 +1,19 @@
 var searchData=
 [
-  ['zblscreening',['ZBLScreening',['../G4ScreenedNuclearRecoil_8hh.html#a38390a6f2bb8ba250affdccb1c9cc49c',1,'G4ScreenedNuclearRecoil.hh']]],
-  ['zero',['zero',['../classc2__transformation.html#a81a65d1c58abae1f7bed846f736a9887',1,'c2_transformation']]]
+  ['_7ec2_5fbinary_5ffunction',['~c2_binary_function',['../classc2__binary__function.html#aaec2d1f2a53845f36974b0b82786d4f2',1,'c2_binary_function']]],
+  ['_7ec2_5fconnector_5ffunction_5fp',['~c2_connector_function_p',['../classc2__connector__function__p.html#a3cf5737490d0653f6421cb8ea8390cbf',1,'c2_connector_function_p']]],
+  ['_7ec2_5fconst_5fplugin_5ffunction_5fp',['~c2_const_plugin_function_p',['../classc2__const__plugin__function__p.html#a9b26b8f7469d38ff816b9a3d9b137745',1,'c2_const_plugin_function_p']]],
+  ['_7ec2_5fconst_5fptr',['~c2_const_ptr',['../classc2__const__ptr.html#a13ec57f307039d21c12b20ab4aafda2f',1,'c2_const_ptr']]],
+  ['_7ec2_5ffunction',['~c2_function',['../classc2__function.html#ab17870e5af508c66ec154195b837466e',1,'c2_function']]],
+  ['_7ec2_5ffunction_5ftransformation',['~c2_function_transformation',['../classc2__function__transformation.html#ab7cd7a2df0c12d4ce25f2e8a415383ad',1,'c2_function_transformation']]],
+  ['_7ec2_5fpiecewise_5ffunction_5fp',['~c2_piecewise_function_p',['../classc2__piecewise__function__p.html#ae4568a15bc298e69a25d1b05a25a3c1f',1,'c2_piecewise_function_p']]],
+  ['_7ec2_5fplugin_5ffunction_5fp',['~c2_plugin_function_p',['../classc2__plugin__function__p.html#aac74d9e2221ee6b8fee5adc579960530',1,'c2_plugin_function_p']]],
+  ['_7ec2_5ftransformation',['~c2_transformation',['../classc2__transformation.html#ad0f684d47ebb7fdc089b7d298cf60120',1,'c2_transformation']]],
+  ['_7ec2_5ftransformation_5flinear',['~c2_transformation_linear',['../classc2__transformation__linear.html#ad53dc59cddc116f38047c8c8f1d35760',1,'c2_transformation_linear']]],
+  ['_7ec2_5ftransformation_5flog',['~c2_transformation_log',['../classc2__transformation__log.html#adbd45864343f53409af79c41c8a03c5a',1,'c2_transformation_log']]],
+  ['_7ec2_5ftransformation_5frecip',['~c2_transformation_recip',['../classc2__transformation__recip.html#ac154bb15973de9c28497726a3ca2a175',1,'c2_transformation_recip']]],
+  ['_7eemmadriftchamber',['~EMMADriftChamber',['../classEMMADriftChamber.html#a9d5f86484023f4a6bb7ec477e0ea8480',1,'EMMADriftChamber']]],
+  ['_7eemmaelementfield',['~EMMAElementField',['../classEMMAElementField.html#afda9d839a3caadc03a68a603f8c64d1a',1,'EMMAElementField']]],
+  ['_7eg4screenednuclearrecoil',['~G4ScreenedNuclearRecoil',['../classG4ScreenedNuclearRecoil.html#ab0abe5d31e651ae07660f01dbeb4981f',1,'G4ScreenedNuclearRecoil']]],
+  ['_7einterpolating_5ffunction_5fp',['~interpolating_function_p',['../classinterpolating__function__p.html#a24f78c2f0f5dc80cfbd87ada46d1367e',1,'interpolating_function_p']]]
 ];

@@ -50,27 +50,30 @@ class G4Tubs;
 class G4Polycone;
 class G4Polyhedra;
 
-///  A parameterisation that describes a series of cylinders along Z.
-///
-///  The cylinders have equal width, & their lengths are a linear equation.
-///  They are spaced an equal distance apart, starting from given location.
+/*! \file
+ \brief  A parameterisation that describes a series of cylinders along Z (the wires in the PCAG ioin drift chamber).
+
+ The cylinders have equal width, & their lengths are a linear equation.
+ They are spaced an equal distance apart, starting from given location.
+*/
+
 
 class PGACWireParameterisation : public G4VPVParameterisation
-{ 
+{
   public:
-  
-    PGACWireParameterisation(G4int    noChambers, 
-                              G4double startZ, 
+
+    PGACWireParameterisation(G4int    noChambers,
+                              G4double startZ,
                               G4double spacing,
-                              G4double widthChamber, 
+                              G4double widthChamber,
                               G4double lengthInitial,
                               G4double lengthFinal );
 
     virtual ~PGACWireParameterisation();
-   
+
     void ComputeTransformation (const G4int copyNo,
                                 G4VPhysicalVolume* physVol) const;
-    
+
     void ComputeDimensions (G4Tubs & trackerLayer, const G4int copyNo,
                             const G4VPhysicalVolume* physVol) const;
 
@@ -90,12 +93,12 @@ class PGACWireParameterisation : public G4VPVParameterisation
 
   private:
 
-    G4int    fNoChambers;   
+    G4int    fNoChambers;
     G4double fStartZ;
     G4double fHalfWidth;        //  The half-width of each tracker chamber
     G4double fSpacing;          //  The distance between the chambers' center
-    G4double fRmaxFirst;        //  The first half-length 
-    G4double fRmaxIncr;         //  The Increment for the half-length 
+    G4double fRmaxFirst;        //  The first half-length
+    G4double fRmaxIncr;         //  The Increment for the half-length
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

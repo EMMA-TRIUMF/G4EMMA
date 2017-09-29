@@ -30,6 +30,10 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+/*! \file
+ \brief Prints out the information obtained in SteppingAction (Hence verbose).
+ */
+
 #include "EMMASteppingVerbose.hh"
 
 #include "G4SteppingManager.hh"
@@ -44,29 +48,29 @@ EMMASteppingVerbose::EMMASteppingVerbose()
 
 EMMASteppingVerbose::~EMMASteppingVerbose()
 {}
- 
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void EMMASteppingVerbose::StepInfo()
 {
   CopyState();
-  
+
   G4int prec = G4cout.precision(3);
 
-  if( verboseLevel >= 1 ){	//set verboseLevel with e.g. /track/verbose 3 
+  if( verboseLevel >= 1 ){	//set verboseLevel with e.g. /track/verbose 3
     if( verboseLevel >= 4 ) VerboseTrack();
     if( verboseLevel >= 3 ){
-      G4cout << G4endl;    
+      G4cout << G4endl;
       G4cout << std::setw( 5) << "#Step#"     << " "
 	     << std::setw( 6) << "X"          << "    "
-	     << std::setw( 6) << "Y"          << "    "  
+	     << std::setw( 6) << "Y"          << "    "
 	     << std::setw( 6) << "Z"          << "    "
 	     << std::setw( 9) << "KineE"      << " "
-	     << std::setw( 9) << "dEStep"     << " "  
-	     << std::setw(10) << "StepLeng"     
-	     << std::setw(10) << "TrakLeng" 
+	     << std::setw( 9) << "dEStep"     << " "
+	     << std::setw(10) << "StepLeng"
+	     << std::setw(10) << "TrakLeng"
 	     << std::setw(10) << "Volume"    << "  "
-	     << std::setw(10) << "Process"   << G4endl;	          
+	     << std::setw(10) << "Process"   << G4endl;
     }
 
     G4cout << std::setw(5) << fTrack->GetCurrentStepNumber() << " "
@@ -79,15 +83,15 @@ void EMMASteppingVerbose::StepInfo()
 	<< std::setw(6) << G4BestUnit(fTrack->GetTrackLength(),"Length")
 	<< "  ";
 
-    // if( fStepStatus != fWorldBoundary){ 
-    if( fTrack->GetNextVolume() != 0 ) { 
+    // if( fStepStatus != fWorldBoundary){
+    if( fTrack->GetNextVolume() != 0 ) {
       G4cout << std::setw(10) << fTrack->GetVolume()->GetName();
     } else {
       G4cout << std::setw(10) << "OutOfWorld";
     }
 
     if(fStep->GetPostStepPoint()->GetProcessDefinedStep() != NULL){
-      G4cout << "  " 
+      G4cout << "  "
         << std::setw(10) << fStep->GetPostStepPoint()->GetProcessDefinedStep()
 	                                ->GetProcessName();
     } else {
@@ -104,7 +108,7 @@ void EMMASteppingVerbose::StepInfo()
 	                    // just executed. Declared in G4SteppingVerbose
       if(tN2ndariesTot>0){
 	G4cout << "    :----- List of 2ndaries - "
-	       << "#SpawnInStep=" << std::setw(3) << tN2ndariesTot 
+	       << "#SpawnInStep=" << std::setw(3) << tN2ndariesTot
 	       << "(Rest="  << std::setw(2) << fN2ndariesAtRestDoIt
 	       << ",Along=" << std::setw(2) << fN2ndariesAlongStepDoIt
 	       << ",Post="  << std::setw(2) << fN2ndariesPostStepDoIt
@@ -113,7 +117,7 @@ void EMMASteppingVerbose::StepInfo()
 	       << " ---------------"
 	       << G4endl;
 
-	for(size_t lp1=(*fSecondary).size()-tN2ndariesTot; 
+	for(size_t lp1=(*fSecondary).size()-tN2ndariesTot;
                         lp1<(*fSecondary).size(); lp1++){
 	  G4cout << "    : "
 		 << std::setw(6)
@@ -128,14 +132,14 @@ void EMMASteppingVerbose::StepInfo()
 		 << (*fSecondary)[lp1]->GetDefinition()->GetParticleName();
 	  G4cout << G4endl;
 	}
-              
+
 	G4cout << "    :-----------------------------"
 	       << "----------------------------------"
 	       << "-- EndOf2ndaries Info ---------------"
 	       << G4endl;
       }
     }
-    
+
   }
   G4cout.precision(prec);
 }
@@ -147,18 +151,18 @@ void EMMASteppingVerbose::TrackingStarted()
 
   CopyState();
 G4int prec = G4cout.precision(3);
-  if( verboseLevel > 0 ){	//set verboseLevel with e.g. /track/verbose 3 
+  if( verboseLevel > 0 ){	//set verboseLevel with e.g. /track/verbose 3
 							//appears at the beginning of the run
     G4cout << std::setw( 5) << "Step#"      << " "
            << std::setw( 6) << "X"          << "    "
-	   << std::setw( 6) << "Y"          << "    "  
+	   << std::setw( 6) << "Y"          << "    "
 	   << std::setw( 6) << "Z"          << "    "
 	   << std::setw( 9) << "KineE"      << " "
-	   << std::setw( 9) << "dEStep"     << " "  
-	   << std::setw(10) << "StepLeng"  
+	   << std::setw( 9) << "dEStep"     << " "
+	   << std::setw(10) << "StepLeng"
 	   << std::setw(10) << "TrakLeng"
 	   << std::setw(10) << "Volume"     << "  "
-	   << std::setw(10) << "Process"    << G4endl;	     
+	   << std::setw(10) << "Process"    << G4endl;
 
     G4cout << std::setw(5) << fTrack->GetCurrentStepNumber() << " "
 	<< std::setw(6) << G4BestUnit(fTrack->GetPosition().x(),"Length")

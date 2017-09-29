@@ -24,7 +24,12 @@
 // ********************************************************************
 //
 //
-//
+/*! \file
+ \brief Represents one step of a particle being tracked.
+    Built off the G4 source file which contains the
+    particle's static information, previous steps, termination conditions, and identifying the track,
+    with specificalities to EMMA.
+    */
 
 #include "G4Track.hh"
 #include "G4VParticleChange.hh"

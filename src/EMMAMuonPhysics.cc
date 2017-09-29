@@ -26,8 +26,14 @@
 // $Id: EMMAMuonPhysics.cc,v 1.10 2009-12-02 22:45:09 perl Exp $
 // --------------------------------------------------------------
 //
-// 09-Oct-2003 mu+- tau+- processes are changed by T. Koi 
+// 09-Oct-2003 mu+- tau+- processes are changed by T. Koi
 // 05-Jan-2004 Add Brem. and PairProd. of AlongStepDoit for mu+- by T. Koi
+
+
+/*! \file
+ \brief Particle and process construction for muon +/- and tau +/- particles.
+ */
+
 
 #include "EMMAMuonPhysics.hh"
 
@@ -107,7 +113,7 @@ void EMMAMuonPhysics::ConstructProcess()
    pManager->SetProcessOrdering(themmIonisation,        idxPostStep,2);
    pManager->SetProcessOrdering(themmBremsstrahlung,     idxPostStep,3);
    pManager->SetProcessOrdering(themmPairProduction,     idxPostStep,4);
- 
+
    // Tau+ Physics
    pManager = G4TauPlus::TauPlus()->GetProcessManager();
    G4VProcess* thetpMultipleScattering = new G4MuMultipleScattering();

@@ -35,11 +35,22 @@ class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;
 
+/*!
+ \file
+ \brief
+ This header contains the class required to run the PGAC drift chamber (see also G4SensitiveDetector.hh)
+*/
 class EMMADriftChamber : public G4VSensitiveDetector
 {
 
   public:
+
+	//! Constructor.
+
       EMMADriftChamber(G4String name);
+
+	//! Destructor
+
       virtual ~EMMADriftChamber();
 
       virtual void Initialize(G4HCofThisEvent*HCE);
@@ -47,6 +58,11 @@ class EMMADriftChamber : public G4VSensitiveDetector
       virtual void EndOfEvent(G4HCofThisEvent*HCE);
 
   private:
+
+	//! hitsCollection is an instance of the
+	//! EMMADriftChamberHitsCollection object
+	//! also declares private variable HCID of type G4int
+
       EMMADriftChamberHitsCollection * hitsCollection;
       G4int HCID;
 };
