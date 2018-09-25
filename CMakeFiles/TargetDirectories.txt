@@ -1,0 +1,7 @@
+/home/awen/G4EMMA/CMakeFiles/rebuild_cache.dir
+/home/awen/G4EMMA/CMakeFiles/install.dir
+/home/awen/G4EMMA/CMakeFiles/list_install_components.dir
+/home/awen/G4EMMA/CMakeFiles/EMMA.dir
+/home/awen/G4EMMA/CMakeFiles/edit_cache.dir
+/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir
+/home/awen/G4EMMA/CMakeFiles/install/local.dir
