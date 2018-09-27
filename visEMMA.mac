@@ -3,7 +3,7 @@
 #
 # Set verbosity
 #
-#/control/verbose 2
+#/control/verbose 0
 #/control/execute BeamSetup.mac
 #
 # Use this open statement to create an OpenGL view:

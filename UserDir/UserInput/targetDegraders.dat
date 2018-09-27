@@ -1,5 +1,5 @@
 # TARGET
-IN                 # IN/OUT
+OUT                 # IN/OUT
 4.46               # thickness (um)
 1                  # target z position offset (cm)
 19.3               # density (g/cm3)

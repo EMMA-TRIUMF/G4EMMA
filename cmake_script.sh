@@ -17,4 +17,4 @@ cmake -DGeant4_DIR=/opt/geant4/geant4.9.6.p04-build .
 #Assumes you have a quad core processor
 make -j4
 
-SUCCESS!!!
+
