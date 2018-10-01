@@ -125,7 +125,8 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 	    }
 	    else {
 	      n++;
-	      if (n==1) {if (text=="YES") useAlphaSource = true;}
+	      if (n==1) {if (text=="YES") useAlphaSource = true;
+		cout << "AlphaSource set to YES" <<endl;	}
 	      else if (n==2) {energyAlphaSource = atof(text.c_str());}
 	      else if (n==3) {maxAngleAlphaSource = atof(text.c_str());}
 	    }
