@@ -27,12 +27,6 @@
 // --------------------------------------------------------------
 //
 
-
-/*! \file
-\brief Constructs all the detectors in the simulation; notably, the target, the degraders, and the PGAC.
-Also builds the special materials used for detector components.
-Look here if you need to edit detectors, their sizes, their conditions, or their materials.
-*/
 #include "EMMADetectorConstruction.hh"
 
 #include "G4FieldManager.hh"
@@ -72,6 +66,7 @@ Look here if you need to edit detectors, their sizes, their conditions, or their
 #include "EMMADetectorConstMessenger.hh"
 #include "EMMADriftChamber.hh"
 #include "EMMAIonChamber.hh"
+#include "EMMASiliconDetector.hh"
 #include "SpectrometerConstruction.hh"
 
 #include "EMFieldDebugger.hh"
@@ -97,13 +92,13 @@ G4double targetZoffset;
 
 
 EMMADetectorConstruction::EMMADetectorConstruction()
-:	air(0), Vacuum(0), Aluminum(0), lead(0), graphite(),
-worldVisAtt(0), cellVisAtt(0), WallVisAtt(0), //wedgeVisAtt(0),
-BeamLineVisAtt(0), PoleVisAtt(0), BendingVisAtt(0),
-stepLimit(0),fCheckOverlaps(true)
+  :	air(0), Vacuum(0), Aluminum(0), lead(0), graphite(),
+	worldVisAtt(0), cellVisAtt(0), WallVisAtt(0), //wedgeVisAtt(0),
+	BeamLineVisAtt(0), PoleVisAtt(0), BendingVisAtt(0),
+	stepLimit(0),fCheckOverlaps(true)
 {
   messenger = new EMMADetectorConstMessenger(this);
-
+  
   // Read in user specifications for target and degraders
   ReadUserInput();
 
@@ -121,15 +116,15 @@ stepLimit(0),fCheckOverlaps(true)
 
 EMMADetectorConstruction::~EMMADetectorConstruction()
 {
-  delete BeamLineVisAtt;
-  delete PoleVisAtt;
-  delete BendingVisAtt;
-  delete WallVisAtt;
-  delete stepLimit;
-  delete messenger;
-  DestroyMaterials();
-  delete worldVisAtt;
-  delete cellVisAtt;
+  	delete BeamLineVisAtt;
+	delete PoleVisAtt;
+	delete BendingVisAtt;
+	delete WallVisAtt;
+	delete stepLimit;
+	delete messenger;
+	DestroyMaterials();
+	delete worldVisAtt;
+	delete cellVisAtt;
 }
 
 
@@ -139,11 +134,12 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   // All managed (deleted) by SDManager
   G4VSensitiveDetector* detector;
   G4VSensitiveDetector* detector2;
+  G4VSensitiveDetector* silicondetector;
   ConstructMaterials();
-
-  // User Limits
+  	
+  // User Limits	
   G4FieldManager *globalFieldManager;
-  G4TransportationManager *transportMgr = G4TransportationManager::GetTransportationManager();
+  G4TransportationManager *transportMgr = G4TransportationManager::GetTransportationManager();	
   globalFieldManager = transportMgr->GetFieldManager();
 
   // Relative accuracy values:
@@ -153,7 +149,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   globalFieldManager->SetMaximumEpsilonStep( maxEps );
   globalFieldManager->SetDeltaOneStep( 0.5e-3 * mm );  // 0.5 micrometer
   G4cout << "EpsilonStep: set min= " << minEps << " max= " << maxEps << G4endl;
-
+  
   // For later use:
   G4RotationMatrix* Rotate0 = new G4RotationMatrix();
   G4RotationMatrix* Rotate90X = new G4RotationMatrix();
@@ -161,7 +157,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   Rotate90X->rotateX(90*deg); //for cathode wires
   Rotate0->rotateY(0*deg);
   Rotate90Y->rotateY(90*deg); //for anode wires
-
+     
   // Visualization attributes
   G4VisAttributes* DegraderVisAtt = new G4VisAttributes(G4Colour(0.5,0.0,0.5)); //purple
   DegraderVisAtt->SetVisibility(true);
@@ -173,7 +169,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   G4VSolid* worldSolid = new G4Box("worldBox",10.*m,3.*m,20.*m);
   G4LogicalVolume* worldLogical = new G4LogicalVolume(worldSolid,Vacuum,"worldLogical",0,0,0);
   G4VPhysicalVolume* worldPhysical = new G4PVPlacement(0,G4ThreeVector(),worldLogical,"worldPhysical",0,0,0,fCheckOverlaps);
-
+  
   // Create spectrometer here to assign value to zQ1begins, zAnode and zQ4ends
   // It's created later again in case Pipe1length has changed due to the change in target location
   G4double Pipe1length = 247*mm; //Default target to Q1 pipe length
@@ -193,12 +189,12 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   if (insertTarget) {
     zTarget = targetZoffset;
     if(targetZoffset>zQ1begins){
-      G4cout<<"WARNING: target z offset is too large. If larger than "
-      <<G4BestUnit(zQ1begins,"Length")<<" the target overlaps with Q1."<<G4endl;
-    }
+	  G4cout<<"WARNING: target z offset is too large. If larger than "
+	        <<G4BestUnit(zQ1begins,"Length")<<" the target overlaps with Q1."<<G4endl;
+	}
     new G4PVPlacement(0,G4ThreeVector(0.,0.,zTarget),targetLogical,"targetPhys",worldLogical,0,0,fCheckOverlaps);
     Pipe1length = zQ1begins - zTarget - targetThickness/2.0;
-    targetLogical->SetVisAttributes(DegraderVisAtt);
+	targetLogical->SetVisAttributes(DegraderVisAtt);
   }
   //
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -209,7 +205,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   //
   //                                               DEGRADER 1
   //
-  //    Carbon degrader #1
+  //    Carbon degrader #1 
   //    Downstream of target but before Q1
   //    dimensions: 10cm x 10cm x degrader1Thickness
   //
@@ -221,7 +217,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
     zDegrader1 = zTarget + targetThickness/2.0 + degrader1Thickness/2.0;
     new G4PVPlacement(0,G4ThreeVector(0.,0.,zDegrader1),degrader1Logical,"degrader1Phys",worldLogical,0,0,fCheckOverlaps);
     Pipe1length = zQ1begins - zTarget - targetThickness/2.0 - zDegrader1 - degrader1Thickness/2.0;
-    degrader1Logical->SetVisAttributes(DegraderVisAtt);
+	degrader1Logical->SetVisAttributes(DegraderVisAtt);
   }
   //
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -229,10 +225,10 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
 
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
   //
-  //                                               DEGRADER2
+  //                                               DEGRADER2 
   //
   //    Degrader #2
-  //    Downstream of degrader #1
+  //    Downstream of degrader #1 
   //    dimensions: 10cm x 10cm x degrader2Thickness
   //
   if (insertDegrader2) {
@@ -241,27 +237,27 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
     // Degrader2 position is fixed
     G4double zDegrader2 = 115.6*mm;
     new G4PVPlacement(0,G4ThreeVector(0.,0.,zDegrader2),degrader2Logical,"degrader2Phys",worldLogical,0,0,fCheckOverlaps);
-    degrader2Logical->SetVisAttributes(DegraderVisAtt);
-
+	degrader2Logical->SetVisAttributes(DegraderVisAtt);
+    
     Pipe1length = zQ1begins - zDegrader2 - degrader2Thickness/2.0;
-
+    
     //Add another pipe inbetween target or degrader1 and degrader2
-    G4double Pipe0HL = (zDegrader2 + degrader2Thickness/2.0 - zTarget - targetThickness/2.0)/2.0; //distance between target and degrader2
-    if(insertDegrader1)Pipe0HL = (zDegrader2 + degrader2Thickness/2.0 - zDegrader1 - degrader1Thickness/2.0)/2.0; //distance between degrader1 and degrader2
-    G4double Pipe0z = zTarget + targetThickness/2.0 + Pipe0HL;
-    if(insertDegrader1) Pipe0z = zDegrader1 + degrader1Thickness/2.0 + Pipe0HL;
-    // Pipe0Wall
-    G4VSolid* Pipe0WallSolid = new G4Tubs("Pipe0WallTub",13.75*cm,14.75*cm,Pipe0HL,0*deg,360*deg);
-    G4LogicalVolume* Pipe0WallLogical = new G4LogicalVolume(Pipe0WallSolid,Aluminum,"Pipe0WallLogical", 0,0,0);
-    // Pipe0 vacuum area is shorter than Pipe0Wall due to space occupied by degrader2
-    new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe0z),Pipe0WallLogical,"Pipe0WallPhysical",worldLogical,0,0,fCheckOverlaps);
-    G4VSolid* Pipe0Solid = new G4Tubs("Pipe0Tub",0*cm,13.75*cm,Pipe0HL-degrader2Thickness/2.0,0*deg,360*deg);
-    G4LogicalVolume* Pipe0Logical = new G4LogicalVolume(Pipe0Solid,Vacuum,"Pipe0Logical", 0,0,0);
-    new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe0z-degrader2Thickness/2.0),Pipe0Logical,"Pipe0Physical",worldLogical,0,0,fCheckOverlaps);
+	G4double Pipe0HL = (zDegrader2 + degrader2Thickness/2.0 - zTarget - targetThickness/2.0)/2.0; //distance between target and degrader2
+	if(insertDegrader1)Pipe0HL = (zDegrader2 + degrader2Thickness/2.0 - zDegrader1 - degrader1Thickness/2.0)/2.0; //distance between degrader1 and degrader2
+	G4double Pipe0z = zTarget + targetThickness/2.0 + Pipe0HL;
+	if(insertDegrader1) Pipe0z = zDegrader1 + degrader1Thickness/2.0 + Pipe0HL;
+	// Pipe0Wall
+	G4VSolid* Pipe0WallSolid = new G4Tubs("Pipe0WallTub",13.75*cm,14.75*cm,Pipe0HL,0*deg,360*deg);
+	G4LogicalVolume* Pipe0WallLogical = new G4LogicalVolume(Pipe0WallSolid,Aluminum,"Pipe0WallLogical", 0,0,0);
+	// Pipe0 vacuum area is shorter than Pipe0Wall due to space occupied by degrader2  
+	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe0z),Pipe0WallLogical,"Pipe0WallPhysical",worldLogical,0,0,fCheckOverlaps);
+	G4VSolid* Pipe0Solid = new G4Tubs("Pipe0Tub",0*cm,13.75*cm,Pipe0HL-degrader2Thickness/2.0,0*deg,360*deg);
+	G4LogicalVolume* Pipe0Logical = new G4LogicalVolume(Pipe0Solid,Vacuum,"Pipe0Logical", 0,0,0);
+	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe0z-degrader2Thickness/2.0),Pipe0Logical,"Pipe0Physical",worldLogical,0,0,fCheckOverlaps);
   }
   //
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-
+ 
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
   //
   //                                               SPECTROMETER
@@ -270,8 +266,8 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   G4LogicalVolume* vol = Spectrometer->GetQ3Log();
   G4RotationMatrix* Rotate1 = new G4RotationMatrix();
   G4RotationMatrix* Rotate2 = new G4RotationMatrix();
-  Rotate1->rotateY(20*deg);
-  Rotate2->rotateY(-20*deg);
+	Rotate1->rotateY(20*deg);
+	Rotate2->rotateY(-20*deg);
   //
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
@@ -283,10 +279,9 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   //    Entrance window situated 21 mm upstream of focal plane.
   //    Dimensions of gas chamber: 160mm x 60mm x 75mm - WRONG!!!
   //
-
+  
   G4double PGACWindowSeparation = 80.*mm;
-  G4double PGACwindowThickness = 1*um;
-  G4double ICwindowThick = 2*um;
+  G4double PGACwindowThickness = 0.9*um;
   G4double PGACwidth = 166*mm;
   G4double PGACheight = 66*mm;
 
@@ -296,7 +291,7 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
 
   G4VSolid* PGACgasSolid = new G4Box("PGACgas",(PGACwidth/2),(PGACheight/2),(PGACWindowSeparation/2));
   G4LogicalVolume* PGACgasLogical = new G4LogicalVolume(PGACgasSolid,isobutane,"PGACgasLogical",0,0,0);
-  new G4PVPlacement(0,G4ThreeVector(0,0,zPGAC),PGACgasLogical,"PGACgasPhys",worldLogical,0,0,fCheckOverlaps);
+  new G4PVPlacement(0,G4ThreeVector(0,0,zPGAC),PGACgasLogical,"PGACgasPhys",worldLogical,0,0,fCheckOverlaps);  
 
   // PGAC Windows:
 
@@ -308,53 +303,74 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
 
   // Focal Plane
   // This arbitrarily thin plane is located at the the focal plane of the spectrometer. This is used to get the (x,y) positions of ions using the existing EMMADriftChmaberHitt.cc class. This class outputs x and y pos at the start of the object.
-
+  
   G4VSolid* PGAC_FP = new G4Box("PGAC_FP",(PGACwidth/2),(PGACheight/2),1*um);
   G4LogicalVolume* PGAC_FP_Logical = new G4LogicalVolume(PGAC_FP,Vacuum,"PGAC_FP_Logical",0,0,0);
   new G4PVPlacement(0,G4ThreeVector(0,0,(-13.8/2*mm)),PGAC_FP_Logical,"PGAC_FP_Phys", PGACgasLogical,0,0,fCheckOverlaps);
 
 
-  //
+  // 
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
 
   //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
   //
   //                                               Ionization Chamber
-  //    Modified by Naomi Galinski: focal plane is now made of mylar
-  //
-  //    dimensions: 15.4cm x 5.4cm x 2*DetThick
-  //
-
-  G4double zIonChamber;
+  
+  G4double zIonChamber, zIonChamberFront, zIonChamberBack;
   G4double zIonChamberEntranceWindow;
   G4int nofLayers = 12;
   G4double layerThickness = 2*cm;
+  G4double ICwindowThick = 2*um;
   G4double IC_Thick = nofLayers * layerThickness;
-  // this ensures that upstream edge of Lead block is at Focal Plane:
+  
   zIonChamber = zPGAC + PGACWindowSeparation/2 + PGACwindowThickness + ICwindowThick + IC_Thick/2;
+  zIonChamberFront = zPGAC + PGACWindowSeparation/2 + PGACwindowThickness + ICwindowThick + IC_Thick/4;
+  zIonChamberBack = zPGAC + PGACWindowSeparation/2 + PGACwindowThickness + ICwindowThick + IC_Thick/4 + IC_Thick/2;
   zIonChamberEntranceWindow = zIonChamber - IC_Thick/2 - ICwindowThick/2;
 
-  G4VSolid* IonChamberWindow = new G4Box("IonChamberWindow",(PGACwidth/2),(PGACheight/2),(ICwindowThick/2));
-
-  G4VSolid* IonChamberSolid = new G4Box("IonChamber",(PGACwidth/2),(PGACheight/2),(IC_Thick/2));
+  G4VSolid* IonChamberWindow = new G4Box("IonChamberWindow",(PGACwidth/2),(PGACheight/2),(ICwindowThick/2)); 
+  G4VSolid* IonChamberSolid_FrontHalf = new G4Box("IonChamber_FrontSolid",(PGACwidth/2),(PGACheight/2),(IC_Thick/4));
+  G4VSolid* IonChamberSolid_BackHalf = new G4Box("IonChamber_BackSolid",(PGACwidth/2),(PGACheight/2),(IC_Thick/4));
   G4VSolid* IonChamberLayerS = new G4Box("IonChamberLayer", (PGACwidth/2),(PGACheight/2),layerThickness);
 
   G4LogicalVolume* IonChamberWindowLogical = new G4LogicalVolume(IonChamberWindow,mylar,"IonChamberWindowLogical",0,0,0);
+  G4LogicalVolume* IonChamberLogicalFront = new G4LogicalVolume(IonChamberSolid_FrontHalf,Vacuum,"IonChamberLogical_Front",0,0,0);
+  G4LogicalVolume* IonChamberLogicalBack = new G4LogicalVolume(IonChamberSolid_BackHalf,Vacuum,"IonChamberLogical_Back",0,0,0);
+  G4LogicalVolume* IonChamberLayerLV_Front = new G4LogicalVolume(IonChamberLayerS, isobutaneIC,"IonChamberLayerLV_Front",0,0,0);
+  G4LogicalVolume* IonChamberLayerLV_Back = new G4LogicalVolume(IonChamberLayerS, isobutaneIC,"IonChamberLayerLV_Back",0,0,0);
+ 
+  new G4PVPlacement(0,G4ThreeVector(0.,0.,zIonChamberEntranceWindow),IonChamberWindowLogical, "IonChamberWindow",worldLogical,0,0,fCheckOverlaps);
+  new G4PVPlacement(0,G4ThreeVector(0.,0.,zIonChamberFront),IonChamberLogicalFront, "IonChamberFrontPhys",worldLogical,0,0,fCheckOverlaps);
+   new G4PVPlacement(0,G4ThreeVector(0.,0.,zIonChamberBack),IonChamberLogicalBack, "IonChamberBackPhys",worldLogical,0,0,fCheckOverlaps);
 
-  G4LogicalVolume* IonChamberLogical = new G4LogicalVolume(IonChamberSolid,Vacuum,"IonChamberLogical",0,0,0);
-  G4LogicalVolume* IonChamberLayerLV = new G4LogicalVolume(IonChamberLayerS, silicon,"IonChamberLayerLV",0,0,0);
+  new G4PVReplica("IonChamberLayer_Front",
+			IonChamberLayerLV_Front,
+			IonChamberLogicalFront,
+			kZAxis,
+			nofLayers/2,
+			layerThickness);
+   new G4PVReplica("IonChamberLayer_Back",
+			IonChamberLayerLV_Back,
+			IonChamberLogicalBack,
+			kZAxis,
+			nofLayers/2,
+			layerThickness);
+  
+  //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
-  //new G4PVPlacement(0,G4ThreeVector(0.,0.,zIonChamberEntranceWindow),IonChamberWindowLogical, "IonChamberWindow",worldLogical,0,0,fCheckOverlaps);
+  //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+  //
+  //                                            Silicon Detector
+  //
 
-  new G4PVPlacement(0,G4ThreeVector(0.,0.,zIonChamber),IonChamberLogical, "IonChamberPhys",worldLogical,0,0,fCheckOverlaps);
-  new G4PVReplica("IonChamberLayer",
-  IonChamberLayerLV,
-  IonChamberLogical,
-  kZAxis,
-  nofLayers,
-  layerThickness);
+  G4double SiliconDetThickness = 1*cm;
+  G4double zSiliconDet = zIonChamber + IC_Thick + ICwindowThick + 5*cm + SiliconDetThickness/2;
 
+  G4VSolid* SiliconDetSolid = new G4Box("siliconDetector",(PGACwidth/2),(PGACheight/2),(SiliconDetThickness/2));
+  G4LogicalVolume* SiliconDetLogical = new G4LogicalVolume(SiliconDetSolid,silicon,"SiliconDetLogical",0,0,0);
+  new G4PVPlacement(0,G4ThreeVector(0.,0.,zSiliconDet),SiliconDetLogical, "SiliconDetPhys",worldLogical,0,0,fCheckOverlaps);
+  
   //
   //
   //    Detector (mylar) at focal plane
@@ -368,16 +384,36 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   detector = new EMMADriftChamber(SDname="/detector");
   SDman->AddNewDetector(detector);
   PGAC_FP_Logical->SetSensitiveDetector(detector);
+  
+  EMMAIonChamber* IonChamberFront
+    = new EMMAIonChamber("IonChamberFront", "IonChamberFrontHitsCollection", nofLayers/2);
+  SDman->AddNewDetector(IonChamberFront);
+  IonChamberLayerLV_Front->SetSensitiveDetector(IonChamberFront);
 
+  EMMAIonChamber* IonChamberBack
+    = new EMMAIonChamber("IonChamberBack", "IonChamberBackHitsCollection", nofLayers);
+  SDman->AddNewDetector(IonChamberBack);
+  IonChamberLayerLV_Back->SetSensitiveDetector(IonChamberBack);
+
+  EMMAIonChamber* SiliconDetector
+    = new EMMAIonChamber("SiliconDetector", "SiliconDetectorHitsCollection", nofLayers);
+  SDman->AddNewDetector(SiliconDetector);
+  SiliconDetLogical->SetSensitiveDetector(SiliconDetector);
+
+//  EMMASiliconDetector* SiliconDetector
+//   = new EMMASiliconDetector("SiliconDetector", "SiliconDetectorHitsCollection", 1);
+ // SDman->AddNewDetector(SiliconDetector);
+//  SiliconDetLogical->SetSensitiveDetector(SiliconDetector);
+/*
   EMMAIonChamber* IonChamber
-  = new EMMAIonChamber("IonChamber", "IonChamberHitsCollection", nofLayers);
+    = new EMMAIonChamber("IonChamber", "IonChamberHitsCollection", 1);
   SDman->AddNewDetector(IonChamber);
-  IonChamberLayerLV->SetSensitiveDetector(IonChamber);
-
+  SiliconDetLogical->SetSensitiveDetector(IonChamber);
+*/
   //detector2 = new EMMADriftChamber(SDname="/detector2");
   //SDman->AddNewDetector(detector2);
   //IonChamberLogical->SetSensitiveDetector(detector2);
-
+ 
   // Define visualization attributes ------------------------------------------------
   worldVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,1.0));
   worldVisAtt->SetVisibility(false);
@@ -392,21 +428,21 @@ G4VPhysicalVolume* EMMADetectorConstruction::Construct()
   //  detectorLogical->SetVisAttributes(cellVisAtt);
   //  wedgeLogical->SetVisAttributes(wedgeVisAtt);
 
-
+	
   //User Limits
   G4double maxStep = 5 * mm;
   stepLimit = new G4UserLimits(maxStep);
   worldLogical->SetUserLimits(stepLimit);
   //  spectrometerBoxLogical->SetUserLimits(stepLimit);
-
+	
 
   // return the world physical volume ----------------------------------------
   G4cout << G4endl << "The geometrical tree defined are : " << G4endl << G4endl;
   G4cout << G4endl << "(Uncomment 'DumpGeometricalTree(worldPhysical)' line in "
-  "EMMADetectorConstruction.cc if you don't see the list.)" << G4endl << G4endl;
-  //************************** if I forget: uncomment this. Useful output on volumes created
-  DumpGeometricalTree(worldPhysical);
-
+    "EMMADetectorConstruction.cc if you don't see the list.)" << G4endl << G4endl;
+//************************** if I forget: uncomment this. Useful output on volumes created
+  //DumpGeometricalTree(worldPhysical);
+  
   return worldPhysical;
 
 }
@@ -425,9 +461,9 @@ void EMMADetectorConstruction::ConstructMaterials()
   G4String symbol;
   G4int nElem;
   G4int iz,ia;
-  G4Isotope* isotope;
+  G4Isotope* isotope;	
   G4double RelativeAbundance;
-
+      
 
   // elements for mixtures and compounds
 
@@ -455,37 +491,37 @@ void EMMADetectorConstruction::ConstructMaterials()
 
   // // pure Carbon-12
   // G4Element* elC = new G4Element(name="Carbon", symbol="C", 1);
-  // isotope = new G4Isotope(name="C12", iz=6, ia=12, a=12.0000*g/mole );
+  // isotope = new G4Isotope(name="C12", iz=6, ia=12, a=12.0000*g/mole );	
   // RelativeAbundance = 1.0;
   // elC->AddIsotope( isotope, RelativeAbundance );
 
   // pure Deuterium
   G4Element* elD = new G4Element(name="Deuterium", symbol="D", 1);
-  isotope = new G4Isotope(name="H2", iz=1, ia=2, a=2.01410178*g/mole );
+  isotope = new G4Isotope(name="H2", iz=1, ia=2, a=2.01410178*g/mole );	
   RelativeAbundance = 1.0;
   elD->AddIsotope( isotope, RelativeAbundance );
   a=2.01410178*g/mole;
 
-
+  
   // Air
   density = 1.29*mg/cm3;
   air = new G4Material(name="Air", density, nElem=2);
   air->AddElement(elN, weightRatio=.7);
   air->AddElement(elO, weightRatio=.3);
-
+  
   // Vacuum
   Vacuum = G4NistManager::Instance()->FindOrBuildMaterial("G4_Galactic", false);
-
+  
   // Aluminum
   density = 2.70*g/cm3;
   Aluminum = new G4Material(name="Aluminum", density, nElem=1);
   Aluminum->AddElement(elAl, weightRatio=1.0);
-
+  
   // Lead
   density = 11.35*g/cm3;
   lead = new G4Material(name="Lead", density, nElem=1);
   lead->AddElement(elPb, weightRatio=1.0);
-
+  
   // Graphite (compressed to high density)
   density = 1.88*g/cm3;
   graphite = new G4Material(name="Graphite", density, nElem=1);
@@ -502,21 +538,21 @@ void EMMADetectorConstruction::ConstructMaterials()
   silicon = new G4Material(name="Silicon", density, nElem=1);
   silicon->AddElement(elSi, weightRatio=1.0);
 
-  // Mylar
+  // Mylar  
   G4NistManager* man = G4NistManager::Instance();
   man->SetVerbose(1);
   mylar = man->FindOrBuildMaterial("G4_MYLAR");
   /*
-  new G4Material("Mylar", density= 1.397*g/cm3, ncomponents=3);
-  Myl->AddElement(C, natoms=10);
-  Myl->AddElement(H, natoms= 8);
-  Myl->AddElement(O, natoms= 4);
+    new G4Material("Mylar", density= 1.397*g/cm3, ncomponents=3);
+    Myl->AddElement(C, natoms=10);
+    Myl->AddElement(H, natoms= 8);
+    Myl->AddElement(O, natoms= 4);
   */
 
   // iso-Butane (methylpropane), STP
   G4double density0 = 2.51*mg/cm3;
-  G4double p0=100; // kPA
-  G4double p=pTorr*0.133322368; // kPA
+  G4double p0=760; // kPA
+  G4double p=pTorr; // kPA
   G4double p2=pTorrIC; //kPA
   G4double T0=288.15; // K
   G4double T=273.15+TCelsius; // K
@@ -530,7 +566,7 @@ void EMMADetectorConstruction::ConstructMaterials()
   isobutaneIC->AddElement(elH,10);
 
 
-
+  
   G4cout << G4endl << "The materials defined are : " << G4endl << G4endl;
   G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 }
@@ -554,25 +590,25 @@ void EMMADetectorConstruction::DestroyMaterials()
 void EMMADetectorConstruction::DumpGeometricalTree(G4VPhysicalVolume* aVolume,G4int depth)
 {
   for(int isp=0;isp<depth;isp++)
-  /* { G4cout << "  "; }
+ /* { G4cout << "  "; }
   G4cout << aVolume->GetName() << "[" << aVolume->GetCopyNo() << "] "
-  << aVolume->GetLogicalVolume()->GetName() << " "
-  << aVolume->GetLogicalVolume()->GetNoDaughters() << " "
-  << aVolume->GetLogicalVolume()->GetMaterial()->GetName();*/
+         << aVolume->GetLogicalVolume()->GetName() << " "
+         << aVolume->GetLogicalVolume()->GetNoDaughters() << " "
+         << aVolume->GetLogicalVolume()->GetMaterial()->GetName();*/
   if(aVolume->GetLogicalVolume()->GetSensitiveDetector())
   {
     G4cout << " " << aVolume->GetLogicalVolume()->GetSensitiveDetector()
-    ->GetFullPathName();
+                            ->GetFullPathName();
   }
   G4cout << G4endl;
-  /* for(int i=0;i<aVolume->GetLogicalVolume()->GetNoDaughters();i++)
+ /* for(int i=0;i<aVolume->GetLogicalVolume()->GetNoDaughters();i++)
   { DumpGeometricalTree(aVolume->GetLogicalVolume()->GetDaughter(i),depth+1); }*/
 }
 
 
 
 
-void EMMADetectorConstruction::CalculateScalingFactors()
+void EMMADetectorConstruction::CalculateScalingFactors() 
 {
   // reference rigidities
   G4double magneticRigidity_0 = 289.681657561;	//289.672643165132; // Z=54, A=100, Q=20, E=180 MeV in Tm
@@ -586,13 +622,26 @@ void EMMADetectorConstruction::CalculateScalingFactors()
   // rigidities of central trajectory
   G4double excitationEnergy = 0.*keV;
   G4ParticleDefinition* ic = G4ParticleTable::GetParticleTable()->GetIon(centralZ,centralA,excitationEnergy);
-  G4double mc = ic->GetPDGMass();
+
+  G4double mc = centralA*931.4940954;  //(centralZ - centralQ)*0.510998910;
+  //G4double mc = ic->GetPDGMass();
+
+  G4cout << "central mass: " << centralA << endl;
+ // G4cout << "centralA: " << centralA <<endl;
+ // G4cout << "central mass propper: " << mc1 << endl;
+
+  //G4ParticleDefinition* particle = G4ParticleTable::GetParticleTable()->FindParticle("proton");
+  //G4ParticleDefinition* particle = particleTable->FindParticle("proton");
+  //G4double mass_proton = particle->GetPDGMass();
+  //G4cout << "proton mass: " << mass_proton << endl;
+
+
   G4double pc = std::sqrt((centralE + mc)*(centralE + mc)-(mc*mc));
   G4double magneticRigidity = pc/Qc;
   G4double vc = pc/(centralE+mc);
   G4double electricRigidity = pc*vc/Qc;
 
-  //G4cout << "(Mass, mom): (" << mc <<", "<< pc << ")" << G4endl;
+  //G4cout << "(Mass, mom): (" << mc <<", "<< pc << ")" << G4endl; 
 
   G4double RB_SIunits = magneticRigidity * 1./(2.99792458e2);  // T*m	conversion factor = (10^6)/c
   G4double RE_SIunits = electricRigidity * 1e6 / 1000000.;  // MV
@@ -601,11 +650,11 @@ void EMMADetectorConstruction::CalculateScalingFactors()
   G4cout << "    Magnetic: " << RB_SIunits << " Tm" << G4endl;
   G4cout << "    Electric: " << RE_SIunits << " MV" << G4endl;
   if(RB_SIunits>0.848)
-  G4cout << "WARNING: Magnetic rigidity of ion exceeds limit of 0.848 TM, what "
-  "EMMA can achieve." << G4endl;
+    G4cout << "WARNING: Magnetic rigidity of ion exceeds limit of 0.848 TM, what "
+    "EMMA can achieve." << G4endl;
   if(RE_SIunits>20)
-  G4cout << "WARNING: Electric rigidity of ion exceeds limit of 20 MV, what "
-  "EMMA can achieve." << G4endl;
+    G4cout << "WARNING: Electric rigidity of ion exceeds limit of 20 MV, what "
+    "EMMA can achieve." << G4endl;
   G4cout << G4endl;
   G4bool flag=false;
   if (RB_SIunits>1.0) {
@@ -644,7 +693,7 @@ void EMMADetectorConstruction::CalculateScalingFactors()
 
 // Read in user specifications for target, degraders, and slits
 // and build materials
-void EMMADetectorConstruction::ReadUserInput()
+void EMMADetectorConstruction::ReadUserInput() 
 {
   G4int nElem, iel=0;
   G4double density, density2, zElem, aElem, weightRatio;
@@ -656,151 +705,148 @@ void EMMADetectorConstruction::ReadUserInput()
   filename.append("UserInput/targetDegraders.dat");
   inputfil.open ( filename.c_str(), ios::in );
   if ( inputfil.is_open() ) {
-    int n = 0;
+    int n=0;
     while ( inputfil.good() ) {
       inputfil >> text;
       if (text=="#") { // skip comments
-        getline (inputfil,line);
+	    getline (inputfil,line);
       }
-      else {
-        val = atof(text.c_str());
-        n++;
+      else {	 
+	val = atof(text.c_str());  
+	n = n+1;
 
-        if (n==1)
-        {
-          if (text=="IN") {insertTarget=true;}
-          else if (text=="OUT") {insertTarget=false;}
-        }
-        else if (n==2) targetThickness = val*um;
-        else if (n==3)
-        {
-          targetZoffset = val*cm;
-        }
-        else if (n==4) density = val*g/cm3;
+	if (n==1) {
+	  if (text=="IN") {insertTarget=true;} 
+	  else if (text=="OUT") {insertTarget=false;}
+	}
+	if (n==2) targetThickness = val*um; 
+	if (n==3){
+		targetZoffset = val*cm;
+	}
+	if (n==4) density = val*g/cm3;
 
-        //---------------------------------------------//
-        //             build target material
-        //---------------------------------------------//
-        else if (n==5) {
-          nElem = (int)val;
-          if (insertTarget) targetMaterial = new G4Material(name="targetMaterial", density, nElem);
-          for (int i=0; i<nElem; i++) {
-            iel = iel+1;
-            // element name and symbol:
-            sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
-            name = "userElement";
-            name.append(sn);
-            symbol = "uE";
-            symbol.append(sn);
-            // read Z, molar mass and weight ratio from file:
-            text = "#";
-            while (text=="#") {
-              getline (inputfil,line);
-              inputfil >> text;
-            }
-            val = atof(text.c_str());
-            zElem = val;
-            inputfil >> text;
-            val = atof(text.c_str());
-            aElem = val*g/mole;
-            //	    G4cout << zElem << " " << aElem << " " << G4endl;
-            G4Element* el = new G4Element(name, symbol, zElem, aElem);
-            inputfil >> text;
-            val = atof(text.c_str());
-            weightRatio = val;
-            if (insertTarget) targetMaterial->AddElement(el, weightRatio);
-          }//for
-        }//else if (n==5)
+	//---------------------------------------------//
+	//             build target material
+	//---------------------------------------------//
+	if (n==5) { 
+	  nElem = (int)val;
+	  if (insertTarget) targetMaterial = new G4Material(name="targetMaterial", density, nElem);
+	  for (int i=0; i<nElem; i++) {
+	    iel = iel+1;
+	    // element name and symbol:
+	    sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
+	    name = "userElement";
+	    name.append(sn);
+	    symbol = "uE";
+	    symbol.append(sn);
+	    // read Z, molar mass and weight ratio from file:
+	    text = "#";
+	    while (text=="#") {	
+	      getline (inputfil,line);
+	      inputfil >> text;
+	    }
+	    val = atof(text.c_str());  
+	    zElem = val;
+	    inputfil >> text;
+	    val = atof(text.c_str());  
+	    aElem = val*g/mole;
+	    //	    G4cout << zElem << " " << aElem << " " << G4endl;
+	    G4Element* el = new G4Element(name, symbol, zElem, aElem);
+	    inputfil >> text;
+	    val = atof(text.c_str());  
+	    weightRatio = val;
+	    if (insertTarget) targetMaterial->AddElement(el, weightRatio);
+	  }
+	}
 
-        else if (n==6)
-        {
-          if (text=="IN") {insertDegrader1=true;}
-          else if (text=="OUT") {insertDegrader1=false;}
-        }
-        else if (n==7) degrader1Thickness = val*um;
-        else if (n==8) density = val*g/cm3;
+	if (n==6) {
+	  if (text=="IN") {insertDegrader1=true;} 
+	  else if (text=="OUT") {insertDegrader1=false;}
+	}
+	if (n==7) degrader1Thickness = val*um; 
+	if (n==8) density = val*g/cm3;
 
-        //---------------------------------------------//
-        //           build degrader1 material
-        //---------------------------------------------//
-        else if (n==9) {
-          nElem = (int)val;
-          if (insertDegrader1) degrader1Material = new G4Material(name="degrader1Material", density, nElem);
-          for (int i=0; i<nElem; i++) {
-            iel = iel+1;
-            // element name and symbol:
-            sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
-            name = "userElement";
-            name.append(sn);
-            symbol = "uE";
-            symbol.append(sn);
-            // read Z, molar mass and weight ratio from file:
-            text = "#";
-            while (text=="#") {
-              getline (inputfil,line);
-              inputfil >> text;
-            }
-            val = atof(text.c_str());
-            zElem = val;
-            inputfil >> text;
-            val = atof(text.c_str());
-            aElem = val*g/mole;
-            //	    G4cout << zElem << " " << aElem << " " << G4endl;
-            G4Element* el = new G4Element(name, symbol, zElem, aElem);
-            inputfil >> text;
-            val = atof(text.c_str());
-            weightRatio = val;
-            if (insertDegrader1) degrader1Material->AddElement(el, weightRatio);
-          }
-        }
-        else if (n==10) {
-          if (text=="IN") {insertDegrader2=true;}
-          else if (text=="OUT") {insertDegrader2=false;}
-        }
-        else if (n==11) degrader2Thickness = val*um;
-        else if (n==12) density = val*g/cm3;
+	//---------------------------------------------//
+	//           build degrader1 material
+	//---------------------------------------------//
+	if (n==9) { 
+	  nElem = (int)val;
+	  if (insertDegrader1) degrader1Material = new G4Material(name="degrader1Material", density, nElem);
+	  for (int i=0; i<nElem; i++) {
+	    iel = iel+1;
+	    // element name and symbol:
+	    sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
+	    name = "userElement";
+	    name.append(sn);
+	    symbol = "uE";
+	    symbol.append(sn);
+	    // read Z, molar mass and weight ratio from file:
+	    text = "#";
+	    while (text=="#") {	
+	      getline (inputfil,line);
+	      inputfil >> text;
+	    }
+	    val = atof(text.c_str());  
+	    zElem = val;
+	    inputfil >> text;
+	    val = atof(text.c_str());  
+	    aElem = val*g/mole;
+	    //	    G4cout << zElem << " " << aElem << " " << G4endl;
+	    G4Element* el = new G4Element(name, symbol, zElem, aElem);
+	    inputfil >> text;
+	    val = atof(text.c_str());  
+	    weightRatio = val;
+	    if (insertDegrader1) degrader1Material->AddElement(el, weightRatio);
+	  }
+	}
+	if (n==10) {
+	  if (text=="IN") {insertDegrader2=true;} 
+	  else if (text=="OUT") {insertDegrader2=false;}
+	}
+	if (n==11) degrader2Thickness = val*um; 
+	if (n==12) density = val*g/cm3;
 
-        //---------------------------------------------//
-        //           build degrader2 material
-        //---------------------------------------------//
-        else if (n==13) {
-          nElem = (int)val;
-          if (insertDegrader2) degrader2Material = new G4Material(name="degrader2Material", density, nElem);
-          for (int i=0; i<nElem; i++) {
-            iel = iel+1;
-            // element name and symbol:
-            sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
-            name = "userElement";
-            name.append(sn);
-            symbol = "uE";
-            symbol.append(sn);
-            // read Z, molar mass and weight ratio from file:
-            text = "#";
-            while (text=="#") {
-              getline (inputfil,line);
-              inputfil >> text;
-            }
-            val = atof(text.c_str());
-            zElem = val;
-            inputfil >> text;
-            val = atof(text.c_str());
-            aElem = val*g/mole;
-            //	    G4cout << zElem << " " << aElem << " " << G4endl;
-            G4Element* el = new G4Element(name, symbol, zElem, aElem);
-            inputfil >> text;
-            val = atof(text.c_str());
-            weightRatio = val;
-            if (insertDegrader2) degrader2Material->AddElement(el, weightRatio);
-          }//for
-        }//else if (n==13)
-      }//else (not comment)
-    } //while ( inputfil.good() )
+	//---------------------------------------------//
+	//           build degrader2 material
+	//---------------------------------------------//
+	if (n==13) { 
+	  nElem = (int)val;
+	  if (insertDegrader2) degrader2Material = new G4Material(name="degrader2Material", density, nElem);
+	  for (int i=0; i<nElem; i++) {
+	    iel = iel+1;
+	    // element name and symbol:
+	    sn = static_cast<ostringstream*>( &(ostringstream() << iel ) )->str();
+	    name = "userElement";
+	    name.append(sn);
+	    symbol = "uE";
+	    symbol.append(sn);
+	    // read Z, molar mass and weight ratio from file:
+	    text = "#";
+	    while (text=="#") {	
+	      getline (inputfil,line);
+	      inputfil >> text;
+	    }
+	    val = atof(text.c_str());  
+	    zElem = val;
+	    inputfil >> text;
+	    val = atof(text.c_str());
+	    aElem = val*g/mole;
+	    //	    G4cout << zElem << " " << aElem << " " << G4endl;
+	    G4Element* el = new G4Element(name, symbol, zElem, aElem);
+	    inputfil >> text;
+	    val = atof(text.c_str());  
+	    weightRatio = val;
+	    if (insertDegrader2) degrader2Material->AddElement(el, weightRatio);
+	  }
+	}
+	}
+	} //while ( inputfil.good() )
     inputfil.close();
   } //if ( inputfil.is_open() )
-  else cout << "Unable to open " << "UserInput/targetDegraders.dat" << endl;
+  else cout << "Unable to open " << "UserInput/targetDegraders.dat" << endl; 
 
   // Multi-wire proportional counter
-  filename = UserDir; //redundant assignments... compiler must be smart enough to get rid of it...
+  filename = UserDir;
   filename.append("/UserInput/mwpc.dat");
   inputfil.open ( filename, ios::in );
   if ( inputfil.is_open() ) {
@@ -808,23 +854,23 @@ void EMMADetectorConstruction::ReadUserInput()
     while ( inputfil.good() ) {
       inputfil >> text;
       if (text=="#") { // skip comments
-        getline (inputfil,line);
+	getline (inputfil,line);
       }
-      else {
-        val = atof(text.c_str());
-        n++;
+      else {	 
+	val = atof(text.c_str());  
+	n = n+1;
 
-        if (n==1) {
-          if (text=="IN") {insertMWPC=true;}
-          else if (text=="OUT") {insertMWPC=false;}
-        }
-        else if (n==2) pTorr = val;
-        else if (n==3) TCelsius = val;
+	if (n==1) {
+	  if (text=="IN") {insertMWPC=true;} 
+	  else if (text=="OUT") {insertMWPC=false;}
+	}
+	if (n==2) pTorr = val; 
+	if (n==3) TCelsius = val;
       }
     }
     inputfil.close();
   }
-  else cout << "Unable to open " << "UserInput/mwpc.dat" << endl;
+  else cout << "Unable to open " << "UserInput/mwpc.dat" << endl; 
 
   filename = UserDir;
   filename.append("/UserInput/IonChamber.dat");
@@ -834,21 +880,21 @@ void EMMADetectorConstruction::ReadUserInput()
     while ( inputfil.good() ) {
       inputfil >> text;
       if (text=="#") { // skip comments
-        getline (inputfil,line);
+	getline (inputfil,line);
       }
-      else {
-        val = atof(text.c_str());
-        n++;
+      else {	 
+	val = atof(text.c_str());  
+	n = n+1;
 
-        if (n==1) {
-          if (text=="IN") {insertIC=true;}
-          else if (text=="OUT") {insertIC=false;}
-        }
-        else if (n==2) pTorrIC = val;
-        else if (n==3) TCelsius = val;
+	if (n==1) {
+	  if (text=="IN") {insertIC=true;} 
+	  else if (text=="OUT") {insertIC=false;}
+	}
+	if (n==2) pTorrIC = val; 
+	if (n==3) TCelsius = val;
       }
     }
     inputfil.close();
   }
-  else cout << "Unable to open " << "UserInput/IonChamber.dat" << endl;
+  else cout << "Unable to open " << "UserInput/IonChamber.dat" << endl; 
 }

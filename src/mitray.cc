@@ -13,9 +13,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <f2c.h>
-//#include "/usr/local/include/f2c.h"
+#include "/usr/local/include/f2c.h"
 
 
 /* Common Block Declarations */
@@ -105,7 +103,7 @@ struct {
 #define mitray_bounds__1 mitray_bounds__
 
 struct {
-    integer idebug, idemin, idemax, itest, idrun, idevt, ieorun, ieotri,
+    integer idebug, idemin, idemax, itest, idrun, idevt, ieorun, ieotri, 
 	    ievent, iswit[10], ifinit[20], nevent, nrndm[2];
 } gcflag_;
 
@@ -229,7 +227,7 @@ static integer c__6 = 6;
 /*                          DIPOLE SUBROUTINES */
 /* *********************************************************************** */
 
-/* Subroutine */ int mitray_dipo_atob__(doublereal *xa, doublereal *ya,
+/* Subroutine */ int mitray_dipo_atob__(doublereal *xa, doublereal *ya, 
 	doublereal *za, doublereal *xb, doublereal *yb, doublereal *zb)
 {
     /* Builtin functions */
@@ -266,7 +264,7 @@ static integer c__6 = 6;
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_dipo_btoc__(doublereal *xb, doublereal *yb,
+/* Subroutine */ int mitray_dipo_btoc__(doublereal *xb, doublereal *yb, 
 	doublereal *zb, doublereal *xc, doublereal *yc, doublereal *zc)
 {
     /* Builtin functions */
@@ -278,13 +276,13 @@ static integer c__6 = 6;
 
 /* 	TRANFORM FROM SYSTEM B TO SYSTEM C COORDINATES OF A DIPOLE */
 
-    copab = cos((mitray_dipo__1.phi - mitray_dipo__1.alpha -
+    copab = cos((mitray_dipo__1.phi - mitray_dipo__1.alpha - 
 	    mitray_dipo__1.beta) / 57.29577951);
-    sipab = sin((mitray_dipo__1.phi - mitray_dipo__1.alpha -
+    sipab = sin((mitray_dipo__1.phi - mitray_dipo__1.alpha - 
 	    mitray_dipo__1.beta) / 57.29577951);
-    cospb = cos((mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) /
+    cospb = cos((mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) / 
 	    57.29577951);
-    sinpb = sin((mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) /
+    sinpb = sin((mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) / 
 	    57.29577951);
     sip2 = sin(mitray_dipo__1.phi / (float)2. / 57.29577951);
 
@@ -308,7 +306,7 @@ static integer c__6 = 6;
 
     *xc -= mitray_dipo__1.xcr2;
     *yc = *yb;
-
+    
 /* 	COORDINATES ARE NOW IN TERMS OF THE NEW, SHIFTED C SYSTEM. */
 
     return 0;
@@ -317,7 +315,7 @@ static integer c__6 = 6;
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_dipo_bbtoba__(doublereal *bxb, doublereal *byb,
+/* Subroutine */ int mitray_dipo_bbtoba__(doublereal *bxb, doublereal *byb, 
 	doublereal *bzb, doublereal *bxa, doublereal *bya, doublereal *bza)
 {
     /* Builtin functions */
@@ -352,7 +350,7 @@ static integer c__6 = 6;
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_dipo_bctobb__(doublereal *bxc, doublereal *byc,
+/* Subroutine */ int mitray_dipo_bctobb__(doublereal *bxc, doublereal *byc, 
 	doublereal *bzc, doublereal *bxb, doublereal *byb, doublereal *bzb)
 {
     /* Builtin functions */
@@ -370,13 +368,13 @@ static integer c__6 = 6;
 
 
 
-    copab = cos(-(mitray_dipo__1.phi - mitray_dipo__1.alpha -
+    copab = cos(-(mitray_dipo__1.phi - mitray_dipo__1.alpha - 
 	    mitray_dipo__1.beta) / 57.29577951);
-    sipab = sin(-(mitray_dipo__1.phi - mitray_dipo__1.alpha -
+    sipab = sin(-(mitray_dipo__1.phi - mitray_dipo__1.alpha - 
 	    mitray_dipo__1.beta) / 57.29577951);
-    cospb = cos(-(mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) /
+    cospb = cos(-(mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) / 
 	    57.29577951);
-    sinpb = sin(-(mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) /
+    sinpb = sin(-(mitray_dipo__1.phi / (float)2. - mitray_dipo__1.beta) / 
 	    57.29577951);
     sip2 = sin(-(mitray_dipo__1.phi / (float)2.) / 57.29577951);
 
@@ -394,7 +392,7 @@ static integer c__6 = 6;
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_dipole__(doublereal *data, doublereal *xpos,
+/* Subroutine */ int mitray_dipole__(doublereal *data, doublereal *xpos, 
 	doublereal *bfld)
 {
     /* Format strings */
@@ -412,22 +410,22 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 
     /* Builtin functions */
     /* Subroutine */ void s_copy(char *, char *, ftnlen, ftnlen);
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(),
-	    s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
+    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(), 
+	    s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
 	    e_wsle();
     double cos(doublereal), sin(doublereal);
 
     /* Local variables */
     extern /* Subroutine */ int mitray_dipo_atob__(doublereal *, doublereal *,
-	     doublereal *, doublereal *, doublereal *, doublereal *),
-	    mitray_dipo_btoc__(doublereal *, doublereal *, doublereal *,
+	     doublereal *, doublereal *, doublereal *, doublereal *), 
+	    mitray_dipo_btoc__(doublereal *, doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *);
     static integer i__;
-    static doublereal z11, z12, z21, z22, lf1, lf2, br1, br2, rb2, rb3, rb4,
+    static doublereal z11, z12, z21, z22, lf1, lf2, br1, br2, rb2, rb3, rb4, 
 	    lu1;
-    extern /* Subroutine */ int mitray_dipo_bbtoba__(doublereal *, doublereal
-	    *, doublereal *, doublereal *, doublereal *, doublereal *),
-	    mitray_dipo_bctobb__(doublereal *, doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_dipo_bbtoba__(doublereal *, doublereal 
+	    *, doublereal *, doublereal *, doublereal *, doublereal *), 
+	    mitray_dipo_bctobb__(doublereal *, doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *);
     static doublereal bxa, bya, bza, bxb, wde, byb, bzb, bxc, byc, bzc, wdx;
     extern /* Subroutine */ int mitray_bdip__();
@@ -653,8 +651,8 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 /*   entrance/exit far field regions, to be sure that we get the most */
 /*   important regions first */
 
-    if (mitray_axes__1.zb <= z11 && mitray_axes__1.zb > z12 &&
-	    mitray_axes__1.xb >= mitray_bounds__1.xbmin && mitray_axes__1.xb
+    if (mitray_axes__1.zb <= z11 && mitray_axes__1.zb > z12 && 
+	    mitray_axes__1.xb >= mitray_bounds__1.xbmin && mitray_axes__1.xb 
 	    <= mitray_bounds__1.xbmax) {
 
 /*        ************************* */
@@ -717,9 +715,9 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 /*                     =1 CURVED */
 
 	mitray25_1.nsrf = 1;
-	if (mitray21_1.s2 == (float)0. && mitray21_1.s3 == (float)0. &&
-		mitray21_1.s4 == (float)0. && mitray21_1.s5 == (float)0. &&
-		mitray21_1.s6 == (float)0. && mitray21_1.s7 == (float)0. &&
+	if (mitray21_1.s2 == (float)0. && mitray21_1.s3 == (float)0. && 
+		mitray21_1.s4 == (float)0. && mitray21_1.s5 == (float)0. && 
+		mitray21_1.s6 == (float)0. && mitray21_1.s7 == (float)0. && 
 		mitray21_1.s8 == (float)0.) {
 	    mitray25_1.nsrf = 0;
 	}
@@ -760,8 +758,8 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 
 /*        ------------------------- */
 
-    } else if (mitray_axes__1.zc > z21 && mitray_axes__1.zc <= z22 &&
-	    mitray_axes__1.xc >= mitray_bounds__1.xcmin && mitray_axes__1.xc
+    } else if (mitray_axes__1.zc > z21 && mitray_axes__1.zc <= z22 && 
+	    mitray_axes__1.xc >= mitray_bounds__1.xcmin && mitray_axes__1.xc 
 	    <= mitray_bounds__1.xcmax) {
 
 /*        ********************* */
@@ -775,9 +773,9 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 /*        IN=3 designates exit fringe field */
 	mitray25_1.in = 3;
 	mitray25_1.ir = 2;
-	mitray24_1.xc_offset__ = -mitray24_1.rb * cos(mitray_dipo__1.beta /
+	mitray24_1.xc_offset__ = -mitray24_1.rb * cos(mitray_dipo__1.beta / 
 		57.29577951);
-	mitray24_1.zc_offset__ = -mitray24_1.rb * sin(mitray_dipo__1.beta /
+	mitray24_1.zc_offset__ = -mitray24_1.rb * sin(mitray_dipo__1.beta / 
 		57.29577951);
 
 /*        Load the C axis coordinates into array TC, because this is */
@@ -830,9 +828,9 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 /*                     =1 CURVED */
 
 	mitray25_1.nsrf = 1;
-	if (mitray21_1.s2 == (float)0. && mitray21_1.s3 == (float)0. &&
-		mitray21_1.s4 == (float)0. && mitray21_1.s5 == (float)0. &&
-		mitray21_1.s6 == (float)0. && mitray21_1.s7 == (float)0. &&
+	if (mitray21_1.s2 == (float)0. && mitray21_1.s3 == (float)0. && 
+		mitray21_1.s4 == (float)0. && mitray21_1.s5 == (float)0. && 
+		mitray21_1.s6 == (float)0. && mitray21_1.s7 == (float)0. && 
 		mitray21_1.s8 == (float)0.) {
 	    mitray25_1.nsrf = 0;
 	}
@@ -896,9 +894,9 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 
 	mitray22_1.s = (float)0.;
 	mitray25_1.in = 2;
-	mitray24_1.xc_offset__ = -mitray24_1.rb * cos(mitray_dipo__1.beta /
+	mitray24_1.xc_offset__ = -mitray24_1.rb * cos(mitray_dipo__1.beta / 
 		57.29577951);
-	mitray24_1.zc_offset__ = -mitray24_1.rb * sin(mitray_dipo__1.beta /
+	mitray24_1.zc_offset__ = -mitray24_1.rb * sin(mitray_dipo__1.beta / 
 		57.29577951);
 
 /*        Load the C axis coordinates into array TC, because this is where */
@@ -952,8 +950,8 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 	bfld[2] = bya;
 	bfld[3] = bza;
 
-    } else if (mitray_axes__1.zb > z11 && mitray_axes__1.xb >=
-	    mitray_bounds__1.xbmin && mitray_axes__1.xb <=
+    } else if (mitray_axes__1.zb > z11 && mitray_axes__1.xb >= 
+	    mitray_bounds__1.xbmin && mitray_axes__1.xb <= 
 	    mitray_bounds__1.xbmax) {
 
 /*        ********************** */
@@ -1008,8 +1006,8 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
 
 /*        ------------------------- */
 
-    } else if (mitray_axes__1.zc > z22 && mitray_axes__1.xc >
-	    mitray_bounds__1.xcmin && mitray_axes__1.xc <=
+    } else if (mitray_axes__1.zc > z22 && mitray_axes__1.xc > 
+	    mitray_bounds__1.xcmin && mitray_axes__1.xc <= 
 	    mitray_bounds__1.xcmax) {
 
 /*        ****************** */
@@ -1119,18 +1117,18 @@ f10.3,\002  XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
     doublereal d__1, d__2;
 
     /* Builtin functions */
-    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
+    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
 	    e_wsle();
     /* Subroutine */ int s_stop(char *, ftnlen);
     integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe();
     double sqrt(doublereal);
 
     /* Local variables */
-    static doublereal x, y, z__, b0, b1, b2, b3, b4, b5, b6, b7, b8, s0, b9,
+    static doublereal x, y, z__, b0, b1, b2, b3, b4, b5, b6, b7, b8, s0, b9, 
 	    b10, b11, b12, yg1, yg2, yg3, yg4;
-    extern /* Subroutine */ int mitray_bdmp__(doublereal *, doublereal *,
-	    doublereal *), mitray_bdpp__(doublereal *, doublereal *,
-	    doublereal *), mitray_ndip__(), mitray_bdppx__(doublereal *,
+    extern /* Subroutine */ int mitray_bdmp__(doublereal *, doublereal *, 
+	    doublereal *), mitray_bdpp__(doublereal *, doublereal *, 
+	    doublereal *), mitray_ndip__(), mitray_bdppx__(doublereal *, 
 	    integer *, integer *), mitray_bpretz__();
 
     /* Fortran I/O blocks */
@@ -1369,15 +1367,15 @@ L9:
 	    float)12.);
     mitray10_1.by = b0 - yg2 * ((b1 + b9 + b5 + b7 - b0 * (float)4.) * (float)
 	    2. / (float)3. - (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)
-	    24.) + yg4 * (-(b1 + b9 + b5 + b7 - b0 * (float)4.) / (float)6. +
-	    (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)24. + (b3 + b11 +
+	    24.) + yg4 * (-(b1 + b9 + b5 + b7 - b0 * (float)4.) / (float)6. + 
+	    (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)24. + (b3 + b11 + 
 	    b4 + b12 - b1 * (float)2. - b9 * (float)2. - b5 * (float)2. - b7 *
 	     (float)2. + b0 * (float)4.) / (float)12.);
     mitray10_1.bz = yg1 * ((b1 - b9) * (float)2. / (float)3. - (b2 - b10) / (
 	    float)12.) + yg3 * ((b1 - b9) / (float)6. - (b2 - b10) / (float)
 	    12. - (b3 + b4 - b11 - b12 - b1 * (float)2. + b9 * (float)2.) / (
 	    float)12.);
-    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by + mitray10_1.bz * mitray10_1.bz);
     return 0;
 /* **** */
@@ -1406,7 +1404,7 @@ L4:
 
     /* Local variables */
     static doublereal a, e, p0, db, cs;
-    extern /* Subroutine */ int mitray_sij__(integer *, integer *),
+    extern /* Subroutine */ int mitray_sij__(integer *, integer *), 
 	    mitray_sdip__(doublereal *, doublereal *);
     extern doublereal xmitray_zefb__(doublereal *);
 
@@ -1438,7 +1436,7 @@ L6:
 /* **** MTYP=1  :    UNIFORM FIELD STANDARD APPROXIMATION */
 /* **** */
 L10:
-    mitray22_1.s = (*z__ - xmitray_zefb__(x)) / mitray22_1.d__ +
+    mitray22_1.s = (*z__ - xmitray_zefb__(x)) / mitray22_1.d__ + 
 	    mitray21_1.dels;
     goto L13;
 /* **** */
@@ -1460,7 +1458,7 @@ L12:
     a = (float)1. / mitray21_1.rca;
 /* Computing 2nd power */
     d__1 = *z__ + a;
-    mitray22_1.s = (d_sign(&c_b202, &a) * sqrt(d__1 * d__1 + *x * *x) - a) /
+    mitray22_1.s = (d_sign(&c_b202, &a) * sqrt(d__1 * d__1 + *x * *x) - a) / 
 	    mitray22_1.d__ + mitray21_1.dels;
     goto L13;
 /* **** */
@@ -1487,7 +1485,7 @@ L13:
     return 0;
 } /* mitray_bdpp__ */
 
-/* Subroutine */ int mitray_bdpp__(doublereal *bfld, doublereal *z__,
+/* Subroutine */ int mitray_bdpp__(doublereal *bfld, doublereal *z__, 
 	doublereal *x)
 {
     return mitray_bdpp__0_(0, bfld, z__, x, (integer *)0, (integer *)0);
@@ -1517,16 +1515,16 @@ L13:
     /* Subroutine */ int s_stop(char *, ftnlen);
 
     /* Local variables */
-    static doublereal x, y, z__, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10,
-	    b11, b12, dr, dx, dz, rp, xp, dr1, dr2, dr3, dr4, dr5, dr6, dr7,
-	    dr8, dr9, yg1, yg2, yg3, yg4, rr1, rr2, rr3, yr1, yr2, yr3, yr4,
-	    dr10, dr11, dr12, zfb, brr, dnr1, dnr2, dnr3, dnr4, drr1, drr2,
+    static doublereal x, y, z__, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, 
+	    b11, b12, dr, dx, dz, rp, xp, dr1, dr2, dr3, dr4, dr5, dr6, dr7, 
+	    dr8, dr9, yg1, yg2, yg3, yg4, rr1, rr2, rr3, yr1, yr2, yr3, yr4, 
+	    dr10, dr11, dr12, zfb, brr, dnr1, dnr2, dnr3, dnr4, drr1, drr2, 
 	    drr3, drr4, dnr5;
-    extern /* Subroutine */ int mitray_bdmp__(doublereal *, doublereal *,
-	    doublereal *), mitray_ndpp__(doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_bdmp__(doublereal *, doublereal *, 
+	    doublereal *), mitray_ndpp__(doublereal *, doublereal *, 
 	    doublereal *, doublereal *);
     extern doublereal xmitray_zefb__(doublereal *);
-    extern /* Subroutine */ int mitray_ndppx__(doublereal *, integer *,
+    extern /* Subroutine */ int mitray_ndppx__(doublereal *, integer *, 
 	    integer *, doublereal *);
 
     /* Fortran I/O blocks */
@@ -1596,8 +1594,8 @@ L2:
     mitray10_1.bx = (float)0.;
     mitray10_1.by = (float)0.;
     if (mitray25_1.mtyp == 3) {
-	mitray10_1.by = mitray22_1.bf * ((float)1. - mitray20_1.ndx * drr1 +
-		mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 +
+	mitray10_1.by = mitray22_1.bf * ((float)1. - mitray20_1.ndx * drr1 + 
+		mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 + 
 		mitray20_1.delt * drr4);
     }
     if (mitray25_1.mtyp == 4) {
@@ -1628,23 +1626,23 @@ L4:
 /* **** MTYP = 3 */
 /* **** */
 L11:
-    brr = mitray22_1.bf * ((-mitray20_1.ndx + mitray20_1.bet1 * (float)2. *
+    brr = mitray22_1.bf * ((-mitray20_1.ndx + mitray20_1.bet1 * (float)2. * 
 	    drr1 + mitray20_1.gama * (float)3. * drr2 + mitray20_1.delt * (
 	    float)4. * drr3) * yr1 - (mitray20_1.ndx * rr2 + mitray20_1.bet1 *
 	     (float)2. * rr1 * ((float)1. - rr1 * drr1) + mitray20_1.gama * (
-	    float)3. * (rr1 * (float)2. * drr1 + (float)2. - rr2 * drr2) +
-	    mitray20_1.delt * (float)4. * (drr1 * (float)6. + rr1 * (float)3.
+	    float)3. * (rr1 * (float)2. * drr1 + (float)2. - rr2 * drr2) + 
+	    mitray20_1.delt * (float)4. * (drr1 * (float)6. + rr1 * (float)3. 
 	    * drr2 - rr2 * drr3)) * yr3 / (float)6.);
-    mitray10_1.by = mitray22_1.bf * ((float)1. - mitray20_1.ndx * drr1 +
-	    mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 + mitray20_1.delt
-	    * drr4 - yr2 * (float).5 * (-mitray20_1.ndx * rr1 +
-	    mitray20_1.bet1 * (float)2. * (rr1 * drr1 + (float)1.) +
-	    mitray20_1.gama * (float)3. * drr1 * (rr1 * drr1 + (float)2.) +
-	    mitray20_1.delt * (float)4. * drr2 * (rr1 * drr1 + (float)3.)) +
-	    yr4 * (-mitray20_1.ndx * rr3 + mitray20_1.bet1 * (float)2. * (rr3
-	    * drr1 - rr2) + mitray20_1.gama * (float)3. * (rr1 * (float)4. -
+    mitray10_1.by = mitray22_1.bf * ((float)1. - mitray20_1.ndx * drr1 + 
+	    mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 + mitray20_1.delt 
+	    * drr4 - yr2 * (float).5 * (-mitray20_1.ndx * rr1 + 
+	    mitray20_1.bet1 * (float)2. * (rr1 * drr1 + (float)1.) + 
+	    mitray20_1.gama * (float)3. * drr1 * (rr1 * drr1 + (float)2.) + 
+	    mitray20_1.delt * (float)4. * drr2 * (rr1 * drr1 + (float)3.)) + 
+	    yr4 * (-mitray20_1.ndx * rr3 + mitray20_1.bet1 * (float)2. * (rr3 
+	    * drr1 - rr2) + mitray20_1.gama * (float)3. * (rr1 * (float)4. - 
 	    rr2 * (float)2. * drr1 + rr3 * drr2) + mitray20_1.delt * (float)
-	    4. * (rr1 * (float)12. * drr1 + (float)6. - rr2 * (float)3. *
+	    4. * (rr1 * (float)12. * drr1 + (float)6. - rr2 * (float)3. * 
 	    drr2 + rr3 * drr3)) / (float)24.);
     goto L13;
 /* **** */
@@ -1657,15 +1655,15 @@ L12:
     dnr4 = dnr3 * dnr1;
     dnr5 = dnr4 * dnr1;
     brr = mitray22_1.bf * mitray20_1.ndx * (-yr1 / dnr2 + yr3 * (
-	    mitray20_1.ndx * (float)6. * mitray20_1.ndx / dnr4 -
+	    mitray20_1.ndx * (float)6. * mitray20_1.ndx / dnr4 - 
 	    mitray20_1.ndx * (float)2. * rr1 / dnr3 - rr2 / dnr2) / (float)6.)
 	    ;
 /* Computing 3rd power */
     d__1 = mitray20_1.ndx;
-    mitray10_1.by = mitray22_1.bf * ((float)1. / dnr1 + yr2 * (float).5 *
+    mitray10_1.by = mitray22_1.bf * ((float)1. / dnr1 + yr2 * (float).5 * 
 	    mitray20_1.ndx * (mitray20_1.ndx * (float)-2. / dnr3 + rr1 / dnr2)
-	     + yr4 * mitray20_1.ndx * (d__1 * (d__1 * d__1) * (float)24. /
-	    dnr5 - mitray20_1.ndx * (float)12. * mitray20_1.ndx * rr1 / dnr4
+	     + yr4 * mitray20_1.ndx * (d__1 * (d__1 * d__1) * (float)24. / 
+	    dnr5 - mitray20_1.ndx * (float)12. * mitray20_1.ndx * rr1 / dnr4 
 	    - mitray20_1.ndx * (float)2. * rr2 / dnr3 - rr3 / dnr2) / (float)
 	    24.);
 /* **** */
@@ -1673,7 +1671,7 @@ L12:
 L13:
     mitray10_1.bx = brr * dx / rp;
     mitray10_1.bz = brr * dz / rp;
-    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by + mitray10_1.bz * mitray10_1.bz);
     return 0;
 /* **** */
@@ -1878,15 +1876,15 @@ L15:
 	    float)12.);
     mitray10_1.by = b0 - yg2 * ((b1 + b9 + b5 + b7 - b0 * (float)4.) * (float)
 	    2. / (float)3. - (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)
-	    24.) + yg4 * (-(b1 + b9 + b5 + b7 - b0 * (float)4.) / (float)6. +
-	    (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)24. + (b3 + b11 +
+	    24.) + yg4 * (-(b1 + b9 + b5 + b7 - b0 * (float)4.) / (float)6. + 
+	    (b2 + b10 + b6 + b8 - b0 * (float)4.) / (float)24. + (b3 + b11 + 
 	    b4 + b12 - b1 * (float)2. - b9 * (float)2. - b5 * (float)2. - b7 *
 	     (float)2. + b0 * (float)4.) / (float)12.);
     mitray10_1.bz = yg1 * ((b1 - b9) * (float)2. / (float)3. - (b2 - b10) / (
 	    float)12.) + yg3 * ((b1 - b9) / (float)6. - (b2 - b10) / (float)
 	    12. - (b3 + b4 - b11 - b12 - b1 * (float)2. + b9 * (float)2.) / (
 	    float)12.);
-    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by + mitray10_1.bz * mitray10_1.bz);
     return 0;
 L14:
@@ -1947,8 +1945,8 @@ L1:
     db = mitray22_1.bf - mitray21_1.br;
     *bfld = (float)0.;
     if (mitray25_1.mtyp == 3) {
-	*bfld = mitray21_1.br + ((float)1. - mitray20_1.ndx * drr1 +
-		mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 +
+	*bfld = mitray21_1.br + ((float)1. - mitray20_1.ndx * drr1 + 
+		mitray20_1.bet1 * drr2 + mitray20_1.gama * drr3 + 
 		mitray20_1.delt * drr4) * db / p0;
     }
     if (mitray25_1.mtyp == 4) {
@@ -1962,7 +1960,7 @@ L1:
     return 0;
 } /* mitray_ndpp__ */
 
-/* Subroutine */ int mitray_ndpp__(doublereal *bfld, doublereal *z__,
+/* Subroutine */ int mitray_ndpp__(doublereal *bfld, doublereal *z__, 
 	doublereal *x, doublereal *dr)
 {
     return mitray_ndpp__0_(0, bfld, z__, x, dr, (integer *)0, (integer *)0);
@@ -2025,7 +2023,7 @@ L1:
 /* Computing 3rd power */
     d__1 = y;
     mitray10_1.bz = y * by1 - d__1 * (d__1 * d__1) * by3 / (float)6.;
-    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray22_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by + mitray10_1.bz * mitray10_1.bz);
     return 0;
 } /* mitray_bpretz__ */
@@ -2033,7 +2031,7 @@ L1:
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_sdip__0_(int n__, doublereal *x, doublereal *z__,
+/* Subroutine */ int mitray_sdip__0_(int n__, doublereal *x, doublereal *z__, 
 	integer *iz, integer *jx)
 {
     /* System generated locals */
@@ -2046,7 +2044,7 @@ L1:
     /* Local variables */
     static doublereal a;
     static integer i__, j;
-    static doublereal r1, r2, x1, cc, dd, dp, az, x12, z12, ro, cx, rr, xp,
+    static doublereal r1, r2, x1, cc, dd, dp, az, x12, z12, ro, cx, rr, xp, 
 	    zp, dp2, dsd, xdi, zdi;
     static integer ixp;
     static doublereal xpm, xpo, zpm, zpo, xxp, zzp;
@@ -2261,9 +2259,9 @@ L_mitray_sij:
 /* **** */
     a = (*jx * mitrayblsdip_1.dcs + *iz * mitrayblsdip_1.dsn) * mitray22_1.dg;
     d__1 = mitrayblsdip_1.xo + a * mitrayblsdip_1.dcs;
-    dsd = -mitrayblsdip_1.dcs * (xmitray_zefb__(&d__1) - mitrayblsdip_1.zo -
+    dsd = -mitrayblsdip_1.dcs * (xmitray_zefb__(&d__1) - mitrayblsdip_1.zo - 
 	    a * mitrayblsdip_1.dsn);
-    mitray22_1.s = mitrayblsdip_1.ss + ((*iz * mitrayblsdip_1.dcs - *jx *
+    mitray22_1.s = mitrayblsdip_1.ss + ((*iz * mitrayblsdip_1.dcs - *jx * 
 	    mitrayblsdip_1.dsn) * mitray22_1.dg + dsd) / mitray22_1.d__;
     return 0;
 } /* mitray_sdip__ */
@@ -2294,8 +2292,8 @@ doublereal xmitray_zefb__(doublereal *xp)
     xp2 = *xp * *xp;
     xp3 = xp2 * *xp;
     xp4 = xp3 * *xp;
-    zefb = -(mitray21_1.s2 * xp2 + mitray21_1.s3 * xp3 + mitray21_1.s4 * xp4
-	    + mitray21_1.s5 * xp4 * *xp + mitray21_1.s6 * xp4 * xp2 +
+    zefb = -(mitray21_1.s2 * xp2 + mitray21_1.s3 * xp3 + mitray21_1.s4 * xp4 
+	    + mitray21_1.s5 * xp4 * *xp + mitray21_1.s6 * xp4 * xp2 + 
 	    mitray21_1.s7 * xp4 * xp3 + mitray21_1.s8 * xp4 * xp4);
     ret_val = zefb;
     return ret_val;
@@ -2318,8 +2316,8 @@ doublereal xmitray_dzdx__(doublereal *xp)
     xp2 = *xp * *xp;
     xp3 = xp2 * *xp;
     xp4 = xp3 * *xp;
-    dzdx = -(mitray21_1.s2 * (float)2. * *xp + mitray21_1.s3 * (float)3. *
-	    xp2 + mitray21_1.s4 * (float)4. * xp3 + mitray21_1.s5 * (float)5.
+    dzdx = -(mitray21_1.s2 * (float)2. * *xp + mitray21_1.s3 * (float)3. * 
+	    xp2 + mitray21_1.s4 * (float)4. * xp3 + mitray21_1.s5 * (float)5. 
 	    * xp4 + mitray21_1.s6 * (float)6. * xp4 * *xp + mitray21_1.s7 * (
 	    float)7. * xp4 * xp2 + mitray21_1.s8 * (float)8. * xp4 * xp3);
     ret_val = dzdx;
@@ -2342,8 +2340,8 @@ doublereal xmitray_dzdx2__(doublereal *xp)
     xp2 = *xp * *xp;
     xp3 = xp2 * *xp;
     xp4 = xp3 * *xp;
-    dzdx2 = -(mitray21_1.s2 * (float)2. + mitray21_1.s3 * (float)6. * *xp +
-	    mitray21_1.s4 * (float)12. * xp2 + mitray21_1.s5 * (float)20. *
+    dzdx2 = -(mitray21_1.s2 * (float)2. + mitray21_1.s3 * (float)6. * *xp + 
+	    mitray21_1.s4 * (float)12. * xp2 + mitray21_1.s5 * (float)20. * 
 	    xp3 + mitray21_1.s6 * (float)30. * xp4 + mitray21_1.s7 * (float)
 	    42. * xp4 * *xp + mitray21_1.s8 * (float)56. * xp4 * xp2);
     ret_val = dzdx2;
@@ -2353,7 +2351,7 @@ doublereal xmitray_dzdx2__(doublereal *xp)
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_bdmp__(doublereal *bzz, doublereal *z__,
+/* Subroutine */ int mitray_bdmp__(doublereal *bzz, doublereal *z__, 
 	doublereal *x)
 {
     static integer i__;
@@ -2395,7 +2393,7 @@ doublereal xmitray_dzdx2__(doublereal *xp)
 		mitray25_1.imap << 1)) * 101) * 101 - 30705];
 	bm1 = mitray26_1.bzmap[nxx + (nzq - 1 + (mitray25_1.ir + (
 		mitray25_1.imap << 1)) * 101) * 101 - 30705];
-	b00 = mitray26_1.bzmap[nxx + (nzq + (mitray25_1.ir + (mitray25_1.imap
+	b00 = mitray26_1.bzmap[nxx + (nzq + (mitray25_1.ir + (mitray25_1.imap 
 		<< 1)) * 101) * 101 - 30705];
 	bp1 = mitray26_1.bzmap[nxx + (nzq + 1 + (mitray25_1.ir + (
 		mitray25_1.imap << 1)) * 101) * 101 - 30705];
@@ -2419,7 +2417,7 @@ doublereal xmitray_dzdx2__(doublereal *xp)
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_edipol__(doublereal *data, doublereal *xpos,
+/* Subroutine */ int mitray_edipol__(doublereal *data, doublereal *xpos, 
 	doublereal *efld)
 {
     /* Format strings */
@@ -2437,18 +2435,18 @@ f10.3,\002 XCMIN=\002,f10.3,\002  XCMAX=\002,f10.3)";
     /* Subroutine */ void s_copy(char *, char *, ftnlen, ftnlen);
     integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe();
     double cos(doublereal), sin(doublereal);
-    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
+    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
 	    e_wsle();
 
     /* Local variables */
     static integer i__;
-    static doublereal xa, ya, za, z11, z12, z21, z22, xb, yb, zb, zc, xc, yc,
+    static doublereal xa, ya, za, z11, z12, z21, z22, xb, yb, zb, zc, xc, yc, 
 	    lf1, lf2, lu1;
-    extern /* Subroutine */ int mitray_edip_ectoea__(doublereal *, doublereal
+    extern /* Subroutine */ int mitray_edip_ectoea__(doublereal *, doublereal 
 	    *, doublereal *, doublereal *, doublereal *, doublereal *);
     static doublereal eff, exa, eya, eza;
     extern /* Subroutine */ int mitray_edip__();
-    static doublereal sip2, copab, sipab, cospb, sinpb, xbmin, xbmax, xcmax,
+    static doublereal sip2, copab, sipab, cospb, sinpb, xbmin, xbmax, xcmax, 
 	    xcmin;
     static char region[2];
 
@@ -3165,10 +3163,10 @@ _EDIP\002,/\002               INVALID VALUE  IN = \002,i5//)";
     double sqrt(doublereal), asin(doublereal);
 
     /* Local variables */
-    static doublereal x, y, z__, g1, g2, g3, g4, g5, g6, dr, dx, rp, re, rp2,
+    static doublereal x, y, z__, g1, g2, g3, g4, g5, g6, dr, dx, rp, re, rp2, 
 	    efr, eft, drr, drr2, drr3;
-    extern /* Subroutine */ int mitray_edpp__(doublereal *, doublereal *,
-	    doublereal *, doublereal *, doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_edpp__(doublereal *, doublereal *, 
+	    doublereal *, doublereal *, doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *);
     static doublereal drr4;
     extern /* Subroutine */ int exit_();
@@ -3224,7 +3222,7 @@ L2:
     mitray11_1.ex = mitray22_2.ef * mitray24_1.rb * dx / rp2;
     mitray11_1.ey = (float)0.;
     mitray11_1.ez = mitray22_2.ef * mitray24_1.rb * z__ / rp2;
-    mitray22_2.et = sqrt(mitray11_1.ex * mitray11_1.ex + mitray11_1.ez *
+    mitray22_2.et = sqrt(mitray11_1.ex * mitray11_1.ex + mitray11_1.ez * 
 	    mitray11_1.ez);
     return 0;
 /* **** */
@@ -3248,7 +3246,7 @@ L3:
     theta = asin(sint);
 /* Computing 4th power */
     d__1 = y / mitray20_2.we, d__1 *= d__1;
-    mitray22_2.s = theta * mitray24_1.rb / mitray22_2.d__ + mitray20_2.ec2 *
+    mitray22_2.s = theta * mitray24_1.rb / mitray22_2.d__ + mitray20_2.ec2 * 
 	    y * y / (mitray20_2.we * mitray20_2.we) + mitray20_2.ec4 * (d__1 *
 	     d__1);
     mitray_edpp__(&mitray22_2.d__, &mitray22_2.s, &re, &g1, &g2, &g3, &g4, &
@@ -3258,14 +3256,14 @@ L3:
     drr3 = drr2 * drr;
     drr4 = drr3 * drr;
     efr = mitray22_2.ef * mitray24_1.rb * (re - drr2 * g2 / (float)2. + drr3 *
-	     g2 / (float)2. + drr4 * (g4 - g2 * (float)11.) / (float)24.) /
+	     g2 / (float)2. + drr4 * (g4 - g2 * (float)11.) / (float)24.) / 
 	    rp;
-    eft = mitray22_2.ef * mitray24_1.rb * (drr * g1 - drr2 * g1 / (float)2. +
+    eft = mitray22_2.ef * mitray24_1.rb * (drr * g1 - drr2 * g1 / (float)2. + 
 	    drr3 * (g1 * (float)2. - g3) / (float)6. - drr4 * (g1 - g3) / (
 	    float)4.) / rp;
     mitray11_1.ex = efr * cost - eft * sint;
     mitray11_1.ez = efr * sint + eft * cost;
-    mitray22_2.et = sqrt(mitray11_1.ex * mitray11_1.ex + mitray11_1.ey *
+    mitray22_2.et = sqrt(mitray11_1.ex * mitray11_1.ex + mitray11_1.ey * 
 	    mitray11_1.ey + mitray11_1.ez * mitray11_1.ez);
     if (mitray25_2.in == 1) {
 	mitray11_1.ez = -mitray11_1.ez;
@@ -3276,8 +3274,8 @@ L3:
 
 /* ======================================================================== */
 
-/* Subroutine */ int mitray_edpp__(doublereal *d__, doublereal *s, doublereal
-	*re, doublereal *g1, doublereal *g2, doublereal *g3, doublereal *g4,
+/* Subroutine */ int mitray_edpp__(doublereal *d__, doublereal *s, doublereal 
+	*re, doublereal *g1, doublereal *g2, doublereal *g3, doublereal *g4, 
 	doublereal *g5, doublereal *g6)
 {
     /* System generated locals */
@@ -3287,7 +3285,7 @@ L3:
     double d_sign(doublereal *, doublereal *), exp(doublereal);
 
     /* Local variables */
-    static doublereal e, s2, s3, s4, s5, cs, cp1, cp2, cp3, cp4, cp12, cp13,
+    static doublereal e, s2, s3, s4, s5, cs, cp1, cp2, cp3, cp4, cp12, cp13, 
 	    rbd, cp14, cp22, ere, ere1, ere2, ere3, ere4;
 
 /* **** */
@@ -3300,18 +3298,18 @@ L3:
     s3 = s2 * *s;
     s4 = s2 * s2;
     s5 = s4 * *s;
-    cs = mitray23_1.c0 + mitray23_1.c1 * *s + mitray23_1.c2 * s2 +
+    cs = mitray23_1.c0 + mitray23_1.c1 * *s + mitray23_1.c2 * s2 + 
 	    mitray23_1.c3 * s3 + mitray23_1.c4 * s4 + mitray23_1.c5 * s5;
     rbd = mitray24_1.rb / *d__;
     cp1 = (mitray23_1.c1 + mitray23_1.c2 * (float)2. * *s + mitray23_1.c3 * (
 	    float)3. * s2 + mitray23_1.c4 * (float)4. * s3 + mitray23_1.c5 * (
 	    float)5. * s4) * rbd;
-    cp2 = (mitray23_1.c2 * (float)2. + mitray23_1.c3 * (float)6. * *s +
+    cp2 = (mitray23_1.c2 * (float)2. + mitray23_1.c3 * (float)6. * *s + 
 	    mitray23_1.c4 * (float)12. * s2 + mitray23_1.c5 * (float)20. * s3)
 	     * rbd * rbd;
 /* Computing 3rd power */
     d__1 = rbd;
-    cp3 = (mitray23_1.c3 * (float)6. + mitray23_1.c4 * (float)24. * *s +
+    cp3 = (mitray23_1.c3 * (float)6. + mitray23_1.c4 * (float)24. * *s + 
 	    mitray23_1.c5 * (float)60. * s2) * (d__1 * (d__1 * d__1));
 /* Computing 4th power */
     d__1 = rbd, d__1 *= d__1;
@@ -3337,13 +3335,13 @@ L3:
     *g1 = -cp1 * ere1;
 /* **** */
     *g2 = -(cp2 + cp12) * ere1 + cp12 * (float)2. * ere2;
-    *g3 = -(cp3 + cp1 * (float)3. * cp2 + cp13) * ere1 + (cp1 * cp2 + cp13) *
+    *g3 = -(cp3 + cp1 * (float)3. * cp2 + cp13) * ere1 + (cp1 * cp2 + cp13) * 
 	    (float)6. * ere2 - cp13 * (float)6. * ere3;
 /* **** */
 /* L1: */
-    *g4 = -(cp4 + cp1 * (float)4. * cp3 + cp22 * (float)3. + cp12 * (float)6.
-	    * cp2 + cp14) * ere1 + (cp1 * (float)8. * cp3 + cp12 * (float)36.
-	    * cp2 + cp22 * (float)6. + cp14 * (float)14.) * ere2 - (cp12 *
+    *g4 = -(cp4 + cp1 * (float)4. * cp3 + cp22 * (float)3. + cp12 * (float)6. 
+	    * cp2 + cp14) * ere1 + (cp1 * (float)8. * cp3 + cp12 * (float)36. 
+	    * cp2 + cp22 * (float)6. + cp14 * (float)14.) * ere2 - (cp12 * 
 	    cp2 + cp14) * (float)36. * ere3 + cp14 * (float)24. * ere4;
     return 0;
 } /* mitray_edpp__ */
@@ -3351,7 +3349,7 @@ L3:
 
 /* ============================================================================ */
 
-/* Subroutine */ int mitray_edip_ectoea__(doublereal *exc, doublereal *eyc,
+/* Subroutine */ int mitray_edip_ectoea__(doublereal *exc, doublereal *eyc, 
 	doublereal *ezc, doublereal *exa, doublereal *eya, doublereal *eza)
 {
     /* Builtin functions */
@@ -3402,7 +3400,7 @@ L3:
 /*                          MULTI-POLES SUBROUTINE */
 /* *********************************************************************** */
 
-/* Subroutine */ int mitray_poles__(doublereal *data, doublereal *xpos,
+/* Subroutine */ int mitray_poles__(doublereal *data, doublereal *xpos, 
 	doublereal *bfld)
 {
     /* Format strings */
@@ -3418,8 +3416,8 @@ S\002/\002 XA,YA,ZA=\002,3f10.3/)";
     doublereal d__1, d__2;
 
     /* Builtin functions */
-    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(),
-	    s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
+    integer s_wsfe(cilist *), do_fio(integer *, char *, ftnlen), e_wsfe(), 
+	    s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
 	    e_wsle();
 
     /* Local variables */
@@ -3427,7 +3425,7 @@ S\002/\002 XA,YA,ZA=\002,3f10.3/)";
     static integer i__;
     static doublereal l, z11, z12, z21, z22, xb, yb, zb, xc, yc, zc, lf1, lf2,
 	     lu1, bdc, bdd, boc, rad, bqd, frd, frh, bhx, fro;
-    extern /* Subroutine */ int mitray_zone__(doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_zone__(doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *, doublereal *, integer *)
 	    ;
     static doublereal frdd;
@@ -3949,11 +3947,11 @@ S\002/\002 XA,YA,ZA=\002,3f10.3/)";
     double sqrt(doublereal);
 
     /* Local variables */
-    static doublereal x, y, z__, g1, g2, g3, g4, g5, g6, x2, x3, x4, x5, x6,
-	    x7, y2, y3, y4, y5, y6, y7, re, ss, b2x, b2y, b3x, b3y, b4x, b4y,
+    static doublereal x, y, z__, g1, g2, g3, g4, g5, g6, x2, x3, x4, x5, x6, 
+	    x7, y2, y3, y4, y5, y6, y7, re, ss, b2x, b2y, b3x, b3y, b4x, b4y, 
 	    b5x, b5y, b6x, b6y, b2z, b3z, b4z, b5z, b6z;
-    extern /* Subroutine */ int mitray_bpls__(integer *, doublereal *,
-	    doublereal *, doublereal *, doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_bpls__(integer *, doublereal *, 
+	    doublereal *, doublereal *, doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *, doublereal *);
 
     /* Fortran I/O blocks */
@@ -4010,7 +4008,7 @@ L1:
     mitray10_1.bx = b2x + b3x + b4x + b5x + b6x;
     mitray10_1.by = b2y + b3y + b4y + b5y + b6y;
     mitray10_1.bz = (float)0.;
-    mitray90_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray90_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by);
     return 0;
 /* **** */
@@ -4021,8 +4019,8 @@ L2:
     mitray90_1.s = z__ / mitray90_1.d__;
     mitray_bpls__(&c__2, &mitray90_1.d__, &mitray90_1.s, &re, &g1, &g2, &g3, &
 	    g4, &g5, &g6);
-    b2x = mitray90_1.grad1 * (re * y - g2 / (float)12. * (x2 * (float)3. * y
-	    + y3) + g4 / (float)384. * (x4 * (float)5. * y + x2 * (float)6. *
+    b2x = mitray90_1.grad1 * (re * y - g2 / (float)12. * (x2 * (float)3. * y 
+	    + y3) + g4 / (float)384. * (x4 * (float)5. * y + x2 * (float)6. * 
 	    y3 + y5) - g6 / (float)23040. * (x6 * (float)7. * y + x4 * (float)
 	    15. * y3 + x2 * (float)9. * y5 + y7));
     b2y = mitray90_1.grad1 * (re * x - g2 / (float)12. * (x3 + x * (float)3. *
@@ -4047,7 +4045,7 @@ L2:
 /* **** OCTAPOLE */
 /* **** */
     ss = z__ / mitray93_1.do__ + mitray93_1.dso;
-    mitray_bpls__(&c__4, &mitray93_1.do__, &ss, &re, &g1, &g2, &g3, &g4, &g5,
+    mitray_bpls__(&c__4, &mitray93_1.do__, &ss, &re, &g1, &g2, &g3, &g4, &g5, 
 	    &g6);
     b4x = mitray90_1.grad3 * (re * (x2 * (float)3. * y - y3) - g2 / (float)
 	    80. * (x4 * (float)20. * y - y5 * (float)4.));
@@ -4070,7 +4068,7 @@ L2:
     ss = z__ / mitray93_1.ddd + mitray93_1.dsdd;
     mitray_bpls__(&c__6, &mitray93_1.ddd, &ss, &re, &g1, &g2, &g3, &g4, &g5, &
 	    g6);
-    b6x = mitray90_1.grad5 * re * (x4 * (float)5. * y - x2 * (float)10. * y3
+    b6x = mitray90_1.grad5 * re * (x4 * (float)5. * y - x2 * (float)10. * y3 
 	    + y5);
     b6y = mitray90_1.grad5 * re * (x5 - x3 * (float)10. * y2 + x * (float)5. *
 	     y4);
@@ -4081,7 +4079,7 @@ L2:
     mitray10_1.bx = b2x + b3x + b4x + b5x + b6x;
     mitray10_1.by = b2y + b3y + b4y + b5y + b6y;
     mitray10_1.bz = b2z + b3z + b4z + b5z + b6z;
-    mitray90_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by *
+    mitray90_1.bt = sqrt(mitray10_1.bx * mitray10_1.bx + mitray10_1.by * 
 	    mitray10_1.by + mitray10_1.bz * mitray10_1.bz);
     return 0;
 } /* mitray_bpoles__ */
@@ -4090,7 +4088,7 @@ L2:
 /* ======================================================================= */
 
 /* Subroutine */ int mitray_bpls__(integer *igp, doublereal *d__, doublereal *
-	s, doublereal *re, doublereal *g1, doublereal *g2, doublereal *g3,
+	s, doublereal *re, doublereal *g1, doublereal *g2, doublereal *g3, 
 	doublereal *g4, doublereal *g5, doublereal *g6)
 {
     /* System generated locals */
@@ -4100,8 +4098,8 @@ L2:
     double d_sign(doublereal *, doublereal *), exp(doublereal);
 
     /* Local variables */
-    static doublereal e, s2, s3, s4, s5, cs, cp1, cp2, cp3, cp4, cp5, cp12,
-	    cp13, cp14, cp22, cp15, cp16, ere, cp23, cp32, ere1, ere2, ere3,
+    static doublereal e, s2, s3, s4, s5, cs, cp1, cp2, cp3, cp4, cp5, cp12, 
+	    cp13, cp14, cp22, cp15, cp16, ere, cp23, cp32, ere1, ere2, ere3, 
 	    ere4, ere5, ere6;
 
 /* **** */
@@ -4115,17 +4113,17 @@ L2:
     s3 = s2 * *s;
     s4 = s2 * s2;
     s5 = s4 * *s;
-    cs = mitray91_1.c0 + mitray91_1.c1 * *s + mitray91_1.c2 * s2 +
+    cs = mitray91_1.c0 + mitray91_1.c1 * *s + mitray91_1.c2 * s2 + 
 	    mitray91_1.c3 * s3 + mitray91_1.c4 * s4 + mitray91_1.c5 * s5;
     cp1 = (mitray91_1.c1 + mitray91_1.c2 * (float)2. * *s + mitray91_1.c3 * (
 	    float)3. * s2 + mitray91_1.c4 * (float)4. * s3 + mitray91_1.c5 * (
 	    float)5. * s4) / *d__;
-    cp2 = (mitray91_1.c2 * (float)2. + mitray91_1.c3 * (float)6. * *s +
+    cp2 = (mitray91_1.c2 * (float)2. + mitray91_1.c3 * (float)6. * *s + 
 	    mitray91_1.c4 * (float)12. * s2 + mitray91_1.c5 * (float)20. * s3)
 	     / (*d__ * *d__);
 /* Computing 3rd power */
     d__1 = *d__;
-    cp3 = (mitray91_1.c3 * (float)6. + mitray91_1.c4 * (float)24. * *s +
+    cp3 = (mitray91_1.c3 * (float)6. + mitray91_1.c4 * (float)24. * *s + 
 	    mitray91_1.c5 * (float)60. * s2) / (d__1 * (d__1 * d__1));
 /* Computing 4th power */
     d__1 = *d__, d__1 *= d__1;
@@ -4177,7 +4175,7 @@ L2:
     if (*igp == 4) {
 	return 0;
     }
-    *g3 = -(cp3 + cp1 * (float)3. * cp2 + cp13) * ere1 + (cp1 * cp2 + cp13) *
+    *g3 = -(cp3 + cp1 * (float)3. * cp2 + cp13) * ere1 + (cp1 * cp2 + cp13) * 
 	    (float)6. * ere2 - cp13 * (float)6. * ere3;
 /* **** */
 /* **** */
@@ -4185,9 +4183,9 @@ L2:
 	return 0;
     }
 /* L1: */
-    *g4 = -(cp4 + cp1 * (float)4. * cp3 + cp22 * (float)3. + cp12 * (float)6.
-	    * cp2 + cp14) * ere1 + (cp1 * (float)8. * cp3 + cp12 * (float)36.
-	    * cp2 + cp22 * (float)6. + cp14 * (float)14.) * ere2 - (cp12 *
+    *g4 = -(cp4 + cp1 * (float)4. * cp3 + cp22 * (float)3. + cp12 * (float)6. 
+	    * cp2 + cp14) * ere1 + (cp1 * (float)8. * cp3 + cp12 * (float)36. 
+	    * cp2 + cp22 * (float)6. + cp14 * (float)14.) * ere2 - (cp12 * 
 	    cp2 + cp14) * (float)36. * ere3 + cp14 * (float)24. * ere4;
 /* **** */
 /* **** */
@@ -4195,26 +4193,26 @@ L2:
 	return 0;
     }
     *g5 = (-cp5 - cp1 * (float)5. * cp4 - cp2 * (float)10. * cp3 - cp12 * (
-	    float)10. * cp3 - cp1 * (float)15. * cp22 - cp13 * (float)10. *
-	    cp2 - cp15) * ere1 + (cp1 * (float)10. * cp4 + cp2 * (float)20. *
+	    float)10. * cp3 - cp1 * (float)15. * cp22 - cp13 * (float)10. * 
+	    cp2 - cp15) * ere1 + (cp1 * (float)10. * cp4 + cp2 * (float)20. * 
 	    cp3 + cp12 * (float)60. * cp3 + cp1 * (float)90. * cp22 + cp13 * (
 	    float)140. * cp2 + cp15 * (float)30.) * ere2 + (cp12 * (float)
-	    -60. * cp3 - cp1 * (float)90. * cp22 - cp13 * (float)360. * cp2 -
+	    -60. * cp3 - cp1 * (float)90. * cp22 - cp13 * (float)360. * cp2 - 
 	    cp15 * (float)150.) * ere3 + (cp13 * (float)240. * cp2 + cp15 * (
 	    float)240.) * ere4 + cp15 * (float)-120. * ere5;
     *g6 = (cp1 * (float)-6. * cp5 - cp2 * (float)15. * cp4 - cp12 * (float)
-	    15. * cp4 - cp32 * (float)10. - cp1 * (float)60. * cp2 * cp3 -
-	    cp13 * (float)20. * cp3 - cp23 * (float)15. - cp12 * (float)45. *
-	    cp22 - cp14 * (float)15. * cp2 - cp16) * ere1 + (cp1 * (float)12.
-	    * cp5 + cp2 * (float)30. * cp4 + cp12 * (float)90. * cp4 + cp32 *
-	    (float)20. + cp1 * (float)360. * cp2 * cp3 + cp13 * (float)280. *
+	    15. * cp4 - cp32 * (float)10. - cp1 * (float)60. * cp2 * cp3 - 
+	    cp13 * (float)20. * cp3 - cp23 * (float)15. - cp12 * (float)45. * 
+	    cp22 - cp14 * (float)15. * cp2 - cp16) * ere1 + (cp1 * (float)12. 
+	    * cp5 + cp2 * (float)30. * cp4 + cp12 * (float)90. * cp4 + cp32 * 
+	    (float)20. + cp1 * (float)360. * cp2 * cp3 + cp13 * (float)280. * 
 	    cp3 + cp23 * (float)90. + cp12 * (float)630. * cp22 + cp14 * (
 	    float)450. * cp2 + cp16 * (float)62.) * ere2 + (cp12 * (float)
-	    -90. * cp4 - cp1 * (float)360. * cp2 * cp3 - cp13 * (float)720. *
+	    -90. * cp4 - cp1 * (float)360. * cp2 * cp3 - cp13 * (float)720. * 
 	    cp3 - cp23 * (float)90. - cp12 * (float)1620. * cp22 - cp14 * (
 	    float)2250. * cp2 - cp16 * (float)540.) * ere3 + (cp13 * (float)
-	    480. * cp3 + cp12 * (float)1080. * cp22 + cp14 * (float)3600. *
-	    cp2 + cp16 * (float)1560.) * ere4 + (cp14 * (float)-1800. * cp2 -
+	    480. * cp3 + cp12 * (float)1080. * cp22 + cp14 * (float)3600. * 
+	    cp2 + cp16 * (float)1560.) * ere4 + (cp14 * (float)-1800. * cp2 - 
 	    cp16 * (float)1800.) * ere5 + cp16 * (float)720. * ere6;
 /* **** */
     return 0;
@@ -4225,7 +4223,7 @@ L2:
 /*                               SASP SUBROUTINES */
 /* *********************************************************************** */
 
-/* Subroutine */ int mitray_sasp__(doublereal *data, doublereal *xpos,
+/* Subroutine */ int mitray_sasp__(doublereal *data, doublereal *xpos, 
 	doublereal *bfld)
 {
     /* Format strings */
@@ -4243,7 +4241,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
     static doublereal bfld_ideal__[3], xa, ya, za, bf0;
     static integer mtyp;
     static doublereal ratio;
-    extern /* Subroutine */ int mitray_dipole__(doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_dipole__(doublereal *, doublereal *, 
 	    doublereal *);
 
     /* Fortran I/O blocks */
@@ -4332,7 +4330,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_saspratio__(doublereal *bmeas0, doublereal *xa,
+/* Subroutine */ int mitray_saspratio__(doublereal *bmeas0, doublereal *xa, 
 	doublereal *ratio)
 {
     /* Initialized data */
@@ -4340,7 +4338,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
     static doublereal bxeq0[10] = { 2.00225,3.57472,6.92151,9.86762,12.2436,
 	    14.06667,15.80831,16.48228,17.47663,18.02981 };
     static doublereal c1[10] = { .001962394,.001922171,.001962442,.00208478,
-	    .002007846,.002323137,.002777501,.003066965,.003613984,.003992692
+	    .002007846,.002323137,.002777501,.003066965,.003613984,.003992692 
 	    };
     static doublereal c2[10] = { -2.293013e-4,-2.163218e-4,-2.25595e-4,
 	    -2.388581e-4,-2.227859e-4,-2.495408e-4,-2.666869e-4,-2.809122e-4,
@@ -4366,7 +4364,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
     doublereal d__1, d__2, d__3, d__4, d__5, d__6, d__7, d__8;
 
     /* Builtin functions */
-    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
+    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
 	    e_wsle();
     /* Subroutine */ int s_stop(char *, ftnlen);
 
@@ -4433,7 +4431,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
 /*     This procedure is able to reproduce the data to better than      C */
 /*     5.E-4 (1 part in 2000) over the most of the region of interest.  C */
 /*                                                                      C */
-/* current    B0      a0          a1            a2            a3            a4            a5            a6
+/* current    B0      a0          a1            a2            a3            a4            a5            a6    
         a7 */
 
 /*  100   2.010635  .9958276  +1.954237E-3  -2.283502E-4  +1.229721E-5  -3.522838E-7  +5.528341E-9  -4.481606E
@@ -4469,7 +4467,7 @@ D MTYP=4 FOR SASP\002/\002 BUT MTYP = \002,i5,\002 WAS SPECIFIED\002)";
 /*     where BMEAS0 is the measured value of the B-field at reference   C */
 /*     point x=0.                                                       C */
 /*                                                                      C */
-/*  I      BF          C1          C2            C3              C4            C5           C6            C7
+/*  I      BF          C1          C2            C3              C4            C5           C6            C7 
 */
 /* amps   kGauss */
 /* 100.   2.00225  1.962394E-03 -2.293013E-04  1.234833E-05 -3.537459E-07  5.551259E-09 -4.500169E-11  1.47257
@@ -4625,9 +4623,9 @@ L100:
 	d__6 = xrl, d__6 *= d__6;
 /* Computing 7th power */
 	d__7 = xrl, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
-	ratio1 = c1[i__ - 1] * xrl + (float)1. + c2[i__ - 1] * (d__1 * d__1)
+	ratio1 = c1[i__ - 1] * xrl + (float)1. + c2[i__ - 1] * (d__1 * d__1) 
 		+ c3[i__ - 1] * (d__2 * (d__2 * d__2)) + c4[i__ - 1] * (d__3 *
-		 d__3) + c5[i__ - 1] * (d__5 * (d__4 * d__4)) + c6[i__ - 1] *
+		 d__3) + c5[i__ - 1] * (d__5 * (d__4 * d__4)) + c6[i__ - 1] * 
 		(d__6 * (d__6 * d__6)) + c7[i__ - 1] * (d__8 * (d__7 * d__7));
 /* Computing 2nd power */
 	d__1 = xrl;
@@ -4642,7 +4640,7 @@ L100:
 /* Computing 7th power */
 	d__7 = xrl, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
 	ratio2 = c1[j - 1] * xrl + (float)1. + c2[j - 1] * (d__1 * d__1) + c3[
-		j - 1] * (d__2 * (d__2 * d__2)) + c4[j - 1] * (d__3 * d__3) +
+		j - 1] * (d__2 * (d__2 * d__2)) + c4[j - 1] * (d__3 * d__3) + 
 		c5[j - 1] * (d__5 * (d__4 * d__4)) + c6[j - 1] * (d__6 * (
 		d__6 * d__6)) + c7[j - 1] * (d__8 * (d__7 * d__7));
 
@@ -4682,7 +4680,7 @@ L100:
 /* Computing 7th power */
 	d__7 = xrlb, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
 	ratioib = c1[i__ - 1] * xrlb + (float)1. + c2[i__ - 1] * (d__1 * d__1)
-		 + c3[i__ - 1] * (d__2 * (d__2 * d__2)) + c4[i__ - 1] * (d__3
+		 + c3[i__ - 1] * (d__2 * (d__2 * d__2)) + c4[i__ - 1] * (d__3 
 		* d__3) + c5[i__ - 1] * (d__5 * (d__4 * d__4)) + c6[i__ - 1] *
 		 (d__6 * (d__6 * d__6)) + c7[i__ - 1] * (d__8 * (d__7 * d__7))
 		;
@@ -4698,7 +4696,7 @@ L100:
 	d__6 = xrlb, d__6 *= d__6;
 /* Computing 7th power */
 	d__7 = xrlb, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
-	ratiojb = c1[j - 1] * xrlb + (float)1. + c2[j - 1] * (d__1 * d__1) +
+	ratiojb = c1[j - 1] * xrlb + (float)1. + c2[j - 1] * (d__1 * d__1) + 
 		c3[j - 1] * (d__2 * (d__2 * d__2)) + c4[j - 1] * (d__3 * d__3)
 		 + c5[j - 1] * (d__5 * (d__4 * d__4)) + c6[j - 1] * (d__6 * (
 		d__6 * d__6)) + c7[j - 1] * (d__8 * (d__7 * d__7));
@@ -4722,7 +4720,7 @@ L100:
 /* Computing 7th power */
 	d__7 = xrlc, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
 	ratioic = c1[i__ - 1] * xrlc + (float)1. + c2[i__ - 1] * (d__1 * d__1)
-		 + c3[i__ - 1] * (d__2 * (d__2 * d__2)) + c4[i__ - 1] * (d__3
+		 + c3[i__ - 1] * (d__2 * (d__2 * d__2)) + c4[i__ - 1] * (d__3 
 		* d__3) + c5[i__ - 1] * (d__5 * (d__4 * d__4)) + c6[i__ - 1] *
 		 (d__6 * (d__6 * d__6)) + c7[i__ - 1] * (d__8 * (d__7 * d__7))
 		;
@@ -4738,7 +4736,7 @@ L100:
 	d__6 = xrlc, d__6 *= d__6;
 /* Computing 7th power */
 	d__7 = xrlc, d__8 = d__7, d__7 *= d__7, d__8 *= d__7;
-	ratiojc = c1[j - 1] * xrlc + (float)1. + c2[j - 1] * (d__1 * d__1) +
+	ratiojc = c1[j - 1] * xrlc + (float)1. + c2[j - 1] * (d__1 * d__1) + 
 		c3[j - 1] * (d__2 * (d__2 * d__2)) + c4[j - 1] * (d__3 * d__3)
 		 + c5[j - 1] * (d__5 * (d__4 * d__4)) + c6[j - 1] * (d__6 * (
 		d__6 * d__6)) + c7[j - 1] * (d__8 * (d__7 * d__7));
@@ -4762,7 +4760,7 @@ L100:
 /*                         SOLENOID SUBROUTINES */
 /* *********************************************************************** */
 
-/* Subroutine */ int mitray_solnd__(doublereal *data, doublereal *xpos,
+/* Subroutine */ int mitray_solnd__(doublereal *data, doublereal *xpos, 
 	doublereal *bfld)
 {
     static doublereal a, b, d__, l, xa, ya, za, z11, z22;
@@ -4838,7 +4836,7 @@ L100:
 /*     entrance edge of the solenoid, to Z22 beyond the exit edge of */
 /*     the solenoid, then return without calculating anything */
 
-    if (mitray10_2.tc[2] < -(mitray30_1.al + z11) || mitray10_2.tc[2] >
+    if (mitray10_2.tc[2] < -(mitray30_1.al + z11) || mitray10_2.tc[2] > 
 	    mitray30_1.al + z22) {
 	return 0;
     }
@@ -4871,10 +4869,10 @@ L100:
     double sqrt(doublereal);
 
     /* Local variables */
-    static doublereal p, r__, x, y, z__, r1, br, zz, ves, vks, brs1, brs2,
+    static doublereal p, r__, x, y, z__, r1, br, zz, ves, vks, brs1, brs2, 
 	    bzs1, bzs2, r1sq, aamr, aapr, cosa, cosb, radr, rcsq, rksq;
-    extern /* Subroutine */ int mitray_fb01ad__(doublereal *, doublereal *,
-	    doublereal *), mitray_fb03ad__(doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_fb01ad__(doublereal *, doublereal *, 
+	    doublereal *), mitray_fb03ad__(doublereal *, doublereal *, 
 	    doublereal *);
 
 
@@ -4953,11 +4951,11 @@ L5:
 
 /* Computing 2nd power */
     d__1 = mitray30_1.al - z__;
-    cosa = (mitray30_1.al - z__) / sqrt(mitray30_1.rad * mitray30_1.rad +
+    cosa = (mitray30_1.al - z__) / sqrt(mitray30_1.rad * mitray30_1.rad + 
 	    d__1 * d__1);
 /* Computing 2nd power */
     d__1 = mitray30_1.al + z__;
-    cosb = -(mitray30_1.al + z__) / sqrt(mitray30_1.rad * mitray30_1.rad +
+    cosb = -(mitray30_1.al + z__) / sqrt(mitray30_1.rad * mitray30_1.rad + 
 	    d__1 * d__1);
 
     mitray10_2.bx = (float)0.;
@@ -4971,7 +4969,7 @@ L5:
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_fb01ad__(doublereal *c__, doublereal *vk,
+/* Subroutine */ int mitray_fb01ad__(doublereal *c__, doublereal *vk, 
 	doublereal *ve)
 {
     /* Initialized data */
@@ -4999,28 +4997,28 @@ L5:
 	goto L2;
     }
     *ve = e * ((((((((((d__ * 3.18591956555015718e-5 + 9.89833284622538479e-4)
-	     * d__ + .00643214658643830177) * d__ + .016804023346363385) *
-	    d__ + .0261450147003138789) * d__ + .0334789436657616262) * d__ +
-	    .0427178905473830956) * d__ + .0585936612555314917) * d__ +
+	     * d__ + .00643214658643830177) * d__ + .016804023346363385) * 
+	    d__ + .0261450147003138789) * d__ + .0334789436657616262) * d__ + 
+	    .0427178905473830956) * d__ + .0585936612555314917) * d__ + 
 	    .0937499997212031407) * d__ + .249999999999901772) * d__) + ((((((
-	    (((d__ * 1.49466217571813268e-4 + .00246850333046072273) * d__ +
-	    .00863844217360407443) * d__ + .0107706350398664555) * d__ +
-	    .00782040406095955417) * d__ + .00759509342255943228) * d__ +
-	    .0115695957452954022) * d__ + .0218318116761304816) * d__ +
+	    (((d__ * 1.49466217571813268e-4 + .00246850333046072273) * d__ + 
+	    .00863844217360407443) * d__ + .0107706350398664555) * d__ + 
+	    .00782040406095955417) * d__ + .00759509342255943228) * d__ + 
+	    .0115695957452954022) * d__ + .0218318116761304816) * d__ + 
 	    .0568051945675591566) * d__ + .443147180560889526) * d__ + 1.;
 
 /* *** Routine modified to calculate VD and VE always */
 
     *vk = e * ((((((((((d__ * 2.97002809665556121e-5 + 9.21554634963249846e-4)
-	     * d__ + .00597390429915542916) * d__ + .0155309416319772039) *
-	    d__ + .0239319133231107901) * d__ + .0301248490128989303) * d__ +
-	    .0373777397586236041) * d__ + .048828041906862398) * d__ +
+	     * d__ + .00597390429915542916) * d__ + .0155309416319772039) * 
+	    d__ + .0239319133231107901) * d__ + .0301248490128989303) * d__ + 
+	    .0373777397586236041) * d__ + .048828041906862398) * d__ + 
 	    .0703124997390383521) * d__ + .124999999999908081) * d__ + .5) + (
-	    ((((((((d__ * 1.39308785700664673e-4 + .00229663489839695869) *
-	    d__ + .00800300398064998537) * d__ + .00984892932217689377) * d__
-	    + .00684790928262450512) * d__ + .00617962744605331761) * d__ +
-	    .00878980187455506468) * d__ + .0149380135326871652) * d__ +
-	    .0308851462713051899) * d__ + .0965735902808562554) * d__ +
+	    ((((((((d__ * 1.39308785700664673e-4 + .00229663489839695869) * 
+	    d__ + .00800300398064998537) * d__ + .00984892932217689377) * d__ 
+	    + .00684790928262450512) * d__ + .00617962744605331761) * d__ + 
+	    .00878980187455506468) * d__ + .0149380135326871652) * d__ + 
+	    .0308851462713051899) * d__ + .0965735902808562554) * d__ + 
 	    1.38629436111989062;
 
     return 0;
@@ -5035,7 +5033,7 @@ L2:
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_fb02ad__(doublereal *caysq, doublereal *sinp,
+/* Subroutine */ int mitray_fb02ad__(doublereal *caysq, doublereal *sinp, 
 	doublereal *cosp, doublereal *e, doublereal *f)
 {
     /* Builtin functions */
@@ -5044,9 +5042,9 @@ L2:
     /* Local variables */
     static doublereal a, h__;
     static integer n;
-    static doublereal h1, t1, t2, cfi, cfj, cfl, cfm, cfn, phi, cfi1, cfj1,
-	    del1, del2, del3, del4, sig1, sig2, sig3, sig4, sin2, fact, crit,
-	    term, fact1, flog1, factm, factn, recip, caymod, factor, factro,
+    static doublereal h1, t1, t2, cfi, cfj, cfl, cfm, cfn, phi, cfi1, cfj1, 
+	    del1, del2, del3, del4, sig1, sig2, sig3, sig4, sin2, fact, crit, 
+	    term, fact1, flog1, factm, factn, recip, caymod, factor, factro, 
 	    caydsq;
 
 
@@ -5165,7 +5163,7 @@ L8:
 
 /* ======================================================================= */
 
-/* Subroutine */ int mitray_fb03ad__(doublereal *gn, doublereal *caca,
+/* Subroutine */ int mitray_fb03ad__(doublereal *gn, doublereal *caca, 
 	doublereal *p)
 {
     /* System generated locals */
@@ -5176,8 +5174,8 @@ L8:
 
     /* Local variables */
     static doublereal e, f, br, pi, cth, sth, cada, cape, capk;
-    extern /* Subroutine */ int mitray_fb01ad__(doublereal *, doublereal *,
-	    doublereal *), mitray_fb02ad__(doublereal *, doublereal *,
+    extern /* Subroutine */ int mitray_fb01ad__(doublereal *, doublereal *, 
+	    doublereal *), mitray_fb02ad__(doublereal *, doublereal *, 
 	    doublereal *, doublereal *, doublereal *);
 
 
@@ -5256,7 +5254,7 @@ L20:
 /*                        ZONE SELECTION SUBROUTINE */
 /* ******************************************************************************* */
 
-/* Subroutine */ int mitray_zone__(doublereal *zb, doublereal *zc, doublereal
+/* Subroutine */ int mitray_zone__(doublereal *zb, doublereal *zc, doublereal 
 	*z11, doublereal *z12, doublereal *z21, doublereal *z22, integer *
 	izone)
 {
@@ -5270,8 +5268,8 @@ IELD\002//)";
 ,\002  Z21=\002,f12.4,\002Z22=\002,f12.4)";
 
     /* Builtin functions */
-    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen),
-	    e_wsle(), s_wsfe(cilist *), e_wsfe(), do_fio(integer *, char *,
+    integer s_wsle(cilist *), do_lio(integer *, integer *, char *, ftnlen), 
+	    e_wsle(), s_wsfe(cilist *), e_wsfe(), do_fio(integer *, char *, 
 	    ftnlen);
 
     /* Local variables */

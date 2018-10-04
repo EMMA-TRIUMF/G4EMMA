@@ -23,8 +23,8 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// \file field/field04/include/F04GlobalField.hh
-// \brief Definition of the F04GlobalField class
+/// \file field/field04/include/F04GlobalField.hh
+/// \brief Definition of the F04GlobalField class
 //
 //
 #ifndef EMMAGlobalField_h
@@ -50,17 +50,15 @@
 #include "EMMAElementField.hh"
 //#include "EMFieldDebugger.hh"
 
-/*! \file
-    \brief Handles the global ElectroMagnetic field
-
-  There is a single G04GlobalField object.
-  The field from each individual beamline element (quad, ED, etc.) is given by a
-  ElementField object. Any number of overlapping ElementField
-  objects can be added to the global field. Any element that
-  represents an element with an EM field must add the appropriate
-  ElementField to the global GlobalField object.
-*/
-
+//  F04GlobalField - handles the global ElectroMagnetic field
+//
+//  There is a single G04GlobalField object.
+//
+//  The field from each individual beamline element is given by a
+//  ElementField object. Any number of overlapping ElementField
+//  objects can be added to the global field. Any element that
+//  represents an element with an EM field must add the appropriate
+//  ElementField to the global GlobalField object.
 
 typedef std::vector<EMMAElementField*> FieldList;
 
@@ -70,9 +68,8 @@ class EMMAGlobalField : public G4ElectroMagneticField {
 private:
 
   //EMMAGlobalField();
-  //EMMAGlobalField(const EMMAGlobalField&); //these are now public
+  //EMMAGlobalField(const EMMAGlobalField&);
 
-  // Destructor
   virtual ~EMMAGlobalField();
 
   EMMAGlobalField& operator=(const EMMAGlobalField&);
@@ -81,66 +78,67 @@ private:
 
 public:
 
-  // Constructors.
   EMMAGlobalField();
   EMMAGlobalField(const EMMAGlobalField&);
 
-  // GetObject() returns the single EMMAGlobalField object.
-  // It is constructed, if necessary.
+  /// GetObject() returns the single EMMAGlobalField object.
+  /// It is constructed, if necessary.
   static EMMAGlobalField* GetObject();
 
-  // GetFieldValue() returns the field value at a given point[].
-  // field is really field[6]: Bx,By,Bz,Ex,Ey,Ez.
-  // point[] is in global coordinates: x,y,z,t.
+  /// GetFieldValue() returns the field value at a given point[].
+  /// field is really field[6]: Bx,By,Bz,Ex,Ey,Ez.
+  /// point[] is in global coordinates: x,y,z,t.
   virtual void GetFieldValue(const G4double* point, G4double* field) const;
 
+  /// DoesFieldChangeEnergy() returns true.
   virtual G4bool DoesFieldChangeEnergy() const { return true; }
 
-  // AddElementField() adds the ElementField object for a single
-  // element to the global field.
+  /// AddElementField() adds the ElementField object for a single
+  /// element to the global field.
   void AddElementField(EMMAElementField* f) { if (fFields) fFields->push_back(f); }
 
-  // Clear() removes all ElementField-s from the global object,
-  // and destroys them. Used before the geometry is completely
-  // re-created.
+  /// Clear() removes all ElementField-s from the global object,
+  /// and destroys them. Used before the geometry is completely
+  /// re-created.
   void Clear();
 
-  // updates all field tracking objects and Clear()
+  /// updates all field tracking objects and Clear()
   void UpdateField();
 
-  // Set the Stepper types
+  /// Set the Stepper types
   void SetStepperType( G4int i ) { fStepperType = i; }
 
-  // Set the Stepper
+  /// Set the Stepper
   void SetStepper();
 
-  // Set the minimum step length
+  /// Set the minimum step length
   void SetMinStep(G4double stp) { fMinStep = stp; }
 
-  // Set the delta chord length
+  /// Set the delta chord length
   void SetDeltaChord(G4double dcr) { fDeltaChord = dcr; }
 
-  // Set the delta one step length
+  /// Set the delta one step length
   void SetDeltaOneStep(G4double stp) { fDeltaOneStep = stp; }
 
-  // Set the delta intersection length
+  /// Set the delta intersection length
   void SetDeltaIntersection(G4double its) { fDeltaIntersection = its; }
 
-  // Set the minimum eps length
+  /// Set the minimum eps length
   void SetEpsMin(G4double eps) { fEpsMin = eps; }
 
-  // Set the maximum eps length
+  /// Set the maximum eps length
   void SetEpsMax(G4double eps) { fEpsMax = eps; }
 
-  // Return the list of Element Fields
+  /// Return the list of Element Fields
   FieldList* GetFields() { return fFields; }
 
 protected:
 
-  // Get the global field manager
+  /// Get the global field manager
   G4FieldManager* GetGlobalFieldManager();
 
 private:
+
   static EMMAGlobalField* fObject;
 
   G4int fNfp;
@@ -149,6 +147,8 @@ private:
   FieldList* fFields;
 
   const EMMAElementField **fFp;
+
+private:
 
   G4int fStepperType;
 

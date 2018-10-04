@@ -49,37 +49,42 @@
 #include "EMMANuclearReactionProcess.hh"
 #include "EMMANuclearReactionTwoBody.hh"
 
-/*! \file
-    \brief
-    The G4 header "G4VPhysicsConstructor.hh" contains a virtual class that must be used to create concrete classes for specific applications (such as EMMA).
-    Specifically, this header defines particles and processes required to simulate ion interactions.
-*/
 
 class EMMAIonPhysicsMessenger;
-
 
 
 class EMMAIonPhysics : public G4VPhysicsConstructor
 {
 public:
-  // Constructor
   EMMAIonPhysics(const G4String& name="ion");
-
-  // Destructor
   virtual ~EMMAIonPhysics();
 
+
+public:
   // This method will be invoked in the Construct() method.
   // each particle type will be instantiated
   virtual void ConstructParticle(){;};
-
+  
   // This method will be invoked in the Construct() method.
   // each physics process will be instantiated and
   // registered to the process manager of each particle type
   virtual void ConstructProcess();
-
+  
   void AddIonGasModels();
-  void SetReactionParameters();
+  void SetReactionParameters(); 
 
+
+private:
+  EMMAIonPhysicsMessenger* fMessenger;
+  G4double fcs;
+  G4double fZ1,fA1, fZ2,fA2;
+  G4double fZ3,fA3, fZ4,fA4;
+  G4double fqmax;
+  EMMANuclearReactionProcess* theNuclearReactionProcess;
+  EMMANuclearReactionTwoBody* theNuclearReactionTwoBody;
+
+
+public:
   inline void SetCrossSection(G4double val) { fcs = val; }
   inline G4double GetCrossSection() const { return fcs; }
 
@@ -103,26 +108,14 @@ public:
   inline void SetA4(G4double val) { fA4 = val; }
   inline G4double GetA4() const { return fA4; }
 
-  // fqmax getter and setter
   inline void Setqmax(G4double val) { fqmax = val; }
   inline G4double Getqmax() const { return fqmax; }
 
 
-private:
-  EMMAIonPhysicsMessenger* fMessenger;
-  G4double fcs;
-  G4double fZ1,fA1, fZ2,fA2;
-  G4double fZ3,fA3, fZ4,fA4;
-  G4double fqmax;
-  EMMANuclearReactionProcess* theNuclearReactionProcess;
-  EMMANuclearReactionTwoBody* theNuclearReactionTwoBody;
-
-
-
-
-
+protected:
 
 };
 
 
 #endif
+

@@ -1,4 +1,4 @@
-/*
+/* 
    Oliver Kirsebom, TRIUMF, February 2013
 
    Class description:
@@ -6,6 +6,7 @@
 
    (G4HadronElastic.hh used as starting point)
 */
+
 
 
 #ifndef EMMANuclearReactionTwoBody_h
@@ -24,40 +25,24 @@
 #include "G4TrackStatus.hh"
 #include "G4HadronicInteraction.hh"
 
-/*!
- \file
- \brief Nuclear-reaction model for two-body final-state (Z3,A3)+(Z4,A4) after a two body reaction between a projectile and target.
-
-   See related files "EMMANuclearReactionDataSet" and "EMMANuclearReactionProcess"
-*/
-
 
 class EMMANuclearReactionTwoBody : public G4HadronicInteraction
 {
 public:
-	// Constructor
   EMMANuclearReactionTwoBody(const G4String& name = "EMMANuclearReactionTwoBody"
 			     , G4double Z3=0, G4double A3=0
 			     , G4double Z4=0, G4double A4=0
 			     , G4double qmax=180. );
-
-  // Destructor
   ~EMMANuclearReactionTwoBody() {};
-
-
   G4HadFinalState* ApplyYourself(const G4HadProjectile& aTrack, G4Nucleus& targetNucleus);
 
-  // 4 methods to set Z3, Z4, A3, A4
   void SetZ3(G4double x) { Z3rea=x; };
   void SetA3(G4double x) { A3rea=x; };
   void SetZ4(G4double x) { Z4rea=x; };
   void SetA4(G4double x) { A4rea=x; };
-
-  // method to set qmax
   void Setqmax(G4double x) { thetaCMmax=x; };
 
 private:
-
   G4ParticleDefinition* theProton;
   G4ParticleDefinition* theNeutron;
   G4ParticleDefinition* theDeuteron;
