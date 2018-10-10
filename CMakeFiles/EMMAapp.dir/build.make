@@ -1197,7 +1197,7 @@ EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4readout
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4physicslists.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4parmodels.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4zlib.so
-EMMAapp: /home/awen/G4EMMA-old/G4EMMA/f2c/lib/libf2c.a
+EMMAapp: f2c/lib/libf2c.a
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4FR.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4vis_management.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4modeling.so
@@ -1345,7 +1345,7 @@ CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/lib
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4physicslists.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4parmodels.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4zlib.so
-CMakeFiles/CMakeRelink.dir/EMMAapp: /home/awen/G4EMMA-old/G4EMMA/f2c/lib/libf2c.a
+CMakeFiles/CMakeRelink.dir/EMMAapp: f2c/lib/libf2c.a
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4FR.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4vis_management.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4modeling.so
