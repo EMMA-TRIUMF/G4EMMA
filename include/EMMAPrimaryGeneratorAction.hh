@@ -42,7 +42,7 @@
 #include "G4ThreeVector.hh"
 
 
-// global variables 
+// global variables
 extern G4double targetThickness; // EMMADetectorConstMessenger.cc
 extern G4double targetZoffset; // EMMADetectorConstMessenger.cc
 extern G4String MotherDir; // EMMAapp.cc
@@ -62,7 +62,7 @@ public:
   EMMAPrimaryGeneratorAction();
   virtual ~EMMAPrimaryGeneratorAction();
   virtual void GeneratePrimaries(G4Event*);
-  	
+
 private:
   G4ParticleGun* particleGun;
   G4ParticleGun* particleGun2;
@@ -108,6 +108,12 @@ public:
 
   inline void SetEnergy(G4double val) { energy = val; }
   inline G4double GetEnergy() const { return energy; }
+
+  // EXPERIMENTAL!
+  inline void SetEnergyFileName(G4String val) {energyFile = val;}
+  inline G4double GetEnergyFileName() const {return energyFile;}
+  // EXPERIMENTAL!
+
   inline void SetSigmaEnergy(G4double val) { sigmaEnergy = val; }
   inline G4double GetSigmaEnergy() const { return sigmaEnergy; }
   inline void SetAngle(G4double val) { Angle = val; }
@@ -155,5 +161,3 @@ public:
 };
 
 #endif
-
-

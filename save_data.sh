@@ -1,6 +1,6 @@
 #!/bin/bash
 
-title="Ar40_14_test"
+title="Ar40_13_test_high_stats"
 
 cd /home/awen/G4EMMA_data
 
