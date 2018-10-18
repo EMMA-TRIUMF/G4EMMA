@@ -50,6 +50,7 @@ extern G4String UserDir; // EMMAapp.cc
 
 
 class G4ParticleGun;
+class G4GeneralParticleSource;
 class G4Event;
 class G4ParticleDefinition;
 class EMMAPrimaryGeneratorMessenger;
@@ -66,6 +67,7 @@ public:
 private:
   G4ParticleGun* particleGun;
   G4ParticleGun* particleGun2;
+  G4GeneralParticleSource* GPSparticleGun; 
   EMMAPrimaryGeneratorMessenger* gunMessenger;
   G4double beamZ, beamA, beamCharge;
   G4double energy;
@@ -91,6 +93,7 @@ private:
   G4bool useAlphaSource;
   G4double energyAlphaSource;
   G4double maxAngleAlphaSource;
+  G4String energyFile;
 
 public:
   void initializeReactionSimulation();
@@ -111,7 +114,7 @@ public:
 
   // EXPERIMENTAL!
   inline void SetEnergyFileName(G4String val) {energyFile = val;}
-  inline G4double GetEnergyFileName() const {return energyFile;}
+  inline G4String GetEnergyFileName() const {return energyFile;}
   // EXPERIMENTAL!
 
   inline void SetSigmaEnergy(G4double val) { sigmaEnergy = val; }

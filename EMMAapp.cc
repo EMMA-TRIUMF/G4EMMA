@@ -174,7 +174,7 @@ int main(int argc,char** argv)
   //      UImanager->ApplyCommand("/control/execute BeamSetup.mac");
 
 
-  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12;
+  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,sFile;
   G4double d13;
   G4String command;
 
@@ -182,7 +182,7 @@ int main(int argc,char** argv)
   //-----------------------------------------
   //            Specify beam
   //-----------------------------------------
-  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8);
+  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8,sFile);
   command = "/mydet/nEvents "; command.append(s1); UImanager->ApplyCommand(command);
   command = "/mydet/beamZ "; command.append(s2); UImanager->ApplyCommand(command);
   command = "/mydet/beamA "; command.append(s3); UImanager->ApplyCommand(command);
@@ -329,7 +329,7 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
 	if (n==3) s3 = text; // A
 	if (n==4) s4 = text; // charge-state
 	if (n==5) s5 = text; // energy
-	if (n==6) sFile = text //EXPERIMENTAL! energy spectrum file
+	if (n==6) sFile = text; //EXPERIMENTAL! energy spectrum file
 	if (n==7) s6 = text; // resolution
 	if (n==8) s7 = text; // diameter
 	if (n==9) s8 = text; // normalized transverse geometric emittance

@@ -54,6 +54,8 @@
 #include "G4VSolid.hh"
 #include "G4Box.hh"
 
+#include "G4GeneralParticleSource.hh"
+
 #include <string> //words and sentences
 #include <fstream> //Stream class to both read and write from/to files
 #include <sstream>
@@ -78,6 +80,10 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 	G4int n_particle = 1;
 	//G4ParticleGun class generates primary particle(s) with a given momentum and position
 	particleGun  = new G4ParticleGun(n_particle);
+
+	// Experimental!
+	GPSparticleGun = new G4GeneralParticleSource(); 
+	// Experimantal!
 
 	//create a messenger for this class
 	gunMessenger = new EMMAPrimaryGeneratorMessenger(this);
@@ -130,6 +136,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 EMMAPrimaryGeneratorAction::~EMMAPrimaryGeneratorAction()
 {
   delete particleGun;	//must delete G4ParticleGun
+	delete GPSparticleGun;
   delete gunMessenger;
 }
 
@@ -190,21 +197,27 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // BEAM
   if (simulateReaction==false && !useAlphaSource) {
+		G4cout << "PRINT ME DAMMIT!" << G4endl;
     // Ion
     particleDef = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(beamZ,beamA,0.0);
     particleGun->SetParticleDefinition(particleDef);
     particleGun->SetParticleCharge(userCharge);
     // Sample energy
+		G4cout << "THE ENERGY IS " << energy << G4endl;
     Ekin = energy;
+		G4cout<< "SO EKIN MUST BE " <<Ekin << G4endl;
+
     if (sigmaEnergy>0.) {
       G4double mean = energy;
       G4double FWHM = sigmaEnergy/100.*energy;
       G4double std = FWHM/2.35;
       Ekin = CLHEP::RandGauss::shoot(mean,std);
     }
+
+		G4cout<< "NOW THE EKIN MUST BE " <<Ekin << G4endl;
 //---------------------------------------------------------------------------------------//
     //energy including spread
-    particleGun->SetParticleEnergy(Ekin *MeV);//(Ekin *MeV);
+    particleGun->SetParticleEnergy(Ekin *MeV);
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
 //---------------------------------------------------------------------------------------//
@@ -264,7 +277,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
 
-    G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
+    G4cout<<"Prim.Gen.Action output WOW LOOK HERE"<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
           <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
 
     G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;

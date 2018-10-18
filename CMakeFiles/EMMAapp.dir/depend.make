@@ -6248,8 +6248,15 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4ClassificationOfNewTrack.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4Event.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4EventManager.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSource.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSourceMessenger.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleGun.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4PrimaryTransformer.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSAngDistribution.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSEneDistribution.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SingleParticleSource.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4SmartTrackStack.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4StackManager.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/event/include/G4StackedTrack.hh
@@ -6380,6 +6387,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4TouchableHistoryHandle.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4LorentzVector.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
+CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/HEPNumerics/include/G4DataInterpolation.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/HEPRandom/include/Randomize.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
 CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o: /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh

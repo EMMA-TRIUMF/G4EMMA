@@ -6249,8 +6249,15 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/event/include/G4ClassificationOfNewTrack.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4Event.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4EventManager.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSource.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSourceMessenger.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleGun.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4PrimaryTransformer.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSAngDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSEneDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SingleParticleSource.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4SmartTrackStack.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4StackManager.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4StackedTrack.hh
@@ -6381,6 +6388,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4TouchableHistoryHandle.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4LorentzVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
+ /opt/geant4/geant4.9.6.p04/source/global/HEPNumerics/include/G4DataInterpolation.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPRandom/include/Randomize.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh
