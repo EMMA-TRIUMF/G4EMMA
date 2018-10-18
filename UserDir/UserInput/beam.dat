@@ -1,9 +1,9 @@
-10       # number of events
+100       # number of events
 18      # beam Z
 40     # beam A
 13      # beam charge state Q
 80     # beam kinetic energy (MeV)
-energyspectra.txt # energy spectrum file 
+energyspectra.txt # energy spectrum file
 0.01     # fractional energy spread (Sigma %)
 2.0     # beam-spot diameter (mm)
 0.2     # normalized transverse emittance (pi mm mrad)

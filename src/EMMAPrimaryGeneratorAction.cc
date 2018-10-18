@@ -82,7 +82,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 	particleGun  = new G4ParticleGun(n_particle);
 
 	// Experimental!
-	GPSparticleGun = new G4GeneralParticleSource(); 
+	GPSparticleGun = new G4GeneralParticleSource();
 	// Experimantal!
 
 	//create a messenger for this class
@@ -197,15 +197,21 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // BEAM
   if (simulateReaction==false && !useAlphaSource) {
-		G4cout << "PRINT ME DAMMIT!" << G4endl;
+
     // Ion
     particleDef = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(beamZ,beamA,0.0);
     particleGun->SetParticleDefinition(particleDef);
     particleGun->SetParticleCharge(userCharge);
+
+		//Experimental!
+		GPSparticleGun->SetParticleDefinition(particleDef);
+		GPSparticleGun->SetParticleCharge(userCharge);
+		//Experimental!
+
     // Sample energy
-		G4cout << "THE ENERGY IS " << energy << G4endl;
+
     Ekin = energy;
-		G4cout<< "SO EKIN MUST BE " <<Ekin << G4endl;
+
 
     if (sigmaEnergy>0.) {
       G4double mean = energy;
@@ -214,12 +220,13 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       Ekin = CLHEP::RandGauss::shoot(mean,std);
     }
 
-		G4cout<< "NOW THE EKIN MUST BE " <<Ekin << G4endl;
 //---------------------------------------------------------------------------------------//
     //energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
+
+		// WHY CAN'T I USE THIS FUNCTION FOR GENERAL PARTICLE SOURCE?!??!?!?!?
 //---------------------------------------------------------------------------------------//
     // Sample position
     G4double xBeam=0.*m, yBeam=0.*m;
@@ -239,6 +246,10 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
     //fix emittance location to optical axis
     //particleGun->SetParticlePosition(G4ThreeVector(0,0,zemit));
+
+		// Experimental!
+		GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
+		//Experimental!
 //---------------------------------------------------------------------------------------//
     // Determine max angle from normalized transverse emittance
     G4double mass = particleDef->GetPDGMass();
@@ -313,9 +324,11 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
 
-  particleGun->GeneratePrimaryVertex(anEvent);
+  //particleGun->GeneratePrimaryVertex(anEvent);
+	GPSparticleGun->GeneratePrimaryVertex(anEvent);
 
-
+	G4cout << "the energy emitted is " << GPSparticleGun->GetParticleEnergy() << G4endl;
+	/*
   // Print info:
   G4bool printInfo=true;
   G4double mass = particleDef->GetPDGMass();
@@ -326,6 +339,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4cout << "\n Momentum " << pp << ", Mass " << mass << " amu, Ekin "
 	   << Ekin << " MeV, Charge " << charge << G4endl;
   }
+	*/
 
 }
 
