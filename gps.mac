@@ -1,15 +1,15 @@
-/gps/ang/type user 
+/gps/ang/type user
 /gps/hist/type theta
-/gps/hist/point 0. 1. 
+/gps/hist/point 0. 1.
 /gps/hist/type phi
 /gps/hist/point 0. 1.
 
 /gps/ene/type User
 /gps/hist/type energy
 /gps/hist/point 50. 1.
-/gps/hist/point 60. 1. 
-/gps/hist/point 70. 1. 
+/gps/hist/point 60. 1.
+/gps/hist/point 70. 1.
 /gps/hist/point 80. 1. 
-/gps/hist/point 90. 1. 
-/gps/hist/point 100. 1. 
-/gps/hist/point 110. 1. 
+/gps/hist/point 90. 1.
+/gps/hist/point 100. 1.
+/gps/hist/point 110. 1.

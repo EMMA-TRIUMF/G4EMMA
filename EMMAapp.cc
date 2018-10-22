@@ -110,7 +110,7 @@ G4int NOHslits4=0;
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &sFile );
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8);
 void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
 			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
 			     G4double &s13 );
@@ -174,7 +174,7 @@ int main(int argc,char** argv)
   //      UImanager->ApplyCommand("/control/execute BeamSetup.mac");
 
 
-  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,sFile;
+  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12;
   G4double d13;
   G4String command;
 
@@ -182,7 +182,7 @@ int main(int argc,char** argv)
   //-----------------------------------------
   //            Specify beam
   //-----------------------------------------
-  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8,sFile);
+  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8);
   command = "/mydet/nEvents "; command.append(s1); UImanager->ApplyCommand(command);
   command = "/mydet/beamZ "; command.append(s2); UImanager->ApplyCommand(command);
   command = "/mydet/beamA "; command.append(s3); UImanager->ApplyCommand(command);
@@ -308,7 +308,7 @@ int main(int argc,char** argv)
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &sFile )
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8)
 {
   s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8="";
   G4String text, line;
@@ -329,10 +329,9 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
 	if (n==3) s3 = text; // A
 	if (n==4) s4 = text; // charge-state
 	if (n==5) s5 = text; // energy
-	if (n==6) sFile = text; //EXPERIMENTAL! energy spectrum file
-	if (n==7) s6 = text; // resolution
-	if (n==8) s7 = text; // diameter
-	if (n==9) s8 = text; // normalized transverse geometric emittance
+	if (n==6) s6 = text; // resolution
+	if (n==7) s7 = text; // diameter
+	if (n==8) s8 = text; // normalized transverse geometric emittance
       }
     }
     inputfil.close();
