@@ -110,7 +110,7 @@ G4int NOHslits4=0;
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8 );
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &sFile );
 void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
 			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
 			     G4double &s13 );
@@ -122,7 +122,7 @@ int main(int argc,char** argv)
 {
 
   // input arguments
-  G4String vis = "visON";
+  G4String vis = "visOFF";
   MotherDir = ".";
   UserDir = MotherDir + "/UserDir/";
   if (argc > 1) vis = argv[1];
@@ -170,11 +170,11 @@ int main(int argc,char** argv)
   // start interactive session
 #ifdef G4VIS_USE
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
-  //if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");
+  if (vis=="visON") UImanager->ApplyCommand("/control/execute visEMMA.mac");
   //      UImanager->ApplyCommand("/control/execute BeamSetup.mac");
 
 
-  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12;
+  G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,sFile;
   G4double d13;
   G4String command;
 
@@ -182,7 +182,7 @@ int main(int argc,char** argv)
   //-----------------------------------------
   //            Specify beam
   //-----------------------------------------
-  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8);
+  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8,sFile);
   command = "/mydet/nEvents "; command.append(s1); UImanager->ApplyCommand(command);
   command = "/mydet/beamZ "; command.append(s2); UImanager->ApplyCommand(command);
   command = "/mydet/beamA "; command.append(s3); UImanager->ApplyCommand(command);
@@ -192,6 +192,8 @@ int main(int argc,char** argv)
   command = "/mydet/beamSpotDiameter "; command.append(s7); UImanager->ApplyCommand(command);
   command = "/mydet/transEmittance "; command.append(s8); UImanager->ApplyCommand(command);
   //-----------------------------------------
+
+
 
 
   //-----------------------------------------
@@ -212,7 +214,7 @@ int main(int argc,char** argv)
   command = "/twoBodyReaction/ExcitationEnergy3 "; command.append(s12); UImanager->ApplyCommand(command);
   //G4double crossSection1234 = d13;
   G4int simtype=0;
-  if (s3=="0" && s4=="0") simtype=0; // reaction not specified; simulate beam, redundant assignment
+  if (s3=="0" && s4=="0") simtype=0; // reaction not specified; simulate beam
   else simtype=1; // reaction specified; simulate reaction
   //-----------------------------------------
 
@@ -258,19 +260,6 @@ int main(int argc,char** argv)
   //-----------------------------------------
 //-----------------------------------------------------------------------------------------//
 
-// //**************************************************************************
-//  // Run simulation (for server version)
-//  // (Nadège Pulgar-Vidal, G4EMMA, winter term 2017)
-//  // Enable "smarter" autorun (to be used with wrapper for web interface)
-//  //**************************************************************************
-//  UImanager->ApplyCommand("/mydet/doBeam");
-//  if (simtype == 1) //reaction specified (z2 != 0 or a2 != 0)
-//  {
-//  	UImanager->ApplyCommand("/mydet/doPrepare");
-//  	UImanager->ApplyCommand("/mydet/doReaction");
-//  }
-//  //**************************************************************************
-
 
   // Print hit info
   //-----------------------------------------
@@ -298,7 +287,8 @@ int main(int argc,char** argv)
 #endif
 #ifdef G4UI_USE
   G4UIExecutive* ui = new G4UIExecutive(argc, argv);
-  UImanager->ApplyCommand("/control/execute visEMMA.mac");
+  //UImanager->ApplyCommand("/control/execute visEMMA.mac");
+  //UImanager->ApplyCommand("/control/execute macros/BeamSetup.mac");
   ui->SessionStart();
   delete ui;
 #endif
@@ -315,122 +305,116 @@ int main(int argc,char** argv)
 }
 
 
-// The following funtions that read user input could use some serious refactoring
-// I did at least change most of the sequential if statements to if-elseif blocks
 
 
-///Takes the manually-input values from the user input file "beam.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
-///values as strings to be used as simulation commands (See "Specify Beam" section in main())
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8 )
+
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &sFile )
 {
-	s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8="";
-	G4String text, line;
-	ifstream inputfil;
-	G4String filename = UserDir + "/UserInput/beam.dat";
-	inputfil.open ( filename, ios::in );
-	if ( inputfil.is_open() ) {
-		int n = 0;
-		while ( inputfil.good() ) {
-			inputfil >> text;
-			if (text == "#") { // the original author wanted to skip comment lines but this just skips lines that contain exactly "#"
-				getline (inputfil, line); // which is a good thing because this throws away the next line??? Which might not be a comment
-			}//if (comment)
-			else {
-				n++;
-				if (n==1) s1 = text; // # of events
-				else if (n==2) s2 = text; // Z
-				else if (n==3) s3 = text; // A
-				else if (n==4) s4 = text; // charge-state
-				else if (n==5) s5 = text; // energy
-				else if (n==6) s6 = text; // resolution
-				else if (n==7) s7 = text; // diameter
-				else if (n==8) s8 = text; // normalized transverse geometric emittance
-			}//else
-		}//while
-		inputfil.close();
-	}//if (is_open)
-	else G4cout << "Unable to open " << filename << G4endl;
-	// get units right:
-	s5.append(" MeV"); //these are probably just getting appended at the end of a comment explanation of the value
-	s7.append(" mm"); //so they're probably useless...
-	s8.append(" mm");
-}//ReadUserInput_Beam
+  s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8="";
+  G4String text, line;
+  ifstream inputfil;
+  G4String filename = UserDir + "/UserInput/beam.dat";
+  inputfil.open ( filename, ios::in );
+  if ( inputfil.is_open() ) {
+    int n=0;
+    while ( inputfil.good() ) {
+      inputfil >> text;
+      if (text=="#") { // skip comments
+	getline (inputfil,line);
+      }
+      else {
+	n = n+1;
+	if (n==1) s1 = text; // # of events
+	if (n==2) s2 = text; // Z
+	if (n==3) s3 = text; // A
+	if (n==4) s4 = text; // charge-state
+	if (n==5) s5 = text; // energy
+	if (n==6) sFile = text; //EXPERIMENTAL! energy spectrum file
+	if (n==7) s6 = text; // resolution
+	if (n==8) s7 = text; // diameter
+	if (n==9) s8 = text; // normalized transverse geometric emittance
+      }
+    }
+    inputfil.close();
+  }
+  else G4cout << "Unable to open " << filename << G4endl;
+  // get units right:
+  s5.append(" MeV");
+  s7.append(" mm");
+  s8.append(" mm");
+}
 
 
-///Takes the input values from the user input file "reaction.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
-///values as strings to be used as simulation commands (See "Nuclear-reaction process" section in main())
 void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
-	G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
-	G4double &d13 )
-	{
-		s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8=""; s9=""; s10=""; s11=""; s12=""; d13=0;
-		G4String text, line;
-		G4double val;
-		ifstream inputfil;
-		G4String filename = UserDir + "/UserInput/reaction.dat";
-		inputfil.open ( filename, ios::in );
-		if ( inputfil.is_open() ) {
-			int n = 0;
-			while ( inputfil.good() ) {
-				inputfil >> text;
-				if (text=="#") { // skip comments
-					getline (inputfil,line);
-				}//if (comment)
-				else {
-					n++;
-					if (n==1) s1 = text; // Z1
-					else if (n==2) s2 = text; // A1
-					else if (n==3) s3 = text; // Z2
-					else if (n==4) s4 = text; // A2
-					else if (n==5) s5 = text; // Z3
-					else if (n==6) s6 = text; // A3
-					else if (n==7) s7 = text; // Z4
-					else if (n==8) s8 = text; // A4
-					else if (n==9) s9 = text; // theta cm min
-					else if (n==10) s10 = text; // theta cm max
-					else if (n==11) s11 = text; // charge-state of fragment 3
-					else if (n==12) s12 = text; // excitation energy of fragment 3
-					val = atof(text.c_str());
-					if (n==13) d13 = val; // cross section (mb/sr)
-				}//else
-			}//while
-			inputfil.close();
-		}//if (is_open)
-		else G4cout << "Unable to open " << filename << G4endl;
-		// get units right:
-		s9.append(" deg");
-		s10.append(" deg");
-		s12.append(" MeV");
-	}//ReadUserInput_Reaction
+			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
+			     G4double &d13 )
+{
+  s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8=""; s9=""; s10=""; s11=""; s12=""; d13=0;
+  G4String text, line;
+  G4double val;
+  ifstream inputfil;
+  G4String filename = UserDir + "/UserInput/reaction.dat";
+  inputfil.open ( filename, ios::in );
+  if ( inputfil.is_open() ) {
+    int n=0;
+    while ( inputfil.good() ) {
+      inputfil >> text;
+      if (text=="#") { // skip comments
+	getline (inputfil,line);
+      }
+      else {
+	n = n+1;
+	if (n==1) s1 = text; // Z1
+	if (n==2) s2 = text; // A1
+	if (n==3) s3 = text; // Z2
+	if (n==4) s4 = text; // A2
+	if (n==5) s5 = text; // Z3
+	if (n==6) s6 = text; // A3
+	if (n==7) s7 = text; // Z4
+	if (n==8) s8 = text; // A4
+	if (n==9) s9 = text; // theta cm min
+	if (n==10) s10 = text; // theta cm max
+	if (n==11) s11 = text; // charge-state of fragment 3
+	if (n==12) s12 = text; // excitation energy of fragment 3
+	val = atof(text.c_str());
+	if (n==13) d13 = val; // cross section (mb/sr)
+      }
+    }
+    inputfil.close();
+  }
+  else G4cout << "Unable to open " << filename << G4endl;
+  // get units right:
+  s9.append(" deg");
+  s10.append(" deg");
+  s12.append(" MeV");
+}
 
 
-///Takes the input values from the user input file "centralTrajectory.dat" (found in [source directory]/UserDir/UserInput) and assigns the input
-///values as strings to be used as simulation commands (See "Specify central trajectory" section in main()).
 void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 )
 {
-	s1="";  s2="";  s3="";  s4="";
-	G4String text, line;
-	ifstream inputfil;
-	G4String filename = UserDir + "/UserInput/centralTrajectory.dat";
-	inputfil.open ( filename, ios::in );
-	if ( inputfil.is_open() ) {
-		int n = 0;
-		while ( inputfil.good() ) {
-			inputfil >> text;
-			if (text=="#") { // skip comments
-				getline (inputfil,line);
-			}//if (comment)
-			else {
-				n++;
-				if (n==1) s1 = text; // Z
-				else if (n==2) s2 = text; // A
-				else if (n==3) s3 = text; // charge-state
-				else if (n==4) s4 = text; // energy
-			}//else
-		}//while
-		inputfil.close();
-	}//if (is_open)
-	else G4cout << "Unable to open " << filename << G4endl;
-	// get units right:
-	s4.append(" MeV");
-}//ReadUserInput_CentralTrajectory
+  s1="";  s2="";  s3="";  s4="";
+  G4String text, line;
+  ifstream inputfil;
+  G4String filename = UserDir + "/UserInput/centralTrajectory.dat";
+  inputfil.open ( filename, ios::in );
+  if ( inputfil.is_open() ) {
+    int n=0;
+    while ( inputfil.good() ) {
+      inputfil >> text;
+      if (text=="#") { // skip comments
+	getline (inputfil,line);
+      }
+      else {
+	n = n+1;
+	if (n==1) s1 = text; // Z
+	if (n==2) s2 = text; // A
+	if (n==3) s3 = text; // charge-state
+	if (n==4) s4 = text; // energy
+      }
+    }
+    inputfil.close();
+  }
+  else G4cout << "Unable to open " << filename << G4endl;
+  // get units right:
+  s4.append(" MeV");
+}

@@ -1,17 +1,13 @@
-/*! \file
- \brief Calculates E and B fields at certain locations.
-
- It MUST be used after SpectrometerConstruction.cc is initialised since it assigns lengths and sizes
- of the elements needed to calculate the field strengths in the BGField classes.
-*/
-
+// Use this routine to calculate E and B fields at certain locations
+// It MUST be used after SpectrometerConstruction.cc is initialised since it assigns lengths and sizes
+// of the elements needed to calculate the field stengths in the BGField classes
 //
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 #include "EMFieldDebugger.hh"
 #include "EMMAGlobalField.hh"
 #include "G4UnitsTable.hh"
-#include <iomanip>
+#include <iomanip> 
 #include <fstream> //Stream class to both read and write from/to files
 using namespace std;
 #include <stdlib.h>     /* abort, NULL */
@@ -54,7 +50,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
   G4cout << "Q4: " << Field7->GetFieldStrength() << " Tm" << G4endl;
   G4cout << G4endl;
 */
-
+  
   G4int n,nn;
   G4double angle = 20*pi/180; //angle of EDs and half angle of MD
   worldpos[0]=worldpos2[0]=0;
@@ -69,23 +65,23 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
   G4double length;
 
   GlobalField = EMMAGlobalField::GetObject();
-
+  
   //change the step length with nn. To calculate the effective field length use nn=10000.
   //To look at the field shapes nn=3 is sufficient.
-  nn=100;
+  nn=10000;
   G4bool transpose = FALSE; //The fields for the quads are cutoff at the boundary of the volume. The
                             //interference of the B fields of the quads has not been implemented in
                             //gemma1.7. Therefore if you want to calculate the effective field length
                             //set transpose=TRUE. This transposes the field from the full tail onto
                             //the missing end.
-
+  
   std::ofstream fieldFile(fieldFileName, std::ios::app); //Declared in EMMAPrimaryGeneratorAction.cc
 //----------------------------------------------------------------------------------------------//
 //The format of the file outputs is used in EFLcalculator.cc in the /UserDir/Results/fringefields
 //folder. If you change the output format then program won't read in the file properly or calculate
 //the effective field correctly.
 //----------------------------------------------------------------------------------------------//
-
+  
   if(icomp==9){
     G4cout<<"Custom Field Debug \n";
     fieldFile<<"Custom fields along optical axis: zoptical=(cm) xfield=(T) yfield=(T) zfield=(T) \n";
@@ -96,12 +92,12 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
              //n changes for each element since they don't have equal lengths
 
     for(int i=0;i<n;i++){
-      worldpos[2]=zED2fieldends + i*(zQ4fieldends - zED2fieldends)/n; //world position through vacuum volume containing field
+      worldpos[2]=zED2fieldends + i*(zQ4fieldends - zED2fieldends)/n; //world position through vacuum volume containing field	
       GlobalField->GetFieldValue(worldpos,field); //calculate field at position <-----------
       pathlength=worldpos[2]/cm; //pathlength along optical axis within element
       fieldFile<<pathlength<<"\t"<<10*field[1]/(volt*s/m2)<<"\n"; //write to file
     }
-
+     
   }
 
 
@@ -115,19 +111,19 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
              //n changes for each element since they don't have equal lengths
 
     for(int i=0;i<n;i++){
-      worldpos[2]=i*(zED1fieldbegins)/n; //world position through vacuum volume containing field
+      worldpos[2]=i*(zED1fieldbegins)/n; //world position through vacuum volume containing field	
       GlobalField->GetFieldValue(worldpos,field); //calculate field at position <-----------
       pathlength=worldpos[2]/cm; //pathlength along optical axis within element
       fieldFile<<pathlength<<"\t"<<field[1]/(volt*s/m2)<<"\n"; //write to file
     }
-
+     
   }
-
+     
   if(icomp==0){
     G4cout<<"Calculated Q1 fields along optical axis: \n";
     fieldFile<<" Calculated Q1 fields along optical axis: zoptical=(cm) yfield=(T) \n";
-
-
+    
+    
     //central field
     r=2*cm; //radial distance from center
     worldpos[0] = r;
@@ -165,7 +161,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
   if(icomp==1){
     G4cout<<"Q2 fields along optical axis: \n";
     fieldFile<<"Q2 fields along optical axis: zoptical=(cm) yfield=(T) \n";
-
+    
     //central field
     r=2*cm; //radial distance from center
     worldpos[0]=r;
@@ -181,7 +177,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
     worldpos[2]=zQ2fieldbegins;
     GlobalField->GetFieldValue(worldpos,field);
     fieldend=field[1]; //Bfield value of first position in volume
-
+    
     n=nn*10;
     if(transpose==TRUE){
       for(int i=0;i<n;i++){ //add Bfield from upper tail to missing lower tail (field is symmetric around zmiddle)
@@ -202,7 +198,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
       pathlength=(worldpos[2]-zQ2fieldbegins)/cm;
       fieldFile<<pathlength<<"\t"<<field[1]/(volt*s/m2)<<"\n";
     }
-  }
+  }		
 
   if(icomp==2){
     G4cout<<"ED1 fields along optical axis: \n";
@@ -216,8 +212,8 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
     fieldFile<<"Maxfield(kV/cm)"<<"\t"<<sqrt(pow(field[3],2)+pow(field[5],2))<<"\n";
     G4cout<<"Maxfield(kV/cm)"<<"\t"<<sqrt(pow(field[3],2)+pow(field[5],2))<<G4endl;
 
-    n=nn*20;
-
+    //n=nn*20;
+	
     if(transpose==TRUE){
       worldpos[0]=0;
       worldpos[2]=zED1fieldbegins; //straight line
@@ -236,32 +232,33 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
           if(fabs(sqrt(pow(field[3],2)+pow(field[5],2)))<fabs(fieldend))fieldFile<<pathlength<<"\t"<<sqrt(pow(field[3],2)+pow(field[5],2))<<"\n";
         }
       }
-    }
-    n=nn*60;
+    } 
+
+    n=109288;
 
     for(int i=0;i<n;i++){ //before ED1
       worldpos[0]=0;
-      worldpos[2]=/*zED1fieldbegins+*/i*(zED1center/*-zED1fieldbegins*/)/n; //straight line
+      worldpos[2]=i*(zED1center)/n; //straight line
       GlobalField->GetFieldValue(worldpos,field);
-      pathlength=(worldpos[2]/*-zED1fieldbegins*/)/cm;
+      pathlength=(worldpos[2])/cm;
       fieldFile<<pathlength<<"\t"<<10000*sqrt(pow(field[3],2)+pow(field[5],2))<<"\n";
     }
-    n=nn*60;
+    n=174533;
     for(int i=0;i<n;i++){ //inside ED1
       theta = i*angle/n;
       worldpos[0]=xED1center+rED*cos(theta); // the optical axis bends
       worldpos[2]=zED1center+rED*sin(theta);
       GlobalField->GetFieldValue(worldpos,field);
-      pathlength=(zED1center/*-zED1fieldbegins*/+rED*theta)/cm; // = 2*pi*rED*theta/(2*pi)
+      pathlength=(zED1center+rED*theta)/cm; // = 2*pi*rED*theta/(2*pi)
       fieldFile<<pathlength<<"\t"<<10000*sqrt(pow(field[3],2)+pow(field[5],2))<<"\n";
     }
-    n=nn*60;
+    n=122500;
     for(int i=0;i<n;i++){ //after ED1
       delz=i*(zED1fieldends-(zED1center+rED*sin(angle)))/n;
       worldpos[2]=(zED1center+rED*sin(angle))+delz; //straight line at a 20deg angle
       worldpos[0]=(xED1center+rED*cos(angle))-delz*tan(angle);
       GlobalField->GetFieldValue(worldpos,field);
-      pathlength=(zED1center/*-zED1fieldbegins*/+rED*angle+sqrt(pow(delz*tan(angle),2)+pow(delz,2)))/cm; // = 2*pi*rED*angle/(2*pi)
+      pathlength=(zED1center+rED*angle+sqrt(pow(delz*tan(angle),2)+pow(delz,2)))/cm;
       fieldFile<<pathlength<<"\t"<<10000*sqrt(pow(field[3],2)+pow(field[5],2))<<"\n";
     }
   }
@@ -272,12 +269,12 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
 
   if(icomp==3){
     G4cout<<"MD fields along optical axis: \n";
-    fieldFile<<"MD fields along optical axis: zoptical=(cm) yfield=(T) \n";
-
+    fieldFile<<"MD fields along optical axis: zoptical=(cm) yfield=(T) \n";   
+    
     G4double zMDbegins = zMDcenter+rMD*sin(-angle);
     G4double zMDends = zMDcenter+rMD*sin(angle);
     G4double xMDends = xMDcenter-rMD*cos(angle);
-
+    
     //central field
     theta = 0;
     worldpos[0]=xMDcenter-rMD*cos(theta);
@@ -332,9 +329,9 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
   if(icomp==4){
     G4cout<<"ED2 fields along optical axis: \n";
     fieldFile<<"ED2 fields along optical axis: zoptical=(cm) xopticalfield=(kV/cm) \n";
-
+    
     G4double zED2begins = zED2center-rED*sin(angle);
-    G4double xED2begins = -(rED-rED*cos(angle));
+    G4double xED2begins = -(rED-rED*cos(angle));     
 
     //central field
     theta = angle/2;
@@ -391,11 +388,11 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
       }
     } //if(transpose==TRUE)
   }
-
+  
   if(icomp==5){
     G4cout<<"Q3 fields along optical axis: \n";
     fieldFile<<"Q3 fields along optical axis: zoptical=(cm) yfield=(T) \n";
-
+    
     //central field
     r=7*cm; //radial distance from center
     worldpos[0]=r;
@@ -431,7 +428,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
   if(icomp==6){
     G4cout<<"Q4 fields along optical axis: \n";
     fieldFile<<"Q4 fields along optical axis: zoptical=(cm) yfield=(T) \n";
-
+    
     //central field
     r=9*cm; //radial distance from center
     worldpos[0]=r;
@@ -447,7 +444,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
     worldpos[2]=zQ4fieldbegins;
     GlobalField->GetFieldValue(worldpos,field);
     fieldend=field[1]; //Bfield value of first position in volume
-
+    
     n=nn*10;
     if(transpose==TRUE){
       for(int i=0;i<n;i++){ //add Bfield from upper tail to missing lower tail (field is symmetric around zmiddle)
@@ -469,7 +466,7 @@ EMFieldDebugger::EMFieldDebugger(int icomp)
       fieldFile<<pathlength<<"\t"<<field[1]/(volt*s/m2)<<"\n";
     }
   }
-
+  
   fieldFile.close();
 
 }

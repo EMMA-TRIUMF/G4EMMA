@@ -247,6 +247,8 @@ EMMADriftChamber.hh
 /home/awen/G4EMMA/src/EMMADriftChamber.hh
 EMMAIonChamber.hh
 /home/awen/G4EMMA/src/EMMAIonChamber.hh
+EMMASiliconDetector.hh
+/home/awen/G4EMMA/src/EMMASiliconDetector.hh
 SpectrometerConstruction.hh
 /home/awen/G4EMMA/src/SpectrometerConstruction.hh
 EMFieldDebugger.hh
@@ -329,8 +331,6 @@ fstream
 -
 iostream
 -
-ExternalVariables.hh
-/home/awen/G4EMMA/src/ExternalVariables.hh
 
 /home/awen/G4EMMA/src/EMMAEMPhysics.cc
 EMMAEMPhysics.hh
@@ -405,6 +405,10 @@ EMMAIonChamber.hh
 /home/awen/G4EMMA/src/EMMAIonChamber.hh
 EMMAIonChamberHit.hh
 /home/awen/G4EMMA/src/EMMAIonChamberHit.hh
+EMMASiliconDetector.hh
+/home/awen/G4EMMA/src/EMMASiliconDetector.hh
+EMMASiliconDetectorHit.hh
+/home/awen/G4EMMA/src/EMMASiliconDetectorHit.hh
 
 /home/awen/G4EMMA/src/EMMAEventActionMessenger.cc
 EMMAEventActionMessenger.hh
@@ -759,8 +763,6 @@ G4IonTable.hh
 /home/awen/G4EMMA/src/G4IonTable.hh
 G4NucleiProperties.hh
 /home/awen/G4EMMA/src/G4NucleiProperties.hh
-G4Gamma.hh
-/home/awen/G4EMMA/src/G4Gamma.hh
 G4RunManager.hh
 /home/awen/G4EMMA/src/G4RunManager.hh
 G4LogicalVolumeStore.hh
@@ -771,6 +773,8 @@ G4VSolid.hh
 /home/awen/G4EMMA/src/G4VSolid.hh
 G4Box.hh
 /home/awen/G4EMMA/src/G4Box.hh
+G4GeneralParticleSource.hh
+/home/awen/G4EMMA/src/G4GeneralParticleSource.hh
 string
 -
 fstream
@@ -793,6 +797,36 @@ G4UIcmdWithAnInteger.hh
 /home/awen/G4EMMA/src/G4UIcmdWithAnInteger.hh
 G4ios.hh
 /home/awen/G4EMMA/src/G4ios.hh
+
+/home/awen/G4EMMA/src/EMMASiliconDetector.cc
+EMMASiliconDetector.hh
+/home/awen/G4EMMA/src/EMMASiliconDetector.hh
+G4HCofThisEvent.hh
+/home/awen/G4EMMA/src/G4HCofThisEvent.hh
+G4Step.hh
+/home/awen/G4EMMA/src/G4Step.hh
+G4ThreeVector.hh
+/home/awen/G4EMMA/src/G4ThreeVector.hh
+G4SDManager.hh
+/home/awen/G4EMMA/src/G4SDManager.hh
+G4ios.hh
+/home/awen/G4EMMA/src/G4ios.hh
+
+/home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc
+EMMASiliconDetectorHit.hh
+/home/awen/G4EMMA/src/EMMASiliconDetectorHit.hh
+G4UnitsTable.hh
+/home/awen/G4EMMA/src/G4UnitsTable.hh
+G4VVisManager.hh
+/home/awen/G4EMMA/src/G4VVisManager.hh
+G4Circle.hh
+/home/awen/G4EMMA/src/G4Circle.hh
+G4Colour.hh
+/home/awen/G4EMMA/src/G4Colour.hh
+G4VisAttributes.hh
+/home/awen/G4EMMA/src/G4VisAttributes.hh
+iomanip
+-
 
 /home/awen/G4EMMA/src/EMMASteppingAction.cc
 EMMASteppingAction.hh
@@ -827,8 +861,6 @@ G4UnitsTable.hh
 /home/awen/G4EMMA/src/G4UnitsTable.hh
 G4Event.hh
 -
-ExternalVariables.hh
-/home/awen/G4EMMA/src/ExternalVariables.hh
 
 /home/awen/G4EMMA/src/EMMASteppingVerbose.cc
 EMMASteppingVerbose.hh
@@ -949,6 +981,8 @@ G4PVPlacement.hh
 /home/awen/G4EMMA/src/G4PVPlacement.hh
 G4ProductionCutsTable.hh
 /home/awen/G4EMMA/src/G4ProductionCutsTable.hh
+G4SubtractionSolid.hh
+/home/awen/G4EMMA/src/G4SubtractionSolid.hh
 EMMAGlobalField.hh
 /home/awen/G4EMMA/src/EMMAGlobalField.hh
 EMFieldDebugger.hh
@@ -1017,7 +1051,7 @@ G4ios.hh
 /home/awen/G4EMMA/src/fortran_subs.inc
 
 /home/awen/G4EMMA/src/mitray.cc
-f2c.h
+/usr/local/include/f2c.h
 -
 
 /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4CollectionNameVector.hh
@@ -1210,6 +1244,24 @@ G4TrackStatus.hh
 globals.hh
 /opt/geant4/geant4.9.6.p04/source/event/include/globals.hh
 
+/opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSource.hh
+globals.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/globals.hh
+vector
+-
+G4Event.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4Event.hh
+G4SingleParticleSource.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SingleParticleSource.hh
+G4GeneralParticleSourceMessenger.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSourceMessenger.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSourceMessenger.hh
+G4UImessenger.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4UImessenger.hh
+globals.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/globals.hh
+
 /opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleGun.hh
 globals.hh
 /opt/geant4/geant4.9.6.p04/source/event/include/globals.hh
@@ -1235,6 +1287,58 @@ G4PrimaryParticle.hh
 /opt/geant4/geant4.9.6.p04/source/event/include/G4PrimaryParticle.hh
 G4DynamicParticle.hh
 /opt/geant4/geant4.9.6.p04/source/event/include/G4DynamicParticle.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSAngDistribution.hh
+G4PhysicsOrderedFreeVector.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4PhysicsOrderedFreeVector.hh
+G4DataInterpolation.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4DataInterpolation.hh
+G4ParticleMomentum.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleMomentum.hh
+G4SPSPosDistribution.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+G4SPSRandomGenerator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSEneDistribution.hh
+G4PhysicsOrderedFreeVector.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4PhysicsOrderedFreeVector.hh
+G4ParticleMomentum.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleMomentum.hh
+G4ParticleDefinition.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleDefinition.hh
+G4DataInterpolation.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4DataInterpolation.hh
+G4SPSRandomGenerator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+G4Navigator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4Navigator.hh
+G4SPSRandomGenerator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+G4PhysicsOrderedFreeVector.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4PhysicsOrderedFreeVector.hh
+G4DataInterpolation.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4DataInterpolation.hh
+
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SingleParticleSource.hh
+G4VPrimaryGenerator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4VPrimaryGenerator.hh
+G4ParticleMomentum.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleMomentum.hh
+G4ParticleDefinition.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleDefinition.hh
+G4SPSPosDistribution.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+G4SPSAngDistribution.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSAngDistribution.hh
+G4SPSEneDistribution.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSEneDistribution.hh
+G4SPSRandomGenerator.hh
+/opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
 
 /opt/geant4/geant4.9.6.p04/source/event/include/G4SmartTrackStack.hh
 G4StackedTrack.hh
@@ -2627,6 +2731,10 @@ CLHEP/Geometry/Vector3D.h
 /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
 globals.hh
 /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/globals.hh
+
+/opt/geant4/geant4.9.6.p04/source/global/HEPNumerics/include/G4DataInterpolation.hh
+globals.hh
+/opt/geant4/geant4.9.6.p04/source/global/HEPNumerics/include/globals.hh
 
 /opt/geant4/geant4.9.6.p04/source/global/HEPRandom/include/Randomize.hh
 CLHEP/Random/Randomize.h
@@ -7120,6 +7228,8 @@ unistd.h
 sys/types.h
 -
 
+/usr/local/include/f2c.h
+
 include/BGField1.hh
 globals.hh
 include/globals.hh
@@ -7321,6 +7431,8 @@ EMMADriftChamberHit.hh
 include/EMMADriftChamberHit.hh
 EMMAIonChamber.hh
 include/EMMAIonChamber.hh
+EMMASiliconDetector.hh
+include/EMMASiliconDetector.hh
 TFile.h
 -
 TH2F.h
@@ -7702,6 +7814,24 @@ include/G4UImessenger.hh
 globals.hh
 include/globals.hh
 
+include/EMMASiliconDetector.hh
+G4VSensitiveDetector.hh
+include/G4VSensitiveDetector.hh
+EMMASiliconDetectorHit.hh
+include/EMMASiliconDetectorHit.hh
+vector
+-
+
+include/EMMASiliconDetectorHit.hh
+G4VHit.hh
+include/G4VHit.hh
+G4THitsCollection.hh
+include/G4THitsCollection.hh
+G4Allocator.hh
+include/G4Allocator.hh
+G4ThreeVector.hh
+include/G4ThreeVector.hh
+
 include/EMMASteppingAction.hh
 G4UserSteppingAction.hh
 include/G4UserSteppingAction.hh
@@ -7727,8 +7857,6 @@ TROOT.h
 include/EMMASteppingVerbose.hh
 G4SteppingVerbose.hh
 include/G4SteppingVerbose.hh
-
-include/ExternalVariables.hh
 
 include/F04StepMax.hh
 globals.hh

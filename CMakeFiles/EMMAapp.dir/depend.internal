@@ -437,6 +437,8 @@ CMakeFiles/EMMAapp.dir/EMMAapp.cc.o
  include/EMMAIonChamberHit.hh
  include/EMMAPhysicsList.hh
  include/EMMAPrimaryGeneratorAction.hh
+ include/EMMASiliconDetector.hh
+ include/EMMASiliconDetectorHit.hh
  include/EMMASteppingAction.hh
  include/EMMASteppingVerbose.hh
  include/StackingAction.hh
@@ -1949,6 +1951,8 @@ CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o
  include/EMMAGlobalField.hh
  include/EMMAIonChamber.hh
  include/EMMAIonChamberHit.hh
+ include/EMMASiliconDetector.hh
+ include/EMMASiliconDetectorHit.hh
  include/SpectrometerConstruction.hh
 CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o
  /home/awen/G4EMMA/src/EMMADriftChamber.cc
@@ -2244,7 +2248,6 @@ CMakeFiles/EMMAapp.dir/src/EMMADriftChamberHit.cc.o
  /opt/geant4/geant4.9.6.p04/source/track/include/G4TrackVector.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4VUserTrackInformation.hh
  include/EMMADriftChamberHit.hh
- include/ExternalVariables.hh
 CMakeFiles/EMMAapp.dir/src/EMMAEMPhysics.cc.o
  /home/awen/G4EMMA/src/EMMAEMPhysics.cc
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/DualRand.h
@@ -2919,6 +2922,8 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
  include/EMMAEventActionMessenger.hh
  include/EMMAIonChamber.hh
  include/EMMAIonChamberHit.hh
+ include/EMMASiliconDetector.hh
+ include/EMMASiliconDetectorHit.hh
 CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  /home/awen/G4EMMA/src/EMMAEventActionMessenger.cc
  /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4CollectionNameVector.hh
@@ -3108,6 +3113,8 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  include/EMMAEventActionMessenger.hh
  include/EMMAIonChamber.hh
  include/EMMAIonChamberHit.hh
+ include/EMMASiliconDetector.hh
+ include/EMMASiliconDetectorHit.hh
 CMakeFiles/EMMAapp.dir/src/EMMAGeneralPhysics.cc.o
  /home/awen/G4EMMA/src/EMMAGeneralPhysics.cc
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/DualRand.h
@@ -6242,8 +6249,15 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/event/include/G4ClassificationOfNewTrack.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4Event.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4EventManager.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSource.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4GeneralParticleSourceMessenger.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4ParticleGun.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4PrimaryTransformer.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSAngDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSEneDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSPosDistribution.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SPSRandomGenerator.hh
+ /opt/geant4/geant4.9.6.p04/source/event/include/G4SingleParticleSource.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4SmartTrackStack.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4StackManager.hh
  /opt/geant4/geant4.9.6.p04/source/event/include/G4StackedTrack.hh
@@ -6374,6 +6388,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4TouchableHistoryHandle.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4LorentzVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
+ /opt/geant4/geant4.9.6.p04/source/global/HEPNumerics/include/G4DataInterpolation.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPRandom/include/Randomize.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh
@@ -6666,6 +6681,174 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorMessenger.cc.o
  /opt/geant4/geant4.9.6.p04/source/run/include/G4VUserPrimaryGeneratorAction.hh
  include/EMMAPrimaryGeneratorAction.hh
  include/EMMAPrimaryGeneratorMessenger.hh
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o
+ /home/awen/G4EMMA/src/EMMASiliconDetector.cc
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4CollectionNameVector.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4HCtable.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4SDManager.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4SDStructure.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4SensitiveVolumeList.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4VReadOutGeometry.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4VSDFilter.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/detector/include/G4VSensitiveDetector.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4HCofThisEvent.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4THitsCollection.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4VHit.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4VHitsCollection.hh
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/PhysicalConstants.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/SystemOfUnits.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/defs.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/LorentzVector.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/LorentzVector.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/Rotation.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/Rotation.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationInterfaces.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationInterfaces.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationX.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationX.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationY.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationY.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationZ.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationZ.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/ThreeVector.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/ThreeVector.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4AffineTransform.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4AffineTransform.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4LogicalVolume.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4LogicalVolume.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4Region.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4Region.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4TouchableHandle.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4VPhysicalVolume.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4VPhysicalVolume.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4VTouchable.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/management/include/G4VTouchable.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4EnhancedVecAllocator.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationHistory.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationHistory.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationLevel.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationLevel.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationLevelRep.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4NavigationLevelRep.icc
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4TouchableHistory.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/volumes/include/G4TouchableHistory.icc
+ /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4LorentzVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4DataVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4DataVector.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ExceptionSeverity.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4OrderedTable.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicalConstants.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsOrderedFreeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsOrderedFreeVector.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVector.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVectorCache.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVectorType.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ReferenceCountedHandle.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4RotationMatrix.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4String.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4String.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4SystemOfUnits.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ThreeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Types.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ios.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/globals.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/templates.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4Element.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4ElementTable.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4ElementVector.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4IonisParamElm.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4IonisParamMat.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4Isotope.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4IsotopeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4Material.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4MaterialPropertiesTable.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4MaterialPropertiesTable.icc
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4MaterialPropertyVector.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4MaterialTable.hh
+ /opt/geant4/geant4.9.6.p04/source/materials/include/G4SandiaTable.hh
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4DynamicParticle.hh
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4DynamicParticle.icc
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ElectronOccupancy.hh
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleDefinition.hh
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleDefinition.icc
+ /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleMomentum.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4Step.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4Step.icc
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4StepPoint.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4StepPoint.icc
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4StepStatus.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4SteppingControl.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4Track.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4Track.icc
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4TrackStatus.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4TrackVector.hh
+ /opt/geant4/geant4.9.6.p04/source/track/include/G4VUserTrackInformation.hh
+ include/EMMASiliconDetector.hh
+ include/EMMASiliconDetectorHit.hh
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o
+ /home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4THitsCollection.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4VHit.hh
+ /opt/geant4/geant4.9.6.p04/source/digits_hits/hits/include/G4VHitsCollection.hh
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/BasicVector3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Normal3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Point3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Transform3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Transform3D.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Vector3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/PhysicalConstants.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/SystemOfUnits.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/defs.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/LorentzVector.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/LorentzVector.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/Rotation.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/Rotation.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationInterfaces.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationInterfaces.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationX.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationX.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationY.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationY.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationZ.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/RotationZ.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/ThreeVector.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/ThreeVector.icc
+ /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4Point3D.hh
+ /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4Transform3D.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ExceptionSeverity.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicalConstants.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4RotationMatrix.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4String.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4String.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4SystemOfUnits.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ThreeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Types.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4UnitsTable.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4UnitsTable.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ios.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/globals.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/templates.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4Circle.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4Color.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4Colour.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4VMarker.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4VMarker.icc
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4VVisManager.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4VisAttributes.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4VisAttributes.icc
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4Visible.hh
+ /opt/geant4/geant4.9.6.p04/source/graphics_reps/include/G4Visible.icc
+ include/EMMASiliconDetectorHit.hh
 CMakeFiles/EMMAapp.dir/src/EMMASteppingAction.cc.o
  /home/awen/G4EMMA/src/EMMASteppingAction.cc
  /opt/geant4/geant4.9.6.p04/source/digits_hits/digits/include/G4DCofThisEvent.hh
@@ -7093,7 +7276,6 @@ CMakeFiles/EMMAapp.dir/src/EMMASteppingAction.cc.o
  include/EMMAElementField.hh
  include/EMMAGlobalField.hh
  include/EMMASteppingAction.hh
- include/ExternalVariables.hh
 CMakeFiles/EMMAapp.dir/src/EMMASteppingVerbose.cc.o
  /home/awen/G4EMMA/src/EMMASteppingVerbose.cc
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/DualRand.h
@@ -7826,6 +8008,7 @@ CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4BooleanSolid.hh
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4BooleanSolid.icc
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4DisplacedSolid.hh
+ /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4SubtractionSolid.hh
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4UnionSolid.hh
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/CSG/include/G4Box.hh
  /opt/geant4/geant4.9.6.p04/source/geometry/solids/CSG/include/G4Box.icc
@@ -8091,3 +8274,4 @@ CMakeFiles/EMMAapp.dir/src/TrackingAction.cc.o
  include/TrackingAction.hh
 CMakeFiles/EMMAapp.dir/src/mitray.cc.o
  /home/awen/G4EMMA/src/mitray.cc
+ /usr/local/include/f2c.h

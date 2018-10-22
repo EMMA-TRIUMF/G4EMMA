@@ -36,6 +36,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/awen/G4EMMA/src/EMMAPhysicsList.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o"
   "/home/awen/G4EMMA/src/EMMAPrimaryGeneratorAction.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorAction.cc.o"
   "/home/awen/G4EMMA/src/EMMAPrimaryGeneratorMessenger.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorMessenger.cc.o"
+  "/home/awen/G4EMMA/src/EMMASiliconDetector.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o"
+  "/home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o"
   "/home/awen/G4EMMA/src/EMMASteppingAction.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMASteppingAction.cc.o"
   "/home/awen/G4EMMA/src/EMMASteppingVerbose.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/EMMASteppingVerbose.cc.o"
   "/home/awen/G4EMMA/src/F04StepMax.cc" "/home/awen/G4EMMA/CMakeFiles/EMMAapp.dir/src/F04StepMax.cc.o"

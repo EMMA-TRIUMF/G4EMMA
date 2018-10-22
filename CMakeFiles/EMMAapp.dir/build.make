@@ -897,9 +897,33 @@ CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o.provides: CMakeFiles/EMMAapp.dir/
 CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o.provides.build: CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o
 
 
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o: CMakeFiles/EMMAapp.dir/flags.make
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o: src/EMMASiliconDetectorHit.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o -c /home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc > CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.i
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/awen/G4EMMA/src/EMMASiliconDetectorHit.cc -o CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.s
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.requires:
+
+.PHONY : CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.requires
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.provides: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.requires
+	$(MAKE) -f CMakeFiles/EMMAapp.dir/build.make CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.provides.build
+.PHONY : CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.provides
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.provides.build: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o
+
+
 CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o: src/EMMADetectorConstruction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o -c /home/awen/G4EMMA/src/EMMADetectorConstruction.cc
 
 CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.i: cmake_force
@@ -923,7 +947,7 @@ CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o.provides.build: CMakeFi
 
 CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o: src/G4LindhardPartition.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o -c /home/awen/G4EMMA/src/G4LindhardPartition.cc
 
 CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.i: cmake_force
@@ -947,7 +971,7 @@ CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o.provides.build: CMakeFiles/E
 
 CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o: src/EMMAGlobalField.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o -c /home/awen/G4EMMA/src/EMMAGlobalField.cc
 
 CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.i: cmake_force
@@ -971,7 +995,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o.provides.build: CMakeFiles/EMMAa
 
 CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o: src/EMMAPhysicsList.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o -c /home/awen/G4EMMA/src/EMMAPhysicsList.cc
 
 CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.i: cmake_force
@@ -995,7 +1019,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o.provides.build: CMakeFiles/EMMAa
 
 CMakeFiles/EMMAapp.dir/src/BGField7.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/BGField7.cc.o: src/BGField7.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/EMMAapp.dir/src/BGField7.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/EMMAapp.dir/src/BGField7.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/BGField7.cc.o -c /home/awen/G4EMMA/src/BGField7.cc
 
 CMakeFiles/EMMAapp.dir/src/BGField7.cc.i: cmake_force
@@ -1017,9 +1041,33 @@ CMakeFiles/EMMAapp.dir/src/BGField7.cc.o.provides: CMakeFiles/EMMAapp.dir/src/BG
 CMakeFiles/EMMAapp.dir/src/BGField7.cc.o.provides.build: CMakeFiles/EMMAapp.dir/src/BGField7.cc.o
 
 
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o: CMakeFiles/EMMAapp.dir/flags.make
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o: src/EMMASiliconDetector.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o -c /home/awen/G4EMMA/src/EMMASiliconDetector.cc
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/awen/G4EMMA/src/EMMASiliconDetector.cc > CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.i
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/awen/G4EMMA/src/EMMASiliconDetector.cc -o CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.s
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.requires:
+
+.PHONY : CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.requires
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.provides: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.requires
+	$(MAKE) -f CMakeFiles/EMMAapp.dir/build.make CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.provides.build
+.PHONY : CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.provides
+
+CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.provides.build: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o
+
+
 CMakeFiles/EMMAapp.dir/src/BGField3.cc.o: CMakeFiles/EMMAapp.dir/flags.make
 CMakeFiles/EMMAapp.dir/src/BGField3.cc.o: src/BGField3.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/EMMAapp.dir/src/BGField3.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/EMMAapp.dir/src/BGField3.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EMMAapp.dir/src/BGField3.cc.o -c /home/awen/G4EMMA/src/BGField3.cc
 
 CMakeFiles/EMMAapp.dir/src/BGField3.cc.i: cmake_force
@@ -1078,11 +1126,13 @@ EMMAapp_OBJECTS = \
 "CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o" \
+"CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/BGField7.cc.o" \
+"CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/BGField3.cc.o"
 
 # External object files for target EMMAapp
@@ -1123,11 +1173,13 @@ EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAGeneralPhysics.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o
+EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/BGField7.cc.o
+EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/src/BGField3.cc.o
 EMMAapp: CMakeFiles/EMMAapp.dir/build.make
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4Tree.so
@@ -1145,7 +1197,7 @@ EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4readout
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4physicslists.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4parmodels.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4zlib.so
-EMMAapp: /usr/lib/x86_64-linux-gnu/libf2c.a
+EMMAapp: f2c/lib/libf2c.a
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4FR.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4vis_management.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4modeling.so
@@ -1177,7 +1229,7 @@ EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4interco
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4global.so
 EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4clhep.so
 EMMAapp: CMakeFiles/EMMAapp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Linking CXX executable EMMAapp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Linking CXX executable EMMAapp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EMMAapp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -1222,11 +1274,13 @@ EMMAapp_OBJECTS = \
 "CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o" \
+"CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/BGField7.cc.o" \
+"CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o" \
 "CMakeFiles/EMMAapp.dir/src/BGField3.cc.o"
 
 # External object files for target EMMAapp
@@ -1267,11 +1321,13 @@ CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAGeneralPhysic
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o
+CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/BGField7.cc.o
+CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/src/BGField3.cc.o
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/build.make
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4Tree.so
@@ -1289,7 +1345,7 @@ CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/lib
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4physicslists.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4parmodels.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4zlib.so
-CMakeFiles/CMakeRelink.dir/EMMAapp: /usr/lib/x86_64-linux-gnu/libf2c.a
+CMakeFiles/CMakeRelink.dir/EMMAapp: f2c/lib/libf2c.a
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4FR.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4vis_management.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4modeling.so
@@ -1321,7 +1377,7 @@ CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/lib
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4global.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: /opt/geant4/geant4.9.6.p04-build/outputs/library/Linux-g++/libG4clhep.so
 CMakeFiles/CMakeRelink.dir/EMMAapp: CMakeFiles/EMMAapp.dir/relink.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Linking CXX executable CMakeFiles/CMakeRelink.dir/EMMAapp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/awen/G4EMMA/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Linking CXX executable CMakeFiles/CMakeRelink.dir/EMMAapp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EMMAapp.dir/relink.txt --verbose=$(VERBOSE)
 
 # Rule to relink during preinstall.
@@ -1364,11 +1420,13 @@ CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMAGeneralPhysics.c
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMADriftChamber.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMAIonChamber.cc.o.requires
+CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetectorHit.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMADetectorConstruction.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/G4LindhardPartition.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMAGlobalField.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMAPhysicsList.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/BGField7.cc.o.requires
+CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/EMMASiliconDetector.cc.o.requires
 CMakeFiles/EMMAapp.dir/requires: CMakeFiles/EMMAapp.dir/src/BGField3.cc.o.requires
 
 .PHONY : CMakeFiles/EMMAapp.dir/requires

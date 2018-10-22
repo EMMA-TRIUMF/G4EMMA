@@ -26,29 +26,28 @@ include(${Geant4_USE_FILE})
 #
 find_package(ROOT)
 if(ROOT_FOUND)
-  add_definitions(-DG4ANALYSIS_USE)
+  add_definitions(-DG4ANALYSIS_USE)   
 endif()
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 # NB: headers are included so they will show up in IDEs
 #
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
                     ${Geant4_INCLUDE_DIR}
                     ${ROOT_INCLUDE_DIR})
-
-#Grab all source/header files aren't hidden / edits
-file(GLOB sources "${PROJECT_SOURCE_DIR}/src/[^.]*.cc")
-file(GLOB headers "${PROJECT_SOURCE_DIR}/include/[^.]*.hh")
-
+file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
+file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
+#
+set(F2C_LIBRARIES /home/awen/G4EMMA/f2c/lib/libf2c.a)
+# make sure you put the right path to your libf2c here
 
-find_library(F2C_LIBRARIES libf2c.a) #must be static library for some reason
-message(STATUS "Lib file detected: [${F2C_LIBRARIES}].")
 add_executable(EMMAapp EMMAapp.cc ${sources} ${headers})
-target_link_libraries(EMMAapp ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} ${F2C_LIBRARIES} )
+target_link_libraries(EMMAapp ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} 
+${F2C_LIBRARIES} )
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -77,3 +76,4 @@ add_custom_target(EMMA DEPENDS EMMAapp)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS EMMAapp DESTINATION bin)
+

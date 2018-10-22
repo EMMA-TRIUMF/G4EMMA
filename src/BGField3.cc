@@ -1,11 +1,6 @@
 //
 // Created from BuildGeometry program
 //
-
-/*! \file
- \brief The BGField source files construct the 7 magnetic and electric fields on the EMMA simulation (QQEMEQQ).
-*/
-
 #include "BGField3.hh"
 #include "fortran_subs.inc"
 #include "G4UnitsTable.hh"
@@ -29,10 +24,10 @@ BGField3::BGField3(G4double xoffset, G4double zoffset,G4double zbefore,G4double 
   data[3] = 1;
   data[10] = zbefore/cm; //drift length before quad
   data[11] = zafter/cm; //drift length after quad
-  data[12] = 12.5;
+  data[12] = 12.5; // gap
   data[13] = 500; //radius of ED in cm
   data[14] = FieldStrength_0;
-  data[15] = 20;	//20.024; //angle subtended by ED in deg (modified to get correct eff. field length)
+  data[15] = 20;  //angle subtended by ED in deg (modified to get correct eff. field length)
   data[24] = 50;
   data[25] = -25;
   data[26] = -25;
@@ -56,7 +51,7 @@ BGField3::~BGField3()
 void BGField3::AddFieldValue(const double Point[3],G4double field[6]) const
 {
 	double pos[3], pos2[3];
-
+	
 	pos2[0] = Point[0]/cm - offset[0];
 	pos2[1] = Point[1]/cm - offset[1];
 	pos2[2] = Point[2]/cm - offset[2];
@@ -81,12 +76,12 @@ void BGField3::AddFieldValue(const double Point[3],G4double field[6]) const
 	Efield2[2] = 0;
 
 	mitray_edipol__(data,pos,Efield);
-
+       
 
 	Efield2[0] = cos(Pi/180*0)*Efield[0] - sin(Pi/180*0)*Efield[2];
 	Efield2[1] = Efield[1];
 	Efield2[2] = sin(Pi/180*0)*Efield[0] + cos(Pi/180*0)*Efield[2];
-
+	
 
 	//G4cout << "ED1 field: " << field[3] << G4endl;
 
