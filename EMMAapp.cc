@@ -116,6 +116,7 @@ void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String 
 			     G4double &s13 );
 void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 );
 
+EMMAPrimaryGeneratorAction PGA;
 
 
 int main(int argc,char** argv)
@@ -177,6 +178,7 @@ int main(int argc,char** argv)
   G4String s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12;
   G4double d13;
   G4String command;
+	G4double Theta, Phi;
 
 
   //-----------------------------------------
@@ -192,8 +194,18 @@ int main(int argc,char** argv)
   command = "/mydet/beamSpotDiameter "; command.append(s7); UImanager->ApplyCommand(command);
   command = "/mydet/transEmittance "; command.append(s8); UImanager->ApplyCommand(command);
   //-----------------------------------------
+	// Passing some commands for GeneralParticleSource when beam is simulated
+	// the values obtained are based entirely on the read values that are in PrimaryGeneratorAction.cc
+	PGA.GetTheta(); PGA.GetPhi();
+	command = "/gps/ang/type iso"; UImanager->ApplyCommand(command);  // it is not iso, change this.
+	command = "/gps/ang/maxtheta "; command.append(Theta); UImanager->ApplyCommand(command);
+	command = "/gps/ang/maxphi "; command.append(Phi); UImanager->ApplyCommand(command);
+	command = "/gps/ang/mintheta 0."; UImanager->ApplyCommand(command);
+	command = "/gps/ang/maxphi 0."; UImanager->ApplyCommand(command);
 
-
+	command = "/gps/ene/type Arb"; UImanager->ApplyCommand(command);
+	command = "/gps/hist/file UserDir/UserInput/energySpectrum.dat"; UImanager->ApplyCommand(command);
+	command = "/gps/hist/inter Lin"; UImanager->ApplyCommand(command);
 
 
   //-----------------------------------------

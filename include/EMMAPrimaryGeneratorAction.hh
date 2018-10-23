@@ -67,7 +67,7 @@ public:
 private:
   G4ParticleGun* particleGun;
   G4ParticleGun* particleGun2;
-  G4GeneralParticleSource* GPSparticleGun; 
+  G4GeneralParticleSource* GPSparticleGun;
   EMMAPrimaryGeneratorMessenger* gunMessenger;
   G4double beamZ, beamA, beamCharge;
   G4double energy;
@@ -95,12 +95,24 @@ private:
   G4double maxAngleAlphaSource;
   G4String energyFile;
 
+  G4double Theta;
+  G4double Phi;
+
+
 public:
   void initializeReactionSimulation();
   void initializeBeamSimulation();
   void initializeBeamPreparation();
 
+  void GetPrimaryGeneratorActionParameters();
+
+
   void simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir);
+
+  void SetTheta(G4double val) {Theta = val;}
+  G4double GetTheta() const {return Theta; }
+  void SetPhi(G4double val) {Phi = val;}
+  G4double GetPhi() const {return Phi; } 
 
   inline void SetBeamZ(G4double val) { beamZ = val; }
   inline G4double GetBeamZ() const { return beamZ; }
@@ -111,11 +123,6 @@ public:
 
   inline void SetEnergy(G4double val) { energy = val; }
   inline G4double GetEnergy() const { return energy; }
-
-  // EXPERIMENTAL!
-  inline void SetEnergyFileName(G4String val) {energyFile = val;}
-  inline G4String GetEnergyFileName() const {return energyFile;}
-  // EXPERIMENTAL!
 
   inline void SetSigmaEnergy(G4double val) { sigmaEnergy = val; }
   inline G4double GetSigmaEnergy() const { return sigmaEnergy; }
@@ -160,6 +167,8 @@ public:
   inline G4double GetCharge3() const { return fCharge3; }
   inline void SetExcitationEnergy3(G4double val) { fExcitationEnergy3 = val; }
   inline G4double GetExcitationEnergy3() const { return fExcitationEnergy3; }
+
+
 
 };
 

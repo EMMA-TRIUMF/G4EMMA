@@ -200,8 +200,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     // Ion
     particleDef = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(beamZ,beamA,0.0);
-    particleGun->SetParticleDefinition(particleDef);
-    particleGun->SetParticleCharge(userCharge);
+    //particleGun->SetParticleDefinition(particleDef);
+    //particleGun->SetParticleCharge(userCharge);
 
 		//Experimental!
 		GPSparticleGun->SetParticleDefinition(particleDef);
@@ -276,10 +276,16 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     y = sin(theta) * sin(phi);
     z = cos(theta);
 
+		G4double theta_max, phi_max;
+
  //random angles
     if (MaxAngle>0.) {
       theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
       phi = G4UniformRand()*CLHEP::twopi;
+
+			theta_max = MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
+			phi_max = CLHEP::twopi;
+
       THETA = Angle + theta*cos(phi);
       x = sin(THETA);
       y = sin(theta) * sin(phi);
@@ -288,7 +294,10 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
 
-    G4cout<<"Prim.Gen.Action output WOW LOOK HERE"<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
+		SetTheta(theta_max);
+		SetPhi(phi_max);
+
+    G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
           <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
 
     G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
