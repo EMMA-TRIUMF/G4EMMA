@@ -200,8 +200,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     // Ion
     particleDef = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(beamZ,beamA,0.0);
-    //particleGun->SetParticleDefinition(particleDef);
-    //particleGun->SetParticleCharge(userCharge);
+    particleGun->SetParticleDefinition(particleDef);
+    particleGun->SetParticleCharge(userCharge);
 
 		//Experimental!
 		GPSparticleGun->SetParticleDefinition(particleDef);
@@ -263,6 +263,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       MaxAngle = transEmittance/(gamma*beta*rmax);
       MaxAngle = MaxAngle * 180./CLHEP::pi/1000. * deg; // mrad to deg conversion
     }
+		//G4cout << "the transverse emittance is " << transEmittance << G4endl;
 
 	G4cout << "RADIUS: " << rmax/mm << " mm" << G4endl;
         G4cout << "ANGLE: " << MaxAngle/deg << " deg" << G4endl;
@@ -285,23 +286,20 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
       phi = G4UniformRand()*CLHEP::twopi;
 
-			theta_max = MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
-			phi_max = CLHEP::twopi;
-
       THETA = Angle + theta*cos(phi);
       x = sin(THETA);
       y = sin(theta) * sin(phi);
       z = cos(THETA);
+
+			maxTheta = cos(phi) * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
+			maxPhi = CLHEP::twopi;
     }
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
 
-		G4cout << "the momentum vector is supposed to be " << G4ThreeVector(x,y,z) << G4endl; 
+		G4cout << "the momentum vector is supposed to be " << G4ThreeVector(x,y,z) << G4endl;
 
-		/*
-		SetTheta(theta_max);
-		SetPhi(phi_max);
-		*/
+
     //G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
         //  <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
 
@@ -338,13 +336,17 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
 
-  //particleGun->GeneratePrimaryVertex(anEvent);
-	GPSparticleGun->GeneratePrimaryVertex(anEvent);
-
+  particleGun->GeneratePrimaryVertex(anEvent);
+	//GPSparticleGun->GeneratePrimaryVertex(anEvent);
+	/*
 	G4cout << "the energy emitted is " << GPSparticleGun->GetParticleEnergy() << G4endl;
 	G4cout << "the position is " << GPSparticleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << GPSparticleGun->GetParticleMomentumDirection() << G4endl;
+	*/
 
+	G4cout << "the energy emitted is " << particleGun->GetParticleEnergy() << G4endl;
+	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
+	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
 	/*
   // Print info:

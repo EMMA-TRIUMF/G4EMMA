@@ -194,9 +194,13 @@ int main(int argc,char** argv)
   //-----------------------------------------
 	// Passing some commands for GeneralParticleSource when beam is simulated
 	// the values obtained are based entirely on the read values that are in PrimaryGeneratorAction.cc
+	EMMAPrimaryGeneratorAction PGA;
+
 	command = "/gps/ang/type iso"; UImanager->ApplyCommand(command);  // it is not iso, change this.
-	command = "/gps/ang/maxtheta "; command.append("3.1764066 rad"); UImanager->ApplyCommand(command);
-	command = "/gps/ang/mintheta "; command.append("3.1065934 rad"); UImanager->ApplyCommand(command);
+	//command = "/gps/ang/maxtheta "; command.append("3.1564066 rad"); UImanager->ApplyCommand(command);
+	command = "/gps/ang/maxtheta "; command.append("3.1564066 rad"); UImanager->ApplyCommand(command);
+	command = "/gps/ang/mintheta "; command.append("3.1265934 rad"); UImanager->ApplyCommand(command);
+	//command = "/gps/ang/maxphi "; command.append("6.18 rad"); UImanager->ApplyCommand(command);
 	command = "/gps/ang/maxphi "; command.append("6.18 rad"); UImanager->ApplyCommand(command);
 	command = "/gps/ang/minphi 0. rad"; UImanager->ApplyCommand(command);
 

@@ -56,6 +56,8 @@ class G4ParticleDefinition;
 class EMMAPrimaryGeneratorMessenger;
 
 
+
+
 class EMMAPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
 
@@ -63,6 +65,8 @@ public:
   EMMAPrimaryGeneratorAction();
   virtual ~EMMAPrimaryGeneratorAction();
   virtual void GeneratePrimaries(G4Event*);
+
+  G4double maxTheta, maxPhi;
 
 private:
   G4ParticleGun* particleGun;
@@ -97,6 +101,8 @@ private:
 
   G4double Theta;
   G4double Phi;
+
+
 
 
 public:
@@ -169,6 +175,8 @@ public:
   inline G4double GetCharge3() const { return fCharge3; }
   inline void SetExcitationEnergy3(G4double val) { fExcitationEnergy3 = val; }
   inline G4double GetExcitationEnergy3() const { return fExcitationEnergy3; }
+
+
 
 
 
