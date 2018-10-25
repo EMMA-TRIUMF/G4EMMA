@@ -4,5 +4,5 @@
 13      # beam charge state Q
 80     # beam kinetic energy (MeV)
 0.01     # fractional energy spread (Sigma %)
-2.0     # beam-spot diameter (mm)
-0.2     # normalized transverse emittance (pi mm mrad)
+10.0     # beam-spot diameter (mm)
+20.     # normalized transverse emittance (pi mm mrad)

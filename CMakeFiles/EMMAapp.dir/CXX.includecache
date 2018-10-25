@@ -7807,6 +7807,12 @@ G4LPhysicsFreeVector.hh
 include/G4LPhysicsFreeVector.hh
 G4ThreeVector.hh
 include/G4ThreeVector.hh
+G4Types.hh
+-
+string
+-
+vector
+-
 
 include/EMMAPrimaryGeneratorMessenger.hh
 G4UImessenger.hh

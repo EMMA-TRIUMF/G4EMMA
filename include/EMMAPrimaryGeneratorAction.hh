@@ -40,6 +40,9 @@
 #include "G4PhysicsVector.hh"
 #include "G4LPhysicsFreeVector.hh"
 #include "G4ThreeVector.hh"
+#include <G4Types.hh>
+#include <string>
+#include <vector>
 
 
 // global variables
@@ -54,9 +57,6 @@ class G4GeneralParticleSource;
 class G4Event;
 class G4ParticleDefinition;
 class EMMAPrimaryGeneratorMessenger;
-
-
-
 
 class EMMAPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
@@ -102,6 +102,9 @@ private:
   G4double Theta;
   G4double Phi;
 
+  std::vector<G4double> energy_v;
+  std::vector<G4double> frequency_v;
+
 
 
 
@@ -109,8 +112,11 @@ public:
   void initializeReactionSimulation();
   void initializeBeamSimulation();
   void initializeBeamPreparation();
-
   void GetPrimaryGeneratorActionParameters();
+
+
+  void energyDistributionInit(G4String fileName);
+  G4double energyDistribution();
 
 
   void simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir);
@@ -177,9 +183,8 @@ public:
   inline G4double GetExcitationEnergy3() const { return fExcitationEnergy3; }
 
 
-
-
-
 };
+
+
 
 #endif

@@ -79,7 +79,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 
 	G4int n_particle = 1;
 	//G4ParticleGun class generates primary particle(s) with a given momentum and position
-	particleGun  = new G4ParticleGun(n_particle);
+	particleGun = new G4ParticleGun(n_particle);
 
 	// Experimental!
 	GPSparticleGun = new G4GeneralParticleSource();
@@ -87,6 +87,9 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 
 	//create a messenger for this class
 	gunMessenger = new EMMAPrimaryGeneratorMessenger(this);
+
+	// initialize the energy distribution
+	energyDistributionInit("/home/awen/G4EMMA/UserDir/UserInput/energySpectrum.dat");
 
 	// default particle kinematics
 	particleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.*m));
@@ -139,6 +142,29 @@ EMMAPrimaryGeneratorAction::~EMMAPrimaryGeneratorAction()
 	delete GPSparticleGun;
   delete gunMessenger;
 }
+
+//---------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------//
+// Energy spectra reading
+
+void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
+	std::fstream file(fileName, std::ios::in);
+	while (file.good()) {
+		G4double energy, frequency;
+		file >> energy;
+		file >> frequency;
+		energy_v.push_back(energy);
+		frequency_v.push_back(frequency);
+	}
+}
+
+G4double EMMAPrimaryGeneratorAction::energyDistribution() {
+
+	return 0;
+}
+
+//---------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------//
 
 void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 { // This method is invoked at the beginning of each event
