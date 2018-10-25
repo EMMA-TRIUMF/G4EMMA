@@ -241,6 +241,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     }
     // beam particle z emission location is set to 10 Angstroms, i.e. immediately, in front of the target
     G4double zemit = targetZoffset - targetThickness/2 - 10*angstrom;
+
+			G4cout << "the position is supposed to be " << G4ThreeVector(xBeam,yBeam,zemit) << G4endl;
 //---------------------------------------------------------------------------------------//
     //random emittance off optical axis
     particleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
@@ -248,7 +250,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //particleGun->SetParticlePosition(G4ThreeVector(0,0,zemit));
 
 		// Experimental!
-		GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
+		//GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit)); // this shit doesn't work for some reason
 		//Experimental!
 //---------------------------------------------------------------------------------------//
     // Determine max angle from normalized transverse emittance
@@ -294,13 +296,16 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
 
+		G4cout << "the momentum vector is supposed to be " << G4ThreeVector(x,y,z) << G4endl; 
+
+		/*
 		SetTheta(theta_max);
 		SetPhi(phi_max);
+		*/
+    //G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
+        //  <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
 
-    G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
-          <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
-
-    G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
+    //G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
 
 
 //---------------------------------------------------------------------------------------//
@@ -337,6 +342,10 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	GPSparticleGun->GeneratePrimaryVertex(anEvent);
 
 	G4cout << "the energy emitted is " << GPSparticleGun->GetParticleEnergy() << G4endl;
+	G4cout << "the position is " << GPSparticleGun->GetParticlePosition() << G4endl;
+	G4cout << "the momentum vector is " << GPSparticleGun->GetParticleMomentumDirection() << G4endl;
+
+
 	/*
   // Print info:
   G4bool printInfo=true;

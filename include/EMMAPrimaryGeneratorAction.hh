@@ -109,10 +109,12 @@ public:
 
   void simulateTwoBodyReaction( G4double &Ebeam, G4ThreeVector &dir);
 
+  /*
   void SetTheta(G4double val) {Theta = val;}
   G4double GetTheta() const {return Theta; }
   void SetPhi(G4double val) {Phi = val;}
-  G4double GetPhi() const {return Phi; } 
+  G4double GetPhi() const {return Phi; }
+  */
 
   inline void SetBeamZ(G4double val) { beamZ = val; }
   inline G4double GetBeamZ() const { return beamZ; }

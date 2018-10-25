@@ -116,8 +116,6 @@ void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String 
 			     G4double &s13 );
 void ReadUserInput_CentralTrajectory( G4String &s1, G4String &s2, G4String &s3, G4String &s4 );
 
-EMMAPrimaryGeneratorAction PGA;
-
 
 int main(int argc,char** argv)
 {
@@ -196,16 +194,17 @@ int main(int argc,char** argv)
   //-----------------------------------------
 	// Passing some commands for GeneralParticleSource when beam is simulated
 	// the values obtained are based entirely on the read values that are in PrimaryGeneratorAction.cc
-	PGA.GetTheta(); PGA.GetPhi();
 	command = "/gps/ang/type iso"; UImanager->ApplyCommand(command);  // it is not iso, change this.
-	command = "/gps/ang/maxtheta "; command.append(Theta); UImanager->ApplyCommand(command);
-	command = "/gps/ang/maxphi "; command.append(Phi); UImanager->ApplyCommand(command);
-	command = "/gps/ang/mintheta 0."; UImanager->ApplyCommand(command);
-	command = "/gps/ang/maxphi 0."; UImanager->ApplyCommand(command);
+	command = "/gps/ang/maxtheta "; command.append("3.1764066 rad"); UImanager->ApplyCommand(command);
+	command = "/gps/ang/mintheta "; command.append("3.1065934 rad"); UImanager->ApplyCommand(command);
+	command = "/gps/ang/maxphi "; command.append("6.18 rad"); UImanager->ApplyCommand(command);
+	command = "/gps/ang/minphi 0. rad"; UImanager->ApplyCommand(command);
 
 	command = "/gps/ene/type Arb"; UImanager->ApplyCommand(command);
 	command = "/gps/hist/file UserDir/UserInput/energySpectrum.dat"; UImanager->ApplyCommand(command);
 	command = "/gps/hist/inter Lin"; UImanager->ApplyCommand(command);
+
+	command = "/gps/position 0. 0. -0.000501 mm"; UImanager->ApplyCommand(command);
 
 
   //-----------------------------------------
