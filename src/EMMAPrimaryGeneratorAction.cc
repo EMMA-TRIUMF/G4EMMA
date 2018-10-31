@@ -156,6 +156,26 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 		energy_v.push_back(energy);
 		frequency_v.push_back(frequency);
 	}
+
+	energy_v.pop_back();
+	frequency_v.pop_back();
+
+	nPoints = energy_v.size();
+
+	G4cout << "The size of the energy vector is " << energy_v.size() << G4endl;
+	G4cout << "The actual energy vector is " << energy_v[0] << " and " << energy_v[15]<< " and " << energy_v[14] << G4endl;
+
+	// find fMax
+	fMax = 0.;
+	for (G4int j=0; j<nPoints; j++) {
+		if (fMax < frequency_v[j]) fMax = frequency_v[j];
+	};
+
+	
+
+
+
+
 }
 
 G4double EMMAPrimaryGeneratorAction::energyDistribution() {
@@ -247,7 +267,11 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     }
 
 //---------------------------------------------------------------------------------------//
-    //energy including spread
+		//Ekin = GPSparticleGun->GetParticleEnergy();
+
+		//G4cout << "The particle energy from GPS is: " << Ekin << G4endl;
+
+		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
