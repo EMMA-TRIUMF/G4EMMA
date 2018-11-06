@@ -104,6 +104,7 @@ private:
 
   std::vector<G4double> energy_v;
   std::vector<G4double> frequency_v;
+  std::vector<G4double> slope; 
   G4double fMax;
   G4int nPoints;
 

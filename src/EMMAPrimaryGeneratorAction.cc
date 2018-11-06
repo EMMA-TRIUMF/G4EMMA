@@ -157,30 +157,52 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 		frequency_v.push_back(frequency);
 	}
 
+	// reading the file somehow lengthens the vector read in by one, with the last entry being written
+	// twice. pop_back just deletes this extraneous entry.
 	energy_v.pop_back();
 	frequency_v.pop_back();
 
 	nPoints = energy_v.size();
 
+	// debugging
 	G4cout << "The size of the energy vector is " << energy_v.size() << G4endl;
 	G4cout << "The actual energy vector is " << energy_v[0] << " and " << energy_v[15]<< " and " << energy_v[14] << G4endl;
 
-	// find fMax
+	// find maximum frequency (y-axis), fMax
 	fMax = 0.;
 	for (G4int j=0; j<nPoints; j++) {
 		if (fMax < frequency_v[j]) fMax = frequency_v[j];
 	};
 
-	
-
-
-
+	// find slopes between each point (the slopes to the right of the point in question)
+	// a rough linear interpolation
+	slope.resize(nPoints);
+	for (G4int j=0; j<nPoints; j++) {
+		slope[j] = (frequency_v[j+1]-frequency_v[j])/(energy_v[j+1]-energy_v[j]);
+	}
 
 }
 
 G4double EMMAPrimaryGeneratorAction::energyDistribution() {
 
-	return 0;
+	G4double e_rndm = 0., f_rndm = 0., f_inter = -1.;
+
+	if (nPoints == 1) e_rndm = energy_v[0]; 
+
+	else if (nPoints > 1) {
+		while (f_rndm > f_inter) {
+			e_rndm = energy_v[0] + G4UniformRand()*(energy_v[nPoints-1]-energy_v[0]);
+			f_rndm = G4UniformRand()*fMax;
+
+			G4int j = nPoints-2;
+			while ((energy_v[j] > e_rndm) && (j >0)) j--;
+
+			f_inter = frequency_v[j] + slope[j]*(e_rndm - energy_v[j]);
+
+		};
+	};
+
+	return e_rndm;
 }
 
 //---------------------------------------------------------------------------------------//
@@ -256,6 +278,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     // Sample energy
 
+
+		// all this shit ...
     Ekin = energy;
 
 
@@ -266,10 +290,14 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       Ekin = CLHEP::RandGauss::shoot(mean,std);
     }
 
+		// ... to here is useless if we are sampling energy from a spectrum (see below)
+
 //---------------------------------------------------------------------------------------//
 		//Ekin = GPSparticleGun->GetParticleEnergy();
 
 		//G4cout << "The particle energy from GPS is: " << Ekin << G4endl;
+
+		Ekin = energyDistribution();
 
 		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);

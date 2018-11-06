@@ -196,7 +196,7 @@ int main(int argc,char** argv)
 	// the values obtained are based entirely on the read values that are in PrimaryGeneratorAction.cc
 	//EMMAPrimaryGeneratorAction PGA;
 
-
+	/*
 	command = "/gps/ang/type iso"; UImanager->ApplyCommand(command);  // it is not iso, change this.
 	//command = "/gps/ang/maxtheta "; command.append("3.1564066 rad"); UImanager->ApplyCommand(command);
 	command = "/gps/ang/maxtheta "; command.append("3.1564066 rad"); UImanager->ApplyCommand(command);
@@ -209,7 +209,7 @@ int main(int argc,char** argv)
 	command = "/gps/ene/type Arb"; UImanager->ApplyCommand(command);
 	command = "/gps/hist/file UserDir/UserInput/energySpectrum.dat"; UImanager->ApplyCommand(command);
 	command = "/gps/hist/inter Lin"; UImanager->ApplyCommand(command);
-
+	*/
 	//command = "/gps/position 0. 0. -0.000501 mm"; UImanager->ApplyCommand(command);
 
 
