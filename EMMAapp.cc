@@ -110,7 +110,7 @@ G4int NOHslits4=0;
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8);
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &s9);
 void ReadUserInput_Reaction( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6,
 			     G4String &s7, G4String &s8, G4String &s9, G4String &s10, G4String &s11, G4String &s12,
 			     G4double &s13 );
@@ -182,7 +182,7 @@ int main(int argc,char** argv)
   //-----------------------------------------
   //            Specify beam
   //-----------------------------------------
-  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8);
+  ReadUserInput_Beam(s1,s2,s3,s4,s5,s6,s7,s8,s9);
   command = "/mydet/nEvents "; command.append(s1); UImanager->ApplyCommand(command);
   command = "/mydet/beamZ "; command.append(s2); UImanager->ApplyCommand(command);
   command = "/mydet/beamA "; command.append(s3); UImanager->ApplyCommand(command);
@@ -191,6 +191,7 @@ int main(int argc,char** argv)
   command = "/mydet/sigmaEnergy "; command.append(s6); UImanager->ApplyCommand(command);
   command = "/mydet/beamSpotDiameter "; command.append(s7); UImanager->ApplyCommand(command);
   command = "/mydet/transEmittance "; command.append(s8); UImanager->ApplyCommand(command);
+	command = "/mydet/energyData "; command.append(s9); UImanager->ApplyCommand(command);
   //-----------------------------------------
 	// Passing some commands for GeneralParticleSource when beam is simulated
 	// the values obtained are based entirely on the read values that are in PrimaryGeneratorAction.cc
@@ -325,9 +326,9 @@ int main(int argc,char** argv)
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8)
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4string &s9)
 {
-  s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8="";
+  s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8=""; s9="";
   G4String text, line;
   ifstream inputfil;
   G4String filename = UserDir + "/UserInput/beam.dat";
@@ -349,6 +350,7 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
 	if (n==6) s6 = text; // resolution
 	if (n==7) s7 = text; // diameter
 	if (n==8) s8 = text; // normalized transverse geometric emittance
+	if (n==9) s9 = text; // experimental: source of energy data
       }
     }
     inputfil.close();

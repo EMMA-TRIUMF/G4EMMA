@@ -166,7 +166,7 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 
 	// debugging
 	G4cout << "The size of the energy vector is " << energy_v.size() << G4endl;
-	G4cout << "The actual energy vector is " << energy_v[0] << " and " << energy_v[15]<< " and " << energy_v[14] << G4endl;
+	//G4cout << "The actual energy vector is " << energy_v[0] << " and " << energy_v[15]<< " and " << energy_v[14] << G4endl;
 
 	// find maximum frequency (y-axis), fMax
 	fMax = 0.;
@@ -187,7 +187,7 @@ G4double EMMAPrimaryGeneratorAction::energyDistribution() {
 
 	G4double e_rndm = 0., f_rndm = 0., f_inter = -1.;
 
-	if (nPoints == 1) e_rndm = energy_v[0]; 
+	if (nPoints == 1) e_rndm = energy_v[0];
 
 	else if (nPoints > 1) {
 		while (f_rndm > f_inter) {
@@ -263,7 +263,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
 
-  // BEAM
+  // BEAM <<<<<<<<< BEAM <<<<<<<<< BEAM <<<<<<<<< BEAM <<<<<<<<< BEAM <<<<<<<<<
   if (simulateReaction==false && !useAlphaSource) {
 
     // Ion
@@ -272,39 +272,32 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleGun->SetParticleCharge(userCharge);
 
 		//Experimental!
-		GPSparticleGun->SetParticleDefinition(particleDef);
-		GPSparticleGun->SetParticleCharge(userCharge);
+		//GPSparticleGun->SetParticleDefinition(particleDef);
+		//GPSparticleGun->SetParticleCharge(userCharge);
 		//Experimental!
 
     // Sample energy
 
 
-		// all this shit ...
-    Ekin = energy;
-
-
-    if (sigmaEnergy>0.) {
-      G4double mean = energy;
-      G4double FWHM = sigmaEnergy/100.*energy;
-      G4double std = FWHM/2.35;
-      Ekin = CLHEP::RandGauss::shoot(mean,std);
-    }
-
-		// ... to here is useless if we are sampling energy from a spectrum (see below)
-
-//---------------------------------------------------------------------------------------//
-		//Ekin = GPSparticleGun->GetParticleEnergy();
-
-		//G4cout << "The particle energy from GPS is: " << Ekin << G4endl;
-
-		Ekin = energyDistribution();
-
+		if (energyData == "GAUS") {
+			// all this shit ...
+	    Ekin = energy;
+	    if (sigmaEnergy>0.) {
+	      G4double mean = energy;
+	      G4double FWHM = sigmaEnergy/100.*energy;
+	      G4double std = FWHM/2.35;
+	      Ekin = CLHEP::RandGauss::shoot(mean,std);
+	    }
+		}
+		// ... is useless if we are sampling energy from a spectrum (see below, where Ekin is redefined)
+		
+		if (energyData == "SPEC") {
+			Ekin = energyDistribution();
+		}
 		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
-
-		// WHY CAN'T I USE THIS FUNCTION FOR GENERAL PARTICLE SOURCE?!??!?!?!?
 //---------------------------------------------------------------------------------------//
     // Sample position
     G4double xBeam=0.*m, yBeam=0.*m;
@@ -320,7 +313,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     // beam particle z emission location is set to 10 Angstroms, i.e. immediately, in front of the target
     G4double zemit = targetZoffset - targetThickness/2 - 10*angstrom;
 
-			G4cout << "the position is supposed to be " << G4ThreeVector(xBeam,yBeam,zemit) << G4endl;
+			G4cout << "the position is " << G4ThreeVector(xBeam,yBeam,zemit) << G4endl;
 //---------------------------------------------------------------------------------------//
     //random emittance off optical axis
     particleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
@@ -328,7 +321,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //particleGun->SetParticlePosition(G4ThreeVector(0,0,zemit));
 
 		// Experimental!
-		//GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit)); // this shit doesn't work for some reason
+		//GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
 		//Experimental!
 //---------------------------------------------------------------------------------------//
     // Determine max angle from normalized transverse emittance
@@ -341,7 +334,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       MaxAngle = transEmittance/(gamma*beta*rmax);
       MaxAngle = MaxAngle * 180./CLHEP::pi/1000. * deg; // mrad to deg conversion
     }
-		//G4cout << "the transverse emittance is " << transEmittance << G4endl;
 
 	G4cout << "RADIUS: " << rmax/mm << " mm" << G4endl;
         G4cout << "ANGLE: " << MaxAngle/deg << " deg" << G4endl;
@@ -375,8 +367,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
 
-		G4cout << "the momentum vector is supposed to be " << G4ThreeVector(x,y,z) << G4endl;
-
+		G4cout << "the momentum vector is " << G4ThreeVector(x,y,z) << G4endl;
 
     //G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
         //  <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;

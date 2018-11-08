@@ -104,7 +104,7 @@ private:
 
   std::vector<G4double> energy_v;
   std::vector<G4double> frequency_v;
-  std::vector<G4double> slope; 
+  std::vector<G4double> slope;
   G4double fMax;
   G4int nPoints;
 
@@ -147,6 +147,11 @@ public:
   inline G4double GetAngle() const { return Angle; }
   inline void SetTransEmittance(G4double val) { transEmittance = val; }
   inline G4double GetTransEmittance() const { return transEmittance; }
+
+  inline void SetEnergyData(G4String val) { energyData = val; }
+  inline G4String GetEnergyData() const { return energyData; }
+
+
   inline void SetBeamSpotDiameter(G4double val) { beamSpotDiameter = val; }
   inline G4double GetBeamSpotDiameter() const { return beamSpotDiameter; }
 
