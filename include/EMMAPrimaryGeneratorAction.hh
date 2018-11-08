@@ -75,6 +75,7 @@ private:
   EMMAPrimaryGeneratorMessenger* gunMessenger;
   G4double beamZ, beamA, beamCharge;
   G4double energy;
+  G4String energyData;
   G4double sigmaEnergy;
   G4double Angle;
   G4double transEmittance;

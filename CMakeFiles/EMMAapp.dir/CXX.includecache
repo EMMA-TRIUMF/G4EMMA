@@ -795,6 +795,8 @@ G4UIcmdWithADouble.hh
 /home/awen/G4EMMA/src/G4UIcmdWithADouble.hh
 G4UIcmdWithAnInteger.hh
 /home/awen/G4EMMA/src/G4UIcmdWithAnInteger.hh
+G4UIcmdWithAString.hh
+/home/awen/G4EMMA/src/G4UIcmdWithAString.hh
 G4ios.hh
 /home/awen/G4EMMA/src/G4ios.hh
 
@@ -3091,6 +3093,10 @@ G4UIcommand.hh
 /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcommand.hh
 
 /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithADoubleAndUnit.hh
+G4UIcommand.hh
+/opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcommand.hh
+
+/opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithAString.hh
 G4UIcommand.hh
 /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcommand.hh
 

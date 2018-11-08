@@ -290,7 +290,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	    }
 		}
 		// ... is useless if we are sampling energy from a spectrum (see below, where Ekin is redefined)
-		
+
 		if (energyData == "SPEC") {
 			Ekin = energyDistribution();
 		}

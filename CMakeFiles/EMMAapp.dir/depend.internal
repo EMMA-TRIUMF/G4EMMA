@@ -6666,6 +6666,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAPrimaryGeneratorMessenger.cc.o
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithABool.hh
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithADouble.hh
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithADoubleAndUnit.hh
+ /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithAString.hh
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcmdWithAnInteger.hh
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIcommand.hh
  /opt/geant4/geant4.9.6.p04/source/intercoms/include/G4UIdirectory.hh

@@ -326,7 +326,7 @@ int main(int argc,char** argv)
 
 
 
-void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4string &s9)
+void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4, G4String &s5, G4String &s6, G4String &s7, G4String &s8, G4String &s9)
 {
   s1=""; s2=""; s3=""; s4=""; s5=""; s6=""; s7=""; s8=""; s9="";
   G4String text, line;

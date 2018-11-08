@@ -32,6 +32,7 @@
 #include "G4UIcmdWithABool.hh"
 #include "G4UIcmdWithADouble.hh"
 #include "G4UIcmdWithAnInteger.hh"
+#include "G4UIcmdWithAString.hh"
 #include "G4ios.hh"
 
 EMMAPrimaryGeneratorMessenger::EMMAPrimaryGeneratorMessenger(EMMAPrimaryGeneratorAction * mpga)
@@ -323,7 +324,7 @@ G4String EMMAPrimaryGeneratorMessenger::GetCurrentValue(G4UIcommand * command)
   if( command==transEmittanceCmd )
     { cv = transEmittanceCmd->ConvertToString(target->GetTransEmittance(),"mm"); }
   if( command==energyDataCmd )
-    { cv = energyDataCmd->ConvertToString(target->GetEnergyData(),"")); }
+    { cv = target->GetEnergyData(); }
   if( command==beamSpotDiameterCmd )
     { cv = beamSpotDiameterCmd->ConvertToString(target->GetBeamSpotDiameter(),"mm"); }
 
