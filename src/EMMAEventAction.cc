@@ -34,6 +34,7 @@
 #endif // G4ANALYSIS_USE
 #include "G4SystemOfUnits.hh"
 #include "G4UnitsTable.hh"
+#include "EMMAPrimaryGeneratorAction.hh"
 
 #include "G4Event.hh"
 #include "G4EventManager.hh"
@@ -184,9 +185,8 @@ void EMMAEventAction::BeginOfEventAction(const G4Event* event)
 void EMMAEventAction::EndOfEventAction(const G4Event* event)
 {
 
-  EMMAPrimaryGeneratorAction PGA;
-  G4cout << "The energy after target read is " << PGA.targetEkin << G4endl;
-  target_Ekin->Fill(PGA.targetEkin);
+
+  target_Ekin->Fill(EMMAPrimaryGeneratorAction::targetEkin);
 
   G4HCofThisEvent * HCE = event->GetHCofThisEvent();
   EMMADriftChamberHitsCollection* DHC2 = 0;

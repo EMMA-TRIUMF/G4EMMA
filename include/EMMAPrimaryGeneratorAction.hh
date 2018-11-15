@@ -67,7 +67,7 @@ public:
   virtual ~EMMAPrimaryGeneratorAction();
   virtual void GeneratePrimaries(G4Event*);
 
-  G4double targetEkin;
+  static G4double targetEkin;
 
 private:
   G4ParticleGun* particleGun;

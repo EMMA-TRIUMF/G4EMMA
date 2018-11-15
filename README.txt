@@ -18,3 +18,7 @@ user-defined spectrum (see above) or use the default gaussian energy that's
 already implemented in beam.dat. 
 To change this option, simply change the last (9th) line in beam.dat to 
 SPEC or GAUS. It is set to SPEC by default. 
+
+Nov. 15 Update: - added a histogram as part of the output data file which
+displays the energy spectrum that was emitted from the target. Useful
+for verification purposes. 

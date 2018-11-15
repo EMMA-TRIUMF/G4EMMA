@@ -72,6 +72,9 @@ G4double userCharge = 54.; // default value
 G4String postDegrader1FileName;
 G4double depth;
 
+G4double EMMAPrimaryGeneratorAction::targetEkin;
+
+
 EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 {
 	sigmaEnergy = 0.*MeV;
@@ -416,7 +419,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
-	targetEkin = particleGun->GetParticleEnergy(); 
+	targetEkin = particleGun->GetParticleEnergy();
 	/*
   // Print info:
   G4bool printInfo=true;

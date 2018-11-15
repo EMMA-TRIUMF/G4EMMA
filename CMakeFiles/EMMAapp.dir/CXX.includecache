@@ -379,6 +379,8 @@ G4SystemOfUnits.hh
 /home/awen/G4EMMA/src/G4SystemOfUnits.hh
 G4UnitsTable.hh
 /home/awen/G4EMMA/src/G4UnitsTable.hh
+EMMAPrimaryGeneratorAction.hh
+/home/awen/G4EMMA/src/EMMAPrimaryGeneratorAction.hh
 G4Event.hh
 /home/awen/G4EMMA/src/G4Event.hh
 G4EventManager.hh
