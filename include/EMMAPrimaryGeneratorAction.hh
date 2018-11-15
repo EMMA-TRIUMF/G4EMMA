@@ -52,6 +52,7 @@ extern G4String MotherDir; // EMMAapp.cc
 extern G4String UserDir; // EMMAapp.cc
 
 
+
 class G4ParticleGun;
 class G4GeneralParticleSource;
 class G4Event;
@@ -66,7 +67,7 @@ public:
   virtual ~EMMAPrimaryGeneratorAction();
   virtual void GeneratePrimaries(G4Event*);
 
-  G4double maxTheta, maxPhi;
+  G4double targetEkin;
 
 private:
   G4ParticleGun* particleGun;

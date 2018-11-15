@@ -208,6 +208,8 @@ G4double EMMAPrimaryGeneratorAction::energyDistribution() {
 //---------------------------------------------------------------------------------------//
 //---------------------------------------------------------------------------------------//
 
+
+
 void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 { // This method is invoked at the beginning of each event
 
@@ -280,7 +282,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
 		if (energyData == "GAUS") {
-			// all this shit ...
 	    Ekin = energy;
 	    if (sigmaEnergy>0.) {
 	      G4double mean = energy;
@@ -289,13 +290,15 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	      Ekin = CLHEP::RandGauss::shoot(mean,std);
 	    }
 		}
-		// ... is useless if we are sampling energy from a spectrum (see below, where Ekin is redefined)
 
 		if (energyData == "SPEC") {
 			Ekin = energyDistribution();
 		}
 		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
+
+		//targetEkin = Ekin;
+		//G4cout << "The energy is " << Ekin << G4endl;
     //fixed energy
     //particleGun->SetParticleEnergy(energy *MeV);
 //---------------------------------------------------------------------------------------//
@@ -319,10 +322,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
     //fix emittance location to optical axis
     //particleGun->SetParticlePosition(G4ThreeVector(0,0,zemit));
-
-		// Experimental!
-		//GPSparticleGun->SetParticlePosition(G4ThreeVector(xBeam,yBeam,zemit));
-		//Experimental!
 //---------------------------------------------------------------------------------------//
     // Determine max angle from normalized transverse emittance
     G4double mass = particleDef->GetPDGMass();
@@ -361,8 +360,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       y = sin(theta) * sin(phi);
       z = cos(THETA);
 
-			maxTheta = cos(phi) * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
-			maxPhi = CLHEP::twopi;
     }
 
     particleGun->SetParticleMomentumDirection(G4ThreeVector(x,y,z));
@@ -406,6 +403,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
   particleGun->GeneratePrimaryVertex(anEvent);
+
+
 	//GPSparticleGun->GeneratePrimaryVertex(anEvent);
 	/*
 	G4cout << "the energy emitted is " << GPSparticleGun->GetParticleEnergy() << G4endl;
@@ -417,6 +416,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
+	targetEkin = particleGun->GetParticleEnergy(); 
 	/*
   // Print info:
   G4bool printInfo=true;

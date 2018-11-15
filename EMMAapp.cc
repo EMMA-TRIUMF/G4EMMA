@@ -350,7 +350,7 @@ void ReadUserInput_Beam( G4String &s1, G4String &s2, G4String &s3, G4String &s4,
 	if (n==6) s6 = text; // resolution
 	if (n==7) s7 = text; // diameter
 	if (n==8) s8 = text; // normalized transverse geometric emittance
-	if (n==9) s9 = text; // experimental: source of energy data
+	if (n==9) s9 = text; // source of energy data
       }
     }
     inputfil.close();

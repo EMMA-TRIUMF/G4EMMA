@@ -7439,6 +7439,8 @@ EMMAIonChamber.hh
 include/EMMAIonChamber.hh
 EMMASiliconDetector.hh
 include/EMMASiliconDetector.hh
+EMMAPrimaryGeneratorAction.hh
+include/EMMAPrimaryGeneratorAction.hh
 TFile.h
 -
 TH2F.h

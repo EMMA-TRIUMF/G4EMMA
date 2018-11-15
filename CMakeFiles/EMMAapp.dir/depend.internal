@@ -2763,6 +2763,8 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4DataVector.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ExceptionSeverity.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4FastVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4LPhysicsFreeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4LPhysicsFreeVector.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4OrderedTable.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicalConstants.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsOrderedFreeVector.hh
@@ -2824,6 +2826,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
  /opt/geant4/geant4.9.6.p04/source/processes/management/include/G4ProcessVector.hh
  /opt/geant4/geant4.9.6.p04/source/processes/management/include/G4ProcessVector.icc
  /opt/geant4/geant4.9.6.p04/source/processes/management/include/G4VProcess.hh
+ /opt/geant4/geant4.9.6.p04/source/run/include/G4VUserPrimaryGeneratorAction.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4ForceCondition.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4GPILSelection.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4ParticleChange.hh
@@ -2922,6 +2925,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventAction.cc.o
  include/EMMAEventActionMessenger.hh
  include/EMMAIonChamber.hh
  include/EMMAIonChamberHit.hh
+ include/EMMAPrimaryGeneratorAction.hh
  include/EMMASiliconDetector.hh
  include/EMMASiliconDetectorHit.hh
 CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
@@ -2942,9 +2946,52 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Transform3D.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Transform3D.icc
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Geometry/Vector3D.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/DualRand.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/JamesRandom.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/MTwistEngine.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBinomial.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBinomial.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBit.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBit.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBreitWigner.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandBreitWigner.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandChiSquare.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandChiSquare.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandExponential.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandExponential.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandFlat.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandFlat.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGamma.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGamma.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGauss.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGauss.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGaussQ.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGaussQ.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGeneral.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandGeneral.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandLandau.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandLandau.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandPoisson.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandPoisson.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandPoissonQ.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandPoissonQ.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandStudentT.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandStudentT.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/Random.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/Random.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandomEngine.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RandomEngine.icc
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/Randomize.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RanecuEngine.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/Ranlux64Engine.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RanluxEngine.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Random/RanshiEngine.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/PhysicalConstants.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Units/SystemOfUnits.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/defs.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/memory.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/noncopyable.h
+ /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Utility/type_traits.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.h
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/AxisAngle.icc
  /opt/geant4/geant4.9.6.p04/source/externals/clhep/include/CLHEP/Vector/LorentzVector.h
@@ -2984,16 +3031,21 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4LorentzVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/G4Transform3D.hh
  /opt/geant4/geant4.9.6.p04/source/global/HEPGeometry/include/geomdefs.hh
+ /opt/geant4/geant4.9.6.p04/source/global/HEPRandom/include/Randomize.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4Allocator.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4AllocatorPool.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ApplicationState.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4DataVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4DataVector.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4ExceptionSeverity.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4LPhysicsFreeVector.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4LPhysicsFreeVector.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4OrderedTable.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicalConstants.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsOrderedFreeVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsOrderedFreeVector.icc
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsTable.hh
+ /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsTable.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVector.hh
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVector.icc
  /opt/geant4/geant4.9.6.p04/source/global/management/include/G4PhysicsVectorCache.hh
@@ -3033,6 +3085,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleDefinition.hh
  /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleDefinition.icc
  /opt/geant4/geant4.9.6.p04/source/particles/management/include/G4ParticleMomentum.hh
+ /opt/geant4/geant4.9.6.p04/source/run/include/G4VUserPrimaryGeneratorAction.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4Step.hh
  /opt/geant4/geant4.9.6.p04/source/track/include/G4Step.icc
  /opt/geant4/geant4.9.6.p04/source/track/include/G4StepPoint.hh
@@ -3113,6 +3166,7 @@ CMakeFiles/EMMAapp.dir/src/EMMAEventActionMessenger.cc.o
  include/EMMAEventActionMessenger.hh
  include/EMMAIonChamber.hh
  include/EMMAIonChamberHit.hh
+ include/EMMAPrimaryGeneratorAction.hh
  include/EMMASiliconDetector.hh
  include/EMMASiliconDetectorHit.hh
 CMakeFiles/EMMAapp.dir/src/EMMAGeneralPhysics.cc.o

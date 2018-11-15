@@ -36,6 +36,7 @@
 #include "EMMADriftChamberHit.hh"
 #include "EMMAIonChamber.hh"
 #include "EMMASiliconDetector.hh"
+#include "EMMAPrimaryGeneratorAction.hh"
 
 #ifdef G4ANALYSIS_USE
 
@@ -49,6 +50,8 @@
 
 #endif // G4ANALYSIS_USE
 
+
+
 class EMMAEventActionMessenger;
 
 class EMMAEventAction : public G4UserEventAction
@@ -56,6 +59,7 @@ class EMMAEventAction : public G4UserEventAction
   public:
     EMMAEventAction();
     virtual ~EMMAEventAction();
+
 
   public:
     virtual void BeginOfEventAction(const G4Event*);
@@ -79,17 +83,18 @@ class EMMAEventAction : public G4UserEventAction
    // EMMASiliconDetectorHitsCollection* GetHitsCollection(const G4String& hcName,
 //						const G4Event* event) const;
 
-    void PrintEventStatistics(G4double IonChamberEdep, G4double IonChamberTrackLength, G4double SiliconDetectorEdep, G4double SiliconDetectorTrackLength) const; 
+    void PrintEventStatistics(G4double IonChamberEdep, G4double IonChamberTrackLength, G4double SiliconDetectorEdep, G4double SiliconDetectorTrackLength) const;
 
 #ifdef G4ANALYSIS_USE
 	TFile* rootfile;
 	TTree* fp_tree;
+  TH1F* target_Ekin;
 	TH2F* fp_hitpos;
 	TH1F* fp_hitposX;
 	TH1F* fp_hitangle;
-        TH1F* fp_hitEkin;
+  TH1F* fp_hitEkin;
 	TH1F* fp_hitEdep;
-        TH1F* fp_hitEdep2;
+  TH1F* fp_hitEdep2;
 	TH1F* fp_hitEdep_Silicon;
 	TH2F* fp_hit2DEdep;
 #endif // G4ANALYSIS_USE
