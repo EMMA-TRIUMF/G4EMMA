@@ -77,7 +77,7 @@ EMMAEventAction::EMMAEventAction()
   rootfile = analysisManager->getRootfile();
 
   //create root histograms
-  target_Ekin = new TH1F("targetEkin","Emitted Ekin",200,0,200);
+  target_Ekin = new TH1F("targetEkin","Emitted Ekin",150,0,150);
   target_Ekin->GetXaxis()->SetTitle("Emitted Ekin (MeV)");
   target_Ekin->GetYaxis()->SetTitle("Counts");
 
@@ -129,6 +129,7 @@ EMMAEventAction::EMMAEventAction()
 
 EMMAEventAction::~EMMAEventAction()
 {
+
 #ifdef G4ANALYSIS_USE
   EMMAAnalysisManager::dispose();
   rootfile->Write(); //writes all histograms and trees to file (also ones created in SteppingAction.cc
@@ -178,13 +179,13 @@ void EMMAEventAction::BeginOfEventAction(const G4Event* event)
 
   G4cout<<"Start event: "<<event->GetEventID()<<G4endl;
 
+
 }
 
 
 
 void EMMAEventAction::EndOfEventAction(const G4Event* event)
 {
-
 
   target_Ekin->Fill(EMMAPrimaryGeneratorAction::targetEkin);
 

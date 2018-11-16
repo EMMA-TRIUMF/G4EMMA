@@ -73,7 +73,8 @@ G4String postDegrader1FileName;
 G4double depth;
 
 G4double EMMAPrimaryGeneratorAction::targetEkin;
-
+G4double EMMAPrimaryGeneratorAction::targetX;
+G4double EMMAPrimaryGeneratorAction::targetY;
 
 EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 {
@@ -282,7 +283,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		//Experimental!
 
     // Sample energy
-
+		mean_energy = energy;
+		std_energy = (sigmaEnergy/100.*energy)/2.35;
 
 		if (energyData == "GAUS") {
 	    Ekin = energy;
@@ -292,10 +294,20 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	      G4double std = FWHM/2.35;
 	      Ekin = CLHEP::RandGauss::shoot(mean,std);
 	    }
+
+			//minTargetEkin = mean-(std*4);
+			//maxTargetEkin = mean+(std*4);
+			//deltaTargetEkin = maxTargetEkin - minTargetEkin;
+
 		}
 
 		if (energyData == "SPEC") {
 			Ekin = energyDistribution();
+
+			//minTargetEkin = *std::min_element(energy_v.begin(), energy_v.end());
+			//maxTargetEkin = *std::max_element(energy_v.begin(), energy_v.end());
+			//deltaTargetEkin = maxTargetEkin - minTargetEkin;
+
 		}
 		//energy including spread
     particleGun->SetParticleEnergy(Ekin *MeV);
@@ -420,6 +432,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
 	targetEkin = particleGun->GetParticleEnergy();
+	targetX = particleGun->GetParticlePosition()->getX();
+	targetY = particleGun->GetParticlePosition()->getY();
 	/*
   // Print info:
   G4bool printInfo=true;

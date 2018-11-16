@@ -68,6 +68,7 @@ public:
   virtual void GeneratePrimaries(G4Event*);
 
   static G4double targetEkin;
+  static G4double targetX, targetY;
 
 private:
   G4ParticleGun* particleGun;
@@ -110,6 +111,8 @@ private:
   G4double fMax;
   G4int nPoints;
 
+  G4double mean_energy, std_energy;
+
 
 
 
@@ -118,6 +121,40 @@ public:
   void initializeBeamSimulation();
   void initializeBeamPreparation();
   void GetPrimaryGeneratorActionParameters();
+
+  /*
+  G4double GetMinTargetEkin() {
+    G4double min = energy_v[energy_v.size()/2];
+
+    if (energyData == "SPEC") {
+      for (G4int i = 0; i<energy_v.size(); i++) {
+        if (energy_v[i] < min) {min = energy_v[i]; }
+      }
+      return min;
+    }
+    else if (energyData == "GAUS") {
+      min = mean_energy - (4*std_energy);
+
+      return min;
+    }
+  }
+
+  G4double GetMaxTargetEkin() {
+    G4double max = energy_v[energy_v.size()/2];
+
+    if (energyData == "SPEC") {
+      for (G4int i = 0; i<energy_v.size(); i++) {
+        if (energy_v[i] > max) {max = energy_v[i]; }
+      }
+      return max;
+    }
+    else if (energyData == "GAUS") {
+      max = mean_energy + (4*std_energy);
+
+      return max;
+    }
+  }
+  */
 
 
   void energyDistributionInit(G4String fileName);
