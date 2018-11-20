@@ -432,8 +432,8 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
 	targetEkin = particleGun->GetParticleEnergy();
-	targetX = particleGun->GetParticlePosition()->getX();
-	targetY = particleGun->GetParticlePosition()->getY();
+	targetX = particleGun->GetParticlePosition().getX();
+	targetY = particleGun->GetParticlePosition().getY();
 	/*
   // Print info:
   G4bool printInfo=true;

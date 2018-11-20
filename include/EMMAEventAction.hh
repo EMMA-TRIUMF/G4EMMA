@@ -89,6 +89,7 @@ class EMMAEventAction : public G4UserEventAction
 	TFile* rootfile;
 	TTree* fp_tree;
   TH1F* target_Ekin;
+  TH2F* target_pos;
 	TH2F* fp_hitpos;
 	TH1F* fp_hitposX;
 	TH1F* fp_hitangle;

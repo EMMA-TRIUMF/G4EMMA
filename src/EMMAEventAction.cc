@@ -77,9 +77,14 @@ EMMAEventAction::EMMAEventAction()
   rootfile = analysisManager->getRootfile();
 
   //create root histograms
-  target_Ekin = new TH1F("targetEkin","Emitted Ekin",150,0,150);
+  target_Ekin = new TH1F("targetEkin","Emitted Ekin",160,0,160);
   target_Ekin->GetXaxis()->SetTitle("Emitted Ekin (MeV)");
   target_Ekin->GetYaxis()->SetTitle("Counts");
+
+  target_pos = new TH2F("targetPos","Target Plane Emission Position",80,-5,5,80,-5,5);
+  target_pos->GetXaxis()->SetTitle("X Position (mm)");
+  target_pos->GetYaxis()->SetTitle("Y Position (mm)");
+  target_pos->SetOption("colz2");
 
   fp_hitpos = new TH2F("hitpos","Focal plane hit position",160,-80,80,60,-30,30);
   fp_hitpos->GetXaxis()->SetTitle("X position (mm)");	//axis labels
@@ -188,6 +193,7 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
 {
 
   target_Ekin->Fill(EMMAPrimaryGeneratorAction::targetEkin);
+  target_pos->Fill(EMMAPrimaryGeneratorAction::targetX,EMMAPrimaryGeneratorAction::targetY);
 
   G4HCofThisEvent * HCE = event->GetHCofThisEvent();
   EMMADriftChamberHitsCollection* DHC2 = 0;
