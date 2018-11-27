@@ -22,3 +22,10 @@ SPEC or GAUS. It is set to SPEC by default.
 Nov. 15 Update: - added a histogram as part of the output data file which
 displays the energy spectrum that was emitted from the target. Useful
 for verification purposes. 
+
+Nov. 19 Update: - added a histogram in the output file that displays the 
+location of beam emissions at the target plane (in terms of X and Y). 
+
+Nov. 21 Update: - added a histogram in the output file that displays the 
+x and y components of the particle direction unit vectors (Target Plane
+Transverse Emission Components).   

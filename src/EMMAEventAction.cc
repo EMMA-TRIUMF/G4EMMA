@@ -81,10 +81,15 @@ EMMAEventAction::EMMAEventAction()
   target_Ekin->GetXaxis()->SetTitle("Emitted Ekin (MeV)");
   target_Ekin->GetYaxis()->SetTitle("Counts");
 
-  target_pos = new TH2F("targetPos","Target Plane Emission Position",80,-5,5,80,-5,5);
+  target_pos = new TH2F("targetPos","Target Plane Emission Position",120,-5,5,120,-5,5);
   target_pos->GetXaxis()->SetTitle("X Position (mm)");
   target_pos->GetYaxis()->SetTitle("Y Position (mm)");
   target_pos->SetOption("colz2");
+
+  target_dir = new TH2F("targetdir","Target Plane Transverse Emission Components",120,-0.5,0.5,120,-0.5,0.5);
+  target_dir->GetXaxis()->SetTitle("X Component (of direction unit vector)");
+  target_dir->GetYaxis()->SetTitle("Y Component (of direction unit vector)");
+  target_dir->SetOption("colz2");
 
   fp_hitpos = new TH2F("hitpos","Focal plane hit position",160,-80,80,60,-30,30);
   fp_hitpos->GetXaxis()->SetTitle("X position (mm)");	//axis labels
@@ -128,6 +133,10 @@ EMMAEventAction::EMMAEventAction()
   fp_tree->Branch("fp_Edep2",&fp_Edep2,"fp_Edep2/D");
   fp_tree->Branch("fp_2DEdep",&fp_2DEdep,"fp_2DEdep/D");
   fp_tree->Branch("fp_EdepSilicon",&fp_Edep_Silicon,"fp_Edep_Silicon/D");
+
+  fp_tree->Branch("target_posX",&target_posX,"target_posX/D");
+  fp_tree->Branch("target_posY",&target_posY,"target_posY/D");
+  fp_tree->Branch("target_Ekin",&target_Ekin_tree,"target_Ekin/D");
 
 #endif // G4ANALYSIS_USE
 }
@@ -194,6 +203,9 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
 
   target_Ekin->Fill(EMMAPrimaryGeneratorAction::targetEkin);
   target_pos->Fill(EMMAPrimaryGeneratorAction::targetX,EMMAPrimaryGeneratorAction::targetY);
+  target_dir->Fill(EMMAPrimaryGeneratorAction::targetXdir,EMMAPrimaryGeneratorAction::targetYdir);
+
+
 
   G4HCofThisEvent * HCE = event->GetHCofThisEvent();
   EMMADriftChamberHitsCollection* DHC2 = 0;
@@ -241,7 +253,7 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
         if(aHit->GetLayerID()==i2){
           aHit->Print();
 
-#ifdef G4ANALYSIS_USE
+          #ifdef G4ANALYSIS_USE
       localPos = aHit->GetLocalPos();	//local position at focal plane
       theta = aHit->GetTheta()/deg; //angle at focal place
 	    Ekin = aHit->GetEkin()/MeV;
@@ -257,13 +269,16 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
 	    if (fp_hitEdep2) fp_hitEdep2->Fill(Edep2);
       if (fp_hitEdep_Silicon) fp_hitEdep_Silicon->Fill(EdepSilicon);
 	    if (fp_hit2DEdep) fp_hit2DEdep->Fill(Edep,Edep2);
-            if (fp_tree){ //fill branch with position and angle for each event
+      if (fp_tree){                     //fill branch with position and angle for each event
               fp_pos[0]=localPos.x()/mm;
               fp_pos[1]=localPos.y()/mm;
               fp_theta=theta;
-	      fp_Edep=Edep;
-	      fp_Edep2=Edep2;
-	      fp_Edep_Silicon = EdepSilicon;
+	            fp_Edep=Edep;
+	            fp_Edep2=Edep2;
+	            fp_Edep_Silicon = EdepSilicon;
+              target_posX = EMMAPrimaryGeneratorAction::targetX;
+              target_posY = EMMAPrimaryGeneratorAction::targetY;
+              target_Ekin_tree = EMMAPrimaryGeneratorAction::targetEkin;
               fp_tree->Fill();
 
 		PrintEventStatistics(IonChamberBackHit->GetEdep(), IonChamberBackHit->GetTrackLength(), SiliconDetectorHit->GetEdep(), SiliconDetectorHit->GetTrackLength());

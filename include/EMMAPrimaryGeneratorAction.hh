@@ -69,6 +69,7 @@ public:
 
   static G4double targetEkin;
   static G4double targetX, targetY;
+  static G4double targetXdir, targetYdir; 
 
 private:
   G4ParticleGun* particleGun;

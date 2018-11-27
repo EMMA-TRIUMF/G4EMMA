@@ -75,6 +75,8 @@ G4double depth;
 G4double EMMAPrimaryGeneratorAction::targetEkin;
 G4double EMMAPrimaryGeneratorAction::targetX;
 G4double EMMAPrimaryGeneratorAction::targetY;
+G4double EMMAPrimaryGeneratorAction::targetXdir;
+G4double EMMAPrimaryGeneratorAction::targetYdir;
 
 EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 {
@@ -153,6 +155,7 @@ EMMAPrimaryGeneratorAction::~EMMAPrimaryGeneratorAction()
 
 void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 	std::fstream file(fileName, std::ios::in);
+	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignore the first line (for commenting)
 	while (file.good()) {
 		G4double energy, frequency;
 		file >> energy;
@@ -431,9 +434,13 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
+
+	// these variables feed their values into a histogram defined in EMMAEventAction.cc
 	targetEkin = particleGun->GetParticleEnergy();
 	targetX = particleGun->GetParticlePosition().getX();
 	targetY = particleGun->GetParticlePosition().getY();
+	targetXdir = particleGun->GetParticleMomentumDirection().getX();
+	targetYdir = particleGun->GetParticleMomentumDirection().getY();
 	/*
   // Print info:
   G4bool printInfo=true;
