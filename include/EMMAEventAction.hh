@@ -72,8 +72,8 @@ class EMMAEventAction : public G4UserEventAction
     G4double Edep, Edep2;
     G4double EdepSilicon;
     G4double Ekin;
-    G4double fp_pos[2],fp_theta,fp_Ekin,fp_Edep,fp_Edep2,fp_2DEdep[2],fp_posX,fp_Edep_Silicon;
-    G4double target_posX, target_posY, target_Ekin_tree;
+    G4double fp_posX, fp_posY, fp_theta,fp_Ekin,fp_Edep,fp_Edep2,fp_2DEdep[2],fp_Edep_Silicon;
+    G4double target_posX, target_posY, target_Ekin_tree, target_angX, target_angY;
 
     EMMAEventActionMessenger* messenger;
     G4int verboseLevel;

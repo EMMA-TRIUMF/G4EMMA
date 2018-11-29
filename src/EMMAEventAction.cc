@@ -86,9 +86,9 @@ EMMAEventAction::EMMAEventAction()
   target_pos->GetYaxis()->SetTitle("Y Position (mm)");
   target_pos->SetOption("colz2");
 
-  target_dir = new TH2F("targetdir","Target Plane Transverse Emission Components",120,-0.5,0.5,120,-0.5,0.5);
-  target_dir->GetXaxis()->SetTitle("X Component (of direction unit vector)");
-  target_dir->GetYaxis()->SetTitle("Y Component (of direction unit vector)");
+  target_dir = new TH2F("targetdir","Target Plane Transverse Emission Angle",150,-1,1,150,-1,1);
+  target_dir->GetXaxis()->SetTitle("X (rad)");
+  target_dir->GetYaxis()->SetTitle("Y (rad)");
   target_dir->SetOption("colz2");
 
   fp_hitpos = new TH2F("hitpos","Focal plane hit position",160,-80,80,60,-30,30);
@@ -125,8 +125,9 @@ EMMAEventAction::EMMAEventAction()
 
   //call root tree and creates branches to store event by event data
   fp_tree = analysisManager->getRoottree();
-  fp_tree->Branch("fp_pos",&fp_pos,"fp_pos[2]/D");
   fp_tree->Branch("fp_posX",&fp_posX,"fp_posX/D");
+  fp_tree->Branch("fp_posY",&fp_posY,"fp_posY/D");
+
   fp_tree->Branch("fp_theta",&fp_theta,"fp_theta/D");
   fp_tree->Branch("fp_Ekin",&fp_Edep,"fp_Ekin/D");
   fp_tree->Branch("fp_Edep",&fp_Edep,"fp_Edep/D");
@@ -136,6 +137,10 @@ EMMAEventAction::EMMAEventAction()
 
   fp_tree->Branch("target_posX",&target_posX,"target_posX/D");
   fp_tree->Branch("target_posY",&target_posY,"target_posY/D");
+
+  fp_tree->Branch("target_angX",&target_angX,"target_angX/D");
+  fp_tree->Branch("target_angY",&target_angY,"target_angY/D");
+
   fp_tree->Branch("target_Ekin",&target_Ekin_tree,"target_Ekin/D");
 
 #endif // G4ANALYSIS_USE
@@ -201,9 +206,14 @@ void EMMAEventAction::BeginOfEventAction(const G4Event* event)
 void EMMAEventAction::EndOfEventAction(const G4Event* event)
 {
 
+  G4double x_angle, y_angle;
+
+  x_angle = asin(EMMAPrimaryGeneratorAction::targetXdir);
+  y_angle = asin(EMMAPrimaryGeneratorAction::targetYdir);
+
   target_Ekin->Fill(EMMAPrimaryGeneratorAction::targetEkin);
   target_pos->Fill(EMMAPrimaryGeneratorAction::targetX,EMMAPrimaryGeneratorAction::targetY);
-  target_dir->Fill(EMMAPrimaryGeneratorAction::targetXdir,EMMAPrimaryGeneratorAction::targetYdir);
+  target_dir->Fill(x_angle,y_angle);
 
 
 
@@ -270,14 +280,16 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
       if (fp_hitEdep_Silicon) fp_hitEdep_Silicon->Fill(EdepSilicon);
 	    if (fp_hit2DEdep) fp_hit2DEdep->Fill(Edep,Edep2);
       if (fp_tree){                     //fill branch with position and angle for each event
-              fp_pos[0]=localPos.x()/mm;
-              fp_pos[1]=localPos.y()/mm;
+              fp_posX=localPos.x()/mm;
+              fp_posY=localPos.y()/mm;
               fp_theta=theta;
 	            fp_Edep=Edep;
 	            fp_Edep2=Edep2;
 	            fp_Edep_Silicon = EdepSilicon;
               target_posX = EMMAPrimaryGeneratorAction::targetX;
               target_posY = EMMAPrimaryGeneratorAction::targetY;
+              target_angX = asin(EMMAPrimaryGeneratorAction::targetXdir);
+              target_angY = asin(EMMAPrimaryGeneratorAction::targetYdir);
               target_Ekin_tree = EMMAPrimaryGeneratorAction::targetEkin;
               fp_tree->Fill();
 

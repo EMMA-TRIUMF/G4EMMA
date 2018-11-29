@@ -1,9 +1,9 @@
-100     # number of events
+200     # number of events
 18     # beam Z
 40     # beam A
 13     # beam charge state Q
-80    # beam kinetic energy (MeV)
-20     # fractional energy spread (Sigma %)
-5.0    # beam-spot diameter (mm)
-10.    # normalized transverse emittance (pi mm mrad)
+100    # beam kinetic energy (MeV)
+0     # fractional energy spread (Sigma %)
+1.0    # beam-spot diameter (mm)
+50.    # normalized transverse emittance (pi mm mrad)
 GAUS   # source of energy data (either SPEC from user-defined spectrum or GAUS using above energy parameters)
