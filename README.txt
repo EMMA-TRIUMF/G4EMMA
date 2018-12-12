@@ -6,6 +6,8 @@ m/q acceptance: +/- 3.5%
 mass dispersion in focal plane: 10 mm/%
 angular acceptance: +/- 3.6 deg by +/- 3.6 deg (15 msr)
 
+Functionality/Usage changes updates: 
+
 Nov. 5 Update: - Energy spectrum reading is implemented. To utilise it, 
 go to UserDir where the rest of the input files are located. The 
 spectrum, energySpectrum.dat, is located there. Note: it is currently 
@@ -29,3 +31,4 @@ location of beam emissions at the target plane (in terms of X and Y).
 Nov. 21 Update: - added a histogram in the output file that displays the 
 x and y components of the particle direction unit vectors (Target Plane
 Transverse Emission Components).   
+
