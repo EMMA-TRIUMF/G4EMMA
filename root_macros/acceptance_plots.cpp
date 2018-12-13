@@ -23,18 +23,18 @@ void acceptance_plots() {
   Double_t fp_posX_a, fp_posY_a, tar_angX_a, tar_angY_a;
   Double_t fp_posX_e, fp_posY_e, tar_energy;
 
-
+  // get the values of the data from the tree and populate our variables
   ang_tree->SetBranchAddress("fp_posX",&fp_posX_a);
   ang_tree->SetBranchAddress("fp_posY",&fp_posY_a);
   ang_tree->SetBranchAddress("target_angX",&tar_angX_a);
   ang_tree->SetBranchAddress("target_angY",&tar_angY_a);
   Int_t nentries = (Int_t)ang_tree->GetEntries();
-
   energy_tree->SetBranchAddress("fp_posX",&fp_posX_e);
   energy_tree->SetBranchAddress("fp_posY",&fp_posY_e);
   energy_tree->SetBranchAddress("target_Ekin",&tar_energy);
   Int_t pentries = (Int_t)energy_tree->GetEntries();
 
+  // make the histograms to fill
   TH1F* ang_X = new TH1F("X angle","Target X angle",100,-0.1,0.1);
   TH1F* ang_Y = new TH1F("Y angle","Target Y angle",100,-0.1,0.1);
   TH2F* ang_XY = new TH2F("angle distribution","Target angle distribution",100,-0.1,0.1,100,-0.1,0.1);
@@ -67,6 +67,7 @@ void acceptance_plots() {
     }
   }
 
+// display the histograms
 TCanvas * c1 = new TCanvas("c1");
 ang_X->GetXaxis()->SetTitle("rad");
 ang_X->Draw();

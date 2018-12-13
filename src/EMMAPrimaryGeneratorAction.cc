@@ -372,11 +372,16 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     if (MaxAngle>0.) {
       theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
       phi = G4UniformRand()*CLHEP::twopi;
-
+/* this is the original, the next definitions of xyz are experimental.
       THETA = Angle + theta*cos(phi);
       x = sin(THETA);
       y = sin(theta) * sin(phi);
       z = cos(THETA);
+*/
+			THETA = Angle + theta*cos(phi);
+      x = sin(theta) * cos(phi);
+      y = sin(theta) * sin(phi);
+      z = cos(theta);
 
     }
 
