@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-title="Energy_acceptance_1k"
+title="Ang_acceptance_test_10k"
 
 cd /home/awen/G4EMMA_data
 

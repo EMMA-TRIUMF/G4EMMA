@@ -124,7 +124,7 @@ EMMAEventAction::EMMAEventAction()
   fp_hit2DEdep->GetYaxis()->SetTitle("Edep Front (MeV)");
 
   //call root tree and creates branches to store event by event data
-  fp_tree = analysisManager->getRoottree();
+  fp_tree = analysisManager->getfpRoottree();
   fp_tree->Branch("fp_posX",&fp_posX,"fp_posX/D");
   fp_tree->Branch("fp_posY",&fp_posY,"fp_posY/D");
 
@@ -142,6 +142,15 @@ EMMAEventAction::EMMAEventAction()
   fp_tree->Branch("target_angY",&target_angY,"target_angY/D");
 
   fp_tree->Branch("target_Ekin",&target_Ekin_tree,"target_Ekin/D");
+
+  // call another root tree to store the target plane data (for all events, not just the ones that hit fp)
+  target_tree = analysisManager->gettargetRoottree();
+
+  target_tree->Branch("target_Ekint",&target_Ekint,"target_Ekint/D");
+  target_tree->Branch("target_x",&target_x,"target_x/D");
+  target_tree->Branch("target_y",&target_y,"target_y/D");
+  target_tree->Branch("target_xang",&target_xang,"target_xang/D");
+  target_tree->Branch("target_yang",&target_xang,"target_yang/D");
 
 #endif // G4ANALYSIS_USE
 }
@@ -215,6 +224,17 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
   target_pos->Fill(EMMAPrimaryGeneratorAction::targetX,EMMAPrimaryGeneratorAction::targetY);
   target_dir->Fill(x_angle,y_angle);
 
+  //---------------//---------------//---------------//---------------//---------------//
+
+  target_x = EMMAPrimaryGeneratorAction::targetX;
+  target_y = EMMAPrimaryGeneratorAction::targetY;
+  target_xang = x_angle;
+  target_yang = y_angle;
+  target_Ekint = EMMAPrimaryGeneratorAction::targetEkin;
+
+  target_tree->Fill();
+
+  //---------------//---------------//---------------//---------------//---------------//
 
 
   G4HCofThisEvent * HCE = event->GetHCofThisEvent();
@@ -288,8 +308,8 @@ void EMMAEventAction::EndOfEventAction(const G4Event* event)
 	            fp_Edep_Silicon = EdepSilicon;
               target_posX = EMMAPrimaryGeneratorAction::targetX;
               target_posY = EMMAPrimaryGeneratorAction::targetY;
-              target_angX = asin(EMMAPrimaryGeneratorAction::targetXdir);
-              target_angY = asin(EMMAPrimaryGeneratorAction::targetYdir);
+              target_angX = x_angle;
+              target_angY = y_angle;
               target_Ekin_tree = EMMAPrimaryGeneratorAction::targetEkin;
               fp_tree->Fill();
 
