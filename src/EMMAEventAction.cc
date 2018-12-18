@@ -150,7 +150,7 @@ EMMAEventAction::EMMAEventAction()
   target_tree->Branch("target_x",&target_x,"target_x/D");
   target_tree->Branch("target_y",&target_y,"target_y/D");
   target_tree->Branch("target_xang",&target_xang,"target_xang/D");
-  target_tree->Branch("target_yang",&target_xang,"target_yang/D");
+  target_tree->Branch("target_yang",&target_yang,"target_yang/D");
 
 #endif // G4ANALYSIS_USE
 }
