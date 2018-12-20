@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-title="Ang_acceptance_test_10k"
+title="Disp_test_+0%"
 
 cd /home/awen/G4EMMA_data
 

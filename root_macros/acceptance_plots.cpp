@@ -6,6 +6,8 @@
 #include <TFile.h>
 #include <TTree.h>
 
+#define M_PI 3.14159265358979323846L
+
 void acceptance_plots() {
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
@@ -46,11 +48,11 @@ void acceptance_plots() {
 
   // make the histograms to fill
 
-  TH2F* ang_XY = new TH2F("angle distribution","Target angle distribution from focal plane",100,-0.1,0.1,100,-0.1,0.1);
+  TH2F* ang_XY = new TH2F("angle dist - fp","Target angle dist from focal plane events",100,-0.1,0.1,100,-0.1,0.1);
 
   TH1F* energy = new TH1F("energy","Target energy distribution",100,50,150);
 
-  TH2F* ang_XY_total = new TH2F("angle distribution","TOTAL Target angle distribution in acceptance region",100,-0.1,0.1,100,-0.1,0.1);
+  TH2F* ang_XY_total = new TH2F("angle dist - total","Target angle dist in acceptance region",100,-0.1,0.1,100,-0.1,0.1);
 
 
   // get the max and min values of energy and angles that made it to the focal plane
@@ -139,17 +141,19 @@ c1->Divide(3,2);
 c1->cd(1);
 TH1F* ang_X = (TH1F*)ang_XY->ProjectionX();
 ang_X->GetXaxis()->SetTitle("X (rad)");
+ang_X->SetLineColor(2);
 ang_X->Draw();
 
 c1->cd(2);
 TH1F* ang_Y = (TH1F*)ang_XY->ProjectionY();
 ang_Y->GetXaxis()->SetTitle("Y (rad)");
+ang_Y->SetLineColor(2);
 ang_Y->Draw();
 
 c1->cd(3);
 ang_XY->GetXaxis()->SetTitle("X (rad)");
 ang_XY->GetYaxis()->SetTitle("Y (rad)");
-ang_XY->Draw();
+ang_XY->Draw("colz");
 
 c1->cd(4);
 TH1F * ang_X_total = (TH1F*)ang_XY_total->ProjectionX();
@@ -164,7 +168,17 @@ ang_Y_total->Draw();
 c1->cd(6);
 ang_XY_total->GetXaxis()->SetTitle("X (rad)");
 ang_XY_total->GetYaxis()->SetTitle("Y (rad)");
-ang_XY_total->Draw();
+ang_XY_total->Draw("colz");
+
+TCanvas * c2 = new TCanvas("c2");
+c2->Divide(2,1);
+
+c2->cd(1);
+ang_X->Draw();
+ang_X_total->Draw("same");
+c2->cd(2);
+ang_Y->Draw();
+ang_Y_total->Draw("same");
 
 TCanvas * misc = new TCanvas("misc");
 ang_XY->Draw("colz");
@@ -180,8 +194,10 @@ energy_all->Draw("same");
 
 // Display some important max/min values
 std::cout << "Max energy accepted: " << max_e << " Min energy accepted: " << min_e << std::endl;
-std::cout << "Max X angle: " << max_ang_x << " Min X angle: " << min_ang_x << std::endl;
-std::cout << "Max Y angle: " << max_ang_y << " Min Y angle: " << min_ang_y << std::endl;
+std::cout << "Max X angle: " << max_ang_x << " (" << (360/(2*M_PI))*max_ang_x << " deg)" << std::endl;
+std::cout << "Min X angle: " << min_ang_x << " (" << (360/(2*M_PI))*min_ang_x << " deg)" << std::endl;
+std::cout << "Max Y angle: " << max_ang_y << " (" << (360/(2*M_PI))*max_ang_y << " deg)" << std::endl;
+std::cout << "Min Y angle: " << min_ang_y << " (" << (360/(2*M_PI))*min_ang_y << " deg)" << std::endl;
 
 
 }
