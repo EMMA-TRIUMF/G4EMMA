@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-title="Disp_test_+0%"
+title="Disp_test_-4%"
 
 cd /home/awen/G4EMMA_data
 

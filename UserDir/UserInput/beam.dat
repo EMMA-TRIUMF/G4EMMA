@@ -1,7 +1,7 @@
-100     # number of events
-18     # beam Z
-40.4     # beam A
-4     # beam charge state Q
+200     # number of events
+5     # beam Z
+10     # beam A
+1.04166666667    # beam charge state Q
 100    # beam kinetic energy (MeV)
 0     # fractional energy spread (Sigma %)
 1.0    # beam-spot diameter (mm)
