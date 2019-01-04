@@ -5,199 +5,115 @@
 #include <TObject.h>
 #include <TFile.h>
 #include <TTree.h>
+#include <TMath.h>
+#include
 
 #define M_PI 3.14159265358979323846L
 
-void acceptance_plots() {
+void dispersion_plots() {
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
   // call the data files
-  TFile *ang_file = new TFile("/home/awen/G4EMMA_data/Ang_acceptance_test_10k/Results/GEMMAoutput.root");
-  TFile *energy_file = new TFile("/home/awen/G4EMMA_data/Energy_acceptance_1k/Results/GEMMAoutput.root");
+  TFile *z_file = new TFile("/home/awen/G4EMMA_data/Disp_test_0/Results/GEMMAoutput.root");
+
+  TFile *p1_file = new TFile("/home/awen/G4EMMA_data/Disp_test_+1/Results/GEMMAoutput.root");
+  TFile *p2_file = new TFile("/home/awen/G4EMMA_data/Disp_test_+2/Results/GEMMAoutput.root");
+  TFile *p3_file = new TFile("/home/awen/G4EMMA_data/Disp_test_+3/Results/GEMMAoutput.root");
+
+  TFile *m1_file = new TFile("/home/awen/G4EMMA_data/Disp_test_-1/Results/GEMMAoutput.root");
+  TFile *m2_file = new TFile("/home/awen/G4EMMA_data/Disp_test_-2/Results/GEMMAoutput.root");
+  TFile *m3_file = new TFile("/home/awen/G4EMMA_data/Disp_test_-3/Results/GEMMAoutput.root");
 
   // create a new file in case I want to write anything to save
   //TFile *file = new TFile("acceptance_plots.root","RECREATE");
 
   // call the trees in the data files
-  TTree *ang_tree = (TTree*)ang_file->Get("fphits");
-  TTree *energy_tree = (TTree*)energy_file->Get("fphits");
-  TTree *ang_tree_target = (TTree*)ang_file->Get("targetplane");
+  TTree *z_tree = (TTree*)z_file->Get("fphits");
+
+  TTree *p1_tree = (TTree*)p1_file->Get("fphits");
+  TTree *p2_tree = (TTree*)p2_file->Get("fphits");
+  TTree *p3_tree = (TTree*)p3_file->Get("fphits");
+
+  TTree *m1_tree = (TTree*)m1_file->Get("fphits");
+  TTree *m2_tree = (TTree*)m2_file->Get("fphits");
+  TTree *m3_tree = (TTree*)m3_file->Get("fphits");
 
   // data variables
-  Double_t fp_posX_a, fp_posY_a, tar_angX_a, tar_angY_a; //angular data from events that made it to the focal plane
-  Double_t fp_posX_e, fp_posY_e, tar_energy; // energy data from events taht made it to the focal plane
-  Double_t target_angX_total, target_angY_total;  //angular data from the region of interest that were TOTAL emitted
+
+  Double_t z_x, p1, p2, p3, m1, m2, m3;
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
   // get the values of the data from the tree and populate our variables
-  ang_tree->SetBranchAddress("fp_posX",&fp_posX_a);
-  ang_tree->SetBranchAddress("fp_posY",&fp_posY_a);
-  ang_tree->SetBranchAddress("target_angX",&tar_angX_a);
-  ang_tree->SetBranchAddress("target_angY",&tar_angY_a);
-  Int_t nentries = (Int_t)ang_tree->GetEntries();
-  energy_tree->SetBranchAddress("fp_posX",&fp_posX_e);
-  energy_tree->SetBranchAddress("fp_posY",&fp_posY_e);
-  energy_tree->SetBranchAddress("target_Ekin",&tar_energy);
-  Int_t pentries = (Int_t)energy_tree->GetEntries();
+  z_tree->SetBranchAddress("fp_posX",&z_x);
 
-  ang_tree_target->SetBranchAddress("target_xang", &target_angX_total);
-  ang_tree_target->SetBranchAddress("target_yang", &target_angY_total);
-  Int_t qentries = (Int_t)ang_tree_target->GetEntries();
+  p1_tree->SetBranchAddress("fp_posX",&p1);
+  p2_tree->SetBranchAddress("fp_posX",&p2);
+  p3_tree->SetBranchAddress("fp_posX",&p3);
+
+  m1_tree->SetBranchAddress("fp_posX",&m1);
+  m2_tree->SetBranchAddress("fp_posX",&m2);
+  m3_tree->SetBranchAddress("fp_posX",&m3);
+
+  Int_t nentries = (Int_t)z_tree->GetEntries();
+
 
   // make the histograms to fill
 
-  TH2F* ang_XY = new TH2F("angle dist - fp","Target angle dist from focal plane events",100,-0.1,0.1,100,-0.1,0.1);
+  TH1F* z_hist = new TH1F("z_x","z_x",10000,-50,50);
 
-  TH1F* energy = new TH1F("energy","Target energy distribution",100,50,150);
+  TH1F* p1_hist = new TH1F("p1","p1",10000,-50,50);
+  TH1F* p2_hist = new TH1F("p2","p2",10000,-50,50);
+  TH1F* p3_hist = new TH1F("p3","p3",10000,-50,50);
 
-  TH2F* ang_XY_total = new TH2F("angle dist - total","Target angle dist in acceptance region",100,-0.1,0.1,100,-0.1,0.1);
-
-
-  // get the max and min values of energy and angles that made it to the focal plane
-  Double_t max_e = 100;
-  Double_t min_e = 100;
-  Double_t max_ang_x = 0;
-  Double_t min_ang_x = 0;
-  Double_t max_ang_y = 0;
-  Double_t min_ang_y = 0;
+  TH1F* m1_hist = new TH1F("m1","m1",10000,-50,50);
+  TH1F* m2_hist = new TH1F("m2","m2",10000,-50,50);
+  TH1F* m3_hist = new TH1F("m3","m3",10000,-50,50);
 
 
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
+// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
-
-
-  // fill the angular acceptance histograms
+  // fill the histograms
   for (Int_t i=0; i<nentries; i++) {
 
-    ang_tree->GetEntry(i);
+    z_tree->GetEntry(i);
+    p1_tree->GetEntry(i);
+    p2_tree->GetEntry(i);
+    p3_tree->GetEntry(i);
+    m1_tree->GetEntry(i);
+    m2_tree->GetEntry(i);
+    m3_tree->GetEntry(i);
 
-    //ang_X->Fill(tar_angX_a);
-    //ang_Y->Fill(tar_angY_a);
-    ang_XY->Fill(tar_angX_a,tar_angY_a);
-
-    //-----------------------------------------------------------------------------------//
-    // find min and max angles in the x and y directions
-    if (tar_angX_a >= max_ang_x)
-      max_ang_x = tar_angX_a;
-
-    if (tar_angX_a <= min_ang_x)
-      min_ang_x = tar_angX_a;
-
-    if (tar_angY_a >= max_ang_y)
-      max_ang_y = tar_angY_a;
-
-    if (tar_angY_a <= min_ang_y)
-      min_ang_y = tar_angY_a;
-
-
-
-    //-----------------------------------------------------------------------------------//
+    z_hist->Fill(z_x);
+    p1_hist->Fill(p1);
+    p2_hist->Fill(p2);
+    p3_hist->Fill(p3);
+    m1_hist->Fill(m1);
+    m2_hist->Fill(m2);
+    m3_hist->Fill(m3);
 
   }
 
-  // fill the histogram that is independent of the focal plane, for comparison
-  // essentially "cut" by the max and min angles of the events that did make it through to the focal plane
+// define the variables that we are interested in finding
+Double_t z_mean, p1_mean, p2_mean, p3_mean, m1_mean, m2_mean, m3_mean;
+Double_t z_stdev, p1_stdev, p2_stdev, p3_stdev, m1_stdev, m2_stdev, m3_stdev;
 
-  for (Int_t i=0; i<qentries; i++) {
+// get the mean and stdev from the histogram values, so they can be plotted
+z_mean = z_hist->GetMean();   z_stdev = z_hist->GetStdDev();
+p1_mean = p1_hist->GetMean(); p1_stdev = p1_hist->GetStdDev();
+p2_mean = p2_hist->GetMean(); p2_stdev = p2_hist->GetStdDev();
+p3_mean = p3_hist->GetMean(); p3_stdev = p3_hist->GetStdDev();
+m1_mean = m1_hist->GetMean(); m1_stdev = m1_hist->GetStdDev();
+m2_mean = m2_hist->GetMean(); m2_stdev = m2_hist->GetStdDev();
+m3_mean = m3_hist->GetMean(); m3_stdev = m3_hist->GetStdDev();
 
-    ang_tree_target->GetEntry(i);
+std::cout << p1_mean << " " << p1_stdev << std::endl;
 
-    if (target_angX_total<max_ang_x
-        && target_angX_total>min_ang_x
-        && target_angY_total<max_ang_y
-        && target_angY_total>min_ang_y)
-      ang_XY_total->Fill(target_angX_total,target_angY_total);
-
-  }
-
-
-
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
-
-  // fill the energy acceptance histograms
-  for (int i=0; i<pentries; i++) {
-    energy_tree->GetEntry(i);
-    energy->Fill(tar_energy);
-
-    //-----------------------------------------------------------------------------------//
-    // find the max and min energy
-    if (tar_energy >= max_e) {
-      max_e = tar_energy;
-    }
-    if (tar_energy <= min_e) {
-      min_e = tar_energy;
-    }
-    //-----------------------------------------------------------------------------------//
-  }
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
 
-// make a bunch of canvases and display the histograms
-TCanvas * c1 = new TCanvas("c1");
-c1->Divide(3,2);
-c1->cd(1);
-TH1F* ang_X = (TH1F*)ang_XY->ProjectionX();
-ang_X->GetXaxis()->SetTitle("X (rad)");
-ang_X->SetLineColor(2);
-ang_X->Draw();
-
-c1->cd(2);
-TH1F* ang_Y = (TH1F*)ang_XY->ProjectionY();
-ang_Y->GetXaxis()->SetTitle("Y (rad)");
-ang_Y->SetLineColor(2);
-ang_Y->Draw();
-
-c1->cd(3);
-ang_XY->GetXaxis()->SetTitle("X (rad)");
-ang_XY->GetYaxis()->SetTitle("Y (rad)");
-ang_XY->Draw("colz");
-
-c1->cd(4);
-TH1F * ang_X_total = (TH1F*)ang_XY_total->ProjectionX();
-ang_X_total->GetXaxis()->SetTitle("X (rad)");
-ang_X_total->Draw();
-
-c1->cd(5);
-TH1F* ang_Y_total = (TH1F*)ang_XY_total->ProjectionY();
-ang_Y_total->GetXaxis()->SetTitle("Y (rad)");
-ang_Y_total->Draw();
-
-c1->cd(6);
-ang_XY_total->GetXaxis()->SetTitle("X (rad)");
-ang_XY_total->GetYaxis()->SetTitle("Y (rad)");
-ang_XY_total->Draw("colz");
-
-TCanvas * c2 = new TCanvas("c2");
-c2->Divide(2,1);
-
-c2->cd(1);
-ang_X->Draw();
-ang_X_total->Draw("same");
-c2->cd(2);
-ang_Y->Draw();
-ang_Y_total->Draw("same");
-
-TCanvas * misc = new TCanvas("misc");
-ang_XY->Draw("colz");
-
-
-TCanvas * c3 = new TCanvas("c3");
-energy->GetXaxis()->SetTitle("MeV");
-TH1F* energy_all = (TH1F*)energy_file->Get("targetEkin");
-energy->Draw();
-energy_all->SetLineColor(2);
-energy_all->Draw("same");
-
-
-// Display some important max/min values
-std::cout << "Max energy accepted: " << max_e << " Min energy accepted: " << min_e << std::endl;
-std::cout << "Max X angle: " << max_ang_x << " (" << (360/(2*M_PI))*max_ang_x << " deg)" << std::endl;
-std::cout << "Min X angle: " << min_ang_x << " (" << (360/(2*M_PI))*min_ang_x << " deg)" << std::endl;
-std::cout << "Max Y angle: " << max_ang_y << " (" << (360/(2*M_PI))*max_ang_y << " deg)" << std::endl;
-std::cout << "Min Y angle: " << min_ang_y << " (" << (360/(2*M_PI))*min_ang_y << " deg)" << std::endl;
 
 
 }
