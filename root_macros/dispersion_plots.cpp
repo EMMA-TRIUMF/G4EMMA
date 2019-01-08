@@ -6,13 +6,14 @@
 #include <TFile.h>
 #include <TTree.h>
 #include <TMath.h>
-#include
+#include <TGraphErrors.h>
+#include <TGraph.h>
 
 #define M_PI 3.14159265358979323846L
 
 void dispersion_plots() {
 
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
+// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
   // call the data files
   TFile *z_file = new TFile("/home/awen/G4EMMA_data/Disp_test_0/Results/GEMMAoutput.root");
@@ -43,7 +44,7 @@ void dispersion_plots() {
 
   Double_t z_x, p1, p2, p3, m1, m2, m3;
 
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
+// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
   // get the values of the data from the tree and populate our variables
   z_tree->SetBranchAddress("fp_posX",&z_x);
@@ -61,18 +62,18 @@ void dispersion_plots() {
 
   // make the histograms to fill
 
-  TH1F* z_hist = new TH1F("z_x","z_x",10000,-50,50);
+  TH1F* z_hist = new TH1F("z_x","z_x",100000,-50,50);
 
-  TH1F* p1_hist = new TH1F("p1","p1",10000,-50,50);
-  TH1F* p2_hist = new TH1F("p2","p2",10000,-50,50);
-  TH1F* p3_hist = new TH1F("p3","p3",10000,-50,50);
+  TH1F* p1_hist = new TH1F("p1","p1",100000,-50,50);
+  TH1F* p2_hist = new TH1F("p2","p2",100000,-50,50);
+  TH1F* p3_hist = new TH1F("p3","p3",100000,-50,50);
 
-  TH1F* m1_hist = new TH1F("m1","m1",10000,-50,50);
-  TH1F* m2_hist = new TH1F("m2","m2",10000,-50,50);
-  TH1F* m3_hist = new TH1F("m3","m3",10000,-50,50);
+  TH1F* m1_hist = new TH1F("m1","m1",100000,-50,50);
+  TH1F* m2_hist = new TH1F("m2","m2",100000,-50,50);
+  TH1F* m3_hist = new TH1F("m3","m3",100000,-50,50);
 
 
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
+// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
   // fill the histograms
   for (Int_t i=0; i<nentries; i++) {
@@ -108,11 +109,29 @@ m1_mean = m1_hist->GetMean(); m1_stdev = m1_hist->GetStdDev();
 m2_mean = m2_hist->GetMean(); m2_stdev = m2_hist->GetStdDev();
 m3_mean = m3_hist->GetMean(); m3_stdev = m3_hist->GetStdDev();
 
-std::cout << p1_mean << " " << p1_stdev << std::endl;
+// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
+const Int_t n = 7;
+Float_t x[n] = {-3.0,-2.0,-1.0,0.0,1.0,2.0,3.0};
+Float_t y[n] = {m3_mean, m2_mean, m1_mean, z_mean, p1_mean, p2_mean, p3_mean};
+Float_t ey[n] = {m3_stdev, m2_stdev, m1_stdev, z_stdev, p1_stdev, p2_stdev, p3_stdev};
+Float_t ex[n] = {0,0,0,0,0,0,0};
+TGraphErrors *graph = new TGraphErrors(n,x,y,ex,ey);
+graph->SetTitle("Average x Dispersion vs. Percent m/q Dispersion");
+graph->GetXaxis()->SetTitle("Percent m/q dispersion");
+graph->GetYaxis()->SetTitle("Horizontal dispersion in focal plane (mm)");
+graph->SetMarkerStyle(21);
 
-// /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
+const Int_t n2 = 2;
+Float_t x2[n] = {-3.5,3.5};
+Float_t y2[n] = {35.0,-35.0};
+TGraph *graph2 = new TGraph(n2,x2,y2);
+graph2->SetLineColor(2); 
 
+TCanvas *canvas = new TCanvas("canvas","graph");
+canvas->cd();
+graph->Draw("AP");
+graph2->Draw("L");
 
 
 
