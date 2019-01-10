@@ -15,7 +15,7 @@ void dispersion_plots() {
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
-  // call the data files
+  // call the data files from the data folder
   TFile *z_file = new TFile("/home/awen/G4EMMA_data/Disp_test_0/Results/GEMMAoutput.root");
 
   TFile *p1_file = new TFile("/home/awen/G4EMMA_data/Disp_test_+1/Results/GEMMAoutput.root");
@@ -53,7 +53,6 @@ void dispersion_plots() {
   TTree *m2p5_tree = (TTree*)m2p5_file->Get("fphits");
 
   // data variables
-
   Double_t z_x, p1, p2, p3, p0p5, p1p5, p2p5, m1, m2, m3, m0p5, m1p5, m2p5;
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
@@ -79,7 +78,6 @@ void dispersion_plots() {
 
 
   // make the histograms to fill
-
   TH1F* z_hist = new TH1F("z_x","z_x",100000,-50,50);
 
   TH1F* p1_hist = new TH1F("p1","p1",100000,-50,50);
@@ -100,7 +98,7 @@ void dispersion_plots() {
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
-  // fill the histograms
+  // fill the histograms with the data from the trees which came from the data files
   for (Int_t i=0; i<nentries; i++) {
 
     z_tree->GetEntry(i);
@@ -154,18 +152,25 @@ m2p5_mean = m2p5_hist->GetMean(); m2p5_stdev = m2p5_hist->GetStdDev();
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
+// make a TGraphErrors to plot the points
 const Int_t n = 13;
+// array of x values (% dispersion in m/q)
 Float_t x[n] = {-3.0,-2.5,-2.0,-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5,2.0,2.5,3.0};
+// corresponding array of means and stdevs
 Float_t y[n] = {m3_mean, m2p5_mean, m2_mean, m1p5_mean, m1_mean, m0p5_mean, z_mean, p0p5_mean, p1_mean, p1p5_mean, p2_mean, p2p5_mean, p3_mean};
 Float_t ey[n] = {m3_stdev, m2p5_stdev, m2_stdev, m1p5_stdev, m1_stdev, m0p5_stdev, z_stdev, p0p5_stdev, p1_stdev, p1p5_stdev, p2_stdev, p2p5_stdev, p3_stdev};
 Float_t ex[n] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+// draw the graph
 TGraphErrors *graph = new TGraphErrors(n,x,y,ex,ey);
+// aesthetics
 graph->SetTitle("Average x Dispersion vs. Percent m/q Dispersion");
 graph->GetXaxis()->SetTitle("Percent m/q dispersion");
 graph->GetYaxis()->SetTitle("Horizontal dispersion in focal plane (mm)");
+// fit a linear line to get a slope
 graph->Fit("pol1");
 graph->SetMarkerStyle(21);
 
+// draw a line for the nominal slope to compare with the best fit line
 const Int_t n2 = 2;
 Float_t x2[n] = {-3.5,3.5};
 Float_t y2[n] = {35.0,-35.0};
@@ -173,6 +178,7 @@ TGraph *graph2 = new TGraph(n2,x2,y2);
 graph2->SetLineColor(3);
 graph2->SetLineWidth(3);
 
+// make a canvas a draw the graphs
 TCanvas *canvas = new TCanvas("canvas","graph");
 canvas->cd();
 canvas->SetGrid();

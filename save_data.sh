@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-title="Disp_test_+2.5"
+title="Disp_test_0_new"
 
 cd /home/awen/G4EMMA_data
 
