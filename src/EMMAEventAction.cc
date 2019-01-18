@@ -27,6 +27,8 @@
 // --------------------------------------------------------------
 //
 
+/// This file is important for writing the histogram and trees in the output root file. If you want to change the appearance of the output, you've come to the right place...
+
 #include "EMMAEventAction.hh"
 #include "EMMAEventActionMessenger.hh"
 #ifdef G4ANALYSIS_USE

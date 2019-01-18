@@ -88,7 +88,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 	particleGun = new G4ParticleGun(n_particle);
 
 	// Experimental!
-	GPSparticleGun = new G4GeneralParticleSource();
+	//GPSparticleGun = new G4GeneralParticleSource();
 	// Experimantal!
 
 	//create a messenger for this class
@@ -142,17 +142,19 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 
 }
 
+// destructor
 EMMAPrimaryGeneratorAction::~EMMAPrimaryGeneratorAction()
 {
   delete particleGun;	//must delete G4ParticleGun
-	delete GPSparticleGun;
+	//delete GPSparticleGun; // experimental!
   delete gunMessenger;
 }
 
 //---------------------------------------------------------------------------------------//
 //---------------------------------------------------------------------------------------//
-// Energy spectra reading
+// Energy spectra reading (mostly used in generating beam with no reaction (mydet/doBeam))
 
+// Energy distribution initialization
 void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 	std::fstream file(fileName, std::ios::in);
 	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //ignore the first line (for commenting)
@@ -190,6 +192,7 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 
 }
 
+// energy distribution function
 G4double EMMAPrimaryGeneratorAction::energyDistribution() {
 
 	G4double e_rndm = 0., f_rndm = 0., f_inter = -1.;
@@ -216,14 +219,12 @@ G4double EMMAPrimaryGeneratorAction::energyDistribution() {
 //---------------------------------------------------------------------------------------//
 
 
-
 void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 { // This method is invoked at the beginning of each event
 
   G4double randNumb;
   if (prepareBeam) randNumb = G4UniformRand(); //used to chose a random reaction depth
   else randNumb = 1.0;
-
 
   // this is to update target thickness
   // <><><><><><><><><><><><><><><><><><><><> //
@@ -237,7 +238,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   G4double Ekin;
   G4ParticleDefinition* particleDef;
-
 
   // to simulate just an isotropic alpha source
   if (useAlphaSource) {	//boolean determined from alphaSource.dat input file
@@ -279,11 +279,6 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     particleDef = G4ParticleTable::GetParticleTable()->GetIonTable()->GetIon(beamZ,beamA,0.0);
     particleGun->SetParticleDefinition(particleDef);
     particleGun->SetParticleCharge(userCharge);
-
-		//Experimental!
-		//GPSparticleGun->SetParticleDefinition(particleDef);
-		//GPSparticleGun->SetParticleCharge(userCharge);
-		//Experimental!
 
     // Sample energy
 		mean_energy = energy;
@@ -374,13 +369,14 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       phi = G4UniformRand()*CLHEP::twopi;
 
 
-/* this is the original, the next definitions of xyz are experimental.
+/* this is the original, the next definitions of xyz are experimental. I'm not quite sure why
+these definitions for x, y, z are used. I've opted to use a much simpler version....
       THETA = Angle + theta*cos(phi);
       x = sin(THETA);
       y = sin(theta) * sin(phi);
       z = cos(THETA);
 */
-			THETA = Angle + theta*cos(phi);
+// .... here, which is just defining the x, y, z from spherical coordinates, which were calculated earlier.
       x = sin(theta) * cos(phi);
       y = sin(theta) * sin(phi);
       z = cos(theta);
@@ -392,7 +388,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		G4cout << "the momentum vector is " << G4ThreeVector(x,y,z) << G4endl;
 
     //G4cout<<"Prim.Gen.Action output "<<"Energy(MeV)= "<<energy <<" z emission location (mm) "
-        //  <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
+        // <<zemit/mm<< "Angle Offset (deg): "<< Angle/deg << " theta (deg)= "<< theta/deg <<" phi(deg)= "<< phi/deg << " THETA(deg)= "<< THETA/deg <<G4endl;
 
     //G4cout<<"Momentum Dir [x,y,z]: ["<< x <<","<< y << "," << z << "]" << G4endl;
 
@@ -426,23 +422,20 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   }
 
-
+	// fire away! ( ͡° ͜ʖ ͡°)=ε/̵͇̿̿/'̿̿                  ╾━╤デ╦︻(▀̿Ĺ̯▀̿)
   particleGun->GeneratePrimaryVertex(anEvent);
 
-
 	//GPSparticleGun->GeneratePrimaryVertex(anEvent);
-	/*
-	G4cout << "the energy emitted is " << GPSparticleGun->GetParticleEnergy() << G4endl;
-	G4cout << "the position is " << GPSparticleGun->GetParticlePosition() << G4endl;
-	G4cout << "the momentum vector is " << GPSparticleGun->GetParticleMomentumDirection() << G4endl;
-	*/
 
+	// output some basic information (mostly used for verifying that you're shootin' the shit you wanna be shootin')
 	G4cout << "the energy emitted is " << particleGun->GetParticleEnergy() << G4endl;
 	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;
 
 
-	// these variables feed their values into a histogram defined in EMMAEventAction.cc
+	// these variables feed their values into a histogram defined in EMMAEventAction.cc, which eventually makes
+	// its way into the output ROOT file. This adds more information to the output on the particle's status at
+	// the target plane, not just the focal plane.
 	targetEkin = particleGun->GetParticleEnergy();
 	targetX = particleGun->GetParticlePosition().getX();
 	targetY = particleGun->GetParticlePosition().getY();
@@ -460,11 +453,7 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	   << Ekin << " MeV, Charge " << charge << G4endl;
   }
 	*/
-
 }
-
-
-
 
 
 void EMMAPrimaryGeneratorAction::initializeReactionSimulation() // called using /mydet/doReaction
