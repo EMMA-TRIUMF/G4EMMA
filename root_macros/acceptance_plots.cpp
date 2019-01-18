@@ -8,6 +8,55 @@
 
 #define M_PI 3.14159265358979323846L
 
+/* ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°)
+
+This script does some basic analysis regarding energy and angular acceptances of the simulation spectrometer.
+Run it by loading root in this directory, loading with
+
+[] .L acceptance_plots.cpp
+
+and running with
+
+[] acceptance_plots()
+
+
+It reads in two files: Ang_acceptance_test_10k/Results/GEMMAoutput.root and Energy_acceptance_1k/Results/GEMMAoutput.root
+The first one was testing angular acceptance; beam was shot with a large normalized transverse emmittance
+with the goal of finding the maximum angle a particle could be shot and still reach the focal plane.
+The second one tests energy acceptance; beam was shot with a wide spectrum of energies to see the highest and
+lowest energy particles that could still make it to the focal plane.
+
+The energy and angular acceptances can be compared to the nominal values
+E: +25%, -17%
+a: +/-3.6 deg by +/-3.6 deg (square apeture)
+
+This scipt outputs the max/min x/y angles based on the data read it (it is simply the largest/most extreme
+angle in the given direction).
+
+Also, it outputs four graphs:
+
+Target energy distribution graphs the energy spectra of the total emitted beam (blue) and the energy spectra of the
+accepted beam (red) for easy comparison. It is also easy to see where the nominal energy limits should be.
+
+Target angle dist from focal plane events is simply the angular distribution at the target plane from every
+accepted beam particle. This was found by getting every event that hit the focal plane and then plotting
+target plane data from that event. This is slightly DIFFERENT from all the beam particles within the angular 
+acceptance range defined by the max/min angles.
+
+The large canvas with 6 pads features the previous graph in the upper row along with its x and y projections, but in the
+bottom row also features the histogram with ALL PARTICLES WITHIN the angular accecptance range and respective x and y
+projections. The two are very similar but have subtle differences (as you can see from the # of events.)
+
+The final canvas with the two pads are the x and y projections from the previous canvas simply overlaid to allow for
+easier comparison.
+
+
+( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) */
+
+
+
+
+
 void acceptance_plots() {
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
