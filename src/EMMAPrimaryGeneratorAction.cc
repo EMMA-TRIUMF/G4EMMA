@@ -355,17 +355,13 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4double theta = 0.0*deg; G4double THETA = 0.0*deg;
     G4double phi = 0.0*deg;
 //---------------------------------------------------------------------------------------//
-
- //fixed angles
-    x = sin(theta) * cos(phi);
-    y = sin(theta) * sin(phi);
-    z = cos(theta);
-
-		G4double theta_max, phi_max;
-
  //random angles
     if (MaxAngle>0.) {
-      theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
+      //theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
+			// EXPERIMENTAL!
+			G4double p = cos(MaxAngle);
+			theta = acos(p+(G4UniformRand()*(1-p)));
+			// EXPERIMENTAL! 
       phi = G4UniformRand()*CLHEP::twopi;
 
 
