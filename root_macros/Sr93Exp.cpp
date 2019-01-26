@@ -14,7 +14,8 @@ void Sr93Exp() {
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
   // call the data files
-  TFile *file = new TFile("/home/awen/G4EMMA_data/Sr93Exp/Results/GEMMAoutput.root");
+  //TFile *file = new TFile("/home/awen/G4EMMA_data/Sr93Exp/Results/GEMMAoutput.root");
+  TFile *file = new TFile("/home/awen/G4EMMA/UserDir/Results/GEMMAoutput.root");
 
   // create a new file in case I want to write anything to save
   //TFile *file = new TFile("acceptance_plots.root","RECREATE");
@@ -24,7 +25,7 @@ void Sr93Exp() {
 
   // data variables
   Double_t ic_Edepfront, ic_Edepback; // raw values
-  Doublt_t total_Edep; // derived values
+  Double_t total_Edep; // derived values
 
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\
 
@@ -36,7 +37,7 @@ void Sr93Exp() {
 
   // make the histograms to fill
 
-  TH2F* deltaE_E = new TH2F("deltaEvsE","Edep in front of IC vs. Total Edep in IC",10000,0,1000,10000,0,1000);
+  TH2F* deltaE_E = new TH2F("deltaEvsE","Edep in front of IC vs. Total Edep in IC",300,0,300,300,0,300);
 
 
   // fill histograms
@@ -57,9 +58,8 @@ void Sr93Exp() {
 // make a bunch of canvases and display the histograms
 TCanvas * c1 = new TCanvas("c1");
 
-deltaE_E->GetXaxis()->SetTitle("X (rad)");
-deltaE_E->SetLineColor(2);
-deltaE_E->Draw();
-
+deltaE_E->GetXaxis()->SetTitle("Total Energy Deposited in IC (MeV)");
+deltaE_E->GetYaxis()->SetTitle("Energy Deposited in IC Front (MeV)");
+deltaE_E->Draw("colz");
 
 }

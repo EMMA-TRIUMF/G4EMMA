@@ -2,11 +2,11 @@
 
 # Prepare beam
 #---------------------------------------------------------------
-/mydet/beamZ 42
+/mydet/beamZ 38
 /mydet/beamA 92
 /mydet/beamCharge 18
 /mydet/energy 600 MeV
-/mydet/sigmaEnergy 0.01         # beam-energy resolution (sigma) in percent of beam energy
+/mydet/sigmaEnergy 0.01       # beam-energy resolution (sigma) in percent of beam energy
 /mydet/Angle 0.0 deg   	  	# beam angle sampled uniformly between 0 and theta=sigmaAngle
 /mydet/beamSpotDiameter 1.0 mm	# nominal: 1.0
 /mydet/transEmittance 0.2 mm	# nominal: 0.2
@@ -15,11 +15,11 @@
 # Add nuclear-reaction process:
 # (Z1,A1)+(Z2,A2)->(Z3,A3)+(Z4,A4)
 #-----------------------------------------
-/twoBodyReaction/Z1 42
+/twoBodyReaction/Z1 38
 /twoBodyReaction/A1 92
 /twoBodyReaction/Z2 1
 /twoBodyReaction/A2 2
-/twoBodyReaction/Z3 42
+/twoBodyReaction/Z3 38
 /twoBodyReaction/A3 93
 /twoBodyReaction/Z4 1
 /twoBodyReaction/A4 1
@@ -33,10 +33,11 @@
 
 # Specify central trajectory
 #----------------------------
-/mydet/centralZ 42
+/mydet/centralZ 38
 /mydet/centralA 93
 /mydet/centralQ 24
 /mydet/centralE 180.0
+#/mydet/centralE 150.0
 /mydet/updategeo           # necessary for changes to take effect
 #----------------------------
 
@@ -52,7 +53,7 @@
 
 # Run simulation
 #-----------------------
-/mydet/nEvents 100
+/mydet/nEvents 20000
 /mydet/doPrepare
 /mydet/doBeam
 /mydet/doReaction

@@ -1,3 +1,6 @@
+To make and build, simply run the script cmake_script.sh
+./cmake_script.sh
+
 
 Some nominal values for EMMA: 
 
