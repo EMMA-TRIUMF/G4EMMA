@@ -97,6 +97,11 @@ EMMAPrimaryGeneratorMessenger::EMMAPrimaryGeneratorMessenger(EMMAPrimaryGenerato
   energyDataCmd->SetParameterName("t",true);
   energyDataCmd->SetDefaultValue("SPEC");
 
+  angularDataCmd = new G4UIcmdWithAString("/mydet/angularData",this);
+  angularDataCmd->SetGuidance("How the angular distribution (spectra) of the beam is determined");
+  angularDataCmd->SetParameterName("ang",true);
+  angularDataCmd->SetDefaultValue("UNIF");
+
 
 
   doPrepareCmd = new G4UIcmdWithABool("/mydet/doPrepare",this);
@@ -211,6 +216,7 @@ EMMAPrimaryGeneratorMessenger::~EMMAPrimaryGeneratorMessenger()
   delete beamSpotDiameterCmd;
   delete transEmittanceCmd;
   delete energyDataCmd;
+  delete angularDataCmd;
   delete doPrepareCmd;
   delete doBeamCmd;
   delete doReactionCmd;
@@ -249,6 +255,8 @@ void EMMAPrimaryGeneratorMessenger::SetNewValue(G4UIcommand * command,G4String n
     { target->SetTransEmittance(transEmittanceCmd->GetNewDoubleValue(newValue)); }
   if( command==energyDataCmd )
     { target->SetEnergyData(newValue); }
+  if( command==angularDataCmd )
+    { target->SetAngularData(newValue); }
   if( command==beamSpotDiameterCmd )
     { target->SetBeamSpotDiameter(beamSpotDiameterCmd->GetNewDoubleValue(newValue)); }
 
@@ -325,10 +333,12 @@ G4String EMMAPrimaryGeneratorMessenger::GetCurrentValue(G4UIcommand * command)
     { cv = transEmittanceCmd->ConvertToString(target->GetTransEmittance(),"mm"); }
   if( command==energyDataCmd )
     { cv = target->GetEnergyData(); }
+  if( command==angularDataCmd )
+    { cv = target->GetAngularData(); }
   if( command==beamSpotDiameterCmd )
     { cv = beamSpotDiameterCmd->ConvertToString(target->GetBeamSpotDiameter(),"mm"); }
 
- if( command==nEventsCmd )
+  if( command==nEventsCmd )
     { cv = nEventsCmd->ConvertToString(target->GetNEvents(),""); }
 
   if( command==fZ1Cmd )

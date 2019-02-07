@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-title="Disp_test_0_new"
+title="Ang_acceptance_test_20k_uni"
 
 cd /home/awen/G4EMMA_data
 

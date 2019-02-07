@@ -66,7 +66,7 @@ private: //commands
   G4UIcmdWithADoubleAndUnit *fqminCmd,*fqmaxCmd;
   G4UIcmdWithADouble *fCharge3Cmd;
   G4UIcmdWithADoubleAndUnit *fExcitationEnergy3Cmd;
-  G4UIcmdWithAString* energyDataCmd;
+  G4UIcmdWithAString* energyDataCmd, *angularDataCmd;
 
 };
 

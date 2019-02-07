@@ -15,10 +15,10 @@ void Sr93Exp() {
 
   // call the data files
   //TFile *file = new TFile("/home/awen/G4EMMA_data/Sr93Exp/Results/GEMMAoutput.root");
-  TFile *file = new TFile("/home/awen/G4EMMA/UserDir/Results/GEMMAoutput.root");
+  TFile *file = new TFile("/home/awen/G4EMMA_data/Sr93Exp_Sr93_20k/Results/GEMMAoutput.root");
 
   // create a new file in case I want to write anything to save
-  //TFile *file = new TFile("acceptance_plots.root","RECREATE");
+  TFile *file_out = new TFile("Sr93Exp_Sr93.root","RECREATE");
 
   // call the trees in the data files
   TTree *tree = (TTree*)file->Get("fphits");
@@ -37,7 +37,7 @@ void Sr93Exp() {
 
   // make the histograms to fill
 
-  TH2F* deltaE_E = new TH2F("deltaEvsE","Edep in front of IC vs. Total Edep in IC",300,0,300,300,0,300);
+  TH2F* deltaE_E = new TH2F("deltaEvsE","Edep in front of IC vs. Total Edep in IC",200,0,300,200,0,300);
 
 
   // fill histograms
@@ -56,10 +56,26 @@ void Sr93Exp() {
 
 
 // make a bunch of canvases and display the histograms
+
+/*
+file_out->cd();
+tree->Write();
+//deltaE_E->Write();
+file_out->Close();
+*/
+
+
+
+
 TCanvas * c1 = new TCanvas("c1");
 
 deltaE_E->GetXaxis()->SetTitle("Total Energy Deposited in IC (MeV)");
 deltaE_E->GetYaxis()->SetTitle("Energy Deposited in IC Front (MeV)");
 deltaE_E->Draw("colz");
+
+tree->Write(); 
+file_out->Write();
+
+
 
 }

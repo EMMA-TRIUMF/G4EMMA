@@ -357,11 +357,18 @@ void EMMAPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //---------------------------------------------------------------------------------------//
  //random angles
     if (MaxAngle>0.) {
-      //theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
-			// EXPERIMENTAL!
-			G4double p = cos(MaxAngle);
-			theta = acos(p+(G4UniformRand()*(1-p)));
-			// EXPERIMENTAL! 
+
+			if (angularData == "RUNI") {
+				theta = G4UniformRand() * MaxAngle * sqrt(1.0-(r/rmax)*(r/rmax));
+		  }
+
+			if (angularData == "UNIF") {
+				// EXPERIMENTAL!
+				G4double p = cos(MaxAngle);
+				theta = acos(p+(G4UniformRand()*(1-p)));
+				// EXPERIMENTAL!
+			}
+
       phi = G4UniformRand()*CLHEP::twopi;
 
 
@@ -423,7 +430,7 @@ these definitions for x, y, z are used. I've opted to use a much simpler version
 
 	//GPSparticleGun->GeneratePrimaryVertex(anEvent);
 
-	// output some basic information (mostly used for verifying that you're shootin' the shit you wanna be shootin')
+	// output some basic information (mostly used for verifying that you're shootin' the stuff you wanna be shootin')
 	G4cout << "the energy emitted is " << particleGun->GetParticleEnergy() << G4endl;
 	G4cout << "the position is " << particleGun->GetParticlePosition() << G4endl;
 	G4cout << "the momentum vector is " << particleGun->GetParticleMomentumDirection() << G4endl;

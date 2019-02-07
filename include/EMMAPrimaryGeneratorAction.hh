@@ -69,7 +69,7 @@ public:
 
   static G4double targetEkin;
   static G4double targetX, targetY;
-  static G4double targetXdir, targetYdir; 
+  static G4double targetXdir, targetYdir;
 
 private:
   G4ParticleGun* particleGun;
@@ -79,6 +79,7 @@ private:
   G4double beamZ, beamA, beamCharge;
   G4double energy;
   G4String energyData;
+  G4String angularData;
   G4double sigmaEnergy;
   G4double Angle;
   G4double transEmittance;
@@ -123,40 +124,6 @@ public:
   void initializeBeamPreparation();
   void GetPrimaryGeneratorActionParameters();
 
-  /*
-  G4double GetMinTargetEkin() {
-    G4double min = energy_v[energy_v.size()/2];
-
-    if (energyData == "SPEC") {
-      for (G4int i = 0; i<energy_v.size(); i++) {
-        if (energy_v[i] < min) {min = energy_v[i]; }
-      }
-      return min;
-    }
-    else if (energyData == "GAUS") {
-      min = mean_energy - (4*std_energy);
-
-      return min;
-    }
-  }
-
-  G4double GetMaxTargetEkin() {
-    G4double max = energy_v[energy_v.size()/2];
-
-    if (energyData == "SPEC") {
-      for (G4int i = 0; i<energy_v.size(); i++) {
-        if (energy_v[i] > max) {max = energy_v[i]; }
-      }
-      return max;
-    }
-    else if (energyData == "GAUS") {
-      max = mean_energy + (4*std_energy);
-
-      return max;
-    }
-  }
-  */
-
 
   void energyDistributionInit(G4String fileName);
   G4double energyDistribution();
@@ -190,6 +157,9 @@ public:
 
   inline void SetEnergyData(G4String val) { energyData = val; }
   inline G4String GetEnergyData() const { return energyData; }
+
+  inline void SetAngularData(G4String val) { angularData = val; }
+  inline G4String GetAngularData() const { return angularData; }
 
 
   inline void SetBeamSpotDiameter(G4double val) { beamSpotDiameter = val; }
