@@ -985,8 +985,6 @@ G4PVPlacement.hh
 /home/awen/G4EMMA/src/G4PVPlacement.hh
 G4ProductionCutsTable.hh
 /home/awen/G4EMMA/src/G4ProductionCutsTable.hh
-G4SubtractionSolid.hh
-/home/awen/G4EMMA/src/G4SubtractionSolid.hh
 EMMAGlobalField.hh
 /home/awen/G4EMMA/src/EMMAGlobalField.hh
 EMFieldDebugger.hh

@@ -95,7 +95,7 @@ EMMAPrimaryGeneratorAction::EMMAPrimaryGeneratorAction()  // constructor
 	gunMessenger = new EMMAPrimaryGeneratorMessenger(this);
 
 	// initialize the energy distribution
-	energyDistributionInit("/home/awen/G4EMMA/UserDir/UserInput/energySpectrum.dat");
+	energyDistributionInit("./UserDir/UserInput/energySpectrum.dat");
 
 	// default particle kinematics
 	particleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.*m));
@@ -167,7 +167,7 @@ void EMMAPrimaryGeneratorAction::energyDistributionInit(G4String fileName) {
 	}
 
 	// reading the file somehow lengthens the vector read in by one, with the last entry being written
-	// twice. pop_back just deletes this extraneous entry.
+	// twice. pop_back just deletes this extraneous entry. Maybe someone who knows C++ better can find out why...
 	energy_v.pop_back();
 	frequency_v.pop_back();
 

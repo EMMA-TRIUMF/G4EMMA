@@ -2,7 +2,7 @@
 18     # beam Z
 40     # beam A
 13     # beam charge state Q
-10    # beam kinetic energy (MeV)
+100    # beam kinetic energy (MeV)
 0     # fractional energy spread (Sigma %)
 1.0    # beam-spot diameter (mm)
 5.    # normalized transverse emittance (pi mm mrad)

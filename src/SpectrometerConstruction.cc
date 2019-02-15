@@ -175,7 +175,7 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	//
 	G4double Pipe1HL = Pipe1length/2.0;      // drift length, original value: 22.75/2 = 11.375cm
 	G4double Q1HL = 13.977/2*cm;		//mag. eff. field half length
-	G4double Q1apt = 3.1*cm;	//apture of vacuum chamber
+	G4double Q1apt = 3.1*cm;	//radius of apeture of vacuum chamber
 	G4double Pipe2HL = 3.5/4*cm;	// why divided by 4??
 	G4double Q2HL = 29.881/2*cm;	//mag. eff. field half length
 	G4double Q2apt = 6.75*cm;
@@ -292,6 +292,9 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4cout<<"Pipe3z: " << Pipe3z << G4endl;
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z),Pipe3WallLogical,"Pipe3WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	//Pipe3WallLogical->SetVisAttributes(WallVisAtt);
+
+	// debugging
+	G4cout << "Location of end of Q1 pipe segment is " << Pipe3z+Pipe2HL << G4endl;
 
 	// Q2
 	G4VSolid* Q2Solid = new G4Tubs("Q2Tub",0*cm,Q2apt,Q2HL,0*deg,360*deg);
@@ -1339,7 +1342,3 @@ void SpectrometerConstruction::buildSlitSingle( G4LogicalVolume* SpecWorldLogica
   }
 
 }
-
-
-
-
