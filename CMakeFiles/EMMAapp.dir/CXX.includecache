@@ -997,6 +997,8 @@ G4Region.hh
 /home/awen/G4EMMA/src/G4Region.hh
 G4UnionSolid.hh
 /home/awen/G4EMMA/src/G4UnionSolid.hh
+G4SubtractionSolid.hh
+/home/awen/G4EMMA/src/G4SubtractionSolid.hh
 G4RegionStore.hh
 /home/awen/G4EMMA/src/G4RegionStore.hh
 G4UserLimits.hh

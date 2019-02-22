@@ -33,6 +33,7 @@
 
 #include "G4Region.hh"
 #include "G4UnionSolid.hh"
+#include "G4SubtractionSolid.hh"
 #include "G4RegionStore.hh"
 
 #include "G4UserLimits.hh"
@@ -293,16 +294,27 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4cout<<"Pipe3z: " << Pipe3z << G4endl;
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z),Pipe3WallLogical,"Pipe3WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	//Pipe3WallLogical->SetVisAttributes(WallVisAtt);
+	G4double Q2SubHL = (437.89-(Pipe3z+Pipe2HL))/2;
+	// Pipe3 Wall Extension
+	G4VSolid* Pipe3WallExtSolid = new G4Tubs("Pipe3WallExtTub",Q1apt,Q1apt+wallThick,Q2SubHL,0*deg,360*deg);
+	G4LogicalVolume* Pipe3WallExtLogical = new G4LogicalVolume(Pipe3WallExtSolid,Wall,"Pipe3WallExtLogical", 0,0,0);
+	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z+Pipe2HL+Q2SubHL),Pipe3WallExtLogical,"Pipe3WallExtPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
+
 
 	// debugging
-
 	G4cout << "Start of Q1: " << Q1z - Q1HL << G4endl;
 	G4cout << "End of Q1: " << Q1z + Q1HL << G4endl;
 	G4cout << "End of Q1 pipe segment: " << Pipe3z+Pipe2HL << G4endl;
+	G4cout << "End of pipe3 extension (clipping boundary): " << Pipe3z+Pipe2HL+(2*Q2SubHL) << G4endl; 
 
 
 	// Q2
-	G4VSolid* Q2Solid = new G4Tubs("Q2Tub",0*cm,Q2apt,Q2HL,0*deg,360*deg);
+	G4VSolid* Q2Sub = new G4Tubs("Q2SubTub",Q1apt,Q1apt+wallThick,Q2SubHL,0*deg,360*deg);
+	G4VSolid* Q2Cyl = new G4Tubs("Q2TubCyl",0*cm,Q2apt,Q2HL,0*deg,360*deg);
+	G4ThreeVector Q2Suboff(0*cm,0*cm,-Q2HL+Q2SubHL);
+
+	G4SubtractionSolid* Q2Solid = new G4SubtractionSolid("Q2TubCyl-Q1SubTub",Q2Cyl,Q2Sub,Rotate0,Q2Suboff);
+
 	// Q2Wall
 	G4VSolid* Q2WallSolid = new G4Tubs("Q2WallTub",Q2apt,Q2apt+wallThick,Q2HL,0*deg,360*deg);
 	G4LogicalVolume* Q2WallLogical = new G4LogicalVolume(Q2WallSolid,Wall,"Q2WallLogical",0,0,0);

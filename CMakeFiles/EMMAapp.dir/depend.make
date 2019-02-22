@@ -8062,6 +8062,7 @@ CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4BooleanSolid.hh
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4BooleanSolid.icc
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4DisplacedSolid.hh
+CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4SubtractionSolid.hh
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/Boolean/include/G4UnionSolid.hh
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/CSG/include/G4Box.hh
 CMakeFiles/EMMAapp.dir/src/SpectrometerConstruction.cc.o: /opt/geant4/geant4.9.6.p04/source/geometry/solids/CSG/include/G4Box.icc

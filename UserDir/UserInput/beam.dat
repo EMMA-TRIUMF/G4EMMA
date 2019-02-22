@@ -1,4 +1,4 @@
-500     # number of events
+5000     # number of events
 18     # beam Z
 40     # beam A
 13     # beam charge state Q
