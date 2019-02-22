@@ -176,17 +176,17 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4double Pipe1HL = Pipe1length/2.0;      // drift length, original value: 22.75/2 = 11.375cm
 	G4double Q1HL = 13.977/2*cm;		//mag. eff. field half length
 	G4double Q1apt = 3.1*cm;	//radius of apeture of vacuum chamber
-	G4double Pipe2HL = 3.5/4*cm;	// why divided by 4??
+	G4double Pipe2HL = 3.5/4*cm;	// this is divided by 4 because the the physical length (7 cm) is actually constructed from two pipes (2 and 3)
 	G4double Q2HL = 29.881/2*cm;	//mag. eff. field half length
 	G4double Q2apt = 6.75*cm;
-	Pipe4HL = 37.23/4*cm;  //why divided by 4?
+	Pipe4HL = 37.23/4*cm;  // see above comment about division by 4
 	G4double Pipe5HL = Pipe4HL;
 	G4double wallThick = 1*cm;	//arbitrary thickness of vacuum chamber walls
 	G4double rbigpipe = 13.75*cm; //arbitrary size
 
 	//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>//
     //
-    // Pipe1 end caps (Alex Wen, July 2017)
+    // Pipe 1 end caps (Alex Wen, July 2017)
     //
     // This part is added to minimize the unwanted scattering of particles outside of the spectrometer (which slows down the simulation speed).
     // After hitting the target the recoils have a tendency to scatter out of the two ends of pipe1, where there are no walls.
@@ -229,7 +229,8 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
     // To fix this problem disks were again added to the exposed fronts and backs of different parts of the tubes.
     //
     // Specifically, a cap was added to the back (downstream) end of Pipe 11 right before Q3, and another cap was added to the front end of Pipe 12 after Q4.
-    //
+    // Special care was taken to ensure that these caps were strictly exterior, and did not affect the particle travel in any way.
+		//
     // See sections Pipe11Cap and Pipe12Cap later on in this file.
     //
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>//
@@ -294,7 +295,11 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	//Pipe3WallLogical->SetVisAttributes(WallVisAtt);
 
 	// debugging
-	G4cout << "Location of end of Q1 pipe segment is " << Pipe3z+Pipe2HL << G4endl;
+
+	G4cout << "Start of Q1: " << Q1z - Q1HL << G4endl;
+	G4cout << "End of Q1: " << Q1z + Q1HL << G4endl;
+	G4cout << "End of Q1 pipe segment: " << Pipe3z+Pipe2HL << G4endl;
+
 
 	// Q2
 	G4VSolid* Q2Solid = new G4Tubs("Q2Tub",0*cm,Q2apt,Q2HL,0*deg,360*deg);
@@ -305,6 +310,11 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4cout << "Q2z: " << Q2z << G4endl;
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Q2z),Q2WallLogical,"Q2WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	Q2WallLogical->SetVisAttributes(PoleVisAtt);
+
+	//debugging
+	G4cout << "Start of Q2: " << Q2z - Q2HL << G4endl;
+	G4cout << "End of Q2: " << Q2z + Q2HL << G4endl;
+
 
 	// Pipe4
 	G4VSolid* Pipe4Solid = new G4Tubs("Pipe4Tub",0*cm,Q2apt,Pipe4HL,0*deg,360*deg);
