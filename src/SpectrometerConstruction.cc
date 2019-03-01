@@ -220,7 +220,7 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
     //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>//
     //
     //
-    // Detector End Caps (Alex Wen, July 2017)
+    // Detector End Caps (July 2017)
     //
     // Added to address a problem similar to the one regarding Pipe1. Because there were no caps or walls on the ends of the pipes near the detectors,
     // the particles had a tendency to exit EMMA. Not only does this slow down simulation speed, it also sometimes enabled the particles to leave
@@ -295,24 +295,36 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z),Pipe3WallLogical,"Pipe3WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	//Pipe3WallLogical->SetVisAttributes(WallVisAtt);
 	G4double Q2SubHL = (437.89-(Pipe3z+Pipe2HL))/2;
+
+  /*
+	Q1/Q1 Beam Pipe modifications:
+	The geometry is modified here. In the real spectrometer, the beam-pipe that passes through Q1 and Q2 have a narrow first
+	half (mostly passing through Q1) and a wider second half (mostly passing through Q2). However, the field lengths of Q1
+	and Q2 do not match up exactly to the narrow/wide parts of the beam pipe. For acceptance purposes, it's important to
+	accurately model the end of the narrow part of the beam-pipe, because that can directly influence the acceptance.
+	The narrow part of the beam-pipe happens to end a little bit into the effective field length of Q2, so in the simulation
+	geometry, a subtraction soli is made to model the Q2 field volume so that the narrow beam-pipe can extend into the Q2
+	volume to its realistic extent.
+	Pipe3 Wall Extension is the narrow beam-pipe extension into the Q2 region, and Q2 is a subtraction solid.
+	*/
+
 	// Pipe3 Wall Extension
 	G4VSolid* Pipe3WallExtSolid = new G4Tubs("Pipe3WallExtTub",Q1apt,Q1apt+wallThick,Q2SubHL,0*deg,360*deg);
 	G4LogicalVolume* Pipe3WallExtLogical = new G4LogicalVolume(Pipe3WallExtSolid,Wall,"Pipe3WallExtLogical", 0,0,0);
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z+Pipe2HL+Q2SubHL),Pipe3WallExtLogical,"Pipe3WallExtPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 
 
-	// debugging
-	G4cout << "Start of Q1: " << Q1z - Q1HL << G4endl;
-	G4cout << "End of Q1: " << Q1z + Q1HL << G4endl;
-	G4cout << "End of Q1 pipe segment: " << Pipe3z+Pipe2HL << G4endl;
-	G4cout << "End of pipe3 extension (clipping boundary): " << Pipe3z+Pipe2HL+(2*Q2SubHL) << G4endl; 
+		// debugging
+		G4cout << "Start of Q1: " << Q1z - Q1HL << G4endl;
+		G4cout << "End of Q1: " << Q1z + Q1HL << G4endl;
+		G4cout << "End of Q1 pipe segment: " << Pipe3z+Pipe2HL << G4endl;
+		G4cout << "End of pipe3 extension (clipping boundary): " << Pipe3z+Pipe2HL+(2*Q2SubHL) << G4endl;
 
 
 	// Q2
 	G4VSolid* Q2Sub = new G4Tubs("Q2SubTub",Q1apt,Q1apt+wallThick,Q2SubHL,0*deg,360*deg);
 	G4VSolid* Q2Cyl = new G4Tubs("Q2TubCyl",0*cm,Q2apt,Q2HL,0*deg,360*deg);
 	G4ThreeVector Q2Suboff(0*cm,0*cm,-Q2HL+Q2SubHL);
-
 	G4SubtractionSolid* Q2Solid = new G4SubtractionSolid("Q2TubCyl-Q1SubTub",Q2Cyl,Q2Sub,Rotate0,Q2Suboff);
 
 	// Q2Wall

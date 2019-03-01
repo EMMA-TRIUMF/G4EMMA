@@ -62,7 +62,8 @@ void acceptance_plots() {
 // /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^\ /^(o.o)^
 
   // call the data files
-  TFile *ang_file = new TFile("/home/awen/G4EMMA_data/Ang_acceptance_test_histat_uni/Results/GEMMAoutput_70k.root");
+  //TFile *ang_file = new TFile("/home/awen/G4EMMA_data/Ang_acceptance_test_histat_uni/Results/GEMMAoutput_70k.root");
+  TFile *ang_file = new TFile("/home/awen/G4EMMA/UserDir/Results/GEMMAoutput.root");
   TFile *energy_file = new TFile("/home/awen/G4EMMA_data/Energy_acceptance_1k/Results/GEMMAoutput.root");
 
   // create a new file in case I want to write anything to save
