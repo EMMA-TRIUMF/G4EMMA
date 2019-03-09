@@ -294,7 +294,8 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4cout<<"Pipe3z: " << Pipe3z << G4endl;
 	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Pipe3z),Pipe3WallLogical,"Pipe3WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	//Pipe3WallLogical->SetVisAttributes(WallVisAtt);
-	G4double Q2SubHL = (437.89-(Pipe3z+Pipe2HL))/2;
+	G4double Q2SubHL = (437.89-(Pipe3z+Pipe2HL))/2; //437.89 mm is the z coordinate where the Q1/2 beampipe goes from
+																									// its narrow to wide part
 
   /*
 	Q1/Q1 Beam Pipe modifications:
@@ -325,7 +326,7 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4VSolid* Q2Sub = new G4Tubs("Q2SubTub",Q1apt,Q1apt+wallThick,Q2SubHL,0*deg,360*deg);
 	G4VSolid* Q2Cyl = new G4Tubs("Q2TubCyl",0*cm,Q2apt,Q2HL,0*deg,360*deg);
 	G4ThreeVector Q2Suboff(0*cm,0*cm,-Q2HL+Q2SubHL);
-	G4SubtractionSolid* Q2Solid = new G4SubtractionSolid("Q2TubCyl-Q1SubTub",Q2Cyl,Q2Sub,Rotate0,Q2Suboff);
+	G4SubtractionSolid* Q2Solid = new G4SubtractionSolid("Q2TubCyl-Q2SubTub",Q2Cyl,Q2Sub,Rotate0,Q2Suboff);
 
 	// Q2Wall
 	G4VSolid* Q2WallSolid = new G4Tubs("Q2WallTub",Q2apt,Q2apt+wallThick,Q2HL,0*deg,360*deg);
@@ -607,12 +608,12 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	// *********************************************** //
 	// Fix drift space lengths and magnetic effective field lengths
 	//
-	G4double Pipe10HL=26.84/4*cm;
-	G4double Pipe11HL=Pipe10HL;
-	G4double Q3apt1HL=9.65/2*cm;
-	G4double Q3HL=29.882/2*cm;	//mag. eff. field hal length
+	G4double Pipe10HL = 26.84/4*cm;
+	G4double Pipe11HL = Pipe10HL;
+	G4double Q3apt1HL = 9.65/2*cm;
+	G4double Q3HL = 29.882/2*cm;	//mag. eff. field hal length
 	G4double Q3apt = 6.75*cm;
-	G4double Q3apt2HL=3./2*cm;
+	G4double Q3apt2HL = 3./2*cm;
 	G4double Q4HL = 40.179/2*cm; //mag. eff. field half length
 	G4double Q4apt = 18.5/2*cm;
 	G4double Pipe12HL=20.92/2*cm;
@@ -980,10 +981,10 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	new G4PVPlacement(Rotate3,G4ThreeVector(0*cm,0*cm,Q3z),Q3WallLogical,"Q3WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	Q3WallLogical->SetVisAttributes(PoleVisAtt);
 
-	// Q3 vacuum pipe extending out before magnet
+	// Q3 vacuum pipe extending out after magnet and before Q4
 	G4VSolid* Q3apt2Solid = new G4Tubs("Q3apt2Tub",0*cm,Q3apt,Q3apt2HL,0*deg,360*deg);
 	// Q3apt2Wall
-	G4VSolid* Q3apt2WallSolid = new G4Tubs("Q3apt2WallTub",Q3apt,Q4apt+wallThick,Q3apt2HL,0*deg,360*deg);
+	G4VSolid* Q3apt2WallSolid = new G4Tubs("Q3apt2WallTub",Q3apt,Q3apt+wallThick,Q3apt2HL,0*deg,360*deg);
 	G4LogicalVolume* Q3apt2WallLogical = new G4LogicalVolume(Q3apt2WallSolid,Wall,"Q3apt2WallLogical", 0,0,0);
 	G4double Q3apt2z = Q3z+Q3HL+Q3apt2HL;
 	new G4PVPlacement(Rotate3,G4ThreeVector(0*cm,0*cm,Q3apt2z),Q3apt2WallLogical,"Q3apt2WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
@@ -1010,9 +1011,29 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 
 	 Field6 = new BGField6(0,zQ3fieldbegins,Q3before,Q3after,Q3Logical,G4ThreeVector(0*m,0*cm,Pipe11z)); //see BGField6.cc for description of input parameters
 
+	 G4double Q4SubHL = (8199.24-(Q3apt2z+Q3apt2HL))/2; // 8199.24 mm is the global z-value of when the Q3/4 beam-pipe
+	 																										// goes from the narrow to wide part. Refer to blueprints
+
+	/*
+	Similar to the interface between Q1 and Q2, Q4 is a subtraction solid to make sure the narrower Q3 beam-pipe
+	can reach its realistic extent (slightly inside the effective field of Q4)
+	*/
 
 	// Q4
-	G4VSolid* Q4Solid = new G4Tubs("Q4Tub",0*cm,Q4apt,Q4HL,0*deg,360*deg);
+ 	G4VSolid* Q4Sub = new G4Tubs("Q4SubTub",Q3apt,Q3apt+wallThick,Q4SubHL,0*deg,360*deg);
+ 	G4VSolid* Q4Cyl = new G4Tubs("Q4TubCyl",0*cm,Q4apt,Q4HL,0*deg,360*deg);
+ 	G4ThreeVector Q4Suboff(0*cm,0*cm,-Q4HL+Q4SubHL);
+ 	G4SubtractionSolid* Q4Solid = new G4SubtractionSolid("Q4TubCyl-Q4SubTub",Q4Cyl,Q4Sub,Rotate0,Q4Suboff);
+
+	// Q3 Wall Extension
+	G4VSolid* Q3WallExtSolid = new G4Tubs("Q3WallExtTub",Q3apt,Q3apt+wallThick,Q4SubHL,0*deg,360*deg);
+	G4LogicalVolume* Q3WallExtLogical = new G4LogicalVolume(Q3WallExtSolid,Wall,"Q3WallExtLogical", 0,0,0);
+	new G4PVPlacement(Rotate0,G4ThreeVector(0*cm,0*cm,Q3apt2z+Q3apt2HL+Q4SubHL),Q3WallExtLogical,"Q3WallExtPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
+
+	// debugging
+	G4cout << "The clipping booundary of the Q3 extension is " << Q3apt2z+Q3apt2HL+2*Q4SubHL << G4endl;
+
+
 	// Q4Wall
 	G4VSolid* Q4WallSolid = new G4Tubs("Q4WallTub",Q4apt,Q4apt+wallThick,Q4HL,0*deg,360*deg);
 	G4LogicalVolume* Q4WallLogical = new G4LogicalVolume(Q4WallSolid,Wall,"Q4WallLogical",0,0,0);
@@ -1020,6 +1041,13 @@ SpectrometerConstruction::SpectrometerConstruction(G4Material* Vacuum, G4Materia
 	G4cout << "Q4z: " << Q4z << G4endl;
 	new G4PVPlacement(Rotate3,G4ThreeVector(0*cm,0*cm,Q4z),Q4WallLogical,"Q4WallPhysical",SpecWorldLogical,0,0,fCheckOverlaps);
 	Q4WallLogical->SetVisAttributes(PoleVisAtt);
+
+	// debugging
+
+		G4cout << "Q4z front end: " << Q4z-Q4HL << G4endl;
+		G4cout << "Q4z back end: " << Q4z+Q4HL << G4endl;
+
+
 
 	// Pipe12
 	G4VSolid* Pipe12Solid = new G4Tubs("Pipe12Tub",0*cm,rbigpipe,Pipe12HL,0*deg,360*deg);
